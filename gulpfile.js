@@ -1,50 +1,90 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync').create();
-var sass        = require('gulp-sass');
-var autoprefixer= require('gulp-autoprefixer'),
-    base64      = require('gulp-base64'),
-    postcss     = require('gulp-postcss'),
-    px2rem      = require('postcss-px2rem');
+/*
+* @Author: suzhihui
+* @Date:   2016-11-17 22:01:02
+* @Last Modified by:   老苏
+* @Last Modified time: 2016-11-23 14:24:11
+*/
 
-// Static Server + watching scss/html files
-gulp.task('serve', ['sass'], function() {
+'use strict';
 
-    browserSync.init({
-        server: "./app"
-    });
+var gulp         = require('gulp'),
+    sass         = require('gulp-sass'),
+    autoprefixer = require('gulp-autoprefixer'),
+    minifycss    = require('gulp-minify-css'),
+    uglify       = require('gulp-uglify'),
+    rename       = require('gulp-rename'),
+    clean        = require('gulp-clean'),
+    browserSync  = require('browser-sync').create(),
+    // jade         = require('gulp-jade'),
+    base64       = require('gulp-base64');
 
-    gulp.watch("app/scss/*.scss", ['sass']);
-    gulp.watch("app/*.html").on('change', browserSync.reload);
+//样式
+gulp.task('css', function () {
+  return gulp.src('src/skin/scss/*.scss')
+    .pipe(sass({outputStyle: 'compact'}).on('error', sass.logError))
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions', 'Android >= 4.0'],
+      cascade: true,
+      remove: true
+    }))
+    .pipe(base64())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(gulp.dest('dist/skin/css'))
+
+})
+
+//脚本
+gulp.task('js', function () {
+  return gulp.src('src/skin/js/*.js')
+    .pipe(rename({ suffix: '.min'}))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/skin/js'))
+})
+
+// 图片
+gulp.task('img', function() {
+  return gulp.src('src/skin/img/*')
+    // .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    .pipe(gulp.dest('dist/skin/img'))
+    // .pipe(notify({ message: 'Images task complete' }));
 });
 
-// Compile sass into CSS & auto-inject into browsers
-gulp.task('sass', function() {
-    var processors = [px2rem({remUnit: 75})];
-    return gulp.src("app/scss/*.scss")
-        .pipe(sass())
-        .pipe(postcss(processors))
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions', 'Android >= 4.0'],
-            cascade: true, //是否美化属性值 默认：true 像这样：
-            //-webkit-transform: rotate(45deg);
-            //        transform: rotate(45deg);
-            remove:true //是否去掉不必要的前缀 默认：true
-        }))
-        .pipe(base64())
-        .pipe(gulp.dest("app/css"))
-        .pipe(browserSync.stream());
+//第三方js
+gulp.task('plugs', function () {
+  return gulp.src(['src/skin/plugs/*','src/skin/plugs/**/*'])
+    .pipe(gulp.dest('dist/skin/plugs'))
+})
+
+//jade
+gulp.task('html',function () {
+  return gulp.src(['src/*.html','src/**/*.html'])
+    // .pipe(jade({pretty: true}))
+    .pipe(gulp.dest('dist'))
 });
 
-// autoprefixer
-// gulp.task('testAutoFx', function () {
-//   gulp.src('app/css/*.css')
-//     .pipe(autoprefixer({
-//         browsers: ['last 2 versions', 'Android >= 4.0'],
-//         cascade: true, //是否美化属性值 默认：true 像这样：
-//         //-webkit-transform: rotate(45deg);
-//         //        transform: rotate(45deg);
-//         remove:true //是否去掉不必要的前缀 默认：true
-//     }))
-//     .pipe(gulp.dest('app/dist/css'));
-// });
-gulp.task('default', ['serve']);
+//清理
+gulp.task('clean', function () {
+  return gulp.src('dist',{read: false})
+  .pipe(clean());
+})
+
+
+gulp.task('build', function () {
+  gulp.start('css','js','img','html','plugs');
+});
+
+gulp.task('serve',function () {
+  browserSync.init({
+    server: {
+      baseDir: 'dist'
+    }
+  });
+
+  gulp.watch(['src/*.html','src/**/*.html'],['html'])
+  gulp.watch('src/skin/scss/*.scss', ['css']);
+  gulp.watch('src/skin/js/*.js',['js']);
+  gulp.watch('src/skin/img/*',['images']);
+  gulp.watch(['dist/*.html','dist/**/*.html','dist/skin/css/*.css']).on('change',browserSync.reload);
+})
+
+gulp.task('default', ['serve'])

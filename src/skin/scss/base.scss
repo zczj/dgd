@@ -1,0 +1,5 @@
+@import '../comStyle/mixin.scss';
+body{background:red;}
+h1{
+  @include border-1px(rgba(7,27,7,0.2));
+}
