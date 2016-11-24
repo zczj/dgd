@@ -1,0 +1,21 @@
+{
+  "name": "ZCZJ.Trade.Mobile",
+  "description": "",
+  "main": "",
+  "authors": [
+    "laosu"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zczj/dgd",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/plugs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-css": "^5.0.0"
+  }
+}
