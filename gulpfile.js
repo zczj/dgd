@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-11-17 22:01:02
 * @Last Modified by:   老苏
-* @Last Modified time: 2016-11-24 10:30:22
+* @Last Modified time: 2016-11-24 16:29:31
 */
 
 'use strict';
@@ -43,7 +43,7 @@ gulp.task('js', function () {
 
 // 图片
 gulp.task('img', function() {
-  return gulp.src('src/skin/img/*')
+  return gulp.src(['src/skin/img/*','src/skin/img/**/*'])
     // .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
     .pipe(gulp.dest('dist/skin/img'))
     // .pipe(notify({ message: 'Images task complete' }));
