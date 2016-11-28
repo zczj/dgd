@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-11-17 22:01:02
 * @Last Modified by:   老苏
-* @Last Modified time: 2016-11-24 16:29:31
+* @Last Modified time: 2016-11-28 14:52:41
 */
 
 'use strict';
@@ -83,7 +83,7 @@ gulp.task('serve',function () {
   gulp.watch(['src/*.html','src/**/*.html'],['html'])
   gulp.watch('src/skin/scss/*.scss', ['css']);
   gulp.watch('src/skin/js/*.js',['js']);
-  gulp.watch('src/skin/img/*',['images']);
+  gulp.watch('src/skin/img/*',['img']);
   gulp.watch(['dist/*.html','dist/**/*.html','dist/skin/css/*.css']).on('change',browserSync.reload);
 })
 

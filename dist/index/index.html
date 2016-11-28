@@ -1,15 +1,63 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>首页</title>
-  <link rel="stylesheet" href="skin/plugs/normalize-css/normalize.css">
-  <link rel="stylesheet" href="skin/css/base.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/skin/plugs/normalize-css/normalize.css">
+  <link rel="stylesheet" href="/skin/css/base.min.css">
 </head>
 <body>
 
 <!-- ========================================================================== -->
-<h1>首页</h1>
+<header>
+ <div class="container clearfix">
+  <div class="nav">
+    <a href="/" class="logo"><img src="/skin/img/logo.png" alt=""></a>
+    <div class="triggers">
+      <a href="#" class="mean-btn"><i class="icon icon-catgray"></i></a>
+    </div>
+    <nav>
+      <a href="#" class="cur">首页</a>
+      <a href="#">投资项目</a>
+      <a href="#">站岗宝</a>
+      <a href="#">股权转让</a>
+      <a href="#">资讯</a>
+      <a href="#">新手课堂</a>
+    </nav>
+  </div>
+  <div class="login-btns">
+    <ul class="tool-nav">
+
+      <li class="login-btn">
+        <div class="login">
+          <div class="item"><a href="/">注册</a></div>
+          <span class="line">|</span>
+          <div class="item"><a href="/">登录</a></div>
+        </div>
+      </li>
+      <li class="go-zczj">
+        <a href="/">前往众筹之家</a>
+      </li>
+    </ul>
+  </div>
+ </div>
+</header>
 <!-- ========================================================================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+;(function () {
+  console.log('ok');
+  $('.mean-btn').click(function () {
+    if ($('body').hasClass('slide-left')) {
+      $('body').removeClass('slide-left');
+    }else{
+      $('body').addClass('slide-left');
+    }
+
+  })
+})();
+</script>
 </body>
 </html>
