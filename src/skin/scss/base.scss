@@ -1,17 +1,19 @@
 @import '../comStyle/mixin.scss';
 @import "../comStyle/font.scss";
 /************
- * å…±ç”¨æ ·å¼
+ * ¹²ÓÃÑùÊ½
  ************/
 
-/*åŸºæœ¬é»˜è®¤å€¼  */
+/*»ù±¾Ä¬ÈÏÖµ  */
 
 html {
     font-size: 62.5%;
     color: #222;
-    font-family: "å¾®è½¯é›…é»‘";
+    font-family: "Î¢ÈíÑÅºÚ";
 }
-
+html,body{
+  min-height: 100%; overflow-x: hidden;
+}
 ::selection {
     background-color: #b3d4fc;
     text-shadow: none;
@@ -27,7 +29,7 @@ li {
 }
 
 /*
-   å·¥å…·æ ·å¼
+   ¹¤¾ßÑùÊ½
     */
 
 .center-block {
@@ -115,7 +117,7 @@ li {
 }
 
 /*
-   æµè§ˆå™¨æ›´æ–°æç¤º
+   ä¯ÀÀÆ÷¸üĞÂÌáÊ¾
     */
 
 .browserupgrade {
@@ -125,7 +127,7 @@ li {
 }
 
 /*
-   è‡ªå®šä¹‰é¡µé¢æ ·å¼
+   ×Ô¶¨ÒåÒ³ÃæÑùÊ½
     */
 
 body {
@@ -146,10 +148,12 @@ a:hover, a:active {
 
 .container{ max-width: 1100px; margin: 0 auto;}
 /**
- * å¤´éƒ¨
+ * Í·²¿
  */
 
-
+body{
+  position: relative; min-height: 100%;
+}
 
 header{
     height: 100px; background:#fff;
@@ -206,6 +210,11 @@ header{
     }
   }
 @mixin header--sm() {
+  html.holding, body.holding {
+     height: 100%;
+     overflow: hidden;
+  }
+
   header{
     .nav{
        height: 100%;
@@ -219,19 +228,50 @@ header{
         }
       }
       nav{
-        display: none;
+          transition: transform 0.3s ease;
+          padding-top: 62px;
+          padding-left: 0;
+          display: block;
+          height: 2000px;
+          background:#38415c;
+          width: 130px;
+          position: absolute;
+          top: 0;
+          right: -130px;
+          a{
+            display: block;
+            height: 44px;
+            line-height: 44px;
+            text-align: left;
+            color: #fff;
+            float: none;
+            @include border-1px(#4e5c71);
+            &.cur{
+              background:#262d40;
+            }
+
+          }
+
+
+        &.nav-show{
+          transform:translate(-130px, 0);
+        }
       }
     }
     .login-btns .tool-nav > li{
         display: none;
     }
   }
+
   body{
     transition: transform 0.3s ease;
     &.slide-left{
       transform:translate(-130px, 0);
+      margin-right: -130px;
+      padding-right: 130px;
     }
   }
+
 }
 
 @mixin header--ss() {
@@ -253,17 +293,18 @@ header{
 }
 
 
-// å°äº1100px;
+// Ğ¡ÓÚ1100px;
 @media only screen and (max-width: 68.75em) {
+
   @include header--sm();
 }
 
-//å°äº800px;
+//Ğ¡ÓÚ800px;
 @media only screen and (max-width: 50em) {
 
 }
 
-//å°äº480px;
+//Ğ¡ÓÚ480px;
 @media only screen and (max-width: 30em) {
   @include header--ss();
 }
