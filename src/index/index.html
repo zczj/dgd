@@ -18,7 +18,7 @@
     <div class="triggers">
       <a href="#" class="mean-btn" v-on:click="showMean"><i class="icon icon-catgray"></i></a>
     </div>
-    <nav v-bind:class="{ active: tag }">
+    <nav v-bind:class="{ navShow: tag }">
       <a href="#" class="border-1px cur">{{tag}}</a>
       <a href="#" class="border-1px">投资项目</a>
       <a href="#" class="border-1px">站岗宝</a>
@@ -104,7 +104,13 @@
   methods: {
     showMean: function (e) {
       this.tag = !this.tag;
-      console.log(this.tag);
+      document.querySelector('html').className='holding'
+      document.querySelector('body').className='holding'
+    },
+    closeMean: function (e) {
+      this.tag = !this.tag;
+      document.querySelector('html').className='';
+      document.querySelector('body').className='';
     }
   }
 
