@@ -1,0 +1,109 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/plugs/owl/owl.carousel.min.css")
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/assets/owl.theme.default.css")
+  link(rel="stylesheet", href="/skin/css/index.css")
+
+
+  .dgd-ad
+    .owl-carousel.owl-theme
+       div
+        img(src="/skin/img/index/ad01-l.jpg", alt="")
+       div
+        img(src="/skin/img/index/ad01-l.jpg", alt="")
+       div
+        img(src="/skin/img/index/ad01-l.jpg", alt="")
+       div
+        img(src="/skin/img/index/ad01-l.jpg", alt="")
+
+  //- 注册人数
+  section.dgd-num
+    dl.item
+      dt
+      dd
+        span.num 234,600
+        span.title 总注册人数
+    dl.item
+      dt
+      dd
+        span.num 234
+        span.title 总项目数
+      dl.item
+        dt
+        dd
+          span.num 234,60
+          span.title 总融资金额（万元）
+  .container
+    seciton.dgd-ga
+      .ga-main.ga-tab
+        .ga-tab-btns
+          a.ga-tab-btn(href="javascript:void(0);") 众筹
+          a.ga-tab-btn(href="javascript:void(0);") 政策
+          a.ga-tab-btn(href="javascript:void(0);") 国际
+          a.ga-tab-btn(href="javascript:void(0);") 研究
+          a.ga-tab-btn(href="javascript:void(0);") 创投
+          a.see-more(href="#") 更多资讯 >>
+
+        .ga-tab-box
+          ul
+            li.first
+              a(href="#")
+                img(src="http://pic01.zczj.com//homeshow/20161124/20161124173623.jpg@1e_1c_0o_0l_150h_240w_90q.src", alt="")
+            li
+              span.time 25分钟前
+              a(href="#").title 特朗普：上任第一天就将发布命令退出TPP
+            li
+              span.time 10分钟前
+              a(href="#").title 支付机构泄露千万银行卡信息 用户损失3900多万
+      //- 平台公告
+      .ga-side
+        .dgd-plat-gg
+          .title
+            span 平台公告
+            a.see-more(href="#") 更多资讯 >>
+          ul.content
+            li
+              span.time 25天前
+              a(href="#") 2016年大股东国庆假期安排公告
+            li
+              span.time 25天前
+              a(href="#") 2016年大股东国庆假期安排公告
+            li
+              span.time 25天前
+              a(href="#") 2016年大股东国庆假期安排公告
+            li
+              span.time 25天前
+              a(href="#") 2016年大股东国庆假期安排公告
+            li
+              span.time 25天前
+              a(href="#") 2016年大股东国庆假期安排公告
+    //- 站岗宝
+    section.stand-bao
+      .common-t
+        span 站岗宝
+      ul.common-list
+        li.list-item
+          a(href="#")
+            .list-pic
+              img(src="", alt="")
+            .list-main
+              .list-t
+              .list-con
+                .list-txt.
+                  “全新站岗宝”是由大股东推出的一项年化利率8%~10%的全新账户余额管理增值服务，用户
+                  可以把账户中心的资金转入站岗宝中，可以获得一定的利息，让您的回款资金不站岗。
+                .list-info
+
+
+
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js")
+  script.
+    $(document).ready(function(){
+      $('.owl-carousel').owlCarousel({
+         items: 1,
+         loop: true,
+         autoplay: true,
+         autoplayTimeout: 3000,
+         autoplayHoverPause: true
+      });
+    });

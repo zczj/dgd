@@ -1,147 +1,154 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>首页</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/skin/plugs/normalize-css/normalize.css">
-  <link rel="stylesheet" href="/skin/css/base.min.css">
-</head>
-<body>
-
-<!-- ========================================================================== -->
-<header id="header">
- <div class="container clearfix">
-  <div class="nav">
-    <a href="/" class="logo"><img src="/skin/img/logo.png" alt=""></a>
-    <div class="triggers">
-      <a href="#" class="mean-btn" v-on:click="showMean"><i class="icon icon-catgray"></i></a>
-    </div>
-    <nav v-bind:class="{ navShow: tag }">
-      <a href="#" class="border-1px cur">{{tag}}</a>
-      <a href="#" class="border-1px">投资项目</a>
-      <a href="#" class="border-1px">站岗宝</a>
-      <a href="#" class="border-1px">股权转让</a>
-      <a href="#" class="border-1px">资讯</a>
-      <a href="#" class="border-1px">新手课堂</a>
-    </nav>
-  </div>
-  <div class="login-btns">
-    <ul class="tool-nav">
-
-      <li class="login-btn">
-        <div class="login">
-          <div class="item"><a href="/">注册</a></div>
-          <span class="line">|</span>
-          <div class="item"><a href="/">登录</a></div>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <title>Document</title>
+    <link rel="stylesheet" href="/skin/plugs/normalize-css/normalize.css"/>
+    <link rel="stylesheet" href="/skin/css/base.css"/>
+    <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
+    <script src="/skin/js/util.js"></script>
+  </head>
+  <body>
+    <header id="header">
+      <div class="container clearfix">
+        <div class="nav"><a href="/" class="logo"><img src="/skin/img/logo.png" alt=""/></a>
+          <div class="triggers"><a href="#" v-on:click="showMean" class="mean-btn"><i class="icon icon-catgray"></i></a></div>
+          <nav v-bind:class="{ navShow: tag }" v-cloak=""><a href="#" v-for="(item, index) in navs" v-bind:class="{ cur : index == 0 }" class="border-1px">{{item}}</a></nav>
+          <div class="login-btns">
+            <ul class="tool-nav">
+              <li class="login-btn">
+                <div class="login">
+                  <div class="item"><a href="/">登录</a></div><span class="line">|</span>
+                  <div class="item"><a href="/">注册</a></div>
+                </div>
+              </li>
+              <li class="go-zczj"><a href="/">前往之家</a></li>
+            </ul>
+          </div>
         </div>
-      </li>
-      <li class="go-zczj">
-        <a href="/">前往众筹之家</a>
-      </li>
-    </ul>
-  </div>
- </div>
-</header>
-<section class="container">
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-</section>
-<!-- ========================================================================== -->
-<script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
-<script>
-  new Vue({
-  el: "#header",
-  data: {
-    tag: false
-  },
-  methods: {
-    showMean: function (e) {
-      this.tag = !this.tag;
-      document.querySelector('html').className='holding'
-      document.querySelector('body').className='holding'
-    },
-    closeMean: function (e) {
-      this.tag = !this.tag;
-      document.querySelector('html').className='';
-      document.querySelector('body').className='';
-    }
-  }
-
-
-})
-
-
-;(function () {
-  return;
-  var btn = document.querySelector('.mean-btn');
-  var body = document.querySelector('body');
-  var html = document.querySelector('html');
-  var nav = document.querySelector('nav');
-  btn.addEventListener('click',function(){
-    if (nav.className == '') {
-      html.className = 'holding'
-      body.className = 'holding';
-      nav.className = 'nav-show';
-     document.querySelector('header').className = 'header-showmean';
-     // body.className = 'slide-left';
-
-      // WN.addAnimEvent(body,callback);
-    }else{
-       body.className = '';
-       html.className = '';
-       nav.className = '';
-       document.querySelector('header').className = '';
-
-    }
-  },false)
-})();
-</script>
-</body>
+      </div>
+      <div v-bind:class="{'mask-show': tag}" v-on:click="closeMean" class="mask"></div>
+    </header>
+    <script>
+      new Vue({
+        el: "#header",
+        data: {
+          tag: false,
+          navs: [
+            '首页',
+            '投资项目',
+            '股权转让',
+            '质押贷款',
+            '新手指引',
+            '关于我们'
+          ]
+        },
+        methods: {
+          showMean: function(e) {
+            this.tag = !this.tag;
+            document.querySelector('html').className = 'holding'
+            document.querySelector('body').className = 'holding'
+          },
+          closeMean: function(e) {
+            this.tag = !this.tag;
+            document.querySelector('html').className = '';
+            document.querySelector('body').className = '';
+          }
+        }
+      
+      
+      })
+    </script>
+    <!--=================================================-->
+    <link rel="stylesheet" href="/skin/plugs/owl/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/assets/owl.theme.default.css"/>
+    <link rel="stylesheet" href="/skin/css/index.css"/>
+    <div class="dgd-ad">
+      <div class="owl-carousel owl-theme">
+        <div><img src="/skin/img/index/ad01-l.jpg" alt=""/></div>
+        <div><img src="/skin/img/index/ad01-l.jpg" alt=""/></div>
+        <div><img src="/skin/img/index/ad01-l.jpg" alt=""/></div>
+        <div><img src="/skin/img/index/ad01-l.jpg" alt=""/></div>
+      </div>
+    </div>
+    <section class="dgd-num">
+      <dl class="item">
+        <dt></dt>
+        <dd><span class="num">234,600</span><span class="title">总注册人数</span></dd>
+      </dl>
+      <dl class="item">
+        <dt></dt>
+        <dd><span class="num">234</span><span class="title">总项目数</span></dd>
+        <dl class="item">
+          <dt></dt>
+          <dd><span class="num">234,60</span><span class="title">总融资金额（万元）</span></dd>
+        </dl>
+      </dl>
+    </section>
+    <div class="container">
+      <seciton class="dgd-ga">
+        <div class="ga-main ga-tab">
+          <div class="ga-tab-btns"><a href="javascript:void(0);" class="ga-tab-btn">众筹</a><a href="javascript:void(0);" class="ga-tab-btn">政策</a><a href="javascript:void(0);" class="ga-tab-btn">国际</a><a href="javascript:void(0);" class="ga-tab-btn">研究</a><a href="javascript:void(0);" class="ga-tab-btn">创投</a><a href="#" class="see-more">更多资讯 >></a></div>
+          <div class="ga-tab-box">
+            <ul>
+              <li class="first"><a href="#"><img src="http://pic01.zczj.com//homeshow/20161124/20161124173623.jpg@1e_1c_0o_0l_150h_240w_90q.src" alt=""/></a></li>
+              <li><span class="time">25分钟前</span><a href="#" class="title">特朗普：上任第一天就将发布命令退出TPP</a></li>
+              <li><span class="time">10分钟前</span><a href="#" class="title">支付机构泄露千万银行卡信息 用户损失3900多万</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="ga-side">
+          <div class="dgd-plat-gg">
+            <div class="title"><span>平台公告</span><a href="#" class="see-more">更多资讯 >></a></div>
+            <ul class="content">
+              <li><span class="time">25天前</span><a href="#">2016年大股东国庆假期安排公告</a></li>
+              <li><span class="time">25天前</span><a href="#">2016年大股东国庆假期安排公告</a></li>
+              <li><span class="time">25天前</span><a href="#">2016年大股东国庆假期安排公告</a></li>
+              <li><span class="time">25天前</span><a href="#">2016年大股东国庆假期安排公告</a></li>
+              <li><span class="time">25天前</span><a href="#">2016年大股东国庆假期安排公告</a></li>
+            </ul>
+          </div>
+        </div>
+      </seciton>
+      <section class="stand-bao">
+        <div class="common-t"><span>站岗宝</span></div>
+        <ul class="common-list">
+          <li class="list-item"><a href="#">
+              <div class="list-pic"><img src="" alt=""/></div>
+              <div class="list-main">
+                <div class="list-t"></div>
+                <div class="list-con">
+                  <div class="list-txt">
+                    “全新站岗宝”是由大股东推出的一项年化利率8%~10%的全新账户余额管理增值服务，用户
+                    可以把账户中心的资金转入站岗宝中，可以获得一定的利息，让您的回款资金不站岗。
+                  </div>
+                  <div class="list-info"></div>
+                </div>
+              </div></a></li>
+        </ul>
+      </section>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('.owl-carousel').owlCarousel({
+           items: 1,
+           loop: true,
+           autoplay: true,
+           autoplayTimeout: 3000,
+           autoplayHoverPause: true
+        });
+      });
+    </script>
+    <!--=================================================-->
+    <div id="loader" class="loader">
+      <loader-inner class="ball-clip-rotate-pulse">
+        <div></div>
+        <div></div>
+      </loader-inner>
+    </div>
+  </body>
 </html>

@@ -1,0 +1,53 @@
+header#header
+  .container.clearfix
+    .nav
+      a.logo(href="/")
+        img(src="/skin/img/logo.png", alt="")
+      .triggers
+        a(href="#", v-on:click="showMean").mean-btn
+          i.icon.icon-catgray
+      nav(v-bind:class="{ navShow: tag }", v-cloak="")
+        a(href="#",v-for="(item, index) in navs", v-bind:class="{ cur : index == 0 }").border-1px {{item}}
+      .login-btns
+        ul.tool-nav
+          li.login-btn
+            .login
+              .item
+                a(href="/") 登录
+              span.line |
+              .item
+                a(href="/") 注册
+          li.go-zczj
+            a(href="/") 前往之家
+  //- 遮罩层
+  .mask( v-bind:class="{'mask-show': tag}", v-on:click="closeMean")
+
+script.
+  new Vue({
+    el: "#header",
+    data: {
+      tag: false,
+      navs: [
+        '首页',
+        '投资项目',
+        '股权转让',
+        '质押贷款',
+        '新手指引',
+        '关于我们'
+      ]
+    },
+    methods: {
+      showMean: function(e) {
+        this.tag = !this.tag;
+        document.querySelector('html').className = 'holding'
+        document.querySelector('body').className = 'holding'
+      },
+      closeMean: function(e) {
+        this.tag = !this.tag;
+        document.querySelector('html').className = '';
+        document.querySelector('body').className = '';
+      }
+    }
+
+
+  })

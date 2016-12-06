@@ -16,15 +16,11 @@
   <div class="nav">
     <a href="/" class="logo"><img src="/skin/img/logo.png" alt=""></a>
     <div class="triggers">
-      <a href="#" class="mean-btn" v-on:click="showMean"><i class="icon icon-catgray"></i></a>
+      <a href="#" class="mean-btn" v-on:click="tag = true"><i class="icon icon-catgray"></i></a>
     </div>
-    <nav v-bind:class="{ navShow: tag }">
-      <a href="#" class="border-1px cur">{{tag}}</a>
-      <a href="#" class="border-1px">投资项目</a>
-      <a href="#" class="border-1px">站岗宝</a>
-      <a href="#" class="border-1px">股权转让</a>
-      <a href="#" class="border-1px">资讯</a>
-      <a href="#" class="border-1px">新手课堂</a>
+    <nav v-bind:class="{ navShow: tag }" v-clock>
+      <!-- <a href="#" class="border-1px" v-for="item in navs">{{item}}</a> -->
+      <a href="#" class="border-1px" v-for="(item, index) in navs" v-bind:class="{ cur : index == 0 }">{{item}}</a>
     </nav>
   </div>
   <div class="login-btns">
@@ -38,84 +34,52 @@
         </div>
       </li>
       <li class="go-zczj">
-        <a href="/">前往众筹之家</a>
+        <a href="/">前往之家</a>
       </li>
     </ul>
   </div>
  </div>
+ <!-- 遮罩层 -->
+  <div class="mask" v-bind:class="{ mask-show: tag }"></div>
 </header>
 <section class="container">
   <p>xxxx</p>
   <p>xxxx</p>
   <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
-  <p>xxxx</p>
 </section>
+
 <!-- ========================================================================== -->
 <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
 <script>
   new Vue({
-  el: "#header",
-  data: {
-    tag: false
-  },
-  methods: {
-    showMean: function (e) {
-      this.tag = !this.tag;
-      document.querySelector('html').className='holding'
-      document.querySelector('body').className='holding'
+    el: "#header",
+    data: {
+      tag: false,
+      navs: [
+        '首页',
+        '投资项目',
+        '股权转让',
+        '质押贷款',
+        '新手指引',
+        '关于我们'
+      ]
     },
-    closeMean: function (e) {
-      this.tag = !this.tag;
-      document.querySelector('html').className='';
-      document.querySelector('body').className='';
+    methods: {
+      showMean: function(e) {
+        this.tag = !this.tag;
+        document.querySelector('html').className = 'holding'
+        document.querySelector('body').className = 'holding'
+      },
+      closeMean: function(e) {
+        this.tag = !this.tag;
+        document.querySelector('html').className = '';
+        document.querySelector('body').className = '';
+      }
     }
-  }
 
 
-})
+  })
 
 
 ;(function () {

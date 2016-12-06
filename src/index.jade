@@ -1,0 +1,44 @@
+extends shade/layout
+block content
+
+  section#pageList.pageList(v-cloak)
+    dl(v-for='item in items.l')
+      dt {{item.catgray}}
+      dd(v-for='list in item.list')
+        a(:href='list.url') {{list.title}}
+    dl(v-for='item in items.h')
+      dt {{item.catgray}}
+      dd(v-for='list in item.list')
+        a(:href='list.url') {{list.title}}
+
+
+  script.
+    var data={
+      l:[{
+        catgray:'登录注册页面...',
+        list:[{title: '登录',url: 'passport/login.html'}]
+      }],
+      h: [{
+        catgray: '首页',
+        list:[{
+          title: '首页',
+          url: 'index/index.html'
+        }]
+      }]
+    }
+    new Vue({
+      el: '#pageList',
+      data: {
+        items: data
+      }
+    })
+
+  style.
+    body{background:#fff;}
+    .pageList{ width: 800px-; margin: 0 auto; padding: 20px 0; background: #fff; }
+    .pageList dl{ padding: 0 20px; margin-top: 20px; }
+    .pageList dl:first-child{margin-top: 0;}
+    .pageList dl dt, .pageList dl dd{ padding: 0 20px; border-bottom: 1px #ccc solid; height: 30px; line-height: 30px; }
+    .pageList dl dt{ background: #f8f8f8; font-size: 14px; color: #333; font-weight: bold; height: 50px; line-height: 50px; }
+    .pageList dl dd{text-indent: 20px;}
+    .pageList dl dd a{ display: block; }

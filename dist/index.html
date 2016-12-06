@@ -1,60 +1,116 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <title>首页</title>
-  <link rel="stylesheet" href="skin/plugs/normalize-css/normalize.css">
-  <link rel="stylesheet" href="skin/css/base.min.css">
-</head>
-<body>
-
-<!-- ========================================================================== -->
-
-<style>
-  .pageList{ width: 800px; margin: 0 auto; padding: 20px 0; background: #fff; }
-  .pageList dl{ padding: 0 20px; margin-top: 20px; }
-  .pageList dl:first-child{margin-top: 0;}
-  .pageList dl dt, .pageList dl dd{ padding: 0 20px; border-bottom: 1px #ccc solid; height: 30px; line-height: 30px; }
-  .pageList dl dt{ background: #f8f8f8; font-size: 14px; color: #333; font-weight: bold; height: 50px; line-height: 50px; }
-  .pageList dl dd{text-indent: 20px;}
-  .pageList dl dd a{ display: block; }
-</style>
-
-<section class="pageList" id="pageList" v-cloak>
-  <dl v-for="item in items.l">
-    <dt>{{item.catgray}}</dt>
-    <dd v-for="list in item.list"><a :href="list.url">{{list.title}}</a></dd>
-  </dl>
-  <dl v-for="item in items.h">
-    <dt>{{item.catgray}}</dt>
-    <dd v-for="list in item.list"><a :href="list.url">{{list.title}}</a></dd>
-  </dl>
-</section>
-<script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
-<script>
-
-var data={
-  l:[{
-    catgray:'登录注册页面...',
-    list:[{title: '登录',url: 'passport/login.html'}]
-  }],
-  h: [{
-    catgray: '首页',
-    list:[{
-      title: '首页',
-      url: 'index/index.html'
-    }]
-  }]
-}
-
-new Vue({
-  el: '#pageList',
-  data: {
-    items: data
-  }
-})
-</script>
-
-<!-- ========================================================================== -->
-</body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <title>Document</title>
+    <link rel="stylesheet" href="/skin/plugs/normalize-css/normalize.css"/>
+    <link rel="stylesheet" href="/skin/css/base.css"/>
+    <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
+    <script src="/skin/js/util.js"></script>
+  </head>
+  <body>
+    <header id="header">
+      <div class="container clearfix">
+        <div class="nav"><a href="/" class="logo"><img src="/skin/img/logo.png" alt=""/></a>
+          <div class="triggers"><a href="#" v-on:click="showMean" class="mean-btn"><i class="icon icon-catgray"></i></a></div>
+          <nav v-bind:class="{ navShow: tag }" v-cloak=""><a href="#" v-for="(item, index) in navs" v-bind:class="{ cur : index == 0 }" class="border-1px">{{item}}</a></nav>
+          <div class="login-btns">
+            <ul class="tool-nav">
+              <li class="login-btn">
+                <div class="login">
+                  <div class="item"><a href="/">登录</a></div><span class="line">|</span>
+                  <div class="item"><a href="/">注册</a></div>
+                </div>
+              </li>
+              <li class="go-zczj"><a href="/">前往之家</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div v-bind:class="{'mask-show': tag}" v-on:click="closeMean" class="mask"></div>
+    </header>
+    <script>
+      new Vue({
+        el: "#header",
+        data: {
+          tag: false,
+          navs: [
+            '首页',
+            '投资项目',
+            '股权转让',
+            '质押贷款',
+            '新手指引',
+            '关于我们'
+          ]
+        },
+        methods: {
+          showMean: function(e) {
+            this.tag = !this.tag;
+            document.querySelector('html').className = 'holding'
+            document.querySelector('body').className = 'holding'
+          },
+          closeMean: function(e) {
+            this.tag = !this.tag;
+            document.querySelector('html').className = '';
+            document.querySelector('body').className = '';
+          }
+        }
+      
+      
+      })
+    </script>
+    <!--=================================================-->
+    <section id="pageList" v-cloak="v-cloak" class="pageList">
+      <dl v-for="item in items.l">
+        <dt>{{item.catgray}}</dt>
+        <dd v-for="list in item.list"><a :href="list.url">{{list.title}}</a></dd>
+      </dl>
+      <dl v-for="item in items.h">
+        <dt>{{item.catgray}}</dt>
+        <dd v-for="list in item.list"><a :href="list.url">{{list.title}}</a></dd>
+      </dl>
+    </section>
+    <script>
+      var data={
+        l:[{
+          catgray:'登录注册页面...',
+          list:[{title: '登录',url: 'passport/login.html'}]
+        }],
+        h: [{
+          catgray: '首页',
+          list:[{
+            title: '首页',
+            url: 'index/index.html'
+          }]
+        }]
+      }
+      new Vue({
+        el: '#pageList',
+        data: {
+          items: data
+        }
+      })
+      
+    </script>
+    <style>
+      body{background:#fff;}
+      .pageList{ width: 800px-; margin: 0 auto; padding: 20px 0; background: #fff; }
+      .pageList dl{ padding: 0 20px; margin-top: 20px; }
+      .pageList dl:first-child{margin-top: 0;}
+      .pageList dl dt, .pageList dl dd{ padding: 0 20px; border-bottom: 1px #ccc solid; height: 30px; line-height: 30px; }
+      .pageList dl dt{ background: #f8f8f8; font-size: 14px; color: #333; font-weight: bold; height: 50px; line-height: 50px; }
+      .pageList dl dd{text-indent: 20px;}
+      .pageList dl dd a{ display: block; }
+    </style>
+    <!--=================================================-->
+    <div id="loader" class="loader">
+      <loader-inner class="ball-clip-rotate-pulse">
+        <div></div>
+        <div></div>
+      </loader-inner>
+    </div>
+  </body>
 </html>

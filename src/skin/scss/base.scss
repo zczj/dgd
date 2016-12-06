@@ -1,15 +1,15 @@
-@import '../comStyle/mixin.scss';
+ï»¿@import '../comStyle/mixin.scss';
 @import "../comStyle/font.scss";
 /************
- * ¹²ÓÃÑùÊ½
+ * å…±ç”¨æ ·å¼
  ************/
 
-/*»ù±¾Ä¬ÈÏÖµ  */
-
+/*åŸºæœ¬é»˜è®¤å€¼  */
+[v-cloak] {display: none;}
 html {
     font-size: 62.5%;
     color: #222;
-    font-family: "Î¢ÈíÑÅºÚ";
+    font-family: "å¾®è½¯é›…é»‘";
 }
 html,body{
   min-height: 100%; overflow-x: hidden;
@@ -29,7 +29,7 @@ li {
 }
 
 /*
-   ¹¤¾ßÑùÊ½
+   å·¥å…·æ ·å¼
     */
 
 .center-block {
@@ -117,7 +117,7 @@ li {
 }
 
 /*
-   ä¯ÀÀÆ÷¸üÐÂÌáÊ¾
+   æµè§ˆå™¨æ›´æ–°æç¤º
     */
 
 .browserupgrade {
@@ -127,7 +127,7 @@ li {
 }
 
 /*
-   ×Ô¶¨ÒåÒ³ÃæÑùÊ½
+   è‡ªå®šä¹‰é¡µé¢æ ·å¼
     */
 
 body {
@@ -146,9 +146,9 @@ a:hover, a:active {
     //text-decoration: underline;
 }
 
-.container{ max-width: 1100px; margin: 0 auto;}
+.container{ max-width: 1200px; margin: 0 auto;}
 /**
- * Í·²¿
+ * å¤´éƒ¨
  */
 
 body{
@@ -156,11 +156,14 @@ body{
 }
 
 header{
-    height: 100px; background:#fff;
+    height: 76px; background:#fff;
     .container{ height: 100%; position: relative;}
     .nav{
       .logo{
         position: absolute; left: 15px; top: 15px;
+        img{
+          height: 46px;
+        }
       }
       .triggers{ display: none;
         a{
@@ -168,11 +171,11 @@ header{
         }
       }
       nav{
-        float: left; padding-left: 220px;
+        float: left; padding-left: 160px;
         a{
-          display: block; height: 100px; line-height: 100px; position: relative; float: left; font-size: 18px; color: #494949; padding: 0 15px;
+          display: block; height: 76px; line-height: 76px; position: relative; float: left; font-size: 1.8rem; color: #494949; padding: 0 15px;
           &.cur,&:hover{
-            color: #5ee075; text-decoration: none;
+            color: #00a9e0; text-decoration: none;
           }
         }
       }
@@ -185,15 +188,15 @@ header{
           height: 30px;
           line-height: 30px;
           display: inline-block;
-          vertical-align: middle;
-          margin: 34px 0 0 20px;
-          border: 1px #47ca60 solid;
+          vertical-align: top;
+          margin: 20px 0 0 20px;
+          border: 1px #00a9e0 solid;
           border-radius: 15px;
-          padding: 0 15px;
+          padding: 0 10px;
           font-size: 1.8rem;
-          color: #5ee075;
+          color: #00a9e0;
           a{
-                color: #5ee075;
+                color: #00a9e0;
               }
           .login{
             .item{
@@ -202,28 +205,85 @@ header{
           }
           &.go-zczj{
             &::before{
-              display: inline-block; content:''; background:url(../img/icon-zczj.png); width: 23px; height: 12px; vertical-align: middle; margin-top: -2px;
+              display: inline-block; content:''; background:url(../img/icon-zczj.png); width: 20px; height: 11px; vertical-align: middle; margin-top: -2px;
             }
           }
         }
       }
     }
   }
-@mixin header--sm() {
+@mixin header--1050(){
+  header{
+    height: 64px;
+    .nav{
+      .logo{
+        top: 5px;
+      }
+      nav{
+        a{
+          height: 64px;
+          line-height: 64px;
+          font-size: 1.6rem;
+        }
+      }
+    }
+    .login-btns{
+      .tool-nav{
+        font-size: 0;
+        & > li{
+          height: 24px;
+          line-height: 24px;
+          margin: 20px 0 0 10px;
+          border-radius: 10px;
+          padding: 0 10px;
+          font-size: 1.6rem;
+          .login{
+            font-size: 0;
+            .line{font-size: 1.6rem;}
+            .item{
+              font-size: 1.6rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin header--950(){
+  header{
+    .nav{
+      nav{
+        a{
+          font-size: 1.4rem;
+          padding: 0 10px;
+        }
+      }
+    }
+    .login-btns{
+      .tool-nav{
+        font-size: 0;
+        & > li{
+          padding: 0 6px;
+          font-size: 1.4rem;
+          .login{
+            font-size: 0;
+            .line{font-size: 1.4rem;}
+            .item{
+              font-size: 1.4rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@mixin header--800() {
   html.holding, body.holding {
      height: 100%;
      overflow: hidden;
   }
-  body.holding::after{
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    left: 0;
-    top: 0;
-    content:'';
-    z-index: 1000;
+  .holding .container{
   }
   header{
     .nav{
@@ -233,20 +293,22 @@ header{
         .mean-btn{
           font-size: 4rem; text-align: center;
           .icon{
-            display: inline-block; margin-top: 15px;
+            display: inline-block; vertical-align: top;
           }
         }
       }
       nav{
 
           transition: transform 0.3s ease;
-          padding-top: 62px;
+          padding-top: 80px;
           padding-left: 0;
           display: block;
-          height: 2000px;
+          // height: 2000px;
+          height: 100%;
+          bottom: 0;
           background:#38415c;
           width: 130px;
-          position: absolute;
+          position: fixed;
           top: 0;
           right: -130px;
           z-index: 1001;
@@ -270,19 +332,27 @@ header{
         }
       }
     }
-    .login-btns .tool-nav > li{
-        display: none;
+    .login-btns .tool-nav {
+        transition: transform 0.3s ease;
+        position: absolute;
+        right: -130px;
+        top: 0;
+        z-index: 1001;
+        width: 130px;
+        display: block;
+        & > li{
+
+          margin: 10px 5% 0;
+          width: 80%;
+          text-align: center;
+          .item{ padding: 0 5px;}
+        }
     }
+  }
+  .holding header .login-btns .tool-nav{
+      transform:translate(-130px, 0);
   }
 
-  body{
-    transition: transform 0.3s ease;
-    &.slide-left{
-      transform:translate(-130px, 0);
-      margin-right: -130px;
-      padding-right: 130px;
-    }
-  }
 
 }
 
@@ -298,25 +368,99 @@ header{
       }
       .triggers > .mean-btn{
         width: 60px; font-size: 3rem;
-        .icon{ margin-top: 2px;}
+        .icon{ margin-top: 8px;}
       }
     }
   }
 }
 
-
-// Ð¡ÓÚ1100px;
-@media only screen and (max-width: 68.75em) {
-
-  @include header--sm();
+//é®ç½©
+.mask{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background:rgba(0,0,0,0.5);
+  transition: all 0.3s;
+  z-index: 1000;
+  &.mask-show{
+    display: block;
+  }
 }
 
-//Ð¡ÓÚ800px;
+@media only screen and( max-width: 65.625em){
+  @include header--1050();
+}
+@media only screen and( max-width: 59.375em){
+  @include header--950();
+}
+
+// å°äºŽ1200px;
+@media only screen and (max-width: 75em) {
+
+  //@include header--sm();
+}
+
+//å°äºŽ800px;
 @media only screen and (max-width: 50em) {
-
+  @include header--800();
 }
 
-//Ð¡ÓÚ480px;
+//å°äºŽ480px;
 @media only screen and (max-width: 30em) {
   @include header--ss();
 }
+
+// loading
+.loader{
+  font-size: 0.4rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  z-index: 1000;
+}
+.ball-clip-rotate-pulse {
+  position: relative;
+ }
+  .ball-clip-rotate-pulse > div {
+            animation-fill-mode: both;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 100%; }
+    .ball-clip-rotate-pulse > div:first-child {
+      background: #1fdab2;
+      height: 16px;
+      width: 16px;
+      top: 9px;
+      left: 9px;
+              animation: scale 1s 0s cubic-bezier(.09, .57, .49, .9) infinite; }
+    .ball-clip-rotate-pulse > div:last-child {
+      position: absolute;
+      border: 2px solid #1fdab2;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: 2px solid;
+      border-color: #fff transparent #fff transparent;
+              animation: rotate 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
+              animation-duration: 1s; }
+
+  @keyframes rotate {
+  0% {
+            transform: rotate(0deg) scale(1); }
+
+  50% {
+            transform: rotate(180deg) scale(0.6); }
+
+  100% {
+            transform: rotate(360deg) scale(1); } }
