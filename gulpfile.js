@@ -22,7 +22,7 @@ var gulp         = require('gulp'),
 
 //样式
 gulp.task('css', function () {
-  return gulp.src('src/skin/scss/*.scss')
+  return gulp.src(['src/skin/scss/*.scss', 'src/skin/comStyle/*.scss'])
     .pipe(changed('dist/skin/css/', {extension: '.css'}))
     .pipe(debug({title: '编译：'}))
     .pipe(sass({outputStyle: 'compact'}).on('error', sass.logError))
@@ -39,7 +39,7 @@ gulp.task('css', function () {
 
 //脚本
 gulp.task('js', function () {
-  return gulp.src('src/skin/js/*.js')
+  return gulp.src(['src/skin/js/*.js', 'src/skin/js/**/*.js'])
     .pipe(changed('dist/skin/js', {extension: '.js'}))
     .pipe(debug({title: '编译：'}))
     // .pipe(rename({ suffix: '.min'}))
@@ -70,6 +70,7 @@ gulp.task('jade',function () {
     .pipe(debug({title: '编译：'}))
     .pipe(jade({pretty: true}))
     .pipe(gulp.dest('dist'))
+    .pipe(browserSync.reload({stream: true}));
 });
 
 
@@ -92,9 +93,9 @@ gulp.task('serve', ['css','js','img','jade','plugs'],function () {
   });
 
   gulp.watch(['src/*.jade','src/**/*.jade'],['jade'])
-  gulp.watch('src/skin/scss/*.scss', ['css']);
-  gulp.watch('src/skin/js/*.js',['js']);
-  gulp.watch('src/skin/img/*',['img']);
+  gulp.watch(['src/skin/scss/*.scss','src/skin/scss/**/*.scss'], ['css']);
+  gulp.watch(['src/skin/js/*.js', 'src/skin/js/**/*.js'],['js']);
+  gulp.watch(['src/skin/img/*', 'src/skin/img/**/*'],['img']);
   gulp.watch('dist/**/*.html').on('change',browserSync.reload);
 })
 

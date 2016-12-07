@@ -3,7 +3,9 @@
 /************
  * 共用样式
  ************/
-
+*{
+  box-sizing: border-box;
+}
 /*基本默认值  */
 [v-cloak] {display: none;}
 html {
@@ -19,7 +21,7 @@ html,body{
     text-shadow: none;
 }
 
-ul,dl,dt,dd,li {
+ul,dl,dt,dd,li,p {
     margin: 0;
     padding: 0;
 }
@@ -27,7 +29,12 @@ ul,dl,dt,dd,li {
 li {
     list-style: none;
 }
-
+input{
+  outline: none;
+}
+input:not([type='checkbox']){
+  -webkit-appearance: none;// iOS 输入框阴影
+}
 /*
    工具样式
     */
@@ -77,7 +84,11 @@ li {
     background-color: transparent;
     border: 0;
 }
-
+.ellipsis{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 .clearfix:before,
 .clearfix:after {
     content: " ";
@@ -133,7 +144,7 @@ li {
 body {
     font-size: 1.2rem;
     line-height: 1.5;
-    background-color: #f7f7f7;
+    background-color: #fff;
 }
 
 a {
@@ -146,7 +157,11 @@ a:hover, a:active {
     //text-decoration: underline;
 }
 
-.container{ max-width: 1200px; margin: 0 auto;}
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 90%;
+}
 /**
  * 头部
  */
@@ -212,7 +227,7 @@ header{
       }
     }
   }
-@mixin header--1050(){
+@mixin header--1150(){
   header{
     height: 64px;
     .nav{
@@ -250,13 +265,13 @@ header{
   }
 }
 
-@mixin header--950(){
+@mixin header--1050(){
   header{
     .nav{
       nav{
         a{
           font-size: 1.4rem;
-          padding: 0 10px;
+          padding: 0 6px;
         }
       }
     }
@@ -279,11 +294,10 @@ header{
   }
 }
 @mixin header--800() {
+
   html.holding, body.holding {
      height: 100%;
      overflow: hidden;
-  }
-  .holding .container{
   }
   header{
     .nav{
@@ -333,8 +347,8 @@ header{
       }
     }
     .login-btns .tool-nav {
-        transition: transform 0.3s ease;
-        position: absolute;
+        transition: all 0.3s ease;
+        position: fixed;
         right: -130px;
         top: 0;
         z-index: 1001;
@@ -374,6 +388,89 @@ header{
   }
 }
 
+// 底部
+.footer{
+  background:#40454b;
+  color: #fff;
+  font-size: 0px;
+  .info  dl{
+    margin: 0 2rem;
+    width: calc(16.666666666666668% - 4rem);
+    float: left;
+    font-size: 1.2rem;
+    display: inline;
+    dt{
+      font-size: 1.7rem;
+      padding: .4rem 0;
+    }
+    dd{
+      line-height: 26px;
+      p{
+        line-height: 24px;
+      }
+    }
+    &:nth-of-type(4){
+      width:calc(50% - 4rem);
+      img{
+        float: left;
+        width: 94px;
+        height: 94px;
+        margin-right: 10px;
+      }
+    }
+  }
+  .bottom{
+    padding: 4px 10px;
+    line-height: 24px;
+    font-size:1.4rem;
+    text-align: center;
+    background:#34393f;
+    margin-top: 10px;
+  }
+}
+
+@mixin footer--950 () {
+  .footer{
+    .info dl{
+      dt{
+        font-size: 1.5rem;
+      }
+      width: calc(33.3333333333333% - 4rem);
+      &:nth-of-type(4){
+        display: none;
+      }
+    }
+  }
+  .bottom{
+    font-size: 0;
+    span{
+      font-size: 1.2rem;
+      display: inline-block;
+    }
+  }
+}
+@mixin footer--480 () {
+  .footer{
+    .info dl{
+      margin: 0 1rem;
+      dt{
+        font-size: 1.3rem;
+      }
+      width: calc(33.3333333333333% - 2rem);
+      &:nth-of-type(4){
+        display: none;
+      }
+    }
+  }
+  .bottom{
+    font-size: 0;
+    span{
+      font-size: 1.2rem;
+      display: inline-block;
+    }
+  }
+}
+
 //遮罩
 .mask{
   display: none;
@@ -391,11 +488,14 @@ header{
   }
 }
 
-@media only screen and( max-width: 65.625em){
+@media only screen and( max-width: 71.875em){
+  @include header--1150();
+}
+@media only screen and( max-width: 62.625em){
   @include header--1050();
 }
 @media only screen and( max-width: 59.375em){
-  @include header--950();
+  @include footer--950();
 }
 
 // 小于1200px;
@@ -412,9 +512,17 @@ header{
 //小于480px;
 @media only screen and (max-width: 30em) {
   @include header--ss();
+  @include footer--480();
 }
 
-// loading
+// 切换动画
+.fade-enter, .fade-leave-active{
+  opacity: 0;
+  transform: translateX(-60px);
+}
+.fade-enter-active, .fade-leave-active{
+  transition: all .4s ease;
+}// loading
 .loader{
   font-size: 0.4rem;
   position: fixed;
@@ -427,17 +535,21 @@ header{
   justify-content: center;
   align-items:center;
   z-index: 1000;
+  box-sizing: content-box;
 }
 .ball-clip-rotate-pulse {
   position: relative;
+  box-sizing: content-box;
  }
   .ball-clip-rotate-pulse > div {
-            animation-fill-mode: both;
+    box-sizing: content-box;
+    animation-fill-mode: both;
     position: absolute;
     top: 0px;
     left: 0px;
     border-radius: 100%; }
     .ball-clip-rotate-pulse > div:first-child {
+      box-sizing: content-box;
       background: #1fdab2;
       height: 16px;
       width: 16px;
@@ -445,6 +557,7 @@ header{
       left: 9px;
               animation: scale 1s 0s cubic-bezier(.09, .57, .49, .9) infinite; }
     .ball-clip-rotate-pulse > div:last-child {
+      box-sizing: content-box;
       position: absolute;
       border: 2px solid #1fdab2;
       width: 30px;

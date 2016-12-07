@@ -1,5 +1,93 @@
 extends ../shade/layout
 block content
   link(rel="stylesheet", href="/skin/css/login.css")
-  #login
-    //- img(src='')
+  #login(v-cloak)
+    .login-wrapper
+      .profile
+    .login-wrapper
+      .login-box
+        .item
+          // 账号登录
+          transition(name='fade')
+            .login-item(v-show='!formShow')
+              h2.header
+              ul.form
+                li
+                  input.input(type='text' placeholder='输入您的帐号')
+                li
+                  input.input(type='password' placeholder='输入您的密码')
+                li
+                  label.remember
+                    input(type='checkbox')
+                    |记住密码
+                  .forgot
+                    a(href="#") 忘记密码
+                li
+                  button.button 登录
+                li
+                  button.button 注册
+          // 手机验证码登录
+          transition(name='fade')
+            .login-item(v-show='formShow')
+              h2.header
+              ul.form
+                li
+                  input.input(type='text' placeholder='输入您的手机号')
+                li
+                  input.input(type='text' placeholder='输入图形验证码')
+                  img(src="../skin/img/passport/verify.png", alt="").verify
+                li
+                  input.input(type='text' placeholder='输入手机验证码')
+                  span.sms(v-on:click='sendSMS' v-html='sms' v-bind:class='{disabled: sended}')
+                li
+                  button.button 登录
+                li
+                  button.button 注册
+        .other-item
+          button.button.phone-login( v-show='!formShow' v-on:click='formShow=true')
+            i.icon.icon-phone
+            |手机验证码登录
+          button.button.user-login(v-on:click='formShow=false' v-show='formShow')
+            i.icon.icon-user
+            |账号密码登录
+
+  script.
+    new Vue({
+      el: '#login',
+      data: {
+        formShow: true,
+        sms: '发送',
+        sended: false
+      },
+      methods: {
+        sendSMS: function () {
+          if (this.sended){
+            // 已发送短信，倒计时内不可再点击
+            return false
+          } else {
+            // 设置按钮文字状态
+            this.countdown()
+
+            // 发送短信方法
+            console.log(1)
+          }
+        },
+        // 倒计时
+        countdown: function () {
+          var num = 20, timer = null, _this = this
+          this.sms = '重新发送(<em style="color:red;font-style:normal;">'+num+'</em>)s'
+          this.sended = true
+          timer = setInterval(function () {
+            num--
+            if( num <=0 ){
+              clearInterval(timer)
+              _this.sended = false
+              _this.sms = '重新发送'
+              return
+            }
+            _this.sms = '重新发送(<em style="color:red;font-style:normal;">'+num+'</em>)s'
+          }, 1000)
+        }
+      }
+
+    })
