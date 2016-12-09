@@ -64,77 +64,75 @@
     </script>
     <!--==================================================-->
     <link rel="stylesheet" href="/skin/css/login.css"/>
-    <div id="login" v-cloak="v-cloak">
-      <div class="login-wrapper">
-        <div class="profile"></div>
-      </div>
-      <div class="login-wrapper">
-        <div class="login-box">
-          <div class="item">
-            <!-- 账号登录-->
-            <transition name="fade">
-              <div v-show="!formShow" class="login-item">
-                <h2 class="header"></h2>
-                <ul class="form">
-                  <li>
-                    <input type="text" placeholder="输入您的帐号" class="input"/>
-                  </li>
-                  <li>
-                    <input type="password" placeholder="输入您的密码" class="input"/>
-                  </li>
-                  <li>
-                    <label class="remember">
-                      <input type="checkbox"/>记住密码
-                    </label>
-                    <div class="forgot"><a href="#">忘记密码</a></div>
-                  </li>
-                  <li>
-                    <button class="button">登录</button>
-                  </li>
-                  <li>
-                    <button class="button">注册</button>
-                  </li>
-                </ul>
-              </div>
-            </transition>
-            <!-- 手机验证码登录-->
-            <transition name="fade">
-              <div v-show="formShow" class="login-item">
-                <h2 class="header"></h2>
-                <ul class="form">
-                  <li>
-                    <input type="text" placeholder="输入您的手机号" class="input"/>
-                  </li>
-                  <li>
-                    <input type="text" placeholder="输入图形验证码" class="input"/><img src="../skin/img/passport/verify.png" alt="" class="verify"/>
-                  </li>
-                  <li>
-                    <input type="text" placeholder="输入手机验证码" class="input"/><span v-on:click="sendSMS" v-html="sms" v-bind:class="{disabled: sended}" class="sms"></span>
-                  </li>
-                  <li>
-                    <button class="button">登录</button>
-                  </li>
-                  <li>
-                    <button class="button">注册</button>
-                  </li>
-                </ul>
-              </div>
-            </transition>
-          </div>
-          <div class="other-item">
-            <button v-show="!formShow" v-on:click="formShow=true" class="button phone-login"><i class="icon icon-phone"></i>手机验证码登录</button>
-            <button v-on:click="formShow=false" v-show="formShow" class="button user-login"><i class="icon icon-user"></i>账号密码登录</button>
+    <div id="login" v-cloak="v-cloak" class="h-page">
+      <div class="container">
+        <div class="login-wrapper">
+          <div class="profile"></div>
+        </div>
+        <div class="login-wrapper">
+          <div class="login-box">
+            <div class="item">
+              <!-- 账号登录-->
+              <transition name="fade">
+                <div v-show="!formShow" class="login-item account">
+                  <h2 class="header"></h2>
+                  <ul class="form">
+                    <li>
+                      <input type="text" placeholder="输入您的帐号" class="input account"/>
+                    </li>
+                    <li>
+                      <input type="password" placeholder="输入您的密码" v-on:keyup.enter="login" class="input password"/>
+                    </li>
+                    <transition name="fade">
+                      <li v-show="error" class="error">{{errorMsg}}</li>
+                    </transition>
+                    <li>
+                      <label class="remember">
+                        <input type="checkbox"/>记住密码
+                      </label>
+                      <div class="forgot"><a href="#">忘记密码</a></div>
+                    </li>
+                  </ul>
+                  <button v-on:click="login" class="button">登录</button><a href="./register.html" class="button">注册</a>
+                </div>
+              </transition>
+              <!-- 手机验证码登录-->
+              <transition name="fade">
+                <div v-show="formShow" class="login-item phoneNum">
+                  <h2 class="header"></h2>
+                  <ul class="form">
+                    <li>
+                      <input type="text" placeholder="输入您的手机号" class="input"/>
+                    </li>
+                    <li>
+                      <input type="text" placeholder="输入图形验证码" class="input"/><img src="../skin/img/passport/verify.png" alt="" class="verify"/><i v-on:click="refreshVerify()" class="icon icon-refresh"></i>
+                    </li>
+                    <li>
+                      <input type="text" placeholder="输入手机验证码" class="input"/><span v-on:click="sendSMS" v-html="sms" v-bind:class="{disabled: sended}" class="sms"></span>
+                    </li>
+                  </ul>
+                  <button v-on:click="login()" class="button">登录</button><a href="./register.html" class="button">注册</a>
+                </div>
+              </transition>
+            </div>
+            <div class="other-item">
+              <button v-show="!formShow" v-on:click="formShow=true" class="button phone-login"><i class="icon icon-phone"></i>手机验证码登录</button>
+              <button v-on:click="formShow=false" v-show="formShow" class="button user-login"><i class="icon icon-user"></i>账号密码登录</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <script src="../skin/js/jquery-md5.min.js"></script>
     <script>
       new Vue({
         el: '#login',
         data: {
-          formShow: true,
+          formShow: false, // 显示隐藏手机登录还是账号登录
           sms: '发送',
-          sended: false
+          sended: false,  // 是否已发送短信验证码
+          error: false,  // 表单验证错误提示
+          errorMsg: '',  // 表单验证错误提示信息
         },
         methods: {
           sendSMS: function () {
@@ -164,6 +162,54 @@
               }
               _this.sms = '重新发送(<em style="color:red;font-style:normal;">'+num+'</em>)s'
             }, 1000)
+          },
+          // 重新获取验证码
+          refreshVerify: function () {
+            console.log('重新获取验证码')
+          },
+          login: function () {
+            var _this = this, _delay = 5000,
+                account = $('input.account').val(),
+                // 密码加密
+                password =  $.md5($.md5($('input.password').val()))
+      
+            if (account == '' || password == '') {
+              _this.errorMsg = '账号或密码不能为空'
+              _this.error = true
+              setTimeout(function () {
+                _this.error = false
+              }, _delay)
+            } else {
+              $("#loader").fadeIn(300)
+              $.ajax({
+                url: 'http://devapi.zczj.com:80/api/Passport/Login',
+                data: {
+                  'Account': account,
+                  'Password': password
+                },
+                type: 'post',
+                success: function (response) {
+                  if(response){
+                    $("#loader").fadeOut(300)
+      
+                    if(response.resultid !== 200){
+                      // 请求成功，账号或密码不正确
+                      _this.error = true
+                      _this.errorMsg = response.message
+                      setTimeout(function () {
+                        _this.error = false
+                      }, _delay)
+                    } else if (response.resultid === 200) {
+                      // 请求成功，账号密码正确，登录成功
+                      $("#loader").fadeOut(300)
+                      // 登录成功，跳转
+                      // doSomething
+                      window.location.href = './success.html?login'
+                    }
+                  }
+                }
+              })
+            }
           }
         }
       
