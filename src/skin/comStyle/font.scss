@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 190684 */
-  src: url('//at.alicdn.com/t/font_vle99427xqg2e29.eot');
-  src: url('//at.alicdn.com/t/font_vle99427xqg2e29.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_vle99427xqg2e29.woff') format('woff'),
-  url('//at.alicdn.com/t/font_vle99427xqg2e29.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_vle99427xqg2e29.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_8upmcwr8g4cjif6r.eot');
+  src: url('//at.alicdn.com/t/font_8upmcwr8g4cjif6r.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_8upmcwr8g4cjif6r.woff') format('woff'),
+  url('//at.alicdn.com/t/font_8upmcwr8g4cjif6r.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_8upmcwr8g4cjif6r.svg#iconfont') format('svg');
 }
 
 .icon{
@@ -27,5 +27,13 @@
   // 手机
   &-phone::before{
     content: '\e620';
+  }
+  // 刷新
+  &-refresh::before{
+    content: '\e65b';
+  }
+  // 刷新
+  &-money::before{
+    content: '\e616';
   }
 }

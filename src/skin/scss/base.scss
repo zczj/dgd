@@ -30,6 +30,7 @@ li {
     list-style: none;
 }
 input{
+  padding: 0;
   outline: none;
 }
 input:not([type='checkbox']){
@@ -160,7 +161,7 @@ a:hover, a:active {
 .container{
   max-width: 1200px;
   margin: 0 auto;
-  width: 90%;
+  width: 94%;
 }
 /**
  * 头部
@@ -172,7 +173,7 @@ body{
 
 header{
     height: 76px; background:#fff;
-    .container{ height: 100%; position: relative;}
+    .container{ height: 100%; width: 100%; position: relative;}
     .nav{
       .logo{
         position: absolute; left: 15px; top: 15px;

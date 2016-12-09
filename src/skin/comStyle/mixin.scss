@@ -11,4 +11,10 @@
   }
 }
 
-
+//过滤渐变
+@mixin gradient($color1,$color2){
+   background:-webkit-linear-gradient(45deg, $color1, $color2);
+   background:-o-linear-gradient(45deg, $color1, $color2);
+   background:-moz-linear-gradient(45deg, $color1, $color2);
+   background:linear-gradient(45deg, $color1, $color2);
+}

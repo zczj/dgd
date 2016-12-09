@@ -1,0 +1,65 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/login.css")
+  #success(v-cloak).h-page
+    .container
+      .login-wrapper
+        .profile
+      .login-wrapper
+        .login-box
+          .item
+            // 登录/注册成功
+            h2.header {{type}}成功
+            .success
+            p.success-msg 恭喜您{{type}}成功
+            p.success-msg(v-if='from') 520元红包已发，请查收。
+            a(href="#").button 前往用户中心
+            p.success-go
+              span {{number}}s
+              | 后返回大股东首页
+
+  script.
+    var getType = window.location.href.split('?')[1]
+    console.log(getType)
+
+    new Vue({
+      el: '#success',
+      data: {
+        formShow: false,
+        from: false,
+        number: 30
+      },
+      computed: {
+        type: function () {
+          if (getType == 'login') {
+            this.from = false
+            return '登录'
+          } else if (getType == 'register') {
+            this.from = true
+            return '注册'
+          }
+        },
+        // countdown
+        countdown: function () {
+          var timer = null, number = 10
+          return timer = setInterval(function () {
+            number--
+            if (number<=0) {
+              clearInterval(timer)
+              window.location.href = 'http://www.dgd.vc'
+            }
+            return number
+          }, 1000)
+        }
+      },
+      mounted: function () {
+        var timer = null,  _this = this
+        timer = setInterval(function () {
+          _this.number--
+          if (_this.number<=0) {
+            clearInterval(timer)
+            //- window.location.href = 'http://www.dgd.vc'
+          }
+        }, 1000)
+      }
+    })
