@@ -86,6 +86,9 @@
           text-indent: 10px;
           color: #464647;
           font-size: 1.333333em;
+          &:focus{
+            border-color: #0ee894;
+          }
         }
         .verify{
           position: absolute;
@@ -171,7 +174,10 @@
   }
 }
 
-// 注册
+
+
+
+// 注册页面
 #register{
   .login-box{
     .item{
@@ -195,7 +201,7 @@
   }
 }
 
-// 登录/注册成功
+// 登录/注册成功页面
 #success{
   .item{
     .header{
@@ -232,6 +238,19 @@
     }
   }
 }
+
+// 提示工具栏
+#fpwd{
+  .tool-bar{
+    float: right;
+    width: 90px;
+    height: 369px;
+    margin-left: 10px;
+    background-color: #fff;
+  }
+}
+
+
 
 
 //小于800px;

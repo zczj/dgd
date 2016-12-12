@@ -523,7 +523,9 @@ header{
 }
 .fade-enter-active, .fade-leave-active{
   transition: all .4s ease;
-}// loading
+}
+
+// loading
 .loader{
   font-size: 0.4rem;
   position: fixed;

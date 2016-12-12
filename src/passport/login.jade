@@ -1,22 +1,23 @@
 extends ../shade/layout
 block content
-  link(rel="stylesheet", href="/skin/css/login.css")
-  #login(v-cloak).h-page
+  //- link(rel="stylesheet", href="/skin/css/login.css")
+  link(rel="stylesheet", href="/skin/css/passport.css")
+  #login(v-cloak).h-passport-page
     .container
-      .login-wrapper
+      .passport-profile-wrapper
         .profile
-      .login-wrapper
-        .login-box
-          .item
+      .passport-content-wrapper
+        .passport-box-wrapper
+          .passport-box
             // 账号登录
             transition(name='fade')
-              .login-item.account(v-show='!formShow')
-                h2.header
-                ul.form
+              .passport-item.account(v-show='!formShow')
+                h2.passport-header 登录
+                ul.passport-form
                   li
-                    input.input.account(type='text' placeholder='输入您的帐号')
+                    input.passport-input.account(type='text' placeholder='输入您的帐号')
                   li
-                    input.input.password(type='password' placeholder='输入您的密码' v-on:keyup.enter='login')
+                    input.passport-input.password(type='password' placeholder='输入您的密码' v-on:keyup.enter='login')
                   transition(name='fade')
                     li.error(v-show='error') {{errorMsg}}
                   li
@@ -24,30 +25,32 @@ block content
                       input(type='checkbox')
                       |记住密码
                     .forgot
-                      a(href="#") 忘记密码
-                button.button(v-on:click='login') 登录
-                a(href="./register.html").button 注册
+                      a(href="./fpwd.html") 忘记密码
+                button.passport-button(v-on:click='login') 登录
+                a(href="./register.html").passport-button 注册
             // 手机验证码登录
             transition(name='fade')
-              .login-item.phoneNum(v-show='formShow')
-                h2.header
-                ul.form
+              .passport-item.phoneNum(v-show='formShow')
+                h2.passport-header 登录
+                ul.passport-form
                   li
-                    input.input(type='text' placeholder='输入您的手机号')
+                    input.passport-input(type='text' placeholder='输入您的手机号')
                   li
-                    input.input(type='text' placeholder='输入图形验证码')
+                    input.passport-input(type='text' placeholder='输入图形验证码')
                     img(src="../skin/img/passport/verify.png", alt="").verify
                     i.icon.icon-refresh(v-on:click='refreshVerify()')
                   li
-                    input.input(type='text' placeholder='输入手机验证码')
+                    input.passport-input(type='text' placeholder='输入手机验证码')
                     span.sms(v-on:click='sendSMS' v-html='sms' v-bind:class='{disabled: sended}')
-                button.button(v-on:click='login()') 登录
-                a(href="./register.html").button 注册
-          .other-item
-            button.button.phone-login( v-show='!formShow' v-on:click='formShow=true')
+                    transition(name='fade')
+                      li.error(v-show='error') {{errorMsg}}
+                button.passport-button(v-on:click='login') 登录
+                a(href="./register.html").passport-button 注册
+          .switch-login-box
+            button.passport-button.phone-login( v-show='!formShow' v-on:click='formShow=true')
               i.icon.icon-phone
               |手机验证码登录
-            button.button.user-login(v-on:click='formShow=false' v-show='formShow')
+            button.passport-button.user-login(v-on:click='formShow=false' v-show='formShow')
               i.icon.icon-user
               |账号密码登录
   script(src='../skin/js/jquery-md5.min.js')
@@ -96,9 +99,9 @@ block content
         },
         login: function () {
           var _this = this, _delay = 5000,
-              account = $('input.account').val(),
+              account = $('.account input.account').val(),
               // 密码加密
-              password =  $.md5($.md5($('input.password').val()))
+              password =  $.md5($.md5($('.account input.password').val()))
 
           if (account == '' || password == '') {
             _this.errorMsg = '账号或密码不能为空'

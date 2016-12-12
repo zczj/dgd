@@ -1,33 +1,49 @@
 extends ../shade/layout
 block content
-  link(rel="stylesheet", href="/skin/css/login.css")
-  #success(v-cloak).h-page
+  link(rel="stylesheet", href="/skin/css/passport.css")
+  #success(v-cloak).h-passport-page
     .container
-      .login-wrapper
+      .passport-profile-wrapper
         .profile
-      .login-wrapper
-        .login-box
-          .item
+      .passport-content-wrapper
+        .fpwd-tooltips-bar(v-if='fpwd')
+          .step
+            p ①
+            |找回密码
+          .line
+          .step
+            p ②
+            |重置密码
+          .line
+          .step.active
+            p ③
+            |完成
+        .passport-box-wrapper(v-bind:class='{"fpwd-layout": fpwd}')
+          .passport-box
             // 登录/注册成功
-            h2.header {{type}}成功
-            .success
-            p.success-msg 恭喜您{{type}}成功
-            p.success-msg(v-if='from') 520元红包已发，请查收。
-            a(href="#").button 前往用户中心
-            p.success-go
-              span {{number}}s
-              | 后返回大股东首页
+            h2.passport-header {{type}}成功
+            .passport-success
+            div(v-if='!fpwd')
+              p.passport-success-msg 恭喜您{{type}}成功
+              p.passport-success-msg(v-if='from') 520元红包已发，请查收。
+              a(href="#").passport-button 前往用户中心
+              p.passport-success-go
+                span {{number}}s
+                | 后返回大股东首页
+            div(v-if='fpwd')
+              p.passport-success-msg 您已成功修改密码
+              p.passport-success-msg 请重新登录
+              a(href="./login.html").passport-button 登录
 
   script.
     var getType = window.location.href.split('?')[1]
-    console.log(getType)
-
     new Vue({
       el: '#success',
       data: {
         formShow: false,
         from: false,
-        number: 30
+        number: 30,
+        fpwd: false
       },
       computed: {
         type: function () {
@@ -37,6 +53,9 @@ block content
           } else if (getType == 'register') {
             this.from = true
             return '注册'
+          } else if (getType == 'fpwd') {
+            this.fpwd = true
+            return '找回密码'
           }
         },
         // countdown
@@ -46,7 +65,7 @@ block content
             number--
             if (number<=0) {
               clearInterval(timer)
-              window.location.href = 'http://www.dgd.vc'
+              //- window.location.href = 'http://www.dgd.vc'
             }
             return number
           }, 1000)
