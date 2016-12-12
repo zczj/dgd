@@ -63,25 +63,25 @@
       })
     </script>
     <!--==================================================-->
-    <link rel="stylesheet" href="/skin/css/login.css"/>
-    <div id="login" v-cloak="v-cloak" class="h-page">
+    <link rel="stylesheet" href="/skin/css/passport.css"/>
+    <div id="login" v-cloak="v-cloak" class="h-passport-page">
       <div class="container">
-        <div class="login-wrapper">
+        <div class="passport-profile-wrapper">
           <div class="profile"></div>
         </div>
-        <div class="login-wrapper">
-          <div class="login-box">
-            <div class="item">
+        <div class="passport-content-wrapper">
+          <div class="passport-box-wrapper">
+            <div class="passport-box">
               <!-- 账号登录-->
               <transition name="fade">
-                <div v-show="!formShow" class="login-item account">
-                  <h2 class="header"></h2>
-                  <ul class="form">
+                <div v-show="!formShow" class="passport-item account">
+                  <h2 class="passport-header">登录</h2>
+                  <ul class="passport-form">
                     <li>
-                      <input type="text" placeholder="输入您的帐号" class="input account"/>
+                      <input type="text" placeholder="输入您的帐号" class="passport-input account"/>
                     </li>
                     <li>
-                      <input type="password" placeholder="输入您的密码" v-on:keyup.enter="login" class="input password"/>
+                      <input type="password" placeholder="输入您的密码" v-on:keyup.enter="login" class="passport-input password"/>
                     </li>
                     <transition name="fade">
                       <li v-show="error" class="error">{{errorMsg}}</li>
@@ -90,34 +90,37 @@
                       <label class="remember">
                         <input type="checkbox"/>记住密码
                       </label>
-                      <div class="forgot"><a href="#">忘记密码</a></div>
+                      <div class="forgot"><a href="./fpwd.html">忘记密码</a></div>
                     </li>
                   </ul>
-                  <button v-on:click="login" class="button">登录</button><a href="./register.html" class="button">注册</a>
+                  <button v-on:click="login" class="passport-button">登录</button><a href="./register.html" class="passport-button">注册</a>
                 </div>
               </transition>
               <!-- 手机验证码登录-->
               <transition name="fade">
-                <div v-show="formShow" class="login-item phoneNum">
-                  <h2 class="header"></h2>
-                  <ul class="form">
+                <div v-show="formShow" class="passport-item phoneNum">
+                  <h2 class="passport-header">登录</h2>
+                  <ul class="passport-form">
                     <li>
-                      <input type="text" placeholder="输入您的手机号" class="input"/>
+                      <input type="text" placeholder="输入您的手机号" class="passport-input"/>
                     </li>
                     <li>
-                      <input type="text" placeholder="输入图形验证码" class="input"/><img src="../skin/img/passport/verify.png" alt="" class="verify"/><i v-on:click="refreshVerify()" class="icon icon-refresh"></i>
+                      <input type="text" placeholder="输入图形验证码" class="passport-input"/><img src="../skin/img/passport/verify.png" alt="" class="verify"/><i v-on:click="refreshVerify()" class="icon icon-refresh"></i>
                     </li>
                     <li>
-                      <input type="text" placeholder="输入手机验证码" class="input"/><span v-on:click="sendSMS" v-html="sms" v-bind:class="{disabled: sended}" class="sms"></span>
+                      <input type="text" placeholder="输入手机验证码" class="passport-input"/><span v-on:click="sendSMS" v-html="sms" v-bind:class="{disabled: sended}" class="sms"></span>
+                      <transition name="fade">
+                        <li v-show="error" class="error">{{errorMsg}}</li>
+                      </transition>
                     </li>
                   </ul>
-                  <button v-on:click="login()" class="button">登录</button><a href="./register.html" class="button">注册</a>
+                  <button v-on:click="login" class="passport-button">登录</button><a href="./register.html" class="passport-button">注册</a>
                 </div>
               </transition>
             </div>
-            <div class="other-item">
-              <button v-show="!formShow" v-on:click="formShow=true" class="button phone-login"><i class="icon icon-phone"></i>手机验证码登录</button>
-              <button v-on:click="formShow=false" v-show="formShow" class="button user-login"><i class="icon icon-user"></i>账号密码登录</button>
+            <div class="switch-login-box">
+              <button v-show="!formShow" v-on:click="formShow=true" class="passport-button phone-login"><i class="icon icon-phone"></i>手机验证码登录</button>
+              <button v-on:click="formShow=false" v-show="formShow" class="passport-button user-login"><i class="icon icon-user"></i>账号密码登录</button>
             </div>
           </div>
         </div>
@@ -169,9 +172,9 @@
           },
           login: function () {
             var _this = this, _delay = 5000,
-                account = $('input.account').val(),
+                account = $('.account input.account').val(),
                 // 密码加密
-                password =  $.md5($.md5($('input.password').val()))
+                password =  $.md5($.md5($('.account input.password').val()))
       
             if (account == '' || password == '') {
               _this.errorMsg = '账号或密码不能为空'
