@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-12-06 16:23:02
 * @Last Modified by:   老苏
-* @Last Modified time: 2016-12-12 18:02:25
+* @Last Modified time: 2016-12-13 18:08:45
 */
 @import "../comStyle/mixin.scss";
 //轮播图
@@ -272,6 +272,7 @@
         }
       }
     }
+    .dgd-plat-gg
     .ga-side,.ga-main{
       width: 100%;
       padding: 0;
@@ -727,6 +728,8 @@
         font-size: 1.4rem;
       }
       .face{
+        height: 100%;
+        width: 100%;
         .tag{
           display: inline-block;
           width: 41px;
@@ -762,12 +765,16 @@
       }
       .back{
         display: none;
+        height: 100%;
+        width: 100%;
       }
       &.cur{
         .face{display: none;}
         .back{
           display:block;
           padding: 50px 20px;
+          position: relative;
+          z-index: 10;
           .title,.item{
             text-align: left;
           }
@@ -784,17 +791,165 @@
             margin-top: 60px;
           }
         }
+        &::after{
+          display: block;
+          content:'';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background:rgba(0,0,0,0.3);
+          top: 0;
+          left: 0;
+        }
       }
     }
   }
 }
 
+//- 我们的优势
+.odds{
+  padding: 30px 0;
+}
+.odds-list{
+  ul{
+    text-align: center;
+  }
+  li{
+    display: inline-block;
+    font-size: 0;
+    width: calc(33.33333333333333% - 50px);
+    margin: 0 25px;
+    float: left;
+    margin-top: 20px;
+    .pro-logo{
+      display: inline-block;
+      width: 62px;
+      height: 60px;
+      background:url(../img/index/i4.png) center bottom no-repeat;
+
+    }
+    &:nth-of-type(2){
+        .pro-logo{
+          background-image: url(../img/index/i5.png);
+        }
+      }
+    &:nth-of-type(3){
+      .pro-logo{
+        background-image: url(../img/index/i6.png);
+      }
+    }
+    .title{
+      font-size: 2rem;
+      color: #0a0b0b;
+      font-weight: 400;
+      text-align: center;
+      padding: 6px 0;
+      @include border-1px(#dfe1e3);
+    }
+    .txt{
+      text-align: center;
+      font-size: 1.4rem;
+      color: #99a0a7;
+      margin-top: 14px;
+    }
+  }
+}
+@mixin odds-list--600() {
+  .odds-list{
+    li{
+      width: calc(33.33333333333333% - 20px);
+      margin: 0 10px;
+      margin-top: 15px;
+      .txt{
+        margin-top: 10px;
+      }
+    }
+  }
+}
+@mixin odds-list--480() {
+  .odds-list{
+    li{
+      width: calc(33.33333333333333% - 4px);
+      margin: 0 2px;
+      margin-top: 10px;
+      .title{
+        font-size: 1.6rem;
+      }
+      .txt{
+        margin-top: 8px;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+//- 合作机构
+.player{
+  padding: 20px 0;
+  background:#f8f8f8;
+}
+.player-bar{
+  text-align: right;
+  font-size: 0;
+  padding-right: 10px;
+  span{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: url(../img/index/prev.png) center center no-repeat;
+    border-radius: 2px;
+
+    &:nth-of-type(2){
+        background-image: url(../img/index/next.png);
+      }
+  }
+}
+.player-list{
+  margin-top: 20px;
+  .item{
+    display: block;
+    margin: 0 10px;
+  }
+}
+
+@mixin player-list--800() {
+  .player-list{
+    margin-top: 20px;
+    .item{
+      margin: 0 8px;
+    }
+  }
+}
+
+@mixin player-list--600() {
+
+  .player-list{
+    margin-top: 15px;
+    .item{
+      margin: 0 5px;
+    }
+  }
+}
+
+//- 友情链接
+.links{
+
+}
+.links-list{
+  line-height: 28px;
+  padding: 10px 0;
+  a{
+    padding-right: 10px;
+  }
+}
 
 
 //小于950px;
 @media only screen and( max-width: 59.375em){
   @include dgd-ga--950();
   @include common-list--950();
+  @include player-list--800();
 }
 
 //小于800px;
@@ -804,12 +959,16 @@
   }
   @include dgd-ga--800();
   @include common-list--800();
+
 }
 
 //小于600px;
 @media only screen and (max-width: 37.5em) {
   @include dgdNum--600();
   @include common-list--600();
+  @include odds-list--600();
+  @include player-list--600();
+  .odds,.player,.links,.transfer,.ga-main{display: none;}
 
 }
 
@@ -818,6 +977,7 @@
   @include dgd-ga--480();
   @include dgdNum--480();
   @include common-list--480();
+  @include odds-list--480();
 
 }
 

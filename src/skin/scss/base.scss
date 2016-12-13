@@ -29,12 +29,15 @@ ul,dl,dt,dd,li,p {
 li {
     list-style: none;
 }
-input{
+input, select{
   padding: 0;
   outline: none;
 }
 input:not([type='checkbox']){
   -webkit-appearance: none;// iOS 输入框阴影
+}
+img{
+  vertical-align: top;
 }
 /*
    工具样式
@@ -391,6 +394,7 @@ header{
 
 // 底部
 .footer{
+  margin-top: 20px;
   background:#40454b;
   color: #fff;
   font-size: 0px;
@@ -450,18 +454,22 @@ header{
     }
   }
 }
+
 @mixin footer--480 () {
   .footer{
-    .info dl{
-      margin: 0 1rem;
-      dt{
-        font-size: 1.3rem;
-      }
-      width: calc(33.3333333333333% - 2rem);
-      &:nth-of-type(4){
-        display: none;
-      }
+    .info{
+      display: none;
     }
+    // .info dl{
+    //   margin: 0 1rem;
+    //   dt{
+    //     font-size: 1.3rem;
+    //   }
+    //   width: calc(33.3333333333333% - 2rem);
+    //   &:nth-of-type(4){
+    //     display: none;
+    //   }
+    // }
   }
   .bottom{
     font-size: 0;

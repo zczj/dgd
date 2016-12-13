@@ -36,7 +36,7 @@ block content
               a(href="./login.html").passport-button 登录
 
   script.
-    var getType = window.location.href.split('?')[1]
+    var getType = window.location.href.split('?')[1] || 'login'
     new Vue({
       el: '#success',
       data: {

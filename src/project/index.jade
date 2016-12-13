@@ -1,0 +1,100 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="../skin/css/project.css")
+  #project-list(v-cloak)
+    .banner
+      img(src="../skin/img/project/banner.jpg", alt="")
+    h1.project-title 投资项目
+    .search-wrapper
+      .container
+        dl.search-box
+          dt 全部项目：
+          dd
+            input(type="text")
+            i.icon.icon-search
+          dd.toggle-filter(v-on:click='subNavShow = !subNavShow') {{subNavShow ? '收起' : '展开'}}筛选
+            i.icon(v-bind:class='[subNavShow? "icon-up" : "icon-down"]')
+        // 面包屑导航
+        .sub-nav(v-show='subNavShow')
+          dl
+            dt 项目类型：
+            dd.select
+              select
+                option(value="全部") 全部
+                option(value="股权型") 股权型
+                option(value="收益型") 收益型
+                option(value="活期宝") 活期宝
+            dd
+              a(href="#").current 全部
+            dd
+              a(href="#") 股权型
+            dd
+              a(href="#") 收益型
+            dd
+              a(href="#") 活期宝
+          dl
+            dt 项目类型：
+            dd
+            dd
+              a(href="#") 全部
+            dd
+              a(href="#").current 股权型
+            dd
+              a(href="#") 收益型
+            dd
+              a(href="#") 活期宝
+          dl
+            dt 项目类型：
+            dd
+            dd
+              a(href="#") 全部
+            dd
+              a(href="#") 股权型
+            dd
+              a(href="#").current 收益型
+            dd
+              a(href="#") 活期宝
+        // 列表
+    .list-wrapper
+      .container
+        .list
+          .list-img
+            img(src="../skin/img/project/list-img01.jpg", alt="")
+            .list-tag 融资中
+          .list-profile
+            .list-profile-head
+              div
+                .investment 起投金额：
+                  span 5000元
+                .line
+                .platform 项目平台：
+                  span 大股东
+                a(href="#").sub
+                  i.icon.icon-money
+                  |我要认购
+              .name 《逆行未来》网络大电影
+            .list-profile-content
+              p.profile 顺丰是国内快递公司中产业链布局最前瞻，也是最完美的快递公司，剔除剥离的电商板块。包括5大板块，涵盖报关、物流、金融、冷链、仓配等等，其开发出的业务大部分也已其高端快递服务顺丰是国内快递公司中产业链布局最前瞻，也是最完美的快递公司，剔除剥离的电商板块。包括5大板块，涵盖报关、物流、金融、冷链、仓配等等，其开发出的业务大部分也已其高端快递服务顺丰是国内快递公司中产业链布局最前瞻，也是最完美的快递公司，剔除剥离的电商板块。包括5大板块，涵盖报关、物流、金融、冷链、仓配等等，其开发出的业务大部分也已其高端快递服务
+              .list-point
+                .target 目标金额：
+                  span 20,000元
+                .already 已达金额：
+                  span 24,000元
+                .counter 众筹轮次：
+                  span 种子轮
+              .list-progress
+                span 项目进度：
+                .progress
+                  .progress-gray
+                .progress-num 80%
+
+
+
+
+  script.
+    new Vue({
+      el: '#project-list',
+      data: {
+        subNavShow: true
+      }
+    })

@@ -1,7 +1,7 @@
 extends ../shade/layout
 block content
   link(rel="stylesheet", href="/skin/plugs/owl/owl.carousel.min.css")
-  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/assets/owl.theme.default.css")
+  link(rel="stylesheet", href="/skin/plugs/owl-carousel/owl.carousel.css")
   link(rel="stylesheet", href="/skin/css/index.css")
 
 
@@ -74,7 +74,7 @@ block content
           ul
             li.first.clearfix
               a(href="#").pic
-                img(src="http://img.12584.cn/news/bg/201604/ed8af172f376eebc65b9bed3b2ea7b70.jpg", alt="")
+                img(src="../skin/img/project/list-img01.jpg", alt="")
               a(href="#").title.ellipsis 十张图看清BAT之间的实力对比
               p.txt.
                 近日，百度、阿里、腾讯都相继发布了三季度财报，作为中国互
@@ -96,7 +96,7 @@ block content
         li.list-item
           .list-pic
             a(href="#")
-              img(src="http://img.12584.cn/news/bg/201604/ed8af172f376eebc65b9bed3b2ea7b70.jpg", alt="")
+              img(src="../skin/img/project/list-img01.jpg", alt="")
           .list-main
             .list-t.border-1px
               .item
@@ -128,7 +128,7 @@ block content
         li.list-item
           .list-pic
             a(href="#")
-              img(src="http://img.12584.cn/news/bg/201604/ed8af172f376eebc65b9bed3b2ea7b70.jpg", alt="")
+              img(src="../skin/img/project/list-img01.jpg", alt="")
               span.tag.tag-3
           .list-main
             .list-t
@@ -195,27 +195,51 @@ block content
       .common-t
         span 我们的优势
       .odds-list
-        ul
+        ul.clearfix
           li
-            span.logo
-            h2.title 优先项目
-            p.txt 为您精选优质项目 保障资金不站岗
-        ul
+            span.pro-logo
+            .title.border-1px 优先项目
+            .txt
+              p 为您精选优质项目
+              p 保障资金不站岗
           li
-            span.logo
-            h2.title 质押贷款
-            p.txt  资金周转轻松搞定 投资理财更灵活
+            span.pro-logo
+            .title.border-1px 质押贷款
+            .txt
+              p 资金周转轻松搞定
+              p 投资理财更灵活
 
-        ul
           li
-            span.logo
-            h2.title 股权转让
-            p.txt  解决优质资产变现 提高资金流动性
+            span.pro-logo
+            .title.border-1px 股权转让
+            .txt
+              p 解决优质资产变现
+              p 提高资金流动性
   //- 合作机构
   section.player
     .container
       .common-t
         span 合作机构
+      .player-con.clearfix
+        .player-bar
+          span.prev-btn
+          span.next-btn
+        .player-list#player-list.owl-carousel.owl-theme
+          .item
+            img(src="/skin/img/index/p1.jpg", alt="")
+          .item
+            img(src="/skin/img/index/p1.jpg", alt="")
+          .item
+            img(src="/skin/img/index/p1.jpg", alt="")
+          .item
+            img(src="/skin/img/index/p1.jpg", alt="")
+          .item
+            img(src="/skin/img/index/p1.jpg", alt="")
+          .item
+            img(src="/skin/img/index/p1.jpg", alt="")
+
+
+
 
   //- 友情链接
   section.links
@@ -248,23 +272,6 @@ block content
 
 
 
-  script(src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js")
+  script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
   script(src="/skin/plugs/bscroll/bscroll.min.js")
-  script.
-    $(document).ready(function(){
-      $('#dgd-ad').owlCarousel({
-         items: 1,
-         loop: true,
-         autoplay: true,
-         autoplayTimeout: 3000,
-         autoplayHoverPause: true
-      });
-      var transferList = $('#transfer-list');
-      var oUl = $('#transfer-list ul');
-      var aLi = oUl.find('li');
-      oUl.width( aLi.length * (aLi.eq(0).width() + 20 ) -20 +'px');
-      var scroll = new BScroll(document.getElementById('transfer-list'), {
-        scrollX: true
-      })
-
-    });
+  script(src="/skin/js/index.js")
