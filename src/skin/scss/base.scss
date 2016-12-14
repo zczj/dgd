@@ -497,6 +497,400 @@ header{
   }
 }
 
+//项目列表
+.common-list{
+
+
+  .list-item{
+    height: 214px;
+    border: 1px #ededed solid;
+    margin-top: 20px;
+    box-shadow: 3px 3px 3px #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    background:#fff;
+
+    .list-pic{
+      height: 214px;
+      width: 290px;
+      float: left;
+      font-size: 0;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+      a{
+        display: inline-block;
+        position: relative;
+        height: 100%;
+        width: 100%;
+      }
+      a >.tag{
+        display: inline-block;
+        position: absolute;
+        left: 8px;
+        top: 8px;
+        background:rgba(0,0,0,0.3);
+        padding: 3px 10px;
+        font-size: 1.4rem;
+        z-index: 2;
+        border-radius: 4px;
+        &-1{
+          &::after{
+            content:'预热中';
+            display: block;
+            color: #fff;
+          }
+        }
+        &-2{
+          &::after{
+            content: '融资中';
+            color: #30d1fb;
+          }
+        }
+        &-3{
+          &::after{
+            content:'已完成';
+            color: #fff;
+          }
+        }
+      }
+    }
+    .list-main{
+      float: right;
+      height: 214px;
+      width: calc(100% - 290px);
+      position: relative;
+      .list-t{
+        height: 40px;
+        line-height: 40px;
+        padding-left: 20px;
+        @include border-1px(#e0e0e0);
+          font-size: 0;
+          .item{
+            display: inline-block;
+            font-size: 1.5rem;
+            &:nth-of-type(1){
+              width: 180px;
+            }
+
+          }
+          .item + .item{
+            position: relative;
+            width: calc(100% - 180px);
+            &::before{
+              content: '|';
+              font-size: 1.8rem;
+              color:#dcdcdc;
+              margin-right: 40px;
+            }
+          }
+          .buy-now{
+            font-size: 1.5rem;
+            position: absolute;
+            right: 10px;
+            top: 4px;
+            height: 30px;
+            width: 114px;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+            background:#00a9e0;
+            border-radius: 5px;
+            .icon-money{
+              font-size: 2rem;
+              vertical-align: middle;
+            }
+          }
+          .gz-btn{
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 2;
+            color: #b2b9bf;
+            font-size: 15px;
+            padding: 0 10px;
+            &::after{
+              content:'关注';
+            }
+            &.gz-btn-ed{
+              color: #009ff0;
+              &::after{
+                content: '已关注';
+              }
+            }
+          }
+      }
+      .list-con{
+        padding:0 20px;
+        .list-txt,.list-info,.list-point{
+          color: #adb3b9;
+          font-size: 1.5rem;
+          height: 4rem;
+          line-height: 2rem;
+          overflow: hidden;
+          margin-top: 20px;
+        }
+        .list-info{
+          color: #3e4149;
+          .item>span{margin-right: 20px;}
+        }
+        .list-point{
+          margin-top: 5px;
+          height: auto;
+          font-size: 0;
+          .item{
+            font-size: 1.5rem;
+            display: inline-block;
+            padding-right: 1rem;
+            vertical-align: top;
+            width: 33.3333333333333333%;
+            .val{
+              color: #3e4149;
+            }
+          }
+        }
+        .list-progress{
+          height: 30px;
+          line-height: 30px;
+          span{
+            display: inline-block;
+            font-size:1.5rem;
+            float: left;
+            color: #99a0a7;
+            vertical-align: middle;
+            &.val{
+              position: relative;
+              margin-top: 10px;
+              width: calc(100% - 160px);
+              height: 10px;
+              background:#e4e4e4;
+              border-radius: 5px;
+              overflow: hidden;
+               &::before{
+                  content: ' ';
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  @include gradient(#00d5a7,#00a9e0);
+                }
+              .val-sub{
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 100%;
+                background:#e4e4e4;
+              }
+            }
+            &.num{
+              color: #3e4149;
+              padding-left: 4px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.loading-more{
+  text-align: center;
+  margin-top: 20px;
+  & > a{
+    display: inline-block;
+    padding: 0 20px;
+    height: 34px;
+    line-height: 34px;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    font-size:1.5rem;
+  }
+}
+
+@mixin common-list--350() {
+  .common-list .list-item .list-main .list-con .list-point .item{
+    font-size: 1.3rem;
+  }
+}
+@mixin common-list--480(){
+  .common-list{
+    .list-item{
+      height: auto;
+      padding-top: 40px;
+      .list-pic{
+        position: static;
+        top: 40px;
+        left: 0;
+        width: 100%;
+        height: auto;
+      }
+      .list-main{
+        position: static;
+        padding-left: 0;
+        height: auto;
+        width: 100%;
+        .list-t{
+          padding-left: 10px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          .item{
+            font-size: 1.3rem;
+            width: auto;
+            display: inline;
+            padding: 0 5px;
+            &::before{
+              display: none;
+            }
+          }
+        }
+        .list-con{
+
+          padding-top: 0;
+          padding-bottom: 10px;
+          .list-info{
+            height: auto;
+            .item > span{
+              display: block;
+            }
+          }
+          .list-point{
+            margin-top: 6px;
+            .itme{
+              margin-top: 4px;
+            }
+          }
+          .list-progress{
+            height: 20px;
+            line-height: 20px;
+            margin-top: 6px;
+            span{
+              font-size:1.3rem;
+              &.t{
+                display: none;
+              }
+              &.val{
+                position: relative;
+                margin-top: 5px;
+                width: calc(100% - 52px);
+                height: 10px;
+                background:#e4e4e4;
+                border-radius: 5px;
+
+                .val-sub{
+                  height: 10px;
+                }
+              }
+              &.num{
+                color: #009ff0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin common-list--600(){
+  .common-list{
+    .list-item{
+      .list-main{
+        .list-t{
+          .item{
+            width: auto;
+          }
+        }
+        .list-con{
+          .list-point{
+            .item{
+              .val{
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@mixin common-list--800(){
+  .common-list{
+    .list-item{
+      height: 187px;
+      position: relative;
+      .list-pic{
+        position: absolute;
+        top: 40px;
+        left: 0;
+      }
+      .list-main{
+        width: 100%;
+        padding-left: 200px;
+        .list-t{
+          position: absolute;
+          left: 0;
+          width: 100%;
+          .gz-btn{
+            display: block;
+          }
+        }
+        .list-con{
+          padding-top: 40px;
+          .list-info{
+            height: 6.4rem;
+          }
+        }
+      }
+    }
+  }
+  .common-list .list-item .list-main .list-t .buy-now{
+    display: none;
+  }
+}
+
+@mixin common-list--950() {
+  .common-list{
+
+    .list-item{
+      height: 147px;
+      .list-pic{
+        height: 147px;
+        width: 200px;
+
+      }
+      .list-main{
+        height: 147px;
+        width: calc(100% - 200px);
+        .list-t{
+          .item + .item{
+            &::before{
+              font-size: 1.6rem;
+              margin-right: 20px;
+            }
+          }
+        }
+        .list-con{
+          .list-txt,.list-info{
+            margin-top: 8px;
+            font-size: 1.3rem;
+            height: 3.2rem;
+            line-height: 1.6rem;
+          }
+          .list-point .item{
+            line-height: 1.6rem;
+            font-size: 1.4rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
 @media only screen and( max-width: 71.875em){
   @include header--1150();
 }
@@ -505,6 +899,7 @@ header{
 }
 @media only screen and( max-width: 59.375em){
   @include footer--950();
+  @include common-list--950();
 }
 
 // 小于1200px;
@@ -516,12 +911,19 @@ header{
 //小于800px;
 @media only screen and (max-width: 50em) {
   @include header--800();
+  @include header--800();
+  @include common-list--800();
+}
+//小于600px;
+@media only screen and (max-width: 37.5em) {
+  @include common-list--600();
 }
 
 //小于480px;
 @media only screen and (max-width: 30em) {
   @include header--ss();
   @include footer--480();
+  @include common-list--480();
 }
 
 // 切换动画

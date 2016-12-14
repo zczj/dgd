@@ -4,274 +4,268 @@ block content
   link(rel="stylesheet", href="/skin/plugs/owl-carousel/owl.carousel.css")
   link(rel="stylesheet", href="/skin/css/index.css")
 
+  #model-index
+    .dgd-ad
+      .owl-carousel.owl-theme#dgd-ad
+         div(v-for="item in Ad.ChannelList")
+          img(v-bind:src="item.Pic", alt="")
 
-  .dgd-ad
-    .owl-carousel.owl-theme#dgd-ad
-       div
-        img(src="/skin/img/index/ad01-l.jpg", alt="")
-       div
-        img(src="/skin/img/index/ad01-l.jpg", alt="")
-       div
-        img(src="/skin/img/index/ad01-l.jpg", alt="")
-       div
-        img(src="/skin/img/index/ad01-l.jpg", alt="")
-
-  //- 注册人数
-  section.dgd-num.border-1px
-    span.item
-      span.item-r
-        span.num 234,600
-        span.title 总注册人数
-    span.item
+    //- 注册人数
+    section.dgd-num.border-1px
+      span.item
         span.item-r
-          span.num 234
-          span.title 总项目数
-    span.item
-        span.item-r
-          span.num 234,60
-          span.title 总融资金额（万元）
+          span.num 234,600
+          span.title 总注册人数
+      span.item
+          span.item-r
+            span.num 234
+            span.title 总项目数
+      span.item
+          span.item-r
+            span.num 234,60
+            span.title 总融资金额（万元）
 
-  seciton.dgd-ga
-    .container.clearfix
-      //- 平台公告
-      .ga-side
-        .dgd-plat-gg
-          .title
-            span 平台公告
+    section.dgd-ga
+      .container.clearfix
+        //- 平台公告
+        .ga-side
+          .dgd-plat-gg
+            .title
+              span 平台公告
+              a.more(href="#") 更多资讯 >>
+            ul.content
+              li.clearfix
+                span.time 25天前
+                a(href="#").title.ellipsis 2016年大股东国庆假期安排公告2016年大股东国庆假期安排公告
+              li.clearfix
+                span.time 25天前
+                a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
+              li.clearfix
+                span.time 25天前
+                a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
+              li.clearfix
+                span.time 25天前
+                a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
+              li.clearfix
+                span.time 25天前
+                a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
+              li.clearfix
+                span.time 25天前
+                a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
+              li.clearfix
+                span.time 25天前
+                a(href="#").title.clearfix 2016年大股东国庆假期安排公告
+        .ga-main.ga-tab
+          .ga-tab-btns.clearfix
+            a.ga-tab-btn.cur(href="javascript:void(0);") 众筹
+            a.ga-tab-btn(href="javascript:void(0);") 政策
+            a.ga-tab-btn(href="javascript:void(0);") 国际
+            a.ga-tab-btn(href="javascript:void(0);") 研究
+            a.ga-tab-btn(href="javascript:void(0);") 创投
             a.more(href="#") 更多资讯 >>
-          ul.content
-            li.clearfix
-              span.time 25天前
-              a(href="#").title.ellipsis 2016年大股东国庆假期安排公告2016年大股东国庆假期安排公告
-            li.clearfix
-              span.time 25天前
-              a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
-            li.clearfix
-              span.time 25天前
-              a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
-            li.clearfix
-              span.time 25天前
-              a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
-            li.clearfix
-              span.time 25天前
-              a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
-            li.clearfix
-              span.time 25天前
-              a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
-            li.clearfix
-              span.time 25天前
-              a(href="#").title.clearfix 2016年大股东国庆假期安排公告
-      .ga-main.ga-tab
-        .ga-tab-btns.clearfix
-          a.ga-tab-btn.cur(href="javascript:void(0);") 众筹
-          a.ga-tab-btn(href="javascript:void(0);") 政策
-          a.ga-tab-btn(href="javascript:void(0);") 国际
-          a.ga-tab-btn(href="javascript:void(0);") 研究
-          a.ga-tab-btn(href="javascript:void(0);") 创投
-          a.more(href="#") 更多资讯 >>
 
-        .ga-tab-box
-          ul
-            li.first.clearfix
-              a(href="#").pic
+          .ga-tab-box
+            ul
+              li.first.clearfix
+                a(href="#").pic
+                  img(src="../skin/img/project/list-img01.jpg", alt="")
+                a(href="#").title.ellipsis 十张图看清BAT之间的实力对比
+                p.txt.
+                  近日，百度、阿里、腾讯都相继发布了三季度财报，作为中国互
+                  联网的三大巨头，三者的营收体量、利润和业务结构各有什么区
+                  别？我们从这两年三者的季度财报中看看。
+              li
+                span.time 25分钟前
+                a(href="#").title.ellipsis 特朗普：上任第一天就将发布命令退出TPP上任第一天就将发布命令退出TPP上任第一天就将发布命令退出TPP上任第一天就将发布命令退出TPP
+              li
+                span.time 10分钟前
+                a(href="#").title.ellipsis 支付机构泄露千万银行卡信息 用户损失3900多万
+
+    //- 站岗宝
+    section.stand-bao
+      .container
+        .common-t
+          span 站岗宝
+        ul.common-list
+          li.list-item
+            .list-pic
+              a(href="#")
                 img(src="../skin/img/project/list-img01.jpg", alt="")
-              a(href="#").title.ellipsis 十张图看清BAT之间的实力对比
-              p.txt.
-                近日，百度、阿里、腾讯都相继发布了三季度财报，作为中国互
-                联网的三大巨头，三者的营收体量、利润和业务结构各有什么区
-                别？我们从这两年三者的季度财报中看看。
+            .list-main
+              .list-t.border-1px
+                .item
+                  span 起投金额：
+                  span.price 1元~100元
+                .item
+                  span 可购余额：
+                  span.price 103000元
+                a.buy-now(href="#")
+                  i.icon.icon-money
+                  |我要认购
+              .list-con
+                .list-txt.
+                  “全新站岗宝”是由大股东推出的一项年化利率8%~10%的全新账户余额管理增值服务，用户
+                  可以把账户中心的资金转入站岗宝中，可以获得一定的利息，让您的回款资金不站岗。
+                .list-info
+                  p.item
+                    span 年化利率达8%~10%
+                    span 日均收益(每万元)：2.11元起
+                  p.item
+                    span 每人每天限购5.00万元
+                    span 总额不能超过20.00万元
+    //- 融资的项目
+    section.stand-bao
+      .container
+        .common-t
+          span 融资的项目
+        ul.common-list
+          li.list-item(v-for="(item, index) in Ad.projectList")
+            .list-pic
+              a(:href="['/buy/'+ item.ProjectID]")
+                img(v-if="item.BigPic==null" src="/skin/img/default.jpg", alt="")
+                img(v-else="item.BigPic!=null" v-bind:src="item.BigPic")
+                span.tag(v-bind:class='["tag-"+item.State]')
+            .list-main
+              .list-t
+                .item
+                  span 起投金额：
+                  span.price {{item.LowVote}}
+                .item
+                  span 项目平台：
+                  span.price 智金汇
+                a.buy-now(:href="['/buy/'+ item.ProjectID]")
+                  i.icon.icon-money
+                  |我要认购
+                a.gz-btn(href="javascript:void(0);", v-on:click= "gz(item.ProjectID,index)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }")
+              .list-con
+                .list-txt(v-show="item.ShortDesc").
+                  {{item.ShortDesc}}
+                .list-point
+                  span.item
+                    span.t 目标金额：
+                    span.val {{item.TargetAmount}}
+                  span.item
+                    span.t 已达金额：
+                    span.val {{item.CurrentAmount}}
+                  span.item
+                    span.t 众筹轮次：
+                    span.val {{TimesRotationMap[parseInt(item.TimesRotation)-1]}}
+                .list-progress.clearfix
+                  span.t 项目进度：
+                  span.val
+                    span.val-sub(v-bind:style='{width: (100 - item.Progress) < 0 ? "0" : (100 - item.Progress).toFixed(2)+"%"}')
+                  span.num {{parseInt(item.Progress)}}%
+
+        .loading-more
+          a(href="/project") 查看更多融资项目
+
+    //- 转让的项目
+    section.transfer
+      .container
+        .common-t
+          span 转让的项目
+        #transfer-list.transfer-list
+          ul.clearfix
+            li.item.cur(style="background-image:url(http://pic01.zczj.com//counseling/20161212/20161212101626.jpg@1e_1c_0o_0l_136h_220w_90q.src)")
+              .face
+                span.tag
+                .logo
+                  img(src="http://www.dgd.vc/skin/promotion/fhReport/img/l2.png", alt="")
+                h2.title 乐商宝2号2期
+                a.btn(href="#") 点击查看
+              .back
+                .title 此项目折价出售
+                p.item 还剩 X 天 X 小时 X 秒
+                p.item 转让金额：4万元
+                p.item 转让份额：2份
+                a.btn(href="#") 查看关联项目
+
+        .loading-more
+          a(href="javascript:void(0);") 查看更多转让项目
+
+    //- 我们的优势
+    section.odds
+      .container
+        .common-t
+          span 我们的优势
+        .odds-list
+          ul.clearfix
             li
-              span.time 25分钟前
-              a(href="#").title.ellipsis 特朗普：上任第一天就将发布命令退出TPP上任第一天就将发布命令退出TPP上任第一天就将发布命令退出TPP上任第一天就将发布命令退出TPP
+              span.pro-logo
+              .title.border-1px 优先项目
+              .txt
+                p 为您精选优质项目
+                p 保障资金不站岗
             li
-              span.time 10分钟前
-              a(href="#").title.ellipsis 支付机构泄露千万银行卡信息 用户损失3900多万
+              span.pro-logo
+              .title.border-1px 质押贷款
+              .txt
+                p 资金周转轻松搞定
+                p 投资理财更灵活
 
-  //- 站岗宝
-  section.stand-bao
-    .container
-      .common-t
-        span 站岗宝
-      ul.common-list
-        li.list-item
-          .list-pic
-            a(href="#")
-              img(src="../skin/img/project/list-img01.jpg", alt="")
-          .list-main
-            .list-t.border-1px
-              .item
-                span 起投金额：
-                span.price 1元~100元
-              .item
-                span 可购余额：
-                span.price 103000元
-              a.buy-now(href="#")
-                i.icon.icon-money
-                |我要认购
-            .list-con
-              .list-txt.
-                “全新站岗宝”是由大股东推出的一项年化利率8%~10%的全新账户余额管理增值服务，用户
-                可以把账户中心的资金转入站岗宝中，可以获得一定的利息，让您的回款资金不站岗。
-              .list-info
-                p.item
-                  span 年化利率达8%~10%
-                  span 日均收益(每万元)：2.11元起
-                p.item
-                  span 每人每天限购5.00万元
-                  span 总额不能超过20.00万元
-  //- 融资的项目
-  section.stand-bao
-    .container
-      .common-t
-        span 融资的项目
-      ul.common-list
-        li.list-item
-          .list-pic
-            a(href="#")
-              img(src="../skin/img/project/list-img01.jpg", alt="")
-              span.tag.tag-3
-          .list-main
-            .list-t
-              .item
-                span 起投金额：
-                span.price 5000元
-              .item
-                span 项目平台：
-                span.price 智金汇
-              a.buy-now(href="#")
-                i.icon.icon-money
-                |我要认购
-              a.gz-btn(href="#")
-            .list-con
-              .list-txt.
-                顺丰是国内快递公司中产业链布局最前瞻，也是最完美的快递公司，剔除剥离的电商板块。包括5大
-                板块，涵盖报关、物流、金融、冷链、仓配等等，其开发出的业务大部分也已其高端快递服务 ......
-              .list-point
-                span.item
-                  span.t 目标金额：
-                  span.val 20,00万元
-                span.item
-                  span.t 已达金额：
-                  span.val 24,00万元
-                span.item
-                  span.t 众筹轮次：
-                  span.val 种子期
-              .list-progress.clearfix
-                span.t 项目进度：
-                span.val
-                  span.val-sub(style="width:80%;")
-                span.num 80%
-
-      .loading-more
-        a(href="javascript:void(0);") 查看更多融资项目
-
-  //- 转让的项目
-  section.transfer
-    .container
-      .common-t
-        span 转让的项目
-      #transfer-list.transfer-list
-        ul.clearfix
-          li.item.cur(style="background-image:url(http://pic01.zczj.com//counseling/20161212/20161212101626.jpg@1e_1c_0o_0l_136h_220w_90q.src)")
-            .face
-              span.tag
-              .logo
-                img(src="http://www.dgd.vc/skin/promotion/fhReport/img/l2.png", alt="")
-              h2.title 乐商宝2号2期
-              a.btn(href="#") 点击查看
-            .back
-              .title 此项目折价出售
-              p.item 还剩 X 天 X 小时 X 秒
-              p.item 转让金额：4万元
-              p.item 转让份额：2份
-              a.btn(href="#") 查看关联项目
-
-      .loading-more
-        a(href="javascript:void(0);") 查看更多转让项目
-
-  //- 我们的优势
-  section.odds
-    .container
-      .common-t
-        span 我们的优势
-      .odds-list
-        ul.clearfix
-          li
-            span.pro-logo
-            .title.border-1px 优先项目
-            .txt
-              p 为您精选优质项目
-              p 保障资金不站岗
-          li
-            span.pro-logo
-            .title.border-1px 质押贷款
-            .txt
-              p 资金周转轻松搞定
-              p 投资理财更灵活
-
-          li
-            span.pro-logo
-            .title.border-1px 股权转让
-            .txt
-              p 解决优质资产变现
-              p 提高资金流动性
-  //- 合作机构
-  section.player
-    .container
-      .common-t
-        span 合作机构
-      .player-con.clearfix
-        .player-bar
-          span.prev-btn
-          span.next-btn
-        .player-list#player-list.owl-carousel.owl-theme
-          .item
-            img(src="/skin/img/index/p1.jpg", alt="")
-          .item
-            img(src="/skin/img/index/p1.jpg", alt="")
-          .item
-            img(src="/skin/img/index/p1.jpg", alt="")
-          .item
-            img(src="/skin/img/index/p1.jpg", alt="")
-          .item
-            img(src="/skin/img/index/p1.jpg", alt="")
-          .item
-            img(src="/skin/img/index/p1.jpg", alt="")
+            li
+              span.pro-logo
+              .title.border-1px 股权转让
+              .txt
+                p 解决优质资产变现
+                p 提高资金流动性
+    //- 合作机构
+    section.player
+      .container
+        .common-t
+          span 合作机构
+        .player-con.clearfix
+          .player-bar
+            span.prev-btn
+            span.next-btn
+          .player-list#player-list.owl-carousel.owl-theme
+            .item
+              img(src="/skin/img/index/p1.jpg", alt="")
+            .item
+              img(src="/skin/img/index/p1.jpg", alt="")
+            .item
+              img(src="/skin/img/index/p1.jpg", alt="")
+            .item
+              img(src="/skin/img/index/p1.jpg", alt="")
+            .item
+              img(src="/skin/img/index/p1.jpg", alt="")
+            .item
+              img(src="/skin/img/index/p1.jpg", alt="")
 
 
 
 
-  //- 友情链接
-  section.links
-    .container
-      .common-t
-        span 友情链接
-      .links-list
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
-        a(href="#") 红岭创投
+    //- 友情链接
+    section.links
+      .container
+        .common-t
+          span 友情链接
+        .links-list
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
+          a(href="#") 红岭创投
 
 
 
 
 
-  script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
-  script(src="/skin/plugs/bscroll/bscroll.min.js")
-  script(src="/skin/js/index.js")
+    script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
+    //- script(src="/skin/plugs/bscroll/bscroll.min.js")
+    script(src="/skin/js/index.js")
