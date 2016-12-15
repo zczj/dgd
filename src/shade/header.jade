@@ -1,6 +1,6 @@
 header#header
   .container.clearfix
-    .nav(v-bind:class="{navLogin: !isLogin}")
+    .nav.clearfix(v-bind:class="{navLogin: !isLogin}")
       a.logo(href="/")
         img(src="/skin/img/logo.png", alt="")
       .triggers
@@ -8,23 +8,35 @@ header#header
           i.icon.icon-catgray
       nav(v-bind:class="{ navShow: tag }", v-cloak="")
         a(href="#",v-for="(item, index) in navs", v-bind:class="{ cur : index == 0 }").border-1px {{item}}
+        a.mobile-show.border-1px(href="javascript:void(0);", v-if="!isLogin", v-on:click="loginOut()") 退出
       .login-btns
         ul.tool-nav
-          li.login-btn
-            .login(v-if="isLogin")
-              .item
-                a(href="/passport/login.html") 登录
+          li.login-btn(v-if="isLogin")
+            .item
+              a(href="/passport/login.html") 登录
               span.line |
-              .item
-                a(href="/passport/register.html") 注册
-            .login(v-else="")
-              .item.avatar
-                a(href="/mycenter/index")
+              a(href="/passport/register.html") 注册
+          li.login-btn(v-else="")
+            .item.avatar
+              a(href="/mycenter/index")
+                img(:src="userInfo.Avatar", alt="")
+              .user-pop.pop-up
+                a.userinfo.clearfix(href="/", :title="userInfo.Avatar")
                   img(:src="userInfo.Avatar", alt="")
-              //- .item
-              //-   a(href="/") 退出
+                  span {{userInfo.UserName}}
+                .menu
+                  a(href="#") 我的帐户
+                  a(href="#") 我的交易
+                  a(href="#") 我的质押
+                  a(href="#") 我的优惠券
+                  a(href="#") 安全中心
+                  a(href="javascript:void(0);", v-if="!isLogin", v-on:click="loginOut()") 退出
+
+              
+            //- .item
+            //-   a(href="/") 退出
           li.go-zczj
-            a(href="http://m.dgd.vc/") 前往之家
+            a.item(href="http://m.dgd.vc/") 前往之家
   //- 遮罩层
   .mask( v-bind:class="{'mask-show': tag}", v-on:click="closeMean")
   input#userId(type="hidden")

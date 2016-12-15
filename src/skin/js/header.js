@@ -30,6 +30,10 @@ var headerModel = new Vue({
         }else{
           this.isLogin = true;
         }
+      },
+      loginOut: function () {
+        DGDTOOLS.loginOut();
+        this.isLogin =! this.isLogin;
       }
     },
     created: function () {

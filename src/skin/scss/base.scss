@@ -208,30 +208,48 @@ header{
     }
     .login-btns{
       float: right;
+      height: 76px;
       .tool-nav{
+        height: 100%;
+        font-size:0;
         & > li{
-          float: left;
-          height: 30px;
-          line-height: 30px;
+          height: 100%;
           display: inline-block;
-          vertical-align: top;
-          margin: 20px 0 0 20px;
-          border: 1px #00a9e0 solid;
-          border-radius: 15px;
-          padding: 0 10px;
-          font-size: 1.8rem;
-          color: #00a9e0;
+          margin-left: 10px;
+          .item{
+            height: 30px;
+            line-height: 30px;
+            display: inline-block;
+            vertical-align: top;
+            border: 1px #00a9e0 solid;
+            border-radius: 15px;
+            padding: 0 10px;
+            font-size: 1.8rem;
+            color: #00a9e0;
+            margin-top: 24px
+
+          }
+          
+          
           a{
                 color: #00a9e0;
+                padding: 0 4px;
               }
-          .login{
-            .item{
-              display: inline-block;
-            }
+          &.login-btn{
+            margin-left: 0;
           }
           &.go-zczj{
-            &::before{
-              display: inline-block; content:''; background:url(../img/icon-zczj.png); width: 20px; height: 11px; vertical-align: middle; margin-top: -2px;
+            .item{
+              &::before{
+                display: inline-block;
+                content:'';
+                background:url(../img/icon-zczj.png);
+                width: 20px;
+                height: 11px;
+                vertical-align: middle;
+                margin-top: -4px;
+                margin-right: 4px;
+              }
             }
           }
         }
@@ -240,26 +258,103 @@ header{
     .navLogin > .login-btns{
       .tool-nav{
         & > li:nth-of-type(1){
-          background:red;
-          border: none;
-          .login{
-            .item{
-              &.avatar{
-                &>a{
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 20px;
-                    img{
-                      width: 100%;
-                      height: 200%;
-                      border-radius: 20px;
-                    }
-                }
+          .avatar{
+            border: none;
+            height: 100%;
+            line-height: 76px;
+            margin-top: 0;
+            position: relative;
+            &>a{
+              display: inline-block;
+              width: 40px;
+              height: 40px;
+              vertical-align: middle;
+              img{
+                width: 35px;
+                height: 35px;
+                border-radius:30px;
               }
             }
           }
         }
+        .pop-up{
+          background: #fff none repeat scroll 0 0;
+          border: 1px solid #ddd;
+          box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+          min-width: 180px;
+          padding: 20px;
+          position: absolute;
+          right: 14px;
+          top: 62px;
+          transform: scale(0);
+          transform-origin: 90% 0 0;
+          transition: none 0s ease 0s;
+          visibility: hidden;
+          font-size:1.4rem;
+          a{ color:#828fb0;
+            &.userinfo{
+              border-bottom: 1px solid #eee;
+              display: block;
+              padding-bottom: 10px;
+              img{
+                 border-radius: 30px;
+                 float: left;
+                 height: 35px;
+                 margin-right: 10px;
+                 width: 35px;
+              }
+              span{
+                display: block;
+                height: 40px;
+                line-height: 40px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+            }
+          }
+          a:hover{ color:#00a9e0;}
+          .menu{
+            a{
+              display: block;
+              height: 36px;
+              line-height: 36px;
+              border-top: solid 1px #eee;
+              padding: 0 6px;
+              font-size: 13px;
+              color: #828fb0;
+              text-align: left;
+              &:hover{
+                color: #00a9e0;
+              }
+            }
+          }
+          &::after{
+            border-color: none;
+            background: #fff none repeat scroll 0 0;
+            border-color: #ddd;
+            border-image: none;
+            border-style: solid;
+            border-width: 1px 1px 0 0;
+            content: " ";
+            height: 10px;
+            position: absolute;
+            right: 6px;
+            top: -6px;
+            transform: rotate(-45deg);
+            width: 10px;
+          }
+        }
       }
+    }
+
+    .navLogin>.login-btns .tool-nav li .avatar:hover .pop-up{
+      opacity: 1;
+      transform: scale(1);
+      transition: all 0.3s cubic-bezier(0.31, 0.57, 0.68, 1.36) 0s;
+      visibility: visible;
+      z-index: 100;
+      top: 70px; 
     }
   }
 @mixin header--1150(){
@@ -281,18 +376,9 @@ header{
       .tool-nav{
         font-size: 0;
         & > li{
-          height: 24px;
-          line-height: 24px;
-          margin: 20px 0 0 10px;
-          border-radius: 10px;
-          padding: 0 10px;
-          font-size: 1.6rem;
-          .login{
-            font-size: 0;
-            .line{font-size: 1.6rem;}
-            .item{
-              font-size: 1.6rem;
-            }
+          .item{
+            font-size:1.6rem;
+            margin-top: 20px;
           }
         }
       }
@@ -390,16 +476,35 @@ header{
         width: 130px;
         display: block;
         & > li{
-
-          margin: 10px 5% 0;
-          width: 80%;
+          height: 30px;
+          line-height: 30px;
+          margin: 5px 0 ;
+          width: 100%;
           text-align: center;
-          .item{ padding: 0 5px;}
+          .item{ 
+            padding: 0 5px;
+            margin: 0;
+            display: block;
+          }
         }
     }
+    .navLogin > .login-btns{
+      .tool-nav{
+        & > li:nth-of-type(1){
+          height: 40px;
+          margin: 0;
+          .avatar{
+            line-height: 40px;
+            margin-top: 0;
+          }
+        }
+      }
+    }
+
   }
   .holding header .login-btns .tool-nav{
       transform:translate(-130px, 0);
+      height: auto;
   }
 
 
