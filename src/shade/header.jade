@@ -1,6 +1,6 @@
 header#header
   .container.clearfix
-    .nav
+    .nav(v-bind:class="{navLogin: !isLogin}")
       a.logo(href="/")
         img(src="/skin/img/logo.png", alt="")
       .triggers
@@ -11,43 +11,21 @@ header#header
       .login-btns
         ul.tool-nav
           li.login-btn
-            .login
+            .login(v-if="isLogin")
               .item
-                a(href="/") 登录
+                a(href="/passport/login.html") 登录
               span.line |
               .item
-                a(href="/") 注册
+                a(href="/passport/register.html") 注册
+            .login(v-else="")
+              .item.avatar
+                a(href="/mycenter/index")
+                  img(:src="userInfo.Avatar", alt="")
+              //- .item
+              //-   a(href="/") 退出
           li.go-zczj
-            a(href="/") 前往之家
+            a(href="http://m.dgd.vc/") 前往之家
   //- 遮罩层
   .mask( v-bind:class="{'mask-show': tag}", v-on:click="closeMean")
-
-script.
-  new Vue({
-    el: "#header",
-    data: {
-      tag: false,
-      navs: [
-        '首页',
-        '投资项目',
-        '股权转让',
-        '质押贷款',
-        '新手指引',
-        '关于我们'
-      ]
-    },
-    methods: {
-      showMean: function(e) {
-        this.tag = !this.tag;
-        document.querySelector('html').className = 'holding'
-        document.querySelector('body').className = 'holding'
-      },
-      closeMean: function(e) {
-        this.tag = !this.tag;
-        document.querySelector('html').className = '';
-        document.querySelector('body').className = '';
-      }
-    }
-
-
-  })
+  input#userId(type="hidden")
+  script(src="/skin/js/header.js")

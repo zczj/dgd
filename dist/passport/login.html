@@ -7,62 +7,40 @@
     <title>Document</title>
     <link rel="stylesheet" href="/skin/plugs/normalize-css/normalize.css"/>
     <link rel="stylesheet" href="/skin/css/base.css"/>
+    <link rel="stylesheet" href="/skin/css/dialog.css"/>
     <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+    <script src="/skin/plugs/dialog/js/dialog.js"></script>
     <script src="/skin/js/util.js"></script>
   </head>
   <body>
     <header id="header">
       <div class="container clearfix">
-        <div class="nav"><a href="/" class="logo"><img src="/skin/img/logo.png" alt=""/></a>
+        <div v-bind:class="{navLogin: !isLogin}" class="nav"><a href="/" class="logo"><img src="/skin/img/logo.png" alt=""/></a>
           <div class="triggers"><a href="#" v-on:click="showMean" class="mean-btn"><i class="icon icon-catgray"></i></a></div>
           <nav v-bind:class="{ navShow: tag }" v-cloak=""><a href="#" v-for="(item, index) in navs" v-bind:class="{ cur : index == 0 }" class="border-1px">{{item}}</a></nav>
           <div class="login-btns">
             <ul class="tool-nav">
               <li class="login-btn">
-                <div class="login">
-                  <div class="item"><a href="/">登录</a></div><span class="line">|</span>
-                  <div class="item"><a href="/">注册</a></div>
+                <div v-if="isLogin" class="login">
+                  <div class="item"><a href="/passport/login.html">登录</a></div><span class="line">|</span>
+                  <div class="item"><a href="/passport/register.html">注册</a></div>
+                </div>
+                <div v-else="" class="login">
+                  <div class="item"><a href="/mycenter/index"><img :src="userInfo.Avatar" alt=""/></a></div>
+                  <div class="item"><a href="/">退出</a></div>
                 </div>
               </li>
-              <li class="go-zczj"><a href="/">前往之家</a></li>
+              <li class="go-zczj"><a href="http://m.dgd.vc/">前往之家</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div v-bind:class="{'mask-show': tag}" v-on:click="closeMean" class="mask"></div>
+      <input id="userId" type="hidden"/>
+      <script src="/skin/js/header.js"></script>
     </header>
-    <script>
-      new Vue({
-        el: "#header",
-        data: {
-          tag: false,
-          navs: [
-            '首页',
-            '投资项目',
-            '股权转让',
-            '质押贷款',
-            '新手指引',
-            '关于我们'
-          ]
-        },
-        methods: {
-          showMean: function(e) {
-            this.tag = !this.tag;
-            document.querySelector('html').className = 'holding'
-            document.querySelector('body').className = 'holding'
-          },
-          closeMean: function(e) {
-            this.tag = !this.tag;
-            document.querySelector('html').className = '';
-            document.querySelector('body').className = '';
-          }
-        }
-      
-      
-      })
-    </script>
     <!--==================================================-->
     <link rel="stylesheet" href="/skin/css/passport.css"/>
     <div id="login" v-cloak="v-cloak" class="h-passport-page">
@@ -185,40 +163,37 @@
               }, _delay)
             } else {
               $("#loader").fadeIn(300)
-              this.$http.post('http://devapi.zczj.com:80/api/Passport/Login',{
-                'Account': account,
-                'Password': password
-              }.then(function(response){
+              $.ajax({
+                url: 'http://devapi.zczj.com:80/api/Passport/Login',
+                data: {
+                  'Account': account,
+                  'Password': password
+                },
+                type: 'post',
+                success: function (response) {
+                  if(response){
+                    $("#loader").fadeOut(300)
       
-              }))
-              //- $.ajax({
-              //-   url: 'http://devapi.zczj.com:80/api/Passport/Login',
-              //-   data: {
-              //-     'Account': account,
-              //-     'Password': password
-              //-   },
-              //-   type: 'post',
-              //-   success: function (response) {
-              //-     if(response){
-              //-       $("#loader").fadeOut(300)
-      
-              //-       if(response.resultid !== 200){
-              //-         // 请求成功，账号或密码不正确
-              //-         _this.error = true
-              //-         _this.errorMsg = response.message
-              //-         setTimeout(function () {
-              //-           _this.error = false
-              //-         }, _delay)
-              //-       } else if (response.resultid === 200) {
-              //-         // 请求成功，账号密码正确，登录成功
-              //-         $("#loader").fadeOut(300)
-              //-         // 登录成功，跳转
-              //-         // doSomething
-              //-         window.location.href = './success.html?login'
-              //-       }
-              //-     }
-              //-   }
-              //- })
+                    if(response.resultid !== 200){
+                      // 请求成功，账号或密码不正确
+                      _this.error = true
+                      _this.errorMsg = response.message
+                      setTimeout(function () {
+                        _this.error = false
+                      }, _delay)
+                    } else if (response.resultid === 200) {
+                      // 请求成功，账号密码正确，登录成功
+                      $("#loader").fadeOut(300)
+                      // 登录成功，跳转
+                      // doSomething
+                      //用户信息
+                      //{"token":"","uid":,"Avatar":"","UserName":"","message":"","resultid":}
+                      DGDTOOLS.store.save('userInfo', response);
+                      window.location.href = './success.html?login'
+                    }
+                  }
+                }
+              })
             }
           }
         }

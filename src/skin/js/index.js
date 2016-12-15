@@ -44,26 +44,56 @@ $(document).ready(function(){
       },
       data: {
         Ad: '',
-        token:'laosu',
+        token:'4433e0fa17fe5933dd9d25df4df409cc',
         TimesRotationMap:['种子期', '天使期', 'pre-A轮', 'A轮', 'B轮', 'C轮'],
         urlApi:'http://devapi.zczj.com:80/api'
       },
       methods: {
+        //关注
         gz: function (id,i) {
-          var state = this.Ad.projectList[i].FollowState =!this.Ad.projectList[i].FollowState;
-          if (state) {
-            state=1;
-          }else{
-            state=0;
+          if (!DGDTOOLS.checkLogin()) {
+            ;(function () {
+              $.dialog({
+                type: 'warning',
+                message: '请先登录！',
+                buttons:[{
+                  text: '登录',
+                  type: 'green',
+                  callback: function () {
+                    window.location='/passport/login.html';
+                  }
+                },{
+                  text: '取消',
+                  type: 'red'
+                }],
+                maskClose: true
+              })
+            })(jQuery);
+            return;
           }
-          console.log(state);
-          this.$http.post(this.urlApi+'/MyCenter/AddFollow',{
-            'projectid':id,
-            'type':state,
-            'token':this.token
-          }).then(function (response) {
-            console.log(response);
-          });
+          $("#loader").fadeIn(300);
+          var state = this.Ad.projectList[i].FollowState =!this.Ad.projectList[i].FollowState;
+          state?state=1:state=0;
+          $.ajax({
+            url: this.urlApi + '/MyCenter/AddFollow',
+            data: {
+              'projectid':id,
+              'type':state,
+              'token':this.token
+            },
+            type: 'post',
+            success: function (response) {
+              $("#loader").fadeOut(300);
+              console.log(response);
+            }
+          })
+          // this.$http.post(this.urlApi+'/MyCenter/AddFollow',{
+          //   'projectid':1096,
+          //   'type':1,
+          //   'token':this.token
+          // }).then(function (response) {
+          //   console.log(response);
+          // });
         }
       }
     })

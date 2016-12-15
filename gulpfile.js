@@ -9,6 +9,7 @@
 
 var gulp         = require('gulp'),
     sass         = require('gulp-sass'),
+    sourcemaps   = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss    = require('gulp-minify-css'),
     uglify       = require('gulp-uglify'),
@@ -25,14 +26,19 @@ gulp.task('css', function () {
   return gulp.src(['src/skin/scss/*.scss', 'src/skin/comStyle/*.scss'])
     .pipe(changed('dist/skin/css/', {extension: '.css'}))
     .pipe(debug({title: '编译：'}))
-    .pipe(sass({outputStyle: 'compact'}).on('error', sass.logError))
+    .pipe(sourcemaps.init())
+    // 嵌套输出方式 nested (默认)
+    // 展开输出方式 expanded
+    // 紧凑输出方式 compact
+    // 压缩输出方式 compressed
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: ['last 2 versions', 'Android >= 4.0'],
       cascade: true,
       remove: true
     }))
     .pipe(base64())
-    // .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('dist/skin/css'))
     .pipe(browserSync.reload({stream: true}));
 })
@@ -43,7 +49,7 @@ gulp.task('js', function () {
     .pipe(changed('dist/skin/js', {extension: '.js'}))
     .pipe(debug({title: '编译：'}))
     // .pipe(rename({ suffix: '.min'}))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('dist/skin/js'))
 })
 

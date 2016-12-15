@@ -5,6 +5,12 @@
  ************/
 *{
   box-sizing: border-box;
+  user-select: none;
+  // 去除移动端浏览器点击元素时的边框
+  /* 来自http://www.cnblogs.com/PeunZhang/archive/2013/02/28/2907708.html*/
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent; /* For some Androids */
+
 }
 /*基本默认值  */
 [v-cloak] {display: none;}
@@ -39,6 +45,7 @@ input:not([type='checkbox']){
 img{
   vertical-align: top;
 }
+
 /*
    工具样式
     */
@@ -225,6 +232,30 @@ header{
           &.go-zczj{
             &::before{
               display: inline-block; content:''; background:url(../img/icon-zczj.png); width: 20px; height: 11px; vertical-align: middle; margin-top: -2px;
+            }
+          }
+        }
+      }
+    }
+    .navLogin > .login-btns{
+      .tool-nav{
+        & > li:nth-of-type(1){
+          background:red;
+          border: none;
+          .login{
+            .item{
+              &.avatar{
+                &>a{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 20px;
+                    img{
+                      width: 100%;
+                      height: 200%;
+                      border-radius: 20px;
+                    }
+                }
+              }
             }
           }
         }

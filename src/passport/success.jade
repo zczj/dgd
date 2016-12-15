@@ -42,7 +42,7 @@ block content
       data: {
         formShow: false,
         from: false,
-        number: 30,
+        number: 10,
         fpwd: false
       },
       computed: {
@@ -65,7 +65,7 @@ block content
             number--
             if (number<=0) {
               clearInterval(timer)
-              //- window.location.href = 'http://www.dgd.vc'
+              window.location.href = '/';
             }
             return number
           }, 1000)
@@ -77,7 +77,8 @@ block content
           _this.number--
           if (_this.number<=0) {
             clearInterval(timer)
-            //- window.location.href = 'http://www.dgd.vc'
+            window.location.href = '/';
+
           }
         }, 1000)
       }

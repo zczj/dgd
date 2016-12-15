@@ -1,6 +1,5 @@
 extends ../shade/layout
 block content
-  link(rel="stylesheet", href="../skin/css/index.css")
   link(rel="stylesheet", href="../skin/css/project.css")
   #project-list(v-cloak)
     .banner
@@ -13,7 +12,8 @@ block content
           dd
             input(type="text")
             i.icon.icon-search
-          dd.toggle-filter(v-on:click='subNavShow = !subNavShow') {{subNavShow ? '收起' : '展开'}}筛选
+          dd.toggle-filter(v-on:click='subNavShow = !subNavShow')
+            span {{subNavShow ? '收起' : '展开'}}筛选
             i.icon(v-bind:class='[subNavShow? "icon-up" : "icon-down"]')
         // 面包屑导航
         .sub-nav(v-show='subNavShow')
@@ -68,13 +68,13 @@ block content
         // 列表
     .list-wrapper
       .container
-        section.stand-bao(v-for='item in list')
+        section.stand-bao
           ul.common-list
-            li.list-item
+            li.list-item(v-for='(item, ii) in list')
               .list-pic
-                a(href="#")
-                  img(src="../skin/img/default.jpg", alt="" v-if='item.BigPic == null')
-                  img(v-bind:src="item.BigPic", alt="" v-else='item.BigPic != null')
+                a(:href="['/#/'+item.ProjectID]")
+                  img(src="../skin/img/default.jpg", alt="" v-if='item.MiddlePic == null')
+                  img(v-bind:src="item.MiddlePic", alt="" v-else='item.MiddlePic != null')
                   span.tag(v-bind:class='["tag-"+item.State]')
               .list-main
                 .list-t
@@ -83,11 +83,11 @@ block content
                     span.price {{item.LowVote}}
                   .item
                     span 项目平台：
-                    span.price 智金汇
+                    span.price {{ii}} - 智金汇 {{item.ProjectID}}
                   a.buy-now(href="#")
                     i.icon.icon-money
                     |我要认购
-                  a.gz-btn(href="#")
+                  a.gz-btn(href="javascript:;" v-on:click='gz(ii)')
                 .list-con
                   .list-txt.
                     {{item.ShortDesc}}
@@ -100,58 +100,23 @@ block content
                       span.val {{item.CurrentAmount}}
                     span.item
                       span.t 众筹轮次：
-                      span.val 种子期
+                      span.val {{TimesRotation[(item.TimesRotation-1)]}}
                   .list-progress.clearfix
                     span.t 项目进度：
                     span.val
                       span.val-sub(v-bind:style='{width: (100 - item.Progress) < 0 ? "0" : (100 - item.Progress).toFixed(2)+"%"}')
                     span.num {{parseInt(item.Progress)}}%
         // 分页
-        .pagation
-          a(href="javascript:;") 上一页
-          //- a(href="javascript:;" v-for='(pg, index) in pagations' v-bind:class='{current: (index+1) == currentpage}') {{index+1}}
-          a(href="javascript:;" v-on:click='next') 下一页
+        .pagination
+          a(href="javascript:;" v-on:click='firstPage' v-show='prevShow') 首页
+          a(href="javascript:;" v-on:click='prevPage' v-show='prevShow') 上一页
+          a(href="javascript:;" v-for='pg in totalPages.arr' v-bind:class='{current: pg == currentpage}' v-on:click='paginationTo(pg)') {{pg}}
+          a.ellipsis(href="javascript:;" v-show='ellipsis') ...
+          a(href="javascript:;" v-on:click='nextPage' v-show='nextShow') 下一页
+          a(href="javascript:;" v-on:click='lastPage' v-show='nextShow') 尾页
 
-  script(src="//cdn.bootcss.com/axios/0.15.3/axios.min.js")
-  script(src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js")
-  script.
-    var data = []
-    Vue.prototype.$http = axios
-    new Vue({
-      el: '#project-list',
-      data: {
-        pageSize: 6,
-        currentpage: 1,
-        state: 0,
-        token: 1,
-        list: [],
-        pagation: '',
-        subNavShow: true,
-      },
-      methods: {
-        // 下一页
-        next: function () {
-          this.currentpage++
-          this.getData()
-        },
-        //- vue-resource
-        getData: function () {
-          var url2 = 'http://devapi.zczj.com:80/api/ZhongChou/GetList?pagesize='+this.pageSize+'&state='+this.state+'&currentpage='+this.currentpage+'&token='+this.token
+        .loading-more
+          a(href="javascript:void(0);" v-on:click='loadMore') 查看更多融资项目
 
-          $("#loader").fadeIn(300)
 
-          this.$http.get(url2).then(function (response) {
-            this.list = response.data.projectList
-            console.log(this.list)
-            $("#loader").fadeOut(300)
-          })
-        }
-      },
-      computed: {
-
-      },
-      created: function () {
-        this.getData()
-        //- this.getList()
-      }
-    })
+  script(src='../skin/js/project.js')

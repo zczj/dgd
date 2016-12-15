@@ -133,6 +133,9 @@ block content
                     $("#loader").fadeOut(300)
                     // 登录成功，跳转
                     // doSomething
+                    //用户信息
+                    //{"token":"","uid":,"Avatar":"","UserName":"","message":"","resultid":}
+                    DGDTOOLS.store.save('userInfo', response);
                     window.location.href = './success.html?login'
                   }
                 }
