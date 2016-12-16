@@ -2,6 +2,7 @@ var headerModel = new Vue({
     el: "#header",
     data: {
       tag: false,
+      api:'http://devapi.zczj.com:80/api',
       navs: [
         {title:'首页', url:'/index'},
         {title:'投资项目', url:'/index'},
@@ -10,8 +11,9 @@ var headerModel = new Vue({
         {title:'新手指引', url:'/index'},
         {title:'关于我们', url:'/index'}
       ],
-      isLogin: true,
-      userInfo:null
+      isLogin: false, //是否登录
+      userInfo: null,
+      token: ''
     },
     methods: {
       showMean: function() {
@@ -26,19 +28,20 @@ var headerModel = new Vue({
       },
       checkLogin: function(){
         if (DGDTOOLS.checkLogin()) {
-          this.isLogin = false;
-        }else{
           this.isLogin = true;
+        }else{
+          this.isLogin = false;
         }
       },
       loginOut: function () {
         DGDTOOLS.loginOut();
         this.isLogin =! this.isLogin;
+        this.token='';
       }
     },
     created: function () {
       this.checkLogin();
-      console.log(this.isLogin);
       this.userInfo = DGDTOOLS.store._fetch('userInfo');
+      this.token = DGDTOOLS.store._fetch('userInfo')?DGDTOOLS.store._fetch('userInfo').token:'';
     }
   })

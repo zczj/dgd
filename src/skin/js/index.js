@@ -30,26 +30,18 @@ $(document).ready(function() {
     }
   })('公告');
 });
-    var IndexModel = new Vue({
+    var indexModel = new Vue({
       el: '#model-index',
       data: {
         Ad: '',
-        token:'',
         TimesRotationMap:['种子期', '天使期', 'pre-A轮', 'A轮', 'B轮', 'C轮'],
-        urlApi:'http://devapi.zczj.com:80/api',
         GG: {
           ggList:[],
           ggIsMobile: false
         }
       },
       created: function() {
-        //判断登录，
-        if (DGDTOOLS.checkLogin()) {
-          this.token = DGDTOOLS.store._fetch('userInfo').token;
-        }else{
-          this.token = '';
-        }
-        this.$http.get(this.urlApi+'/ZhongChou/GetList?pagesize=3&state=0&currentpage=20&token='+ this.token).then(function(response) {
+        this.$http.get(headerModel.api+'/ZhongChou/GetList?pagesize=3&state=0&currentpage=20&token='+  headerModel.token).then(function(response) {
           this.Ad = response.data;
 
           //广告列表
@@ -104,7 +96,7 @@ $(document).ready(function() {
       methods: {
         //关注
         gz: function (id,i) {
-          if (!DGDTOOLS.checkLogin()) {
+          if ( !headerModel.isLogin) {
             ;(function ($) {
               $.dialog({
                 type: 'warning',
@@ -126,18 +118,22 @@ $(document).ready(function() {
             return;
           }
           $("#loader").fadeIn(300);
-          var state = this.Ad.projectList[i].FollowState =!this.Ad.projectList[i].FollowState;
-          state?state=1:state=0;
+          // var state = this.Ad.projectList[i].FollowState =!this.Ad.projectList[i].FollowState;
+          // state?state=1:state=0;
+          var state = this.Ad.projectList[i].FollowState
           $.ajax({
-            url: this.urlApi + '/MyCenter/AddFollow',
+            url: headerModel.api + '/MyCenter/AddFollow',
             data: {
               'projectid':id,
               'type':state,
-              'token':this.token
+              'token': headerModel.token
             },
             type: 'post',
             success: function (response) {
               $("#loader").fadeOut(300);
+              if (response.resultid == 200) {
+
+              }
             },
             error: function () {
               $("#loader").fadeOut(300);

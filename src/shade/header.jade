@@ -1,6 +1,6 @@
 header#header
   .container.clearfix
-    .nav.clearfix(v-bind:class="{navLogin: !isLogin}")
+    .nav.clearfix(v-bind:class="{navLogin: isLogin}")
       a.logo(href="/")
         img(src="/skin/img/logo.png", alt="")
       .triggers
@@ -8,10 +8,10 @@ header#header
           i.icon.icon-catgray
       nav(v-bind:class="{ navShow: tag }", v-cloak="")
         a(v-for="(item, index) in navs", :href="item.url", v-bind:class="{ cur : index == 0 }").border-1px {{item.title}}
-        a.mobile-show.border-1px(href="javascript:void(0);", v-if="!isLogin", v-on:click="loginOut()") 退出
+        a.mobile-show.border-1px(href="javascript:void(0);", v-if="isLogin", v-on:click="loginOut()") 退出
       .login-btns
         ul.tool-nav
-          li.login-btn(v-if="isLogin")
+          li.login-btn(v-if="!isLogin")
             .item
               a(href="/passport/login.html") 登录
               span.line |
@@ -30,7 +30,7 @@ header#header
                   a(href="#") 我的质押
                   a(href="#") 我的优惠券
                   a(href="#") 安全中心
-                  a(href="javascript:void(0);", v-if="!isLogin", v-on:click="loginOut()") 退出
+                  a(href="javascript:void(0);", v-if="isLogin", v-on:click="loginOut()") 退出
 
 
             //- .item
