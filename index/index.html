@@ -57,9 +57,9 @@
           <div class="ga-side">
             <div class="dgd-plat-gg">
               <div class="title"><span>平台公告</span><a href="#" class="more">更多公告 >></a></div>
-              <div id="ggSlider" class="content">
+              <div id="ggSlider" v-bind:class="{isMobile: headerModel.isMobileOrTable}" class="content">
                 <ul>
-                  <li v-for="item in GG.ggList" class="clearfix"><span class="time">{{item.data}}</span><a v-bind:href="item.url" class="title ellipsis">{{item.title}}</a></li>
+                  <li v-for="item in Ad.NoticeList" class="clearfix"><span class="time">{{item.PostDate}}</span><a v-bind:href="item.URL" class="title ellipsis">{{item.Title}}</a></li>
                 </ul>
               </div>
             </div>
