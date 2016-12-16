@@ -19,7 +19,7 @@
       <div class="container clearfix">
         <div v-bind:class="{navLogin: !isLogin}" class="nav clearfix"><a href="/" class="logo"><img src="/skin/img/logo.png" alt=""/></a>
           <div class="triggers"><a href="#" v-on:click="showMean" class="mean-btn"><i class="icon icon-catgray"></i></a></div>
-          <nav v-bind:class="{ navShow: tag }" v-cloak=""><a href="#" v-for="(item, index) in navs" v-bind:class="{ cur : index == 0 }" class="border-1px">{{item}}</a><a href="javascript:void(0);" v-if="!isLogin" v-on:click="loginOut()" class="mobile-show border-1px">退出</a></nav>
+          <nav v-bind:class="{ navShow: tag }" v-cloak=""><a v-for="(item, index) in navs" :href="item.url" v-bind:class="{ cur : index == 0 }" class="border-1px">{{item.title}}</a><a href="javascript:void(0);" v-if="!isLogin" v-on:click="loginOut()" class="mobile-show border-1px">退出</a></nav>
           <div class="login-btns">
             <ul class="tool-nav">
               <li v-if="isLogin" class="login-btn">
@@ -56,16 +56,12 @@
         <div class="container clearfix">
           <div class="ga-side">
             <div class="dgd-plat-gg">
-              <div class="title"><span>平台公告</span><a href="#" class="more">更多资讯 >></a></div>
-              <ul class="content">
-                <li class="clearfix"><span class="time">25天前</span><a href="#" class="title ellipsis">2016年大股东国庆假期安排公告2016年大股东国庆假期安排公告</a></li>
-                <li class="clearfix"><span class="time">25天前</span><a href="#" class="title ellipsis">2016年大股东国庆假期安排公告</a></li>
-                <li class="clearfix"><span class="time">25天前</span><a href="#" class="title ellipsis">2016年大股东国庆假期安排公告</a></li>
-                <li class="clearfix"><span class="time">25天前</span><a href="#" class="title ellipsis">2016年大股东国庆假期安排公告</a></li>
-                <li class="clearfix"><span class="time">25天前</span><a href="#" class="title ellipsis">2016年大股东国庆假期安排公告</a></li>
-                <li class="clearfix"><span class="time">25天前</span><a href="#" class="title ellipsis">2016年大股东国庆假期安排公告</a></li>
-                <li class="clearfix"><span class="time">25天前</span><a href="#" class="title clearfix">2016年大股东国庆假期安排公告</a></li>
-              </ul>
+              <div class="title"><span>平台公告</span><a href="#" class="more">更多公告 >></a></div>
+              <div id="ggSlider" class="content">
+                <ul>
+                  <li v-for="item in GG.ggList" class="clearfix"><span class="time">{{item.data}}</span><a v-bind:href="item.url" class="title ellipsis">{{item.title}}</a></li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="ga-main ga-tab">
