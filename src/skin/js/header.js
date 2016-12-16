@@ -3,12 +3,12 @@ var headerModel = new Vue({
     data: {
       tag: false,
       navs: [
-        '首页',
-        '投资项目',
-        '股权转让',
-        '质押贷款',
-        '新手指引',
-        '关于我们'
+        {title:'首页', url:'/index'},
+        {title:'投资项目', url:'/index'},
+        {title:'股权转让', url:'/index'},
+        {title:'质押贷款', url:'/index'},
+        {title:'新手指引', url:'/index'},
+        {title:'关于我们', url:'/index'}
       ],
       isLogin: true,
       userInfo:null
@@ -39,8 +39,6 @@ var headerModel = new Vue({
     created: function () {
       this.checkLogin();
       console.log(this.isLogin);
-      this.userInfo=JSON.parse(DGDTOOLS.store._fetchone('userInfo'));
+      this.userInfo = DGDTOOLS.store._fetch('userInfo');
     }
-
-
   })

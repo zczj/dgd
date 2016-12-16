@@ -7,7 +7,7 @@ header#header
         a(href="#", v-on:click="showMean").mean-btn
           i.icon.icon-catgray
       nav(v-bind:class="{ navShow: tag }", v-cloak="")
-        a(href="#",v-for="(item, index) in navs", v-bind:class="{ cur : index == 0 }").border-1px {{item}}
+        a(v-for="(item, index) in navs", :href="item.url", v-bind:class="{ cur : index == 0 }").border-1px {{item.title}}
         a.mobile-show.border-1px(href="javascript:void(0);", v-if="!isLogin", v-on:click="loginOut()") 退出
       .login-btns
         ul.tool-nav
@@ -32,7 +32,7 @@ header#header
                   a(href="#") 安全中心
                   a(href="javascript:void(0);", v-if="!isLogin", v-on:click="loginOut()") 退出
 
-              
+
             //- .item
             //-   a(href="/") 退出
           li.go-zczj

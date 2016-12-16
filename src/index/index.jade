@@ -32,29 +32,13 @@ block content
           .dgd-plat-gg
             .title
               span 平台公告
-              a.more(href="#") 更多资讯 >>
-            ul.content
-              li.clearfix
-                span.time 25天前
-                a(href="#").title.ellipsis 2016年大股东国庆假期安排公告2016年大股东国庆假期安排公告
-              li.clearfix
-                span.time 25天前
-                a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
-              li.clearfix
-                span.time 25天前
-                a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
-              li.clearfix
-                span.time 25天前
-                a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
-              li.clearfix
-                span.time 25天前
-                a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
-              li.clearfix
-                span.time 25天前
-                a(href="#").title.ellipsis 2016年大股东国庆假期安排公告
-              li.clearfix
-                span.time 25天前
-                a(href="#").title.clearfix 2016年大股东国庆假期安排公告
+              a.more(href="#") 更多公告 >>
+            .content#ggSlider
+              ul
+                li.clearfix(v-for="item in GG.ggList")
+                  span.time {{item.data}}
+                  a(v-bind:href="item.url").title.ellipsis {{item.title}}
+
         .ga-main.ga-tab
           .ga-tab-btns.clearfix
             a.ga-tab-btn.cur(href="javascript:void(0);") 众筹

@@ -139,6 +139,15 @@ block content
                     window.location.href = './success.html?login'
                   }
                 }
+              },
+              error: function(e){
+                $("#loader").fadeOut(300);
+                $.dialog({
+                  type: 'ok',
+                  message: e.status + ' ' + e.statusText,
+                  delay: 1000,
+                  effect: true
+                })
               }
             })
           }
