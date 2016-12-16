@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-12-06 16:23:02
 * @Last Modified by:   老苏
-* @Last Modified time: 2016-12-16 11:13:50
+* @Last Modified time: 2016-12-16 18:09:15
 */
 @import "../comStyle/mixin.scss";
 //轮播图
@@ -347,14 +347,16 @@
     }
     .ga-side{
       background:#fff;
+      padding-left: 0;
       width: 100%;
       float: none;
       .dgd-plat-gg{
         position: relative;
         .title{
-          position: relative;
+          position: absolute;
           height: 48px;
           line-height: 48px;
+          width: 100%;
           span{
             font-size: 0;
             &::after{
@@ -380,7 +382,7 @@
           }
         }
         .content{
-          position: absolute;
+          position: relative;
           top: 0;
           z-index: 10;
           height: 48px;
@@ -723,6 +725,7 @@
   @include odds-list--600();
   @include player-list--600();
   @include dgd-ga--600();
+  .stand-bao{margin-top: 10px;}
   .odds,.player,.links,.transfer{display: -none;}
 
 }

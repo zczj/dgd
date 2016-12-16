@@ -13,7 +13,8 @@ var headerModel = new Vue({
       ],
       isLogin: false, //是否登录
       userInfo: null,
-      token: ''
+      token: '',
+      isMobileOrTable: false // 当前视口宽度是否是处于非PC样式
     },
     methods: {
       showMean: function() {
@@ -37,11 +38,26 @@ var headerModel = new Vue({
         DGDTOOLS.loginOut();
         this.isLogin =! this.isLogin;
         this.token='';
+      },
+      //检测视口宽度，
+      checkPlat: function (width) {
+        if (width <= 800) {
+          this.isMobileOrTable = true;
+        }else{
+          this.isMobileOrTable = false;
+        }
       }
     },
     created: function () {
+      var _this = this;
       this.checkLogin();
       this.userInfo = DGDTOOLS.store._fetch('userInfo');
       this.token = DGDTOOLS.store._fetch('userInfo')?DGDTOOLS.store._fetch('userInfo').token:'';
+
+      this.checkPlat(window.innerWidth);
+
+      window.onresize = function () {
+        _this.checkPlat(window.innerWidth)
+      }
     }
   })

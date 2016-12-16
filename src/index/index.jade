@@ -33,11 +33,11 @@ block content
             .title
               span 平台公告
               a.more(href="#") 更多公告 >>
-            .content#ggSlider
+            .content#ggSlider(v-bind:class="{isMobile: headerModel.isMobileOrTable}")
               ul
-                li.clearfix(v-for="item in GG.ggList")
-                  span.time {{item.data}}
-                  a(v-bind:href="item.url").title.ellipsis {{item.title}}
+                li.clearfix(v-for="item in Ad.NoticeList")
+                  span.time {{item.PostDate}}
+                  a(v-bind:href="item.URL").title.ellipsis {{item.Title}}
 
         .ga-main.ga-tab
           .ga-tab-btns.clearfix
