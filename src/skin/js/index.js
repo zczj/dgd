@@ -120,21 +120,31 @@ var indexModel = new Vue({
     },
     //公告滚动
     ggSlider: function () {
+      var _this = this;
       if (headerModel.isMobileOrTable) {
-        var oDiv = document.querySelector('#ggSlider');
-        var oUl = oDiv.getElementsByTagName('ul')[0];
-        var iH = oUl.getElementsByTagName('li')[0].clientHeight;
+        var oDiv = $('#ggSlider');
+        var oUl = oDiv.find('ul');
+        var iH = oUl.find('li:first').height();
         var iNow = 0;
-        var timer = null;
+        oDiv.timer = null;
 
         function slider(num) {
-          iNum += num;
-          if ( Math.abs(iNow) > arrData.length-1 ) {
+          iNow += num;
+          if ( Math.abs(iNow) > _this.Ad.NoticeList.length-1 ) {
             iNow = 0;
           }
-          oUl.stop().animate({ 'top': iH*iNow }, 2200, 'elasticOut');
+          oUl.stop().animate({ 'top': iH*iNow }, 2200,'elasticOut');
         }
+        oDiv.hover(function (){
+          clearInterval( timer );
+        }, autoPlay);
 
+        function autoPlay() {
+          oDiv.timer = setInterval(function () {
+            slider(-1);
+          },2000);
+        }
+        autoPlay();
 
       }else{
         return;

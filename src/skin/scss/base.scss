@@ -20,7 +20,8 @@ html {
     font-family: "微软雅黑";
 }
 html,body{
-  min-height: 100%; overflow-x: hidden;
+  min-height: 100%; 
+  // overflow-x: hidden;
 }
 ::selection {
     background-color: #b3d4fc;
