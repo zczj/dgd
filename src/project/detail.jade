@@ -1,0 +1,19 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="../skin/css/detail.css")
+  #detail
+    .banner(style='background-image: url(../skin/img/project/detail-banner.jpg)')
+      .container
+        .banner-tab
+          a(href="javascript:;")
+            i.icon.icon-up
+          div.tab(data-count='1')
+            img(src="../skin/img/project/detail-banner-tab1.jpg", alt="")
+          div.tab(data-count='2')
+          div.tab(data-count='3')
+          a(href="javascript:;")
+            i.icon.icon-down
+
+
+  script.
+    //- var ID = window.location.href.

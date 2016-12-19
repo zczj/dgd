@@ -73,30 +73,33 @@ block content
         ul.common-list
           li.list-item
             .list-pic
+              //- Ad.projectList.StandGuard
               a(href="#")
                 img(src="../skin/img/project/list-img01.jpg", alt="")
             .list-main
               .list-t.border-1px
-                .item
-                  span 起投金额：
-                  span.price 1元~100元
-                .item
-                  span 可购余额：
-                  span.price 103000元
+                //- .item
+                //-   span 起投金额：
+                //-   span.price 1元~100元
+                //- .item
+                //-   span 可购余额：
+                //-   span.price 103000元
+                .list-st {{Ad.StandGuard.Title}}
                 a.buy-now(href="#")
                   i.icon.icon-money
                   |我要认购
               .list-con
-                .list-txt.
-                  “全新站岗宝”是由大股东推出的一项年化利率8%~10%的全新账户余额管理增值服务，用户
-                  可以把账户中心的资金转入站岗宝中，可以获得一定的利息，让您的回款资金不站岗。
-                .list-info
+                .list-info.list-info-st
+
+                  "站岗宝 复合年化利率高达8%"
                   p.item
-                    span 年化利率达8%~10%
-                    span 日均收益(每万元)：2.11元起
+                    span{{Ad.StandGuard.DailyIncome}}
                   p.item
-                    span 每人每天限购5.00万元
-                    span 总额不能超过20.00万元
+                    span{{Ad.StandGuard.Summary}}
+                  p.item.price
+                    span 可购余额：
+                    span {{Ad.StandGuard.Amount}}
+
     //- 融资的项目
     section.stand-bao
       .container

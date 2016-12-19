@@ -1,8 +1,8 @@
 /*
 * @Author: suzhihui
 * @Date:   2016-12-06 16:23:02
-* @Last Modified by:   suzhihui
-* @Last Modified time: 2016-12-17 12:04:16
+* @Last Modified by:   老苏
+* @Last Modified time: 2016-12-19 10:22:16
 */
 @import "../comStyle/mixin.scss";
 //轮播图
@@ -495,6 +495,7 @@
       .face{
         height: 100%;
         width: 100%;
+        overflow: hidden;
         .tag{
           display: inline-block;
           width: 41px;
