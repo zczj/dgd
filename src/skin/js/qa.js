@@ -40,6 +40,46 @@ var qaModel = new Vue({
       }else{
 
       }
+    },
+    askForm: function () {
+      var keyword = document.querySelector('#askVal').value;
+      //检测登录
+      if (!headerModel.isLogin) {
+        (function($) {
+          $.dialog({
+            type: 'warning',
+            message: '请先登录！',
+            buttons: [{
+              text: '登录',
+              type: 'green',
+              callback: function() {
+                window.location = '/passport/login.html';
+              }
+            }, {
+              text: '取消',
+              type: 'red'
+            }],
+            maskClose: true,
+            effect: true
+          })
+        })(jQuery);
+        return;
+      }
+
+
+      if (keyword == '') {
+        $.dialog({
+          type: 'warning',
+          message: '输入你遇到的问题',
+          delay: 2000,
+          effect: true,
+          delayCallback: function () {
+            document.querySelector('#qaAskForm').focus();
+          }
+        })
+      }else{
+
+      }
     }
   }
 })

@@ -16,7 +16,7 @@ block content
           .qa-ask-from#qaAskForm
             textarea#askVal.ask-val(placeholder="输入你遇到的问题")
             .ask-submit
-              button 提交问题
+              button(v-on:click="askForm") 提交问题
             .tips （之家妹会在1~2个工作日以站内信方式回复您，敬请留意！）
 
 
