@@ -1,0 +1,40 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/plugs/owl/owl.carousel.min.css")
+  link(rel="stylesheet", href="/skin/plugs/owl-carousel/owl.carousel.css")
+  link(rel="stylesheet", href="/skin/css/qa.css")
+  #model-qa
+    .qa-banner.owl-carousel.owl-theme#qa-banner
+      img(src="/skin/img/about/banner-1200.jpg", alt="")
+    .qa-content(v-bind:class="{ qaHeadMobile: headerModel.isMobileOrTable }", v-cloak="")
+      .container
+        .qa-head
+          .qa-t
+            span 个人账户问题
+            em CLASSIFICATION
+        .qa-detail
+          .qa-list
+            dl.item
+              dt Q：大股东上的项目是否安全？
+              dd.
+                A：众筹之家对大股东上展示的项目设有严格的入驻标准，并制定符合投资人利益的投资、退款以及项目管理流程，最大程度保障投资人利益，但众筹之家不对各众筹平台运行及项目本身经营情况及未来发展负责。众筹有风险，投资需谨慎。
+            dl.item
+              dt Q：大股东上的项目是否安全？
+              dd.
+                A：众筹之家对大股东上展示的项目设有严格的入驻标准，并制定符合投资人利益的投资、退款以及项目管理流程，最大程度保障投资人利益，但众筹之家不对各众筹平台运行及项目本身经营情况及未来发展负责。众筹有风险，投资需谨慎。
+            dl.item
+              dt Q：大股东上的项目是否安全？
+              dd.
+                A：众筹之家对大股东上展示的项目设有严格的入驻标准，并制定符合投资人利益的投资、退款以及项目管理流程，最大程度保障投资人利益，但众筹之家不对各众筹平台运行及项目本身经营情况及未来发展负责。众筹有风险，投资需谨慎。
+            dl.item
+              dt Q：大股东上的项目是否安全？
+              dd.
+                A：众筹之家对大股东上展示的项目设有严格的入驻标准，并制定符合投资人利益的投资、退款以及项目管理流程，最大程度保障投资人利益，但众筹之家不对各众筹平台运行及项目本身经营情况及未来发展负责。众筹有风险，投资需谨慎。
+          .qa-more
+            a.more(href="qa.html") 查看问题分类
+
+
+
+  .qa-Mark
+  script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
+  script(src="/skin/js/qa.js")

@@ -19,6 +19,9 @@ html {
     color: #222;
     font-family: "微软雅黑";
 }
+textarea,input{
+  font-family: "微软雅黑";
+}
 html,body{
   min-height: 100%;
   // overflow-x: hidden;
@@ -27,7 +30,9 @@ html,body{
     background-color: #b3d4fc;
     text-shadow: none;
 }
-
+button{
+  cursor: pointer;
+}
 ul,dl,dt,dd,li,p {
     margin: 0;
     padding: 0;
@@ -201,6 +206,9 @@ header{
         float: left; padding-left: 160px;
         a{
           display: block; height: 76px; line-height: 76px; position: relative; float: left; font-size: 1.8rem; color: #494949; padding: 0 15px;
+          &.mobile-show{
+            display: none;
+          }
           &.cur,&:hover{
             color: #00a9e0; text-decoration: none;
           }
@@ -211,7 +219,7 @@ header{
       float: right;
       height: 76px;
       .tool-nav{
-        height: 100%;
+        height: 76px;
         font-size:0;
         & > li{
           height: 100%;
@@ -374,6 +382,7 @@ header{
       }
     }
     .login-btns{
+        height: 64px;
       .tool-nav{
         font-size: 0;
         & > li{
@@ -456,6 +465,9 @@ header{
             color: #fff;
             float: none;
             @include border-1px(#4e5c71);
+            &.mobile-show{
+              display: block;
+            }
             &.cur{
               background:#262d40;
             }

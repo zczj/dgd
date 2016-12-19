@@ -1,27 +1,39 @@
 extends ../shade/layout
 block content
+  link(rel="stylesheet", href="/skin/plugs/owl/owl.carousel.min.css")
   link(rel="stylesheet", href="/skin/plugs/owl-carousel/owl.carousel.css")
-  link(rel="stylesheet", href="/skin/css/about.css")
+  link(rel="stylesheet", href="/skin/css/qa.css")
+  #model-qa
+    .qa-banner.owl-carousel.owl-theme#qa-banner
+      img(src="/skin/img/about/banner-1200.jpg", alt="")
+    .qa-content(v-bind:class="{ qaHeadMobile: headerModel.isMobileOrTable }", v-cloak="")
+      .container
+        .qa-head(v-bind:class="{qaSearchPop: isSearchPop }")
+          .qa-t
+            span 问题分类
+            em CLASSIFICATION
+          .qa-show-btn.icon.icon-search(v-on:click="searchPop")
+          .qa-search(v-bind:class="{qaSearchPop2: isSearchPop}")
+            .searchForm#searchForm
+              input(type="text", placeholder= "输入问题关键字" )#searchKey
+            button.icon.icon-search(v-on:click="searchForm")
+            button.icon.icon-close(v-on:click= "searchClose")
+        .qa-list
+          .item.clearfix
+            a(href="qaDetail.html")
+              img(src="/skin/img/about/c1.png", alt="个人账户问题")
+            a(href="qaDetail.html")
+              img(src="/skin/img/about/c2.png", alt="项目投资问题")
+            a(href="qaDetail.html")
+              img(src="/skin/img/about/c3.png", alt="投后管理问题")
+          .item.clearfix
+            a(href="qaDetail.html")
+              img(src="/skin/img/about/c4.png", alt="股权质押问题")
+            a(href="qaDetail.html")
+              img(src="/skin/img/about/c5.png", alt="站岗宝问题")
+            a(href="qaDetail.html")
+              img(src="/skin/img/about/c6.png", alt="我要提问")
 
-  .qa-banner.owl-carousel.owl-theme
-    img(src="/skin/img/about/banner-1200.jpg", alt="")
-  .qa-content
-    .container
-      .qa-head
-      .qa-list
-        .item
-          .qa-icon
-          .qa-categray 个人账户问题
-          .qa-icon
-          .qa-categray 项目投资问题
-          .qa-icon
-          .qa-categray 投后管理问题
-          .qa-icon
-          .qa-categray 股权质押问题
-          .qa-icon
-          .qa-categray 站岗宝问题
-          .qa-icon
-          .qa-categray 我要提问
-
+  .qa-Mark
   script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
-  script(src="/skin/js/index.js")
+  script(src="/skin/js/qa.js")

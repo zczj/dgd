@@ -1,0 +1,26 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/plugs/owl/owl.carousel.min.css")
+  link(rel="stylesheet", href="/skin/plugs/owl-carousel/owl.carousel.css")
+  link(rel="stylesheet", href="/skin/css/qa.css")
+  #model-qa
+    .qa-banner.owl-carousel.owl-theme#qa-banner
+      img(src="/skin/img/about/banner-1200.jpg", alt="")
+    .qa-content(v-bind:class="{ qaHeadMobile: headerModel.isMobileOrTable }", v-cloak="")
+      .container
+        .qa-head
+          .qa-t
+            span 我要提问
+            em QUESTION
+        .qa-ask
+          .qa-ask-from#qaAskForm
+            textarea#askVal.ask-val(placeholder="输入你遇到的问题")
+            .ask-submit
+              button 提交问题
+            .tips （之家妹会在1~2个工作日以站内信方式回复您，敬请留意！）
+
+
+
+  .qa-Mark
+  script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
+  script(src="/skin/js/qa.js")

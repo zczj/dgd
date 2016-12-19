@@ -7,8 +7,8 @@ block content
   #model-index
     .dgd-ad
       .owl-carousel.owl-theme#dgd-ad
-         div(v-for="item in Ad.ChannelList")
-          img(v-bind:src="item.Pic", alt="")
+         div(v-for="item in Ad.ChannelList", v-cloak="")
+          img(v-bind:src="item.Pic", alt="", v-cloak="")
 
     //- 注册人数
     section.dgd-num.border-1px

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 190684 */
-  src: url('//at.alicdn.com/t/font_eisck7af76u8r529.eot');
-  src: url('//at.alicdn.com/t/font_eisck7af76u8r529.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_eisck7af76u8r529.woff') format('woff'),
-  url('//at.alicdn.com/t/font_eisck7af76u8r529.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_eisck7af76u8r529.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_tepzm8ojdn9daemi.eot');
+  src: url('//at.alicdn.com/t/font_tepzm8ojdn9daemi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_tepzm8ojdn9daemi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_tepzm8ojdn9daemi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_tepzm8ojdn9daemi.svg#iconfont') format('svg');
 }
 
 .icon{
@@ -17,10 +17,15 @@
     color: inherit;
     vertical-align: top;
   }
+  // 关闭
+  &-close::before{
+    content: '\e613';
+  }
+  // 分类
   &-catgray::before{
     content: '\e612';
   }
-  // 用户
+   // 用户
   &-user::before{
     content: '\e600';
   }
