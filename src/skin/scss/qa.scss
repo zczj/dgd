@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-12-19 11:32:37
 * @Last Modified by:   老苏
-* @Last Modified time: 2016-12-19 18:11:14
+* @Last Modified time: 2016-12-21 13:43:22
 */
 body{
   background:#f0f4f7;
@@ -223,6 +223,7 @@ html.searchPop,body.searchPop{
       padding: 15px;
       height: 182px;
       font-size: 1.8rem;
+      resize: none;
     }
     .ask-submit{
       text-align: center;

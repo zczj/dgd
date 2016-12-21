@@ -74,6 +74,7 @@ var indexModel = new Vue({
     //关注
     gz: function(id, i) {
       var _this = this;
+      //检测登录
       if (!headerModel.isLogin) {;
         (function($) {
           $.dialog({

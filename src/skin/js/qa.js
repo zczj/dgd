@@ -53,7 +53,7 @@ var qaModel = new Vue({
               text: '登录',
               type: 'green',
               callback: function() {
-                window.location = '/passport/login.html';
+                window.location = '/passport/login.html?url='+ window.location;
               }
             }, {
               text: '取消',
