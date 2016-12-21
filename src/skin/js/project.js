@@ -1,5 +1,5 @@
 // var projectdata = []
-new Vue({
+var project = new Vue({
   el: '#project-list',
   data: {
     projectdata: [],

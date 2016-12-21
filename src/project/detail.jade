@@ -1,10 +1,19 @@
 extends ../shade/layout
 block content
   link(rel="stylesheet", href="../skin/css/detail.css")
-  #detail
-    .banner(style='background-image: url(../skin/img/project/detail-banner.jpg)')
-      .container
-        .banner-tab
+  #detail(v-cloak)
+    .banner
+      .container(v-bind:style='{backgroundImage: "url("+detail.BigPic+")"}')
+        .banner-project-wrapper
+          div
+            img(src="../skin/img/project/detail-banner-project-logo.png", alt="").banner-project-logo
+            h1.project-name(v-bind:title='detail.ProjectName') {{detail.ProjectName}}
+            p.project-intro(v-bind:title='detail.ShortDesc') {{detail.ShortDesc}}
+            p.project-handle
+              a(href="javascript:;") 关注
+              | |
+              a(href="javascript:;") 分享
+        //- .banner-tab
           a(href="javascript:;")
             i.icon.icon-up
           div.tab(data-count='1')
@@ -13,7 +22,166 @@ block content
           div.tab(data-count='3')
           a(href="javascript:;")
             i.icon.icon-down
+    // main
+    .main-wrapper
+      .container
+        // 侧边栏
+        .sidebar-wrapper
+          // 我要投资
+          .invest-item
+            .invest-item-head
+              .invest-from
+                p 起投
+                h2 ￥{{detail.OriginalLowVote}}
+              .line
+              .invest-target
+                p 目标金额
+                h2 ￥{{detail.TargetAmount}}
+            .invest-item-body
+              h2.invest-head 已认购：
+                span ￥{{detail.CurrentAmount}}
+              .progress-wrapper
+                .progress(v-bind:style='{width: parseInt(detail.Progress) + "%"}')
+                  span {{parseInt(detail.Progress)}}%
+              ul.invest-type
+                li
+                  a(href="#").pledge 可质押
+                li
+                  a(href="#").stand 可站岗
+                li
+                  a(href="#").transfer 可转让
+              a(href="javascript:;").invest-button 我要投资
+              ul.invest-desc-list
+                li 众筹轮次：
+                  span {{TimesRotation[(detail.TimesRotation-1)]}}
+                li 出让份额：
+                  span {{detail.SellStock}}
+                li 目标人数：
+                  span {{detail.TargetNumber}}人
+                li 已投人数：
+                  span {{detail.FollowPerson.length}}人
+          // 融资概况
+          .invest-item
+            ul.detail-nav-tab
+              li.current 融资概况
+            ul.invest-item-body
+              li 领投人：
+                span XX资本（如无省略）
+              li 前端费用：
+                span 5%
+              li 领投人分成：
+                span 收益>50%     收15%
+              li
+                span 收益>150%   收30%
+              li 管理费用：
+                span 5%
+            a(href="javascript:;").earnings-calc 收益计算器
+        // 内容
+        .content-wrapper(style='display:block')
+          .content-item-wrapper
+            ul.detail-nav-tab
+              li(v-on:click='toggleTab(0)' v-bind:class='{current: tabShow==0}') 项目详情
+              li(v-on:click='toggleTab(1)' v-bind:class='{current: tabShow==1}') 项目问答
+              li(v-on:click='toggleTab(2)' v-bind:class='{current: tabShow==2}') 跟投人
+
+            // 项目详情
+            .content-box.detail-box(v-show='tabShow == 0')
+              ul.detail-nav
+                li(v-for='(item, index) in detail.descList')
+                  a(v-bind:href="['#detailnav'+index]" v-bind:class='{current: index == detailNavCur}') {{item.Title}}
+              .content-item
+                .content-box
+                  .video
+                    img(src="../skin/img/project/detail-item-video.png", alt="")
+                  .detail
+                    ul
+                      li 项目官方网址：
+                        a(href="#") xxxxxxx
+                      li 项目服务号：xxxx
+                      li 项目路演时间：2016-06-30 20:00
+                    a(href="#").button 查看路演
+              //-投资亮点
+              .item-desc
+                .content-item(v-for='(item, index) in detail.descList' v-bind:id='["detailnav"+index]')
+                  ul.detail-nav-tab
+                    li.current {{item.Title}}
+                  .content-box(v-html='item.Desc')
+
+            // 项目问答
+            .content-box.detail-qa(v-show='tabShow == 1')
+              textarea.qa-texarea(placeholder='请输入您的任何疑惑，我们会第一时间答复您')
+              .qa-submit-wrapper
+                a(href="javascript:;").qa-submit-button 提交问题
+              dl.qa-list
+                dt 谈谈你成功的一次投资经历
+                  span.time 2016-05-17
+                dd
+                  h2
+                    img(src="../skin/img/project/qa-avatar.png", alt="").qa-avatar
+                    .qa-user-wrapper
+                      h3 彭大聪
+                      span 认证投资人
+                  p 投资人需充分了解投资标的，在决定认购后，需将认购款项汇到VentureShares开通的受【专业第三方基金管理公司Alter Domus】 (www.alterdomus.com) 监管的账户。Alter Domus管理资产达620亿美金。
+                  p VentureShares与 Alter Domus签订了监管协议，资金去向限定为项目投资，并且要通过Alter Domus凭借投资协议、划款指令等才能进行转账操作。而在顶级专业外资律师事务所认定所有法律文件生效、交割完成的同时，资金才会最终进入售股方账户。
+                  p 【认购提醒】
+                    br
+                    |本次基金以美元认购，10万美元起购。为了在交割日之前您能成功认购，请确保：
+                    br
+                    |(A). 您已经有海外账户，且该账户有足够的外汇储备；如果您没有且需要开外汇账户可跟VS投资者关系私聊；
+                    br
+                    |(B). 如果您在线上通过网上转账，请确保外汇账户转账到香港基金账户的上限足够高，或将基金账户添加在您的beneficiary list中，以方便在线转账；
+                    br
+                    |(C). 如果您在线下通过给您海外账户银行发指令进行转账，请确保在交割日前及时完成转账指令的发出。
+              dl.qa-list
+                dt 谈谈你成功的一次投资经历
+                  span.time 2016-05-17
+                dd
+                  h2
+                    img(src="../skin/img/project/qa-avatar.png", alt="").qa-avatar
+                    .qa-user-wrapper
+                      h3 彭大聪
+                      span 认证投资人
+                  p 投资人需充分了解投资标的，在决定认购后，需将认购款项汇到VentureShares开通的受【专业第三方基金管理公司Alter Domus】 (www.alterdomus.com) 监管的账户。Alter Domus管理资产达620亿美金。
+                  p VentureShares与 Alter Domus签订了监管协议，资金去向限定为项目投资，并且要通过Alter Domus凭借投资协议、划款指令等才能进行转账操作。而在顶级专业外资律师事务所认定所有法律文件生效、交割完成的同时，资金才会最终进入售股方账户。
+                  p 【认购提醒】
+                    br
+                    |本次基金以美元认购，10万美元起购。为了在交割日之前您能成功认购，请确保：
+                    br
+                    |(A). 您已经有海外账户，且该账户有足够的外汇储备；如果您没有且需要开外汇账户可跟VS投资者关系私聊；
+                    br
+                    |(B). 如果您在线上通过网上转账，请确保外汇账户转账到香港基金账户的上限足够高，或将基金账户添加在您的beneficiary list中，以方便在线转账；
+                    br
+                    |(C). 如果您在线下通过给您海外账户银行发指令进行转账，请确保在交割日前及时完成转账指令的发出。
+              dl.qa-list
+                dt 谈谈你成功的一次投资经历
+                  span.time 2016-05-17
+                dd
+                  h2
+                    img(src="../skin/img/project/qa-avatar.png", alt="").qa-avatar
+                    .qa-user-wrapper
+                      h3 彭大聪
+                      span 认证投资人
+                  p 投资人需充分了解投资标的，在决定认购后，需将认购款项汇到VentureShares开通的受【专业第三方基金管理公司Alter Domus】 (www.alterdomus.com) 监管的账户。Alter Domus管理资产达620亿美金。
+                  p VentureShares与 Alter Domus签订了监管协议，资金去向限定为项目投资，并且要通过Alter Domus凭借投资协议、划款指令等才能进行转账操作。而在顶级专业外资律师事务所认定所有法律文件生效、交割完成的同时，资金才会最终进入售股方账户。
+                  p 【认购提醒】
+                    br
+                    |本次基金以美元认购，10万美元起购。为了在交割日之前您能成功认购，请确保：
+                    br
+                    |(A). 您已经有海外账户，且该账户有足够的外汇储备；如果您没有且需要开外汇账户可跟VS投资者关系私聊；
+                    br
+                    |(B). 如果您在线上通过网上转账，请确保外汇账户转账到香港基金账户的上限足够高，或将基金账户添加在您的beneficiary list中，以方便在线转账；
+                    br
+                    |(C). 如果您在线下通过给您海外账户银行发指令进行转账，请确保在交割日前及时完成转账指令的发出。
+            // 跟投人
+            .content-box.invest-list(v-show='tabShow == 2')
+              ul
+                li(v-for='item in followPersonList')
+                  img(src="../skin/img/default.jpg", alt="" v-if='item.Avater == null').invest-avatar
+                  img(v-bind:src="item.Avater", alt="" v-else='item.Avater != null').invest-avatar
+                  span.tag(v-bind:class='["tag-"+item.State]')
+                  p.invest-name {{item.Account}}
 
 
-  script.
-    //- var ID = window.location.href.
+
+
+  script(src='../skin/js/detail.js')

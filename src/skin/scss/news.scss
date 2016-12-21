@@ -1,0 +1,83 @@
+/*
+* @Author: suzhihui
+* @Date:   2016-12-21 15:09:25
+* @Last Modified by:   老苏
+* @Last Modified time: 2016-12-21 17:41:50
+*/
+
+//资讯轮播图
+.news-banner{
+  .item{
+    .item-link{
+      display: block;
+      position: relative;
+      .item-desc{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 100%;
+        width: 30%;
+        z-index: 1;
+        background:rgba(0,0,0,0.3);
+        color: #fff;
+        padding:0 50px;
+        font-size: 1.5rem;
+        .item-tite{
+          font-size: 2.6rem;
+          color: #fff;
+          font-weight: bold;
+          margin-top: 30%;
+          padding: 1rem 0px;
+        }
+        .item-txt{
+          line-height: 2.4rem;
+          height: 7.2rem;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.owl-theme .owl-nav.disabled+.owl-dots{
+  position: relative;
+  z-index: 20;
+  margin-top: -30px;
+}
+.owl-theme .owl-dots .owl-dot span{
+  background:none;
+  border: 2px #fff solid;
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+}
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+  background:#fff;
+}

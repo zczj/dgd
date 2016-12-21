@@ -7,8 +7,9 @@ block content
   #model-index
     .dgd-ad
       .owl-carousel.owl-theme#dgd-ad
-         div(v-for="item in Ad.ChannelList", v-cloak="")
-          img(v-bind:src="item.Pic", alt="", v-cloak="")
+         div.item(v-for="item in Ad.ChannelList", v-cloak="")
+          a(:href="item.Link")
+            img(v-bind:src="item.Pic", alt="", v-cloak="")
 
     //- 注册人数
     section.dgd-num.border-1px
@@ -253,6 +254,6 @@ block content
 
 
 
-    script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
-    //- script(src="/skin/plugs/bscroll/bscroll.min.js")
-    script(src="/skin/js/index.js")
+  script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
+  //- script(src="/skin/plugs/bscroll/bscroll.min.js")
+  script(src="/skin/js/index.js")

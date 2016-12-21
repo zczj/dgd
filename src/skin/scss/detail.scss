@@ -1,16 +1,60 @@
 #detail{
+  background-color: #ebebeb;
+  padding-bottom: 20px;
+  margin-bottom: -20px;
+
   .banner{
     width: 100%;
     height: 500px;
     background-position: center;
-    // background-size: auto 100%;
+    background-size: 100%;
     background-repeat: no-repeat;
+    // background-color: #fff;
     .container{height: 100%;}
+    &-project-wrapper{
+      float: left;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      display: table;
+      > div{
+        // padding-right: 29%;
+        display: table-cell;
+        vertical-align: middle;
+      }
+      .banner-project-logo{
+        width: 124px;
+        height: 124px;
+        border-radius: 20px;
+      }
+      .project-name{
+        color: #fff;
+        font-size: 30px;
+      }
+      .project-intro{
+        color: #2cecf8;
+        font-size: 20px;
+        height: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .project-handle{
+        color: #fff;
+        font-size: 16px;
+        line-height: 2.4;
+        a{
+          padding: 0 8px;
+          color: inherit;
+        }
+      }
+    }
     &-tab{
       position: relative;
       float: right;
       height: 100%;
-      width: 350px;
+      width: 29%;
+      margin-left: -29%;
       padding: 26px 12px 30px;
       background-color: rgba(1, 35, 41, .6);
       overflow: hidden;
@@ -59,6 +103,561 @@
           font-size: 16px;
           color: #fefefe;
           z-index: 99;
+        }
+      }
+    }
+  }
+  // main
+  .main-wrapper{
+    margin-top: 37px;
+    .container{
+      &::after{
+        content: '.';
+        display: block;
+        width: 0;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+      }
+    }
+  }
+  // 侧边栏
+  .sidebar-wrapper{
+    position: relative;
+    float: right;
+    width: 27.5%;
+    margin-left: -27.5%;
+    z-index: 999;
+    .invest-item{
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      background-color: #fff;
+      .detail-nav-tab{
+        li{
+          width: 160px;
+        }
+      }
+    }
+    .invest-item-head{
+      position: relative;
+      height: 72px;
+      padding: 10px 0;
+      color: #fff;
+      text-align: center;
+      background-color: #4ad3da;
+      overflow: hidden;
+      h2{
+        margin: 0;
+      }
+    }
+    .line{
+      position: absolute;
+      left: 50%;
+      width: 1px;
+      height: 75%;
+      background-color: #fff;
+    }
+    .invest-from{
+      float: left;
+      width: 50%;
+    }
+    .invest-target{
+      float: left;
+      width: 50%;
+    }
+
+    .invest-item-body{
+      padding: 0 14px;
+      font-size: 16px;
+    }
+    .invest-head{
+      color: #515151;
+      font-size: 18px;
+      text-align: center;
+      span{
+        color: #4ad3da;
+        font-size: 26px;
+      }
+    }
+    .progress-wrapper{
+      position: relative;
+      width: 100%;
+      height: 12px;
+      margin-top: 28px;
+      background-color: #dee3e9;
+      border-radius: 10px;
+      // overflow-x: hidden;
+      .progress{
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: #fe6840;
+        border-radius: 10px;
+        span{
+          position: absolute;
+          top: -22px;
+          left: 90%;
+          color: #fe6840;
+        }
+      }
+    }
+    .invest-type{
+      margin: 18px 0;
+      overflow: hidden;
+      li{
+        width: 33.33%;
+        float: left;
+        text-align: center;
+      }
+      a{
+        display: inline-block;
+        width: 60px;
+        height: 25px;
+        border: 1px solid currentColor;
+        border-radius: 5px;
+        &.pledge{
+          color: #00b7ee;
+        }
+        &.stand{
+          color: #5f52a0;
+        }
+        &.transfer{
+          color: #3e85ff;
+        }
+      }
+    }
+    .invest-button{
+      display: inline-block;
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      color: #fff;
+      font-size: 18px;
+      background-color: #4ad3da;
+      border-radius: 5px;
+      &:hover{
+        opacity: .8;
+      }
+    }
+    .invest-desc-list{
+      font-size: 16px;
+      margin-top: 22px;
+      padding-left: 20px;
+      li{
+        color: #6b7c93;
+        margin-bottom: 10px;
+      }
+      span{
+        color: #4f4f4f;
+      }
+    }
+    ul.invest-item-body{
+      padding: 22px;
+      color: #787979;
+      li{
+        line-height: 30px;
+        overflow: hidden;
+      }
+      span{
+        float: right;
+        color: #fe6840;
+      }
+    }
+    .earnings-calc{
+      display: block;
+      width: 164px;
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      margin: 0 auto;
+      color: #4ad3da;
+      font-size: 18px;
+      border: 1px solid #4ad3da;
+      border-radius: 5px;
+      &:hover{
+        background-color: #4ad3da;
+        color: #fff;
+      }
+    }
+  }
+
+  // tab切换
+  .detail-nav-tab{
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #ececec;
+    overflow: hidden;
+    li{
+      float: left;
+      width: 25%;
+      height: 68px;
+      line-height: 68px;
+      text-align: center;
+      font-size: 18px;
+      cursor: pointer;
+      &.current, &:hover{
+        color: #49d6df;
+        border-bottom: 2px solid #4ad3da;
+      }
+    }
+    .search-form{
+      position: relative;
+      &:hover{
+        border: none;
+      }
+      input{
+        width: 80%;
+        height: 30px;
+        border: 1px solid #dcdcdc;
+        text-indent: 6px;
+        font-size: 14px;
+        border-radius: 5px;
+      }
+      .icon-search{
+        position: absolute;
+        right: 24px;
+        color: #969696;
+      }
+    }
+  }
+
+  // 主体
+  .content-wrapper{
+    float: left;
+    width: 100%;
+    .content-item-wrapper{
+      margin-right: 29%;
+    }
+  }
+
+  //  项目详情
+  .detail-box{
+    position: relative;
+    .detail-nav{
+      position: fixed;
+      top: 50%;
+      left: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      transform: translateY(-50%);
+      a{
+        display: block;
+        padding: 10px;
+        line-height: 2.2;
+        cursor: pointer;
+        background-color: #fff;
+        transition: all .25s;
+        &.current, &:hover{
+          color: #fff;
+          background-color: #4ad3da;
+        }
+      }
+    }
+    .content-item{
+      margin-bottom: 20px;
+      color: #505050;
+      background-color: #fff;
+    }
+    .content-box{
+      padding: 22px;
+      overflow: hidden;
+      // img{
+      //   width: 100%;
+      // }
+      .video{
+        width: 39%;
+        height: 210px;
+        float: left;
+        margin: 36px 0;
+
+      }
+      .detail{
+        float: left;
+        margin-left: 52px;
+        padding-top: 50px;
+        font-size: 16px;
+        line-height: 30px;
+        .button{
+          display: block;
+          width: 100px;
+          height: 37px;
+          line-height: 37px;
+          text-align: center;
+          margin-top: 30px;
+          background-color: #4ad3da;
+          color: #fff;
+          border-radius: 5px;
+          &:hover{
+            opacity: .8;
+          }
+        }
+      }
+      .sub{
+        position: relative;
+        color: #49d6df;
+        font-size: 18px;
+        height: 28px;
+        line-height: 28px;
+        margin-left: 18px;
+        margin-bottom: 28px;
+        &::before{
+          content: ' ';
+          position: absolute;
+          top: 0;
+          left: -12px;
+          width: 3px;
+          height: 100%;
+          background-color: currentColor;
+        }
+      }
+    }
+    .investment-highlights{
+      font-size: 16px;
+      li{
+        list-style: decimal;
+        line-height: 36px;
+      }
+    }
+  }
+
+  // 项目问答
+  .detail-qa{
+    padding: 32px 12px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    overflow: hidden;
+    .qa-texarea{
+      width: 100%;
+      height: 95px;
+      border: 1px solid #dcdcdc;
+      padding: 12px;
+      resize: none;
+    }
+    .qa-submit-wrapper{
+      overflow: hidden;
+    }
+    .qa-submit-button{
+      float: right;
+      display: block;
+      width: 150px;
+      height: 45px;
+      line-height: 45px;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 48px;
+      background-color: #46c9d0;
+      border-radius: 5px;
+      &:hover{
+        opacity: .8;
+      }
+    }
+    .qa-list{
+      padding-bottom: 27px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #e5e5e5;
+      dt{
+        position: relative;
+        margin-left: 22px;
+        line-height: 21px;
+        &::before{
+          position: absolute;
+          left: -22px;
+          content: 'Q';
+          width: 19px;
+          height: 21px;
+          line-height: 21px;
+          text-align: center;
+          color: #fff;
+          font-size: 14px;
+          background-color: #46c9d1;
+        }
+        .time{
+          float: right;
+          color: #b2b9bf;
+        }
+      }
+      dd{
+        position: relative;
+        background-color: #f6f6f6;
+        margin-top: 18px;
+        padding: 22px 16px;
+        font-size: 14px;
+        color: #616a73;
+        &::before{
+          content: 'A';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 19px;
+          height: 21px;
+          line-height: 21px;
+          text-align: center;
+          color: #fff;
+          font-size: 14px;
+          background-color: #46c9d1;
+        }
+        h2{
+          overflow: hidden;
+          .qa-avatar{
+            float: left;
+            width: 54px;
+            height: 54px;
+            margin-right: 12px;
+            border-radius: 50%;
+          }
+          .qa-user-wrapper{
+            float: left;
+            font-size: 14px;
+          }
+          h3{
+            margin: 0;
+            color: #3f403d;
+          }
+          span{
+            display: block;
+            width: 109px;
+            height: 23px;
+            line-height: 23px;
+            text-align: center;
+            color: #fff;
+            margin-top: 10px;
+            background-color: #46c9d1;
+            border-radius: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  // 跟投人
+  .invest-list{
+    margin-bottom: 20px;
+    background-color: #fff;
+    ul{
+      overflow: hidden;
+    }
+    li{
+      width: 25%;
+      min-height: 100px;
+      float: left;
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+    .invest-avatar{
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+    }
+    .invest-name{
+      line-height: 40px;
+      font-size: 16px;
+    }
+    .invest-time{
+      color: #aaa;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #detail{
+    padding: 0;
+    .banner{
+      height: 200px;
+      &-project-wrapper{
+        > div{
+          padding: 0;
+        }
+        .banner-project-logo{
+          width: 60px;
+          height: 60px;
+        }
+        .project-name{
+          margin: .3em;
+        }
+        .project-intro{
+          font-size: 14px;
+        }
+      }
+      &-tab{
+        display: none;
+      }
+    }
+    .main-wrapper{
+      margin-top: 20px;
+    }
+    .content-wrapper{
+      .content-item-wrapper{
+        width: 100%;
+      }
+    }
+    // 侧边栏
+    .sidebar-wrapper{
+      float: none;
+      width: 100%;
+      margin: 0;
+      .invest-item-head{
+        height: 50px;
+        padding: 4px 0;
+      }
+      .invest-desc-list{
+        overflow: hidden;
+        li{
+          width: 50%;
+          float: left;
+        }
+      }
+      .invest-item{
+        &:first-child{
+
+        }
+        &:last-child{
+          display: none;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+  #detail{
+    .detail-nav-tab{
+      li{
+        width: 33.33%;
+      }
+    }
+    .invest-list{
+      li{
+        width: 50%;
+        margin: 20px 0;
+      }
+    }
+    .detail-box{
+      .content-box{
+        .video{
+          float: none;
+          width: 100%;
+          img{
+            height: 100%;
+          }
+        }
+        .detail{
+          float: none;
+          width: 100%;
+          padding-top: 0;
+          margin: 0;
+          padding-bottom: 20px;
+        }
+      }
+    }
+    // 侧边栏
+    .sidebar-wrapper{
+      .invest-desc-list{
+        li{
+          float: none;
+          width: 100%;
         }
       }
     }

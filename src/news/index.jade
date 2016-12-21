@@ -1,0 +1,43 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/plugs/owl-carousel/assets/owl.carousel.min.css")
+  link(rel="stylesheet", href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css")
+  link(rel="stylesheet", href="/skin/css/news.css")
+  #model-news
+    .news-banner
+      .owl-carousel.owl-theme#news-banner
+        div.item(v-for="item in Ad", v-cloak="")
+          a.item-link(:href="item.Link")
+            .item-desc
+              p.item-tite {{item.Title}}
+              p.item-txt(v-if="item.Remark") {{item.Remark}}
+              p.item-txt(v-else) 老苏说这里还没有描述
+            img(v-bind:src="item.Pic", alt="", v-cloak="")
+    .news-warp
+      .container
+        .main
+          .dgd-tab
+            a(href="#").cur 全部
+            a(href="#") 众筹
+            a(href="#") 政策
+            a(href="#") 国际
+            a(href="#") 研究
+            a(href="#") 创业
+          .news-list
+            ul
+              li.item
+                .item-pic
+                .item-desc
+                  a.title(href="#") 一位“90后”经历的众筹平台之死
+                  .item-txt.
+                    这家股权众筹平台的死亡过程，也是当前众筹行业林林总总失败企业的一个典
+                    型缩影。
+                  .item-bar
+                    .item-bar-l
+                      span.author 众筹大文豪
+                    .item-bar-r
+
+        .side
+
+  script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
+  script(src="/skin/js/new.js")
