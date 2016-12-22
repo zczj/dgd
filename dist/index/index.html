@@ -43,7 +43,7 @@
     </header>
     <!--==================================================-->
     <link rel="stylesheet" href="/skin/plugs/owl/owl.carousel.min.css"/>
-    <link rel="stylesheet" href="/skin/plugs/owl-carousel/owl.carousel.css"/>
+    <link rel="stylesheet" href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css"/>
     <link rel="stylesheet" href="/skin/css/index.css"/>
     <div id="model-index">
       <div class="dgd-ad">
@@ -110,7 +110,7 @@
           <div class="common-t"><span>融资的项目</span></div>
           <ul class="common-list">
             <li v-for="(item, index) in Ad.projectList" class="list-item">
-              <div class="list-pic"><a :href="['/buy/'+ item.ProjectID]"><img v-if="item.BigPic==null" src="/skin/img/default.jpg" alt=""/><img v-else="item.BigPic!=null" v-bind:src="item.BigPic"/><span v-bind:class="[&quot;tag-&quot;+item.State]" class="tag"></span></a></div>
+              <div class="list-pic"><a v-bind:href="['/project/detail.html?id='+ item.ProjectID]"><img v-if="item.BigPic==null" src="/skin/img/default.jpg" alt=""/><img v-else="item.BigPic!=null" v-bind:src="item.BigPic"/><span v-bind:class="[&quot;tag-&quot;+item.State]" class="tag"></span></a></div>
               <div class="list-main">
                 <div class="list-t">
                   <div class="item"><span>起投金额：</span><span class="price">{{item.LowVote}}</span></div>

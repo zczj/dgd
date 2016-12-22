@@ -10,7 +10,7 @@ var qaModel = new Vue({
     ;(function () {
       var dgdAd = $('#qa-banner');
       dgdAd.owlCarousel({
-        singleItem: true,
+        items: 1,
         loop: true,
         autoplay: true,
         autoplayTimeout: 3000,

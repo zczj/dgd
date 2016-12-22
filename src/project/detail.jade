@@ -1,110 +1,92 @@
 extends ../shade/layout
 block content
-  link(rel="stylesheet", href="../skin/css/detail.css")
-  #detail(v-cloak)
+  link(rel="stylesheet", href="../skin/css/project-detail.css")
+  #detail()
     .banner
       .container(v-bind:style='{backgroundImage: "url("+detail.BigPic+")"}')
         .banner-project-wrapper
           div
-            img(src="../skin/img/project/detail-banner-project-logo.png", alt="").banner-project-logo
+            //- img(src="../skin/img/project/detail-banner-project-logo.png", alt="").banner-project-logo
             h1.project-name(v-bind:title='detail.ProjectName') {{detail.ProjectName}}
             p.project-intro(v-bind:title='detail.ShortDesc') {{detail.ShortDesc}}
             p.project-handle
               a(href="javascript:;") 关注
               | |
               a(href="javascript:;") 分享
-        //- .banner-tab
-          a(href="javascript:;")
-            i.icon.icon-up
-          div.tab(data-count='1')
-            img(src="../skin/img/project/detail-banner-tab1.jpg", alt="")
-          div.tab(data-count='2')
-          div.tab(data-count='3')
-          a(href="javascript:;")
-            i.icon.icon-down
+
     // main
     .main-wrapper
-      .container
+      .container(ref='container')
         // 侧边栏
-        .sidebar-wrapper
-          // 我要投资
-          .invest-item
-            .invest-item-head
-              .invest-from
-                p 起投
-                h2 ￥{{detail.OriginalLowVote}}
-              .line
-              .invest-target
-                p 目标金额
-                h2 ￥{{detail.TargetAmount}}
-            .invest-item-body
-              h2.invest-head 已认购：
-                span ￥{{detail.CurrentAmount}}
-              .progress-wrapper
-                .progress(v-bind:style='{width: parseInt(detail.Progress) + "%"}')
-                  span {{parseInt(detail.Progress)}}%
-              ul.invest-type
-                li
-                  a(href="#").pledge 可质押
-                li
-                  a(href="#").stand 可站岗
-                li
-                  a(href="#").transfer 可转让
-              a(href="javascript:;").invest-button 我要投资
-              ul.invest-desc-list
-                li 众筹轮次：
-                  span {{TimesRotation[(detail.TimesRotation-1)]}}
-                li 出让份额：
-                  span {{detail.SellStock}}
-                li 目标人数：
-                  span {{detail.TargetNumber}}人
-                li 已投人数：
-                  span {{detail.FollowPerson.length}}人
-          // 融资概况
-          .invest-item
-            ul.detail-nav-tab
-              li.current 融资概况
-            ul.invest-item-body
-              li 领投人：
-                span XX资本（如无省略）
-              li 前端费用：
-                span 5%
-              li 领投人分成：
-                span 收益>50%     收15%
-              li
-                span 收益>150%   收30%
-              li 管理费用：
-                span 5%
-            a(href="javascript:;").earnings-calc 收益计算器
+        .sidebar-wrapper(style='position: relative')
+          div(ref='sidebar')
+            // 我要投资
+            .invest-item
+              .invest-item-head
+                .invest-from
+                  p 起投
+                  h2 ￥{{detail.OriginalLowVote}}
+                .line
+                .invest-target
+                  p 目标金额
+                  h2 ￥{{detail.TargetAmount}}
+              .invest-item-body
+                h2.invest-head 已认购：
+                  span ￥{{detail.CurrentAmount}}
+                .progress-wrapper
+                  .progress(v-bind:style='{width: parseInt(detail.Progress) + "%"}')
+                    span {{parseInt(detail.Progress)}}%
+                ul.invest-type
+                  li
+                    a(href="#").pledge 可质押
+                  li
+                    a(href="#").stand 可站岗
+                  li
+                    a(href="#").transfer 可转让
+                a(href="javascript:;").invest-button 我要投资
+                ul.invest-desc-list
+                  li 众筹轮次：
+                    span {{TimesRotation[(detail.TimesRotation-1)]}}
+                  li 出让份额：
+                    span {{detail.SellStock}}
+                  li 目标人数：
+                    span {{detail.TargetNumber}}人
+                  li 已投人数：
+                    span {{totalFollowPerson}}人
+            // 项目平台
+            .invest-item.kf-wechat
+              ul.detail-nav-tab
+                li 项目平台
+              ul.invest-item-body
+                img(src="http://www.dgd.vc/skin/images/zjmCode.jpg", alt="" width='150')
+            // 微信客服
+            .invest-item.kf-wechat
+              ul.detail-nav-tab
+                li 客服微信
+              ul.invest-item-body
+                img(src="http://www.dgd.vc/skin/images/zjmCode.jpg", alt="" width='150')
+
         // 内容
         .content-wrapper(style='display:block')
           .content-item-wrapper
-            ul.detail-nav-tab
+            ul.detail-nav-tab.detail-tab
               li(v-on:click='toggleTab(0)' v-bind:class='{current: tabShow==0}') 项目详情
               li(v-on:click='toggleTab(1)' v-bind:class='{current: tabShow==1}') 项目问答
               li(v-on:click='toggleTab(2)' v-bind:class='{current: tabShow==2}') 跟投人
 
             // 项目详情
-            .content-box.detail-box(v-show='tabShow == 0')
-              ul.detail-nav
-                li(v-for='(item, index) in detail.descList')
-                  a(v-bind:href="['#detailnav'+index]" v-bind:class='{current: index == detailNavCur}') {{item.Title}}
-              .content-item
-                .content-box
-                  .video
-                    img(src="../skin/img/project/detail-item-video.png", alt="")
-                  .detail
-                    ul
-                      li 项目官方网址：
-                        a(href="#") xxxxxxx
-                      li 项目服务号：xxxx
-                      li 项目路演时间：2016-06-30 20:00
-                    a(href="#").button 查看路演
-              //-投资亮点
+            .content-box.detail-box(v-show='tabShow == 0' ref='detailBox')
+              // 侧边导航
+              .detail-nav-wrapper
+                transition(name='opacity')
+                  ul.detail-nav(v-show='detailNav' ref='detailNav')
+                    li(v-for='(item, index) in detail.descList')
+                      a(v-bind:href="['#detailnav'+index]" v-bind:class='{current: index == detailNavCur}' ref='detailNavBtn') {{item.Title}}
+              // 项目详情
               .item-desc
                 .content-item(v-for='(item, index) in detail.descList' v-bind:id='["detailnav"+index]')
                   ul.detail-nav-tab
-                    li.current {{item.Title}}
+                    li {{item.Title}}
                   .content-box(v-html='item.Desc')
 
             // 项目问答
@@ -175,7 +157,7 @@ block content
             // 跟投人
             .content-box.invest-list(v-show='tabShow == 2')
               ul
-                li(v-for='item in followPersonList')
+                li(v-for='item in detail.FollowPerson')
                   img(src="../skin/img/default.jpg", alt="" v-if='item.Avater == null').invest-avatar
                   img(v-bind:src="item.Avater", alt="" v-else='item.Avater != null').invest-avatar
                   span.tag(v-bind:class='["tag-"+item.State]')
@@ -184,4 +166,4 @@ block content
 
 
 
-  script(src='../skin/js/detail.js')
+  script(src='../skin/js/project-detail.js')

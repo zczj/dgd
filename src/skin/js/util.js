@@ -22,7 +22,7 @@ $(window).load(function () {
       }
       return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
     }
-    
+
   });
 })(jQuery);
 

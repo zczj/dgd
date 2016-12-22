@@ -1,12 +1,12 @@
 extends ../shade/layout
 block content
-  link(rel="stylesheet", href="/skin/plugs/owl-carousel/assets/owl.carousel.min.css")
+  link(rel="stylesheet", href="/skin/plugs/owl/owl.carousel.min.css")
   link(rel="stylesheet", href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css")
   link(rel="stylesheet", href="/skin/css/news.css")
   #model-news
     .news-banner
-      .owl-carousel.owl-theme#news-banner
-        div.item(v-for="item in Ad", v-cloak="")
+      .owl-carousel.owl-theme#news-banner(ref='slider')
+        div.item(v-for="item in Ad.ChannelList", v-cloak="")
           a.item-link(:href="item.Link")
             .item-desc
               p.item-tite {{item.Title}}
@@ -14,7 +14,7 @@ block content
               p.item-txt(v-else) 老苏说这里还没有描述
             img(v-bind:src="item.Pic", alt="", v-cloak="")
     .news-warp
-      .container
+      .container.clearfix
         .main
           .dgd-tab
             a(href="#").cur 全部
@@ -25,19 +25,53 @@ block content
             a(href="#") 创业
           .news-list
             ul
-              li.item
+              li.item(v-for="item in Ad.NewsList").clearfix
                 .item-pic
+                  a(v-bind:href="item.CoverPic")
+                    img(v-bind:src="[item.CoverMobilePic.split('@')[0]+'@1e_1c_0o_0l_150h_240w_90q.src']", alt="")
+
                 .item-desc
                   a.title(href="#") 一位“90后”经历的众筹平台之死
                   .item-txt.
                     这家股权众筹平台的死亡过程，也是当前众筹行业林林总总失败企业的一个典
                     型缩影。
-                  .item-bar
+                  .item-bar.clearfix
                     .item-bar-l
-                      span.author 众筹大文豪
+                      span.author.point 众筹大文豪
+                      span.timer.point 3个小时前
                     .item-bar-r
+                      span.zan
+                        i.icon.icon-zan
+                        span 30
+                      span.point
+                      span.showmore
+                        i.icon.icon-msg
+                        span 0
+
 
         .side
+          //- 推荐项目
+          .side-box.tjxm
+            .side-title.clearfix
+              span.t 推荐项目
+              a.more(href="/project") 更多>>
+            ul.side-content
+              li(v-for="item in Pro.projectList")
+                a(v-bind:href="['/project/detail.html?id='+ item.ProjectID]")
+                  img(v-if="item.MoblePic==null" src="/skin/img/default.jpg", alt="")
+                  img(v-else="item.MoblePic!=null" v-bind:src="item.MoblePic")
+          //- 推荐文章
+          .side-box.tjwz.mt20
+            .side-title.clearfix
+              span.t 推荐文章
+              a.more(href="/project") 更多>>
+            ul.side-content
+              li.item(v-for="item in TopNews.news" v-cloak="")
+                a.wz-t(v-bind:href="item.ShareUrl") {{item.newtitle}}
+                p.wz-bar
+                  span.wz-time {{item.newdate}}
+                  span.wz-view {{item.newpoint}}
+
 
   script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
   script(src="/skin/js/new.js")

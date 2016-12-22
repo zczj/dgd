@@ -55,6 +55,8 @@ img{
 /*
    工具样式
     */
+.mt20{ margin-top: 20px;}
+
 
 .center-block {
     display: block;
@@ -171,6 +173,7 @@ a {
 
 a:hover, a:active {
     color: #5ee075;
+    cursor: pointer;
     //text-decoration: underline;
 }
 
@@ -188,7 +191,13 @@ body{
 }
 
 header{
-    height: 76px; background:#fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999;
+  background: rgba(255, 255, 255, .8);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .3);
+    height: 76px;
     .container{ height: 100%; width: 100%; position: relative;}
     .nav{
       .logo{
@@ -547,6 +556,8 @@ header{
   background:#40454b;
   color: #fff;
   font-size: 0px;
+  position: relative;
+  z-index: 9999;
   .info  dl{
     margin: 0 2rem;
     width: calc(16.666666666666668% - 4rem);
@@ -1082,13 +1093,20 @@ header{
   @include common-list--480();
 }
 
-// 切换动画
+// 切换动画 （透明度+位移）
 .fade-enter, .fade-leave-active{
   opacity: 0;
   transform: translateX(-60px);
 }
 .fade-enter-active, .fade-leave-active{
   transition: all .4s ease;
+}
+// 切换动画2 (透明度)
+.opacity-enter, .opacity-leave-active{
+  opacity: 0;
+}
+.opacity-enter-active, .opacity-leave-active{
+  transition: opacity .3s ease;
 }
 
 // loading

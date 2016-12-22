@@ -51,16 +51,35 @@ var indexModel = new Vue({
       var owl = $('#player-list');
       owl.owlCarousel({
         items: 5, //10 items above 1000px browser width
-        itemsDesktop: [1000, 5], //5 items between 1000px and 901px
-        itemsDesktopSmall: [900, 4], // betweem 900px and 601px
-        itemsTablet: [600, 3], //2 items between 600 and 0
-        itemsMobile: [480, 2] // itemsMobile disabled - inherit from itemsTablet option
+        // itemsDesktop: [1000, 5], //5 items between 1000px and 901px
+        // itemsDesktopSmall: [900, 4], // betweem 900px and 601px
+        // itemsTablet: [600, 3], //2 items between 600 and 0
+        // itemsMobile: [480, 2] // itemsMobile disabled - inherit from itemsTablet option
+        nav: false,
+        responsiveClass:true,
+        responsive: {
+          0:{
+            items:2
+          },
+          480:{
+            items:3
+          },
+          600:{
+            items:3,
+          },
+          780:{
+            items:4,
+          },
+          1000:{
+            items: 5,
+          }
+        }
       });
       $('.next-btn').click(function() {
-        owl.trigger('owl.next');
+        owl.trigger('next.owl.carousel');
       })
       $('.prev-btn').click(function() {
-        owl.trigger('owl.prev')
+        owl.trigger('prev.owl.carousel')
       });
     })('合作伙伴');
 
@@ -137,7 +156,7 @@ var indexModel = new Vue({
           oUl.stop().animate({ 'top': iH*iNow }, 2200,'elasticOut');
         }
         oDiv.hover(function (){
-          clearInterval( timer );
+          clearInterval( oDiv.timer );
         }, autoPlay);
 
         function autoPlay() {

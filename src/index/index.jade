@@ -1,7 +1,7 @@
 extends ../shade/layout
 block content
   link(rel="stylesheet", href="/skin/plugs/owl/owl.carousel.min.css")
-  link(rel="stylesheet", href="/skin/plugs/owl-carousel/owl.carousel.css")
+  link(rel="stylesheet", href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css")
   link(rel="stylesheet", href="/skin/css/index.css")
 
   #model-index
@@ -109,7 +109,7 @@ block content
         ul.common-list
           li.list-item(v-for="(item, index) in Ad.projectList")
             .list-pic
-              a(:href="['/buy/'+ item.ProjectID]")
+              a(v-bind:href="['/project/detail.html?id='+ item.ProjectID]")
                 img(v-if="item.BigPic==null" src="/skin/img/default.jpg", alt="")
                 img(v-else="item.BigPic!=null" v-bind:src="item.BigPic")
                 span.tag(v-bind:class='["tag-"+item.State]')
