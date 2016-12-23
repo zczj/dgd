@@ -29,14 +29,14 @@ block content
               a(href="#").passport-button 前往用户中心
               p.passport-success-go
                 span {{number}}s
-                | 后返回大股东首页
+                | 后返回到上一页
             div(v-if='fpwd')
               p.passport-success-msg 您已成功修改密码
               p.passport-success-msg 请重新登录
               a(href="./login.html").passport-button 登录
 
   script.
-    var getType = window.location.href.split('?')[1] || 'login'
+    var getType = window.location.href.split('?')[1] || 'error'
     new Vue({
       el: '#success',
       data: {
@@ -56,18 +56,20 @@ block content
           } else if (getType == 'fpwd') {
             this.fpwd = true
             return '找回密码'
+          } else {
+            window.location.href='/'
+            return
           }
         },
-        // countdown
+        // 计算countdown值
         countdown: function () {
-          var timer = null, number = 10
+          var timer = null, _this=this//, number = 10
           return timer = setInterval(function () {
-            number--
-            if (number<=0) {
+            _this.number--
+            if (_this.number<=0) {
               clearInterval(timer)
-              window.location.href = '/';
             }
-            return number
+            return _this.number
           }, 1000)
         }
       },
@@ -77,7 +79,7 @@ block content
           _this.number--
           if (_this.number<=0) {
             clearInterval(timer)
-            window.location.href = '/';
+            window.location.href = window.location.search.split('url=')[1];
 
           }
         }, 1000)

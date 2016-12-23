@@ -10,7 +10,7 @@ var autoprefixer= require('gulp-autoprefixer'),
 gulp.task('serve', ['sass'], function() {
 
     browserSync.init({
-        server: "./dist"
+        server: "./app"
     });
 
     gulp.watch("app/scss/*.scss", ['sass']);

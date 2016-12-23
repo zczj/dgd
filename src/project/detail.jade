@@ -1,12 +1,12 @@
 extends ../shade/layout
 block content
   link(rel="stylesheet", href="../skin/css/project-detail.css")
-  #detail()
+  #detail(v-cloak)
     .banner
       .container(v-bind:style='{backgroundImage: "url("+detail.BigPic+")"}')
         .banner-project-wrapper
           div
-            //- img(src="../skin/img/project/detail-banner-project-logo.png", alt="").banner-project-logo
+            img(src="../skin/img/project/detail-banner-project-logo.png", alt="").banner-project-logo
             h1.project-name(v-bind:title='detail.ProjectName') {{detail.ProjectName}}
             p.project-intro(v-bind:title='detail.ShortDesc') {{detail.ShortDesc}}
             p.project-handle
@@ -58,7 +58,7 @@ block content
               ul.detail-nav-tab
                 li 项目平台
               ul.invest-item-body
-                img(src="http://www.dgd.vc/skin/images/zjmCode.jpg", alt="" width='150')
+                img(src="http://zczj01.oss-cn-shenzhen.aliyuncs.com//daohangshow/20160415/20160415141458.jpg", alt="" width='120' height='40')
             // 微信客服
             .invest-item.kf-wechat
               ul.detail-nav-tab
@@ -93,72 +93,30 @@ block content
             .content-box.detail-qa(v-show='tabShow == 1')
               textarea.qa-texarea(placeholder='请输入您的任何疑惑，我们会第一时间答复您')
               .qa-submit-wrapper
-                a(href="javascript:;").qa-submit-button 提交问题
-              dl.qa-list
-                dt 谈谈你成功的一次投资经历
-                  span.time 2016-05-17
-                dd
+                a(href="javascript:;" v-on:click='AddProjectQA').qa-submit-button 提交问题
+              .empty(v-if='projectQAList.length == 0')
+                h3 暂无问答
+              dl.qa-list(v-else v-for='qa in projectQAList')
+                dt {{qa.Content}}
+                  span.time {{qa.PostDate}}
+                  span.time {{qa.UserName}}
+                  span.qa-avatar
+                    img(v-bind:src="qa.Avatar", v-bind:alt="qa.UserName" width='100%' height='100%')
+                dd(v-if='qa.ChlidList.length' v-for='qachild in qa.ChlidList')
                   h2
-                    img(src="../skin/img/project/qa-avatar.png", alt="").qa-avatar
+                    img(v-bind:src="qachild.Avatar", alt="").qa-avatar
                     .qa-user-wrapper
-                      h3 彭大聪
-                      span 认证投资人
-                  p 投资人需充分了解投资标的，在决定认购后，需将认购款项汇到VentureShares开通的受【专业第三方基金管理公司Alter Domus】 (www.alterdomus.com) 监管的账户。Alter Domus管理资产达620亿美金。
-                  p VentureShares与 Alter Domus签订了监管协议，资金去向限定为项目投资，并且要通过Alter Domus凭借投资协议、划款指令等才能进行转账操作。而在顶级专业外资律师事务所认定所有法律文件生效、交割完成的同时，资金才会最终进入售股方账户。
-                  p 【认购提醒】
-                    br
-                    |本次基金以美元认购，10万美元起购。为了在交割日之前您能成功认购，请确保：
-                    br
-                    |(A). 您已经有海外账户，且该账户有足够的外汇储备；如果您没有且需要开外汇账户可跟VS投资者关系私聊；
-                    br
-                    |(B). 如果您在线上通过网上转账，请确保外汇账户转账到香港基金账户的上限足够高，或将基金账户添加在您的beneficiary list中，以方便在线转账；
-                    br
-                    |(C). 如果您在线下通过给您海外账户银行发指令进行转账，请确保在交割日前及时完成转账指令的发出。
-              dl.qa-list
-                dt 谈谈你成功的一次投资经历
-                  span.time 2016-05-17
-                dd
-                  h2
-                    img(src="../skin/img/project/qa-avatar.png", alt="").qa-avatar
-                    .qa-user-wrapper
-                      h3 彭大聪
-                      span 认证投资人
-                  p 投资人需充分了解投资标的，在决定认购后，需将认购款项汇到VentureShares开通的受【专业第三方基金管理公司Alter Domus】 (www.alterdomus.com) 监管的账户。Alter Domus管理资产达620亿美金。
-                  p VentureShares与 Alter Domus签订了监管协议，资金去向限定为项目投资，并且要通过Alter Domus凭借投资协议、划款指令等才能进行转账操作。而在顶级专业外资律师事务所认定所有法律文件生效、交割完成的同时，资金才会最终进入售股方账户。
-                  p 【认购提醒】
-                    br
-                    |本次基金以美元认购，10万美元起购。为了在交割日之前您能成功认购，请确保：
-                    br
-                    |(A). 您已经有海外账户，且该账户有足够的外汇储备；如果您没有且需要开外汇账户可跟VS投资者关系私聊；
-                    br
-                    |(B). 如果您在线上通过网上转账，请确保外汇账户转账到香港基金账户的上限足够高，或将基金账户添加在您的beneficiary list中，以方便在线转账；
-                    br
-                    |(C). 如果您在线下通过给您海外账户银行发指令进行转账，请确保在交割日前及时完成转账指令的发出。
-              dl.qa-list
-                dt 谈谈你成功的一次投资经历
-                  span.time 2016-05-17
-                dd
-                  h2
-                    img(src="../skin/img/project/qa-avatar.png", alt="").qa-avatar
-                    .qa-user-wrapper
-                      h3 彭大聪
-                      span 认证投资人
-                  p 投资人需充分了解投资标的，在决定认购后，需将认购款项汇到VentureShares开通的受【专业第三方基金管理公司Alter Domus】 (www.alterdomus.com) 监管的账户。Alter Domus管理资产达620亿美金。
-                  p VentureShares与 Alter Domus签订了监管协议，资金去向限定为项目投资，并且要通过Alter Domus凭借投资协议、划款指令等才能进行转账操作。而在顶级专业外资律师事务所认定所有法律文件生效、交割完成的同时，资金才会最终进入售股方账户。
-                  p 【认购提醒】
-                    br
-                    |本次基金以美元认购，10万美元起购。为了在交割日之前您能成功认购，请确保：
-                    br
-                    |(A). 您已经有海外账户，且该账户有足够的外汇储备；如果您没有且需要开外汇账户可跟VS投资者关系私聊；
-                    br
-                    |(B). 如果您在线上通过网上转账，请确保外汇账户转账到香港基金账户的上限足够高，或将基金账户添加在您的beneficiary list中，以方便在线转账；
-                    br
-                    |(C). 如果您在线下通过给您海外账户银行发指令进行转账，请确保在交割日前及时完成转账指令的发出。
+                      h3 {{qachild.UserName}}
+                      span 大股东管理员
+                  p {{qachild.Content}}
+
             // 跟投人
             .content-box.invest-list(v-show='tabShow == 2')
-              ul
+              .empty(v-if='detail.FollowPerson.length == 0')
+                h3 暂无跟投人
+              ul(v-else)
                 li(v-for='item in detail.FollowPerson')
-                  img(src="../skin/img/default.jpg", alt="" v-if='item.Avater == null').invest-avatar
+                  img(src="http://pic01.zczj.com//avatar/nophoto.jpg", alt="" v-if='item.Avater == null').invest-avatar
                   img(v-bind:src="item.Avater", alt="" v-else='item.Avater != null').invest-avatar
                   span.tag(v-bind:class='["tag-"+item.State]')
                   p.invest-name {{item.Account}}

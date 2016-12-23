@@ -43,6 +43,62 @@ var Util=function () {
       }
     }
   }
+  function time() {
+    var Ft = {};
+    return Ft.prototype = {
+      // 转换时间 年/月/日 时：分：秒
+      _convertTime: function (date) {
+        var now = new Date().getTime();
+        var t1 = date.getTime();
+        var year = new Date().getYear() - date.getYear();
+        var month = new Date().getMonth() - date.getMonth();
+        var leftsecond = parseInt((now - t1)/1000);
+        var day=Math.floor(leftsecond/(60*60*24));
+        var hour=Math.floor((leftsecond-day*24*60*60)/3600);
+        var minute=Math.floor((leftsecond-day*24*60*60-hour*3600)/60);
+        var second=Math.floor(leftsecond-day*24*60*60-hour*3600-minute*60);
+        var cutTime = {};
+        cutTime.year=year;
+        cutTime.month=month;
+        cutTime.day=day;
+        cutTime.hour=hour;
+        cutTime.min=minute;
+        cutTime.sec=second;
+        var result = this._cutTime(cutTime);
+
+        return result ;
+      },
+      // 转换时间 **前
+      _cutTime: function (cutTime) {
+        var str = '刚刚';
+        if (cutTime.year && cutTime.year > 0) {
+          return str = cutTime.year + '年前';
+        }
+        if (cutTime.month && cutTime.month > 0) {
+          return str = cutTime.month + '个月前';
+        }
+        if (cutTime.day && cutTime.day > 0) {
+          return str = cutTime.day + '天前';
+        }
+        if (cutTime.hour && cutTime.hour > 0) {
+          return str = cutTime.hour + '小时前';
+        }
+        if (cutTime.min && cutTime.min > 0) {
+          return str = cutTime.min + '分钟前';
+        }
+        return str;
+      }
+    }
+
+  }
+  function check() {
+    var Check = {}
+    return Check.prototype = {
+      _array:function (obj) {
+        return Object.prototype.toString.call(obj) === '[object Array]';
+      }
+    }
+  }
   //检测登录
   function checkLogin() {
     return Tools.store._fetch('userInfo');
@@ -61,6 +117,8 @@ var Util=function () {
   return Tools.store = store(),
          Tools.checkLogin = checkLogin,
          Tools.loginOut = loginOut,
+         Tools.fT = time(),
+         Tools.check = check(),
          Tools
 }
 

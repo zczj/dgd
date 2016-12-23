@@ -19,16 +19,29 @@ var projectDetail = new Vue({
         this.getFollowPerson()
       }
     },
+    // 获取项目详情信息
+    getProjectDetail: function () {
+      $("#loader").fadeIn(300)
+      // 获取数据
+      var url = 'http://devapi.zczj.com:80/api/ZhongChou/Detail/'+ this.proId +'?token=1'
+      this.$http.get(url).then(function (response) {
+        this.detail = response.data
+        console.log(111)
+        this.$nextTick(function(){
+          this.getPicWidth()
+        })
+        $("#loader").fadeOut(300)
+      })
+    },
     // 获取投资人列表
     getFollowPerson: function () {
       this.followPersonList = this.detail.FollowPerson
-      console.log(this.detail.FollowPerson)
     },
-    // 后去问答列表
+    // 获取问答列表
     getProjectQAList: function () {
       var qaurl = 'http://devapi.zczj.com:80/api/ZhongChou/ProjectQAList?projectid='+this.proId
       this.$http.get(qaurl).then(function (response) {
-        console.log(response.data.list)
+        this.projectQAList = response.data.list
       })
     },
     // 鼠标滚轮事件
@@ -71,7 +84,6 @@ var projectDetail = new Vue({
             box = _this.$refs.container,
             $top = $(document).scrollTop()
         if ($top > box.offsetTop-400) {
-          // menu.style.left = box.offsetLeft - 80 + 'px'
           _this.detailNav = true
         } else {
           _this.detailNav = false
@@ -86,12 +98,11 @@ var projectDetail = new Vue({
             container = _this.$refs.container,
             $top = $(document).scrollTop()
         container.style.minHeight = sidebar.offsetHeight + 'px';
-        if ((container.offsetTop - 76) <= $top) {
+        if ((container.offsetTop - 76) <= $top ) {
           $(sidebar).css({
             'position': 'fixed',
             'width': $(sidebar).parent().width(),
-            // 'right': 0,
-            'top': 0//$top - container.offsetTop+76
+            'top': 76
           })
         } else {
           $(sidebar).css({
@@ -100,9 +111,57 @@ var projectDetail = new Vue({
           })
         }
       })
+    },
+    // 添加留言问答
+    AddProjectQA: function () {
+      // 判断登录，登录成功后才能留言
+      if (!headerModel.isLogin){
+        $.dialog({
+          type: 'warning',
+          message: '请先登录！',
+          buttons: [{
+            text: '登录',
+            type: 'green',
+            callback: function() {
+              window.location = '/passport/login.html?url='+window.location.href;
+            }
+          }, {
+            text: '取消',
+            type: 'red'
+          }],
+          maskClose: true,
+          effect: true
+        })
+
+        return false
+      }
+
+      var AddProjectQAUrl = 'http://devapi.zczj.com:80/api/ZhongChou/AddProjectQA';
+      $.ajax({
+        url: AddProjectQAUrl,
+        method: 'POST',
+        data: {
+          "ProjectID": 1234,
+          "Content": "POST提交测试",
+          "Token": 1,
+          "ParentID": 0
+        }}).done(function (res) {
+          console.log(res)
+        })
+    },
+    // 判断详情图片宽度
+    getPicWidth: function () {
+      var imgs = $('.item-desc img')
+
+      imgs.each(function () {
+        if( $(this).width() > $(document).width()) {
+          $(this).parent('p').css('overflow-x', 'auto')
+        }
+      })
     }
   },
   computed: {
+    // 计算总的跟投人数
     totalFollowPerson: function () {
       if (!this.detail){
         return this.detail.FollowPerson.length
@@ -113,18 +172,15 @@ var projectDetail = new Vue({
     //仿路由联调（暂时加一下）套程序后替换。。老苏
     this.proId = window.location.search.split('id=')[1] || 0;
     if(this.proId == 0){
-      console.log(2342532352)
       window.location.href='./index.html'
       return false
     }
-    $("#loader").fadeIn(300)
-    // 获取数据
-    var url = 'http://devapi.zczj.com:80/api/ZhongChou/Detail/'+ this.proId +'?token=1'
-    this.$http.get(url).then(function (response) {
-      this.detail = response.data
-      $("#loader").fadeOut(300)
-    })
-    // 滚动事件
-    this.scroll()
+    // 获取信息事件
+    this.getProjectDetail()
+    // 判断PC端才有滚动事件
+    if (!headerModel.isMobileOrTable) {
+      this.scroll()
+    }
+
   }
 })

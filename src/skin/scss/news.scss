@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-12-21 15:09:25
 * @Last Modified by:   老苏
-* @Last Modified time: 2016-12-22 18:11:11
+* @Last Modified time: 2016-12-23 15:03:59
 */
 
 //资讯轮播图
@@ -156,6 +156,25 @@
           }
         }
       }
+      .news-loadmore{
+        text-align: center;
+        padding: 40px 0;
+        .loadmore{
+          display: inline-block;
+          height: 60px;
+          line-height: 60px;
+          padding: 0 80px;
+          color: #26a6f1;
+          font-size: 2rem;
+          border: 1px #26a6f1 solid;
+          border-radius: 10px;
+          transition: all .3s;
+          &:hover{
+            background:#26a6f1;
+            color: #fff;
+          }
+        }
+      }
     }
   }
   .side{
@@ -193,6 +212,7 @@
             }
           }
         }
+        // 推荐文章
         &.tjwz{
           .side-title{
             border-bottom: 1px #828a92 dashed;
@@ -231,6 +251,34 @@
             }
             &:nth-of-type(3){
               .wz-t{&::before{background-color: #fff100;}}
+            }
+
+            .wz-bar{
+              font-size: 0;
+              color: #b4b3b3;
+              height: 30px;
+              line-height: 30px;
+
+              span{
+                font-size: 1.5rem;
+                display: inline-block;
+                overflow: hidden;
+                &.wz-time{
+                  width: 50%;
+                }
+                &.wz-view{
+                  width: 50%;
+                  text-align: right;
+                  padding-right: 20px;
+                  .icon-ice{
+                    font-size: 2rem;
+                    margin-right: .2rem;
+                    &::before{
+                      vertical-align: middle;
+                    }
+                  }
+                }
+              }
             }
           }
         }

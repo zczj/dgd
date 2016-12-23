@@ -14,7 +14,8 @@ var headerModel = new Vue({
       isLogin: false, //是否登录
       userInfo: null,
       token: '',
-      isMobileOrTable: false // 当前视口宽度是否是处于非PC样式
+      isMobileOrTable: false, // 当前视口宽度是否是处于非PC样式
+      fromUrl: '' // 从哪个页面进入登录页面的
     },
     methods: {
       showMean: function() {

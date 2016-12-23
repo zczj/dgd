@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 190684 */
-  src: url('//at.alicdn.com/t/font_e2fgenj90g722o6r.eot');
-  src: url('//at.alicdn.com/t/font_e2fgenj90g722o6r.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_e2fgenj90g722o6r.woff') format('woff'),
-  url('//at.alicdn.com/t/font_e2fgenj90g722o6r.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_e2fgenj90g722o6r.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_007a14sktv2huxr.eot');
+  src: url('//at.alicdn.com/t/font_007a14sktv2huxr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_007a14sktv2huxr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_007a14sktv2huxr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_007a14sktv2huxr.svg#iconfont') format('svg');
 }
 
 .icon{
@@ -16,6 +16,10 @@
     font-family: 'iconfont';
     color: inherit;
     vertical-align: top;
+  }
+  // 阅读
+  &-ice::before{
+    content: '\e621';
   }
   // 点赞
   &-zan::before{

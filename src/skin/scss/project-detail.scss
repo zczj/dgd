@@ -11,6 +11,7 @@
       background-position: center;
       background-size: 100% 100%;
       background-repeat: no-repeat;
+      overflow: hidden;
     }
     &-project-wrapper{
       float: left;
@@ -148,6 +149,7 @@
       // overflow-x: hidden;
       .progress{
         position: absolute;
+        max-width: 100%;
         height: 100%;
         top: 0;
         left: 0;
@@ -244,6 +246,12 @@
         }
       }
     }
+  }
+
+  // 无数据时
+  .empty{
+    text-align: center;
+    color: #b2b9bf;
   }
 
   // 主体
@@ -385,11 +393,11 @@
       border-bottom: 1px solid #e5e5e5;
       dt{
         position: relative;
-        margin-left: 22px;
+        margin-left: 32px;
         line-height: 21px;
         &::before{
           position: absolute;
-          left: -22px;
+          left: -32px;
           content: 'Q';
           width: 19px;
           height: 21px;
@@ -402,6 +410,14 @@
         .time{
           float: right;
           color: #b2b9bf;
+          margin-left: 10px;
+        }
+        .qa-avatar{
+          float: right;
+          width: 20px;
+          height: 20px;
+          overflow: hidden;
+          border-radius: 50%;
         }
       }
       dd{
@@ -431,6 +447,7 @@
             width: 54px;
             height: 54px;
             margin-right: 12px;
+            border: 1px solid;
             border-radius: 50%;
           }
           .qa-user-wrapper{
@@ -483,6 +500,32 @@
     }
     .invest-time{
       color: #aaa;
+    }
+  }
+}
+
+@media screen and (max-width: 1360px) {
+  #detail .detail-box {
+    font-size: 14px;
+    .detail-nav-wrapper{
+      left: -35px;
+    }
+    .detail-nav{
+      border-radius: 0;
+      a{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 4px;
+        text-overflow: clip;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1000px) {
+  #detail .detail-box{
+    .detail-nav{
+      display: none!important;
     }
   }
 }

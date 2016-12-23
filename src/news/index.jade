@@ -17,15 +17,10 @@ block content
       .container.clearfix
         .main
           .dgd-tab
-            a(href="#").cur 全部
-            a(href="#") 众筹
-            a(href="#") 政策
-            a(href="#") 国际
-            a(href="#") 研究
-            a(href="#") 创业
+            a(href="javascript:void(0);", v-for="(item, index) in tabs", v-bind:class="{ cur : index == 0 }", v-on:click="tabFn(CategoryMap[index], index)", ref='tab-btns'){{item}}
           .news-list
-            ul
-              li.item(v-for="item in Ad.NewsList").clearfix
+            ul#newsList
+              li.item(v-for="item in list").clearfix
                 .item-pic
                   a(v-bind:href="item.CoverPic")
                     img(v-bind:src="[item.CoverMobilePic.split('@')[0]+'@1e_1c_0o_0l_150h_240w_90q.src']", alt="")
@@ -48,6 +43,9 @@ block content
                         i.icon.icon-msg
                         span 0
 
+            .news-loadmore
+              a.loadmore(href="javascript:void(0);", v-on:click='loadMore') 查看更多
+
 
         .side
           //- 推荐项目
@@ -69,8 +67,10 @@ block content
               li.item(v-for="item in TopNews.news" v-cloak="")
                 a.wz-t(v-bind:href="item.ShareUrl") {{item.newtitle}}
                 p.wz-bar
-                  span.wz-time {{item.newdate}}
-                  span.wz-view {{item.newpoint}}
+                  span.wz-time {{timeFormart(item.newdate)}}
+                  span.wz-view
+                    i.icon.icon-ice
+                    |{{item.newpoint}}
 
 
   script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
