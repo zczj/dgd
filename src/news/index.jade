@@ -20,24 +20,24 @@ block content
             a(href="javascript:void(0);", v-for="(item, index) in tabs", v-bind:class="{ cur : index == 0 }", v-on:click="tabFn(CategoryMap[index], index)", ref='tab-btns'){{item}}
           .news-list
             ul#newsList
-              li.item(v-for="item in list").clearfix
+              li.item(v-for="(item, index) in list").clearfix
                 .item-pic
-                  a(v-bind:href="item.CoverPic")
-                    img(v-bind:src="[item.CoverMobilePic.split('@')[0]+'@1e_1c_0o_0l_150h_240w_90q.src']", alt="")
+                  a(v-bind:href="item.ShareUrl")
+                    img(src="../skin/img/default.jpg", alt="" v-if='item.CoverMobilePic == null')
+                    img(v-else="", v-bind:src="resizeImg(item.CoverMobilePic,240,150)", alt="")
 
                 .item-desc
-                  a.title(href="#") 一位“90后”经历的众筹平台之死
-                  .item-txt.
-                    这家股权众筹平台的死亡过程，也是当前众筹行业林林总总失败企业的一个典
-                    型缩影。
+                  a.title.ellipsis(v-bind:href="item.ShareUrl") {{item.Title}}
+                  .item-txt(v-html="item.Abstract") 
                   .item-bar.clearfix
                     .item-bar-l
-                      span.author.point 众筹大文豪
-                      span.timer.point 3个小时前
+                      span.author.point(v-show="item.Author") {{item.Author}}
+                      //- 由于接口没返回年份，故暂都视为今年年份
+                      span.timer.point(v-text="timeFormart(new Date().getFullYear()+'/'+item.PostDate)")
                     .item-bar-r
                       span.zan
-                        i.icon.icon-zan
-                        span 30
+                        i.icon.icon-zan( v-on:click="newZan(1,index)", ref="iconZan")
+                        span {{item.Pageviews}}
                       span.point
                       span.showmore
                         i.icon.icon-msg

@@ -1,8 +1,8 @@
 /*
 * @Author: suzhihui
 * @Date:   2016-12-21 15:09:25
-* @Last Modified by:   老苏
-* @Last Modified time: 2016-12-23 15:03:59
+* @Last Modified by:   suzhihui
+* @Last Modified time: 2016-12-24 20:53:53
 */
 
 //资讯轮播图
@@ -102,6 +102,7 @@
               height: 3rem;
               font-size:2rem;
               color: #3d464d;
+              display: block;
               font-weight: 700;
             }
             .item-txt{
@@ -112,6 +113,7 @@
             .item-bar{
               position: absolute;
               bottom: 20px;
+              right: 0;
               font-size: 0;
               width: 70%;
               height: 30px;
@@ -132,9 +134,15 @@
                 text-align: right;
                 span{
                   .icon{
+                    cursor: pointer;
+                    font-size:1.8rem;
+                    transition: all .3s;
                     &::before{
                       vertical-align: middle;
                     }
+                  }
+                  &.icon-zaned{
+                      color: #58b5f3;
                   }
                 }
               }

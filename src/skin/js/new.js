@@ -1,8 +1,8 @@
 /*
 * @Author: suzhihui
 * @Date:   2016-12-21 15:19:11
-* @Last Modified by:   老苏
-* @Last Modified time: 2016-12-23 18:33:07
+* @Last Modified by:   suzhihui
+* @Last Modified time: 2016-12-24 20:55:58
 */
 
 var newsModel = new Vue({
@@ -37,13 +37,6 @@ var newsModel = new Vue({
       $("#loader").fadeIn(300)
       this.$http.get(headerModel.api + '/News/GetList?token='+ headerModel.token +'&category='+ca+'&newkey=0&pagesize='+ this.pageSize +'&currentpage='+ this.currentpage).then(function(response) {
           this.Ad = response.data;
-          if (this.list.lengt==0) {
-            // 第一次加载
-            //
-            // this.list = response.data.NewsList
-          }else{
-
-          }
           this.list = this.list.concat(response.data.NewsList);
           this.pagination = response.data.pagecount
           this.saveCacheList(this.list,ca);
@@ -56,8 +49,10 @@ var newsModel = new Vue({
     },
     // 推荐项目
     getIntPro: function () {
+      $("#loader").fadeIn(300)
       this.$http.get(headerModel.api + '/ZhongChou/GetList?pagesize=2&state=0&currentpage=1&token=' + headerModel.token).then(function(response) {
         this.Pro = response.data;
+        $("#loader").fadeOut(300)
       })
     },
     // banner
@@ -113,7 +108,31 @@ var newsModel = new Vue({
       var _this = this;
       this.currentpage ++;
       this.getNewsList(_this.cat)
+    },
+    //返回自定义图片尺寸
+    resizeImg: function (url,width,height) {
+      if (url) {
+        var result = url.split('@')[0] +'@1e_1c_0o_0l_'+ height +'h_'+width+'w_90q.src';        
+      }
+      return result;
+    },
+    // 资讯点赞
+    newZan: function (num,i) {
+      if ($(this.$refs.iconZan).eq(i).parent('span').hasClass('icon-zaned')) {
+        return;
+      }
+      $("#loader").fadeIn(300)
+      var _this = this;
+      this.$http.get(headerModel.api+'/News/ClickLike?newsid='+this.list[i].NewsID).then(function (response) {
+        if (response.data.resultid == 200) {
+          _this.list[i].Pageviews++;
+          $(_this.$refs.iconZan).eq(i).parent('span').addClass('icon-zaned')
+          $(this.$refs.iconZan).eq(i).css('cursor','not-allowed')
+        }
+        $("#loader").fadeOut(300)
+      })
     }
+
   },
   created: function () {
     this.getIntPro();

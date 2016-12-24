@@ -50,7 +50,7 @@ var Util=function () {
       _convertTime: function (date) {
         var now = new Date().getTime();
         var t1 = date.getTime();
-        var year = new Date().getYear() - date.getYear();
+        var year = new Date().getFullYear() - date.getFullYear();
         var month = new Date().getMonth() - date.getMonth();
         var leftsecond = parseInt((now - t1)/1000);
         var day=Math.floor(leftsecond/(60*60*24));
