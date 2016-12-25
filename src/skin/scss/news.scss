@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-12-21 15:09:25
 * @Last Modified by:   suzhihui
-* @Last Modified time: 2016-12-24 20:53:53
+* @Last Modified time: 2016-12-25 19:36:45
 */
 
 //资讯轮播图
@@ -47,7 +47,7 @@
     width: calc(100% - 388px);
     @at-root{
       .dgd-tab{
-
+        overflow:：hidden;
         font-size: 0;
         padding-bottom: 10px;
         border-bottom: 1px #e9ebed solid;
@@ -62,7 +62,9 @@
           border: 1px #fff solid;
           display: inline-block;
           transition: all .3s;
-          padding: 0 30px;
+          width: calc(20% - 50px);
+          text-align: center;
+          float: left;
           border-radius: 8px;
           &.cur,&:hover{
             border-color: #009ff0;
@@ -181,6 +183,13 @@
             background:#26a6f1;
             color: #fff;
           }
+          &.loadmoreend{
+            cursor: not-allowed;
+            &:hover{
+              background:#fff;
+              color: #26a6f1;
+            }
+          }
         }
       }
     }
@@ -296,7 +305,36 @@
 
 }
 
+@mixin dgd-ga--1150() {
+  .dgd-tab{
 
+    font-size: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px #e9ebed solid;
+    a+a{
+      margin-left: 10px;
+      width: calc(20% - 30px);
+    }
+  }
+}
+//小于1150px;
+@media only screen and( max-width: 71.875em){
+  @inclub dgd-ga--1150();
+}
+
+//小于1150px;
+@media only screen and( max-width: 62.625){
+  .dgd-tab{
+
+    font-size: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px #e9ebed solid;
+    a+a{
+      margin-left: 10px;
+      width: calc(20% - 30px);
+    }
+  }
+}
 
 
 

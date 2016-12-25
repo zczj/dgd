@@ -16,7 +16,7 @@ block content
     .news-warp
       .container.clearfix
         .main
-          .dgd-tab
+          .dgd-tab.clearfix
             a(href="javascript:void(0);", v-for="(item, index) in tabs", v-bind:class="{ cur : index == 0 }", v-on:click="tabFn(CategoryMap[index], index)", ref='tab-btns'){{item}}
           .news-list
             ul#newsList
@@ -36,7 +36,7 @@ block content
                       span.timer.point(v-text="timeFormart(new Date().getFullYear()+'/'+item.PostDate)")
                     .item-bar-r
                       span.zan
-                        i.icon.icon-zan( v-on:click="newZan(1,index)", ref="iconZan")
+                        i.icon.icon-zan( v-on:click="newZan(index,item.NewsID)", ref="iconZan")
                         span {{item.Pageviews}}
                       span.point
                       span.showmore
@@ -44,7 +44,8 @@ block content
                         span 0
 
             .news-loadmore
-              a.loadmore(href="javascript:void(0);", v-on:click='loadMore') 查看更多
+              a.loadmore.loadmoreend(href="javascript:void(0);", v-on:click='loadMore', v-if="isLastPage") 最后一页 
+              a.loadmore(href="javascript:void(0);", v-on:click='loadMore', v-else="") 查看更多 
 
 
         .side

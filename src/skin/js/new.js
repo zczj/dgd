@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-12-21 15:19:11
 * @Last Modified by:   suzhihui
-* @Last Modified time: 2016-12-24 20:55:58
+* @Last Modified time: 2016-12-25 19:21:10
 */
 
 var newsModel = new Vue({
@@ -17,6 +17,7 @@ var newsModel = new Vue({
     pageSize: 7,
     currentpage: 1,
     pagination: '',
+    isLastPage: false,
     cat: '0',
     // 推荐项目
     Pro: '',
@@ -33,19 +34,33 @@ var newsModel = new Vue({
   },
   methods: {
     getNewsList: function (category) {
-      var ca = category!== undefined ? category:'0';
+      var ca = category!== undefined ? category:this.cat;
       $("#loader").fadeIn(300)
       this.$http.get(headerModel.api + '/News/GetList?token='+ headerModel.token +'&category='+ca+'&newkey=0&pagesize='+ this.pageSize +'&currentpage='+ this.currentpage).then(function(response) {
           this.Ad = response.data;
-          this.list = this.list.concat(response.data.NewsList);
-          this.pagination = response.data.pagecount
-          this.saveCacheList(this.list,ca);
+          
+          this.pagination = response.data.pagecount;
+          this.saveCacheList(ca,response.data.NewsList);
+          this.isLastPage = this.checkLastPage()
           this.$nextTick(function () {
             this.bannerSlider();
           });
-
+          
         $("#loader").fadeOut(300)
       })
+    },
+    //缓存数据
+    saveCacheList:function (ca,array) {
+      if (this.CacheList[ca]=== undefined) {
+        this.CacheList[ca]={};
+        this.CacheList[ca].list=[];
+        this.list = this.CacheList[ca].list=array;
+      }else{
+        this.list = this.CacheList[ca].list=this.CacheList[ca].list.concat(array);
+      }
+      this.CacheList[ca].curPage=this.currentpage;
+      this.CacheList[ca].pagination= this.pagination;
+      
     },
     // 推荐项目
     getIntPro: function () {
@@ -74,14 +89,6 @@ var newsModel = new Vue({
         this.TopNews = response.data;
       })
     },
-    //缓存资讯列表
-    saveCacheList: function (array,cat) {
-      var _this = this;
-      _this.CacheList[cat] = {}
-      _this.CacheList[cat].list=array;
-      _this.CacheList[cat].curPage=_this.currentpage;
-      console.log( _this.CacheList);
-    },
     //推荐文章发布时间格式化
     timeFormart: function (time) {
       var t1 = new Date(time);
@@ -96,16 +103,32 @@ var newsModel = new Vue({
      */
     tabFn: function (cat, i) {
       var _this = this;
+      _this.cat = cat;
       $(_this.$refs['tab-btns']).eq(i).addClass('cur').siblings().removeClass('cur');
-      if (_this.CacheList[cat]) {
-        _this.list = _this.CacheList[cat]
+
+      // 检查当前分类是否有缓存数据
+      if (_this.CacheList[_this.cat]) {
+        _this.list = _this.CacheList[_this.cat].list
+        _this.currentpage = _this.CacheList[_this.cat].curPage
+        _this.pagination = _this.CacheList[_this.cat].pagination
+        
       }else{
-        _this.getNewsList(cat);
+        _this.currentpage = 1;
+        _this.getNewsList(_this.cat);
       }
+      // 最后一页
+      this.isLastPage = this.checkLastPage();
+    },
+    checkLastPage:function () {
+      return this.pagination == this.currentpage;
     },
     // 加载更多
     loadMore: function () {
       var _this = this;
+      if (this.checkLastPage()) {
+        this.isLastPage = true;
+        return;
+      }
       this.currentpage ++;
       this.getNewsList(_this.cat)
     },
@@ -117,13 +140,13 @@ var newsModel = new Vue({
       return result;
     },
     // 资讯点赞
-    newZan: function (num,i) {
+    newZan: function (i,id) {
       if ($(this.$refs.iconZan).eq(i).parent('span').hasClass('icon-zaned')) {
         return;
       }
       $("#loader").fadeIn(300)
       var _this = this;
-      this.$http.get(headerModel.api+'/News/ClickLike?newsid='+this.list[i].NewsID).then(function (response) {
+      this.$http.get(headerModel.api+'/News/ClickLike?newsid='+id).then(function (response) {
         if (response.data.resultid == 200) {
           _this.list[i].Pageviews++;
           $(_this.$refs.iconZan).eq(i).parent('span').addClass('icon-zaned')
