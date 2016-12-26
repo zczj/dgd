@@ -187,17 +187,79 @@ a:hover, a:active {
  */
 
 body{
-  position: relative; min-height: 100%;
+  position: relative; min-height: 100%;  padding-top: 76px;
 }
+.header-top{
+  height: 40px;
+  background:#40454b;
+  color: #fff;
+  font-size: 0;
+  .container{height: 40px;}
+  .header-top-l,.header-top-r{
+    display: inline-block;
+    font-size: 1.5rem;
+    line-height: 40px;
+    float: left;
+    & > span{
+      display: inline-block;
+      height: 22px;
+      line-height: 22px;
+      padding-right: 12px;
+      .icon{
+        vertical-align: middle; margin-right: 4px;
+        &-sina,&-wx,&-phone,&-msgTop{
+          font-size: 1.8rem;
+        }
+        &-msgTop{
+          transform:rotateY(-180deg);
+          position: relative;
+          display: inline-block;
+          &-msgC{
+            &::after{
+              content:'';
+              display: inline-block;
+              width: 6px;
+              height: 6px;
+              border-radius: 3px;
+              background:#fd3948;
+              top: 0;
+              left: 0;
+              position: absolute;
+            }
+          }
+        }
+        &-zczj-b{
+          width: 29px;
+          height: 16px;
+          background-size: 29px 16px;
+          background:url(../img/icon-zczj-b.png);
+          margin-top: -2px;
+        }
+      }
+    }
+  }
+  .header-top-l{
+    span + span {
+      border-left: 1px #fff solid;
+      padding-left: 12px;
+    }
+  }
+  .header-top-r{
+    float: right;
+  }
 
+}
 header{
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 99999;
-  background: rgba(255, 255, 255, .8);
-  box-shadow: 0 1px 5px rgba(0, 0, 0, .3);
+  height: 76px;
+  .header-warp{
     height: 76px;
+    top: 40px;
+    width: 100%;
+    z-index: 99999;
+    background: rgba(255, 255, 255, .8);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
+    position: fixed;
+  }
     .container{ height: 100%; width: 100%; position: relative;}
     .nav{
       .logo{
@@ -244,15 +306,15 @@ header{
             padding: 0 10px;
             font-size: 1.8rem;
             color: #00a9e0;
-            margin-top: 24px
-
+            margin-top: 24px;
+            & > a{
+                  color: #00a9e0;
+                  padding: 0 4px;
+                }
           }
 
 
-          a{
-                color: #00a9e0;
-                padding: 0 4px;
-              }
+
           &.login-btn{
             margin-left: 0;
           }
@@ -295,72 +357,74 @@ header{
             }
           }
         }
-        .pop-up{
-          background: #fff none repeat scroll 0 0;
-          border: 1px solid #ddd;
-          box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-          min-width: 180px;
-          padding: 20px;
-          position: absolute;
-          right: 14px;
-          top: 62px;
-          transform: scale(0);
-          transform-origin: 90% 0 0;
-          transition: none 0s ease 0s;
-          visibility: hidden;
-          font-size:1.4rem;
-          a{ color:#828fb0;
-            &.userinfo{
-              border-bottom: 1px solid #eee;
-              display: block;
-              padding-bottom: 10px;
-              img{
-                 border-radius: 30px;
-                 float: left;
-                 height: 35px;
-                 margin-right: 10px;
-                 width: 35px;
-              }
-              span{
-                display: block;
-                height: 40px;
-                line-height: 40px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-              }
-            }
-          }
-          a:hover{ color:#00a9e0;}
-          .menu{
-            a{
-              display: block;
-              height: 36px;
-              line-height: 36px;
-              border-top: solid 1px #eee;
-              padding: 0 6px;
-              font-size: 13px;
-              color: #828fb0;
-              text-align: left;
-              &:hover{
-                color: #00a9e0;
-              }
-            }
-          }
-          &::after{
-            border-color: none;
+        @at-root{
+          .pop-up{
             background: #fff none repeat scroll 0 0;
-            border-color: #ddd;
-            border-image: none;
-            border-style: solid;
-            border-width: 1px 1px 0 0;
-            content: " ";
-            height: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            min-width: 180px;
+            padding: 20px;
             position: absolute;
-            right: 6px;
-            top: -6px;
-            transform: rotate(-45deg);
-            width: 10px;
+            right: 14px;
+            top: 62px;
+            transform: scale(0);
+            transform-origin: 90% 0 0;
+            transition: none 0s ease 0s;
+            visibility: hidden;
+            font-size:1.4rem;
+            a{ color:#828fb0;
+              &.userinfo{
+                border-bottom: 1px solid #eee;
+                display: block;
+                padding-bottom: 10px;
+                img{
+                   border-radius: 30px;
+                   float: left;
+                   height: 35px;
+                   margin-right: 10px;
+                   width: 35px;
+                }
+                span{
+                  display: block;
+                  height: 40px;
+                  line-height: 40px;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                }
+              }
+            }
+            a:hover{ color:#00a9e0;}
+            .menu{
+              a{
+                display: block;
+                height: 36px;
+                line-height: 36px;
+                border-top: solid 1px #eee;
+                padding: 0 6px;
+                font-size: 13px;
+                color: #828fb0;
+                text-align: left;
+                &:hover{
+                  color: #00a9e0;
+                }
+              }
+            }
+            &::after{
+              border-color: none;
+              background: #fff none repeat scroll 0 0;
+              border-color: #ddd;
+              border-image: none;
+              border-style: solid;
+              border-width: 1px 1px 0 0;
+              content: " ";
+              height: 10px;
+              position: absolute;
+              right: 6px;
+              top: -6px;
+              transform: rotate(-45deg);
+              width: 10px;
+            }
           }
         }
       }
@@ -378,6 +442,9 @@ header{
 @mixin header--1150(){
   header{
     height: 64px;
+    .header-warp{
+      height: 64px;
+    }
     .nav{
       .logo{
         top: 5px;
@@ -535,6 +602,9 @@ header{
 @mixin header--ss() {
   header{
     height: 60px;
+    .header-warp{
+      height: 60px;
+    }
     .nav{
       .logo{
         top: 8px;
@@ -557,7 +627,7 @@ header{
   color: #fff;
   font-size: 0px;
   position: relative;
-  z-index: 9999;
+  z-index: 999;
   .info  dl{
     margin: 0 2rem;
     width: calc(16.666666666666668% - 4rem);

@@ -1,2 +1,70 @@
 extends ../shade/layout
 block content
+  link(rel="stylesheet", href="/skin/plugs/owl/owl.carousel.min.css")
+  link(rel="stylesheet", href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css")
+  link(rel="stylesheet", href="/skin/css/news/newsDetail.css")
+  #model-newsDetail
+    .news-warp
+      .container.clearfix
+        .main
+          .news-detail
+            .item-head
+              h1.item-title 王健林的投资并购不仅仅是“有钱”，还有他的逻辑
+              .item-souce.clearfix
+                .item-l
+                  span.souce 来源：大股东
+                  span.author 作者：指尖的遐想
+                  span.time 2016-04-11 16:49
+                .item-r
+                  span.sc 收藏
+                  span.commone 评论（6）
+                  span.read 阅读（66）
+
+            //- 导读
+            .item-dd.
+              王健林一直强调，万达的海外扩张并非中国“土豪”，见什么买什么，其每一笔投资都有逻辑，比如万达就不会再买俱乐部，因为“不赚钱，有面子没里子，盈利基本都被球员拿走了”。
+
+            //- 新闻详情
+            .item-info
+            //- 关键词
+            .item-keyWords
+              a(href="#") 互联网金融
+              a(href="#") 互联网金融
+              a(href="#") 互联网金融
+            //- 分享
+            .item-share
+            //- 申明
+            .item-shengming
+              span.tigger 声明
+              .item-sm-box
+
+
+
+        .side
+          //- 推荐项目
+          .side-box.tjxm
+            .side-title.clearfix
+              span.t 推荐项目
+              a.more(href="/project") 更多>>
+            ul.side-content
+              li(v-for="item in Pro.projectList")
+                a(v-bind:href="['/project/detail.html?id='+ item.ProjectID]")
+                  img(v-if="item.MoblePic==null" src="/skin/img/default.jpg", alt="")
+                  img(v-else="item.MoblePic!=null" v-bind:src="item.MoblePic")
+          //- 推荐文章
+          .side-box.tjwz.mt20
+            .side-title.clearfix
+              span.t 推荐文章
+              a.more(href="/project") 更多>>
+            ul.side-content
+              li.item(v-for="item in TopNews.news" v-cloak="")
+                a.wz-t(v-bind:href="item.ShareUrl") {{item.newtitle}}
+                p.wz-bar
+                  span.wz-time {{timeFormart(item.newdate)}}
+                  span.wz-view
+                    i.icon.icon-ice
+                    |{{item.newpoint}}
+
+
+  script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
+  script(src="/skin/js/news/newsDetail.js")

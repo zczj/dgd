@@ -1,18 +1,26 @@
 extends ../shade/layout
 block content
-  link(rel="stylesheet", href="../skin/css/project-detail.css")
+  link(rel="stylesheet", href="../skin/css/project/project-detail.css")
   #detail(v-cloak)
     .banner
-      .container(v-bind:style='{backgroundImage: "url("+detail.BigPic+")"}')
+      .container
+        img.detail-img(v-bind:src="detail.BigPic", alt="")
         .banner-project-wrapper
-          div
-            img(src="../skin/img/project/detail-banner-project-logo.png", alt="").banner-project-logo
+          .detail-intro
+            img.banner-project-logo(src="../skin/img/project/detail-banner-project-logo.png", alt="")
             h1.project-name(v-bind:title='detail.ProjectName') {{detail.ProjectName}}
             p.project-intro(v-bind:title='detail.ShortDesc') {{detail.ShortDesc}}
             p.project-handle
               a(href="javascript:;") 关注
               | |
-              a(href="javascript:;") 分享
+              a(href="javascript:;" v-on:click='share') 分享
+            .iShare.iShare1
+              a(href="#").iShare_qzone
+                i.icon.icon-qzone
+              a(href="#").iShare_tencent
+                i.icon.icon-qzone
+              a(href="#").iShare_weibo
+                i.icon.icon-qzone
 
     // main
     .main-wrapper
@@ -45,7 +53,7 @@ block content
                     a(href="#").transfer 可转让
                 a(href="javascript:;").invest-button 我要投资
                 ul.invest-desc-list
-                  li 众筹轮次：
+                  li 众筹轮
                     span {{TimesRotation[(detail.TimesRotation-1)]}}
                   li 出让份额：
                     span {{detail.SellStock}}
@@ -122,6 +130,36 @@ block content
                   p.invest-name {{item.Account}}
 
 
+    // 微信分享
+    transition(name='opacity')
+      .h-modal-mask(v-if='wechatShare' v-on:click='wechatShare = false')
+        img(src="/skin/img/project/share.png", width='100%', alt="")
+    // 移动端非微信端分享
+    transition(name='opacity')
+      .h-modal-mask(v-if='webShare' v-on:click='webShare = false')
+        .qrcode
+          canvas#canvas
 
 
-  script(src='../skin/js/project-detail.js')
+  script(src='../skin/js/project/project-detail.js')
+  script(src='../skin/js/project/iShare.min.js')
+  script(type="text/javascript").
+    window.onload = function () {
+      window.iShare_config = {container:'.iShare1',config:{
+        title: '分享标题',
+        description: '这是分享描述文本',
+        url: 'https://github.com/zhansingsong',
+        WXoptions:{
+            evenType: 'click',
+            isTitleVisibility: true,
+            title: '二维码标题',
+            isTipVisibility: true,
+            tip: '二维码描述文本',
+            qrcodeW: '120',
+            qrcodeH: '120',
+            qrcodeBgc: '#e1bee7',
+            qrcodeFgc: '#4a148c',
+            bgcolor: '#9c27b0'
+        }
+      }};
+    }

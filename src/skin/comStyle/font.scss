@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 190684 */
-  src: url('//at.alicdn.com/t/font_007a14sktv2huxr.eot');
-  src: url('//at.alicdn.com/t/font_007a14sktv2huxr.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_007a14sktv2huxr.woff') format('woff'),
-  url('//at.alicdn.com/t/font_007a14sktv2huxr.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_007a14sktv2huxr.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_yag0fe97dd6ajor.eot');
+  src: url('//at.alicdn.com/t/font_yag0fe97dd6ajor.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_yag0fe97dd6ajor.woff') format('woff'),
+  url('//at.alicdn.com/t/font_yag0fe97dd6ajor.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_yag0fe97dd6ajor.svg#iconfont') format('svg');
 }
 
 .icon{
@@ -16,6 +16,22 @@
     font-family: 'iconfont';
     color: inherit;
     vertical-align: top;
+  }
+  // 头部消息
+  &-msgTop::before{
+    content: '\e65c';
+  }
+  // 400电话
+  &-tel::before{
+    content: '\e60f';
+  }
+  // 微信
+  &-wx::before{
+    content: '\e602';
+  }
+  // 新浪
+  &-sina::before{
+    content: '\e61c';
   }
   // 阅读
   &-ice::before{

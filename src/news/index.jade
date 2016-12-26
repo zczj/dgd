@@ -2,14 +2,14 @@ extends ../shade/layout
 block content
   link(rel="stylesheet", href="/skin/plugs/owl/owl.carousel.min.css")
   link(rel="stylesheet", href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css")
-  link(rel="stylesheet", href="/skin/css/news.css")
+  link(rel="stylesheet", href="/skin/css/news/newsDetail.css")
   #model-news
     .news-banner
       .owl-carousel.owl-theme#news-banner(ref='slider')
         div.item(v-for="item in Ad.ChannelList", v-cloak="")
           a.item-link(:href="item.Link")
             .item-desc
-              p.item-tite {{item.Title}}
+              p.item-tite.ellipsis {{item.Title}}
               p.item-txt(v-if="item.Remark") {{item.Remark}}
               p.item-txt(v-else) 老苏说这里还没有描述
             img(v-bind:src="item.Pic", alt="", v-cloak="")
@@ -27,7 +27,7 @@ block content
                     img(v-else="", v-bind:src="resizeImg(item.CoverMobilePic,240,150)", alt="")
 
                 .item-desc
-                  a.title.ellipsis(v-bind:href="item.ShareUrl") {{item.Title}}
+                  a.title.ellipsis(v-bind:href="['index.html?id='+ item.NewsID]") {{item.Title}}
                   .item-txt.ellipsis(v-html="item.Abstract")
                   .item-bar.clearfix
                     .item-bar-l
@@ -66,7 +66,7 @@ block content
               a.more(href="/project") 更多>>
             ul.side-content
               li.item(v-for="item in TopNews.news" v-cloak="")
-                a.wz-t(v-bind:href="item.ShareUrl") {{item.newtitle}}
+                a.wz-t(v-bind:href="[item.ShareUrl]") {{item.newtitle}}
                 p.wz-bar
                   span.wz-time {{timeFormart(item.newdate)}}
                   span.wz-view
@@ -75,4 +75,4 @@ block content
 
 
   script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
-  script(src="/skin/js/new.js")
+  script(src="/skin/js/news/news.js")

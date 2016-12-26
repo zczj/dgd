@@ -6,18 +6,6 @@ block content
       .passport-profile-wrapper
         .profile
       .passport-content-wrapper
-        .fpwd-tooltips-bar(v-if='fpwd')
-          .step
-            p ①
-            |找回密码
-          .line
-          .step
-            p ②
-            |重置密码
-          .line
-          .step.active
-            p ③
-            |完成
         .passport-box-wrapper(v-bind:class='{"fpwd-layout": fpwd}')
           .passport-box
             // 登录/注册成功

@@ -222,6 +222,9 @@
   .passport-box{
     height: 502px;
   }
+  .passport-button{
+    margin-top: 0;
+  }
 }
 
 
@@ -264,40 +267,40 @@
     position: absolute;
     right: 101px;
   }
-  .passport-box{
-    padding: 40px 43px 0;
-    .passport-header{
-      height: 26px;
-      line-height: 26px;
-      font-size: 21.11px;
-      font-weight: bold;
-      color: #343434;
-      background-image: url(/skin/img/passport/success-item-header.png?12315486);
+}
+.passport-box{
+  padding: 40px 43px 0;
+  .passport-header{
+    height: 26px;
+    line-height: 26px;
+    font-size: 21.11px;
+    font-weight: bold;
+    color: #343434;
+    background-image: url(/skin/img/passport/success-item-header.png?12315486);
+  }
+  .passport-success{
+    width: 80px;
+    height: 80px;
+    margin: 22px auto 18px;
+    background: url(/skin/img/passport/success-ok.png) no-repeat 0 0;
+    background-size: cover;
+  }
+  .passport-success-msg{
+    text-align: center;
+    color: #616a73;
+    font-size: 16px;
+    line-height: 28px;
+  }
+  .passport-success-go{
+    text-align: center;
+    font-size: 16px;
+    color: #616a73;
+    span{
+      color: #e60012;
     }
-    .passport-success{
-      width: 80px;
-      height: 80px;
-      margin: 22px auto 18px;
-      background: url(/skin/img/passport/success-ok.png) no-repeat 0 0;
-      background-size: cover;
-    }
-    .passport-success-msg{
-      text-align: center;
-      color: #616a73;
-      font-size: 16px;
-      line-height: 28px;
-    }
-    .passport-success-go{
-      text-align: center;
-      font-size: 16px;
-      color: #616a73;
-      span{
-        color: #e60012;
-      }
-    }
-    .passport-button{
-      margin-top: 30px;
-    }
+  }
+  .passport-button{
+    margin-top: 30px;
   }
 }
 
@@ -385,7 +388,7 @@
       float: none;
       width: 100%;
       padding: 44px 0;
-      background-color: #f0eff5;
+      // background-color: #f0eff5;
       input.passport-input{
         height: 50px;
       }
