@@ -1,5 +1,5 @@
 $(window).load(function () {
-  // $('#loader').delay(800).fadeOut(300);
+   $('#loader').delay(800).fadeOut(300);
 })
 
 ;(function ($) {

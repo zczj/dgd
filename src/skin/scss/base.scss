@@ -187,7 +187,7 @@ a:hover, a:active {
  */
 
 body{
-  position: relative; min-height: 100%;  padding-top: 76px;
+  position: relative; min-height: 100%; 
 }
 .header-top{
   height: 40px;
@@ -246,6 +246,38 @@ body{
   }
   .header-top-r{
     float: right;
+    & > span{
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+      &.top-login{
+        position: relative;
+        z-index: 10001;
+        img{
+          width: 30px;
+          height: 30px;
+          display: inline-block;
+          vertical-align: middle;
+          border-radius: 15px;
+        }
+        .pop-up{
+          left: -20px;
+          right: auto;
+        }
+        &:hover .pop-up{
+          opacity: 1;
+          transform: scale(1);
+          transition: all 0.3s cubic-bezier(0.31, 0.57, 0.68, 1.36) 0s;
+          visibility: visible;
+          z-index: 100;
+          top: 44px;
+          left: -20px;
+          &::after{
+            left: 30px;
+          }
+        } 
+      }
+    }
   }
 
 }
@@ -255,7 +287,7 @@ header{
     height: 76px;
     top: 40px;
     width: 100%;
-    z-index: 99999;
+    z-index: 1000;
     background: rgba(255, 255, 255, .8);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
     position: fixed;
@@ -1181,6 +1213,7 @@ header{
 
 // loading
 .loader{
+  display: none;
   font-size: 0.4rem;
   position: fixed;
   left: 0;

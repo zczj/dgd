@@ -22,7 +22,7 @@ section#header
           a(href="/passport/register.html") 注册
         span.top-login(v-else="")
           a(href="/mycenter/index")
-            img(:src="userInfo.Avatar", alt="")
+            img(v-bind:src="userInfo.Avatar", alt="")
           span.user-name 老苏
           .user-pop.pop-up
             a.userinfo.clearfix(href="/", :title="userInfo.Avatar")
@@ -53,7 +53,7 @@ section#header
           nav(v-bind:class="{ navShow: tag }", v-cloak="")
             a(v-for="(item, index) in navs", :href="item.url", v-bind:class="{ cur : index == 0 }").border-1px {{item.title}}
             a.mobile-show.border-1px(href="javascript:void(0);", v-if="isLogin", v-on:click="loginOut()") 退出
-          .login-btns
+          .login-btns(v-if="!isMobileOrTable")
             ul.tool-nav
               li.login-btn(v-if="!isLogin")
                 .item
