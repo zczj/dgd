@@ -23,7 +23,7 @@ var gulp         = require('gulp'),
 
 //样式
 gulp.task('css', function () {
-  return gulp.src(['src/skin/scss/*.scss', 'src/skin/comStyle/*.scss'])
+  return gulp.src(['src/skin/scss/**/*.scss', 'src/skin/comStyle/*.scss'])
     .pipe(changed('dist/skin/css/', {extension: '.css'}))
     .pipe(debug({title: '编译：'}))
     .pipe(sourcemaps.init())

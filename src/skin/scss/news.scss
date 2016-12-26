@@ -1,8 +1,8 @@
 /*
 * @Author: suzhihui
 * @Date:   2016-12-21 15:09:25
-* @Last Modified by:   suzhihui
-* @Last Modified time: 2016-12-25 19:36:45
+* @Last Modified by:   老苏
+* @Last Modified time: 2016-12-26 11:48:22
 */
 
 //资讯轮播图
@@ -47,12 +47,12 @@
     width: calc(100% - 388px);
     @at-root{
       .dgd-tab{
-        overflow:：hidden;
+        overflow: hidden;
         font-size: 0;
         padding-bottom: 10px;
         border-bottom: 1px #e9ebed solid;
         a+a{
-          margin-left: 20px;
+          margin-left: 10px;
         }
         & > a{
           height: 48px;
@@ -62,7 +62,7 @@
           border: 1px #fff solid;
           display: inline-block;
           transition: all .3s;
-          width: calc(20% - 50px);
+          width: calc(16.666666666666668% - 9px);
           text-align: center;
           float: left;
           border-radius: 8px;
@@ -97,9 +97,7 @@
             width: 70%;
             color: #838b94;
             height: 100%;
-            div{
-              display: inline-block;
-            }
+
             .title{
               height: 3rem;
               font-size:2rem;
@@ -305,36 +303,78 @@
 
 }
 
+@mixin news-warp--950() {
+  .news-warp{
+    .main{
+      float: none;
+      width: 100%;
+    }
+    .side{
+      display: none;
+    }
+  }
+  @include news-list--1050();
+}
+
+@mixin news-list--480() {
+  .news-list {
+    .item {
+      .item-desc{
+        .item-txt{
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@mixin news-list--1050() {
+  .news-list {
+    .item {
+      .item-desc{
+        .item-txt{
+          height: 2.2rem;
+        }
+      }
+    }
+  }
+}
+
 @mixin dgd-ga--1150() {
   .dgd-tab{
 
     font-size: 0;
     padding-bottom: 10px;
     border-bottom: 1px #e9ebed solid;
-    a+a{
-      margin-left: 10px;
-      width: calc(20% - 30px);
+    a + a{
+      margin-left: 0;
+      width: calc(16.666666666666668%);
     }
   }
 }
-//小于1150px;
+
+
+// 小于1150px;
 @media only screen and( max-width: 71.875em){
-  @inclub dgd-ga--1150();
+  @include dgd-ga--1150();
+}
+// 小于1050px;
+@media only screen and( max-width: 62.625em){
+  @include news-list--1050();
 }
 
-//小于1150px;
-@media only screen and( max-width: 62.625){
-  .dgd-tab{
+// 小于950px;
+@media only screen and( max-width: 59.375em){
 
-    font-size: 0;
-    padding-bottom: 10px;
-    border-bottom: 1px #e9ebed solid;
-    a+a{
-      margin-left: 10px;
-      width: calc(20% - 30px);
-    }
-  }
+  @include news-warp--950();
 }
+
+// 小于480px;
+@media only screen and (max-width: 30em) {
+  @include news-list--480();
+}
+
+
 
 
 

@@ -13,7 +13,7 @@ header#header
         ul.tool-nav
           li.login-btn(v-if="!isLogin")
             .item
-              a(href="/passport/login.html") 登录
+              a(v-bind:href="['/passport/login.html?url='+window.location.href]") 登录
               span.line |
               a(href="/passport/register.html") 注册
           li.login-btn(v-else="")

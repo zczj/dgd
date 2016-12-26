@@ -2,7 +2,7 @@
   width: 100%;
   height: 750px;
   overflow: hidden;
-  background: url(../img/passport/login-bg.jpg) no-repeat center center;
+  background: url(/src/img/passport/login-bg.jpg) no-repeat center center;
   background-size: auto 100%;
   overflow: hidden;
   .login-wrapper{
@@ -12,7 +12,7 @@
       width: 638px;
       height: 445px;
       margin: 100px 0 0 -100px;
-      background: url(../img/passport/profile.png) no-repeat 0 0;
+      background: url(/src/img/passport/profile.png) no-repeat 0 0;
       background-size: 100% 100%;
     }
   }
@@ -59,7 +59,7 @@
         height: 29px;
         margin-top: 34px;
         margin-bottom: 10px;
-        background: url(../img/passport/login-item-header.png) no-repeat 0 center;
+        background: url(/src/img/passport/login-item-header.png) no-repeat 0 center;
       }
       .form{
         margin-bottom: 17px;
@@ -186,7 +186,7 @@
         position: static;
       }
       .header{
-          background: url(../img/passport/register-item-header.png) no-repeat 0 center;
+          background: url(/src/img/passport/register-item-header.png) no-repeat 0 center;
       }
       .remember{
         line-height: 28px;
@@ -210,13 +210,13 @@
       font-size: 21.11px;
       font-weight: bold;
       color: #343434;
-      background-image: url(../img/passport/success-item-header.png?12315486);
+      background-image: url(/src/img/passport/success-item-header.png?12315486);
     }
     .success{
       width: 80px;
       height: 80px;
       margin: 22px auto 18px;
-      background: url(../img/passport/success-ok.png) no-repeat 0 0;
+      background: url(/src/img/passport/success-ok.png) no-repeat 0 0;
       background-size: cover;
     }
     .success-msg{
@@ -278,7 +278,7 @@
       .item{
         .header{
           height: 73px;
-          background: url(../img/passport/login-item-header@small.png) no-repeat center center;
+          background: url(/src/img/passport/login-item-header@small.png) no-repeat center center;
           background-size: auto 100%;
         }
         li{
@@ -379,7 +379,7 @@
         height: 44px;
         line-height: 44px;
         font-size: 37.37px;
-        background-image: url(../img/passport/success-item-header@x2.png);
+        background-image: url(/src/img/passport/success-item-header@x2.png);
         background-position: 0 center;
       }
       .success{

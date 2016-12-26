@@ -1,11 +1,14 @@
 extends ../shade/layout
 block content
-  link(rel="stylesheet", href="/skin/css/passport.css")
+  link(rel="stylesheet", href="/skin/css/passport/passport.css")
+  // passport模块公共vue实例挂载点
+  .passport-common
   #fpwd.h-passport-page(v-cloak)
     .container
       .passport-profile-wrapper
         .profile
       .passport-content-wrapper
+        // 步骤提示栏
         .fpwd-tooltips-bar
           .step(v-bind:class='{active: step==1}')
             p ①
@@ -18,6 +21,7 @@ block content
           .step(v-bind:class='{active: step==3}')
             p ③
             |完成
+        // 步骤
         .passport-box-wrapper
           .passport-box
             // 第一步
@@ -26,10 +30,10 @@ block content
               .fpwd-item-wrapper
                 ul.passport-form
                   li
-                    input.passport-input.user-account(placeholder='输入您的手机或邮箱')
+                    input.passport-input.user-account(placeholder='输入您的手机或邮箱' ref='step1text')
                   transition(name='fade')
-                    li.error(v-show='error') {{errorMsg}}
-              a(href="#" v-on:click='step1').passport-button 下一步
+                    li.error(v-show='passortModel.error') {{passortModel.errorMsg}}
+              a(href="javascript:;" v-on:click='step1').passport-button 下一步
             // 第二步
             transition(name='fade')
               .passport-item(v-show='step==2')
@@ -38,13 +42,13 @@ block content
                   ul.passport-form
                     li
                       input.passport-input.sms-modifycode(placeholder='输入手机验证码')
-                      span.sms(v-on:click='sendSMS' v-html='sms' v-bind:class='{disabled: sended}')
+                      span.sms(v-on:click='passortModel.sendSMS(fpwdModel)' v-html='passortModel.sms' v-bind:class='{disabled: passortModel.sended}')
                     li
                       input.passport-input.new-pwd(type='password' placeholder='输入新密码')
                       span.fpwd-notice (请输入8~16位中英文组合密码)
                     transition(name='fade')
-                      li.error(v-show='error') {{errorMsg}}
-                a(href="#" v-on:click='step2').passport-button 下一步
+                      li.error(v-show='passortModel.error') {{passortModel.errorMsg}}
+                a(href="javascript:;" v-on:click='step2').passport-button 下一步
             // 第三步
             .passport-item(v-show='step==3')
               h2.passport-header 找回密码
@@ -53,79 +57,5 @@ block content
               p.passport-success-msg 请重新登录
               a(href="./login.html").passport-button 登录
 
-  script.
-    new Vue({
-      el: '#fpwd',
-      data: {
-        step: 1,
-        sended: false,
-        sms: '发送',
-        error: false,
-        errorMsg: ''
-      },
-      methods: {
-        sendSMS: function () {
-          if (this.sended){
-            // 已发送短信，倒计时内不可再点击
-            return false
-          } else {
-            // 设置按钮文字状态
-            this.countdown()
-
-            // 发送短信方法
-            console.log(1)
-          }
-        },
-        // 倒计时
-        countdown: function () {
-          var num = 20, timer = null, _this = this
-          this.sms = '重新发送(<em style="color:red;font-style:normal;">'+num+'</em>)s'
-          this.sended = true
-          timer = setInterval(function () {
-            num--
-            if( num <=0 ){
-              clearInterval(timer)
-              _this.sended = false
-              _this.sms = '重新发送'
-              return
-            }
-            _this.sms = '重新发送(<em style="color:red;font-style:normal;">'+num+'</em>)s'
-          }, 1000)
-        },
-        // 第一步
-        step1: function () {
-          var _this = this, _delay = 5000
-          if ($('.user-account').val() === '') {
-            this.errorMsg = '请输入您的手机号码或邮箱'
-            this.error = true
-            setTimeout(function () {
-              _this.error = false
-            }, _delay)
-          } else {
-            this.step = 2
-            console.log($('.user-account').val())
-          }
-        },
-        // 第二步
-        step2: function () {
-          var _this = this, _delay = 5000
-          if ($('.sms-modifycode').val() === '') {
-            this.errorMsg = '请输入手机验证码'
-            this.error = true
-            setTimeout(function () {
-              _this.error = false
-            }, _delay)
-          } else if ($('.new-pwd').val() === '') {
-            this.errorMsg = '请输入您的新密码'
-            this.error = true
-            setTimeout(function () {
-              _this.error = false
-            }, _delay)
-          } else {
-            this.step = 2
-            console.log($('.user-account').val())
-            window.location.href = './success.html?fpwd'
-          }
-        },
-      }
-    })
+  script(src='../skin/js/passport/passport.js')
+  script(src='../skin/js/passport/fpwd.js')

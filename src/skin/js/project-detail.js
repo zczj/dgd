@@ -23,7 +23,7 @@ var projectDetail = new Vue({
     getProjectDetail: function () {
       $("#loader").fadeIn(300)
       // 获取数据
-      var url = 'http://devapi.zczj.com:80/api/ZhongChou/Detail/'+ this.proId +'?token=1'
+      var url = headerModel.api + '/ZhongChou/Detail/'+ this.proId +'?token=1'
       this.$http.get(url).then(function (response) {
         this.detail = response.data
         console.log(111)
@@ -39,7 +39,7 @@ var projectDetail = new Vue({
     },
     // 获取问答列表
     getProjectQAList: function () {
-      var qaurl = 'http://devapi.zczj.com:80/api/ZhongChou/ProjectQAList?projectid='+this.proId
+      var qaurl = headerModel.api + '/ZhongChou/ProjectQAList?projectid='+this.proId
       this.$http.get(qaurl).then(function (response) {
         this.projectQAList = response.data.list
       })
@@ -136,7 +136,7 @@ var projectDetail = new Vue({
         return false
       }
 
-      var AddProjectQAUrl = 'http://devapi.zczj.com:80/api/ZhongChou/AddProjectQA';
+      var AddProjectQAUrl = headerModel.api + '/ZhongChou/AddProjectQA';
       $.ajax({
         url: AddProjectQAUrl,
         method: 'POST',

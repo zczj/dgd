@@ -28,7 +28,7 @@ block content
 
                 .item-desc
                   a.title.ellipsis(v-bind:href="item.ShareUrl") {{item.Title}}
-                  .item-txt(v-html="item.Abstract") 
+                  .item-txt.ellipsis(v-html="item.Abstract")
                   .item-bar.clearfix
                     .item-bar-l
                       span.author.point(v-show="item.Author") {{item.Author}}
@@ -44,8 +44,8 @@ block content
                         span 0
 
             .news-loadmore
-              a.loadmore.loadmoreend(href="javascript:void(0);", v-on:click='loadMore', v-if="isLastPage") 最后一页 
-              a.loadmore(href="javascript:void(0);", v-on:click='loadMore', v-else="") 查看更多 
+              a.loadmore.loadmoreend(href="javascript:void(0);", v-on:click='loadMore', v-if="isLastPage") 最后一页
+              a.loadmore(href="javascript:void(0);", v-on:click='loadMore', v-else="") 查看更多
 
 
         .side

@@ -3,7 +3,7 @@
   width: 100%;
   height: 750px;
   overflow: hidden;
-  background: url(../img/passport/login-bg.jpg) no-repeat center center;
+  background: url(/skin/img/passport/login-bg.jpg) no-repeat center center;
   background-size: auto 100%;
   overflow: hidden;
   .passport-profile-wrapper,
@@ -17,7 +17,7 @@
       width: 638px;
       height: 445px;
       margin: 100px 0 0 -100px;
-      background: url(../img/passport/profile.png) no-repeat 0 0;
+      background: url(/skin/img/passport/profile.png) no-repeat 0 0;
       background-size: 100% 100%;
     }
   }
@@ -49,7 +49,7 @@
     input.passport-input{
       width: 100%;
       height: 38px;
-      line-height: 38px;
+      // line-height: 38px;
       border: 2px solid #dadada;
       text-indent: 10px;
       color: #464647;
@@ -183,7 +183,7 @@
 #login{
   // 登录头部背景
   .passport-header{
-    background-image: url(../img/passport/login-item-header-bg.png);
+    background-image: url(/skin/img/passport/login-item-header-bg.png);
   }
   // 切换登录按钮
   .switch-login-box{
@@ -217,7 +217,7 @@
 #register{
   // 注册头部背景
   .passport-header{
-    background-image: url(../img/passport/register-item-header-bg.png);
+    background-image: url(/skin/img/passport/register-item-header-bg.png);
   }
   .passport-box{
     height: 502px;
@@ -272,13 +272,13 @@
       font-size: 21.11px;
       font-weight: bold;
       color: #343434;
-      background-image: url(../img/passport/success-item-header.png?12315486);
+      background-image: url(/skin/img/passport/success-item-header.png?12315486);
     }
     .passport-success{
       width: 80px;
       height: 80px;
       margin: 22px auto 18px;
-      background: url(../img/passport/success-ok.png) no-repeat 0 0;
+      background: url(/skin/img/passport/success-ok.png) no-repeat 0 0;
       background-size: cover;
     }
     .passport-success-msg{
@@ -346,7 +346,7 @@
       height: 24px;
       line-height: 24px;
       margin-bottom: 0;
-      background-image: url(../img/passport/fpwd-item-header-bg.png);
+      background-image: url(/skin/img/passport/fpwd-item-header-bg.png);
     }
     .fpwd-item-wrapper{
       width: 100%;

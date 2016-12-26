@@ -20,7 +20,7 @@ var project = new Vue({
   methods: {
     //- vue-resource 获取数据
     getData: function () {
-      var url = 'http://devapi.zczj.com:80/api/ZhongChou/GetList?pagesize='+this.pageSize+'&state='+this.state+'&currentpage='+this.currentpage+'&token='+this.token
+      var url = headerModel.api + '/ZhongChou/GetList?pagesize='+this.pageSize+'&state='+this.state+'&currentpage='+this.currentpage+'&token='+this.token
       $("#loader").fadeIn(300)
       this.$http.get(url).then(function (response) {
         this.list = this.projectdata.concat(response.data.projectList)

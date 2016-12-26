@@ -1,6 +1,8 @@
 extends ../shade/layout
 block content
-  link(rel="stylesheet", href="/skin/css/passport.css")
+  link(rel="stylesheet", href="/skin/css/passport/passport.css")
+  // passport模块公共vue实例挂载点
+  .passport-common
   #login(v-cloak).h-passport-page
     .container
       .passport-profile-wrapper
@@ -14,14 +16,14 @@ block content
                 h2.passport-header 登录
                 ul.passport-form
                   li
-                    input#focus.passport-input.account(type='text' placeholder='输入您的帐号')
+                    input#focus.passport-input.account(type='text' placeholder='输入您的帐号' ref='account')
                   li
-                    input.passport-input.password(type='password' placeholder='输入您的密码' v-on:keyup.enter='login')
+                    input.passport-input.password(type='password' placeholder='输入您的密码' ref='password' v-on:keyup.enter='login')
                   transition(name='fade')
-                    li.error(v-show='error') {{errorMsg}}
+                    li.error(v-show='passortModel.error') {{passortModel.errorMsg}}
                   li
                     label.remember
-                      input(type='checkbox')
+                      input(type='checkbox' value='checked' v-model='checkName')
                       |记住密码
                     .forgot
                       a(href="./fpwd.html") 忘记密码
@@ -33,24 +35,26 @@ block content
                 h2.passport-header 登录
                 ul.passport-form
                   li
-                    input.passport-input(type='text' placeholder='输入您的手机号')
+                    input.passport-input(type='tel' placeholder='输入您的手机号' ref='telPhoneNum')
                   li
                     input.passport-input(type='text' placeholder='输入图形验证码')
-                    img(src="../skin/img/passport/verify.png", alt="").verify
-                    i.icon.icon-refresh(v-on:click='refreshVerify()')
+                    img(src="http://www.dgd.vc/Passport/VerifyImage", alt="" ref='verifyImage').verify
+                    i.icon.icon-refresh(v-on:click='passortModel.getVerify(loginModel)')
                   li
-                    input.passport-input(type='text' placeholder='输入手机验证码')
-                    span.sms(v-on:click='sendSMS' v-html='sms' v-bind:class='{disabled: sended}')
-                    transition(name='fade')
-                      li.error(v-show='error') {{errorMsg}}
-                button.passport-button(v-on:click='login') 登录
+                    input.passport-input(type='text' placeholder='输入手机验证码' ref='SMSVerify')
+                    span.sms(v-on:click='passortModel.sendSMS(loginModel)' v-html='passortModel.sms' v-bind:class='{disabled: passortModel.sended}')
+                  transition(name='fade')
+                    li.error(v-show='passortModel.error') {{passortModel.errorMsg}}
+                button.passport-button(v-on:click='loginBySMS') 登录
                 a(href="./register.html").passport-button 注册
+          // 账号登录、手机验证码登录切换按钮
           .switch-login-box
-            button.passport-button.phone-login( v-show='!formShow' v-on:click='formShow=true')
+            button.passport-button.phone-login( v-show='!formShow' v-on:click='toggle')
               i.icon.icon-phone
               |手机验证码登录
-            button.passport-button.user-login(v-on:click='formShow=false' v-show='formShow')
+            button.passport-button.user-login( v-show='formShow' v-on:click='toggle')
               i.icon.icon-user
               |账号密码登录
-  script(src='../skin/js/jquery-md5.min.js')
-  script(src='../skin/js/login.js')
+  script(src='../skin/js/passport/jquery-md5.min.js')
+  script(src='../skin/js/passport/passport.js')
+  script(src='../skin/js/passport/login.js')
