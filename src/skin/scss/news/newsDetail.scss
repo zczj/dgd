@@ -15,8 +15,11 @@
       font-size: 3rem;
       font-weight: 700;
       padding: 0;
+      margin: 0;
+      line-height: 1.2;
     }
     .item-souce{
+      margin-top: 8px;
       &>div{
         display: inline-block;
         width: 50%;
@@ -28,6 +31,19 @@
           text-align: right;
         }
       }
+    }    
+  }
+  .item-dd{
+    padding: 20px;
+    margin: 20px 0;
+    background: #f1f1f1;
+    font-size: 1.5rem;
+    color: #494a4a;
+  }
+  .item-info{
+    font-size:1.6rem;
+    img{
+      max-width:100%;
     }
   }
 }

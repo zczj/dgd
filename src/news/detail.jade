@@ -16,7 +16,9 @@ block content
                   span.author 作者：{{newsData.newsinfo.newman}}
                   span.time(v-text="formartDate(newsData.newsinfo.newdate)")
                 .item-r
-                  span.sc 收藏
+                  span.sc 
+                    i.icon.icon-sc
+                    |收藏
                   span.commone 评论（6）
                   span.read 阅读（66）
 
@@ -32,7 +34,9 @@ block content
             .item-share
             //- 申明
             .item-shengming
-              span.tigger 声明
+              span.tigger
+                i.icon.icon-sm
+                | 声明
               .item-sm-box
 
 
