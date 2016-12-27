@@ -107,7 +107,7 @@ block content
         .common-t
           span 融资的项目
         ul.common-list
-          li.list-item(v-for="(item, index) in Ad.projectList")
+          li.list-item(v-for="item in Ad.projectList")
             .list-pic
               a(v-bind:href="['/project/detail.html?id='+ item.ProjectID]")
                 img(v-if="item.BigPic==null" src="/skin/img/default.jpg", alt="")
@@ -124,7 +124,7 @@ block content
                 a.buy-now(:href="['/buy/'+ item.ProjectID]")
                   i.icon.icon-money
                   |我要认购
-                a.gz-btn(href="javascript:void(0);", v-on:click= "gz(item.ProjectID,index)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }")
+                a.gz-btn(href="javascript:void(0);", v-on:click= "headerModel.gz(item.ProjectID, item)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }")
               .list-con
                 .list-txt(v-show="item.ShortDesc").
                   {{item.ShortDesc}}

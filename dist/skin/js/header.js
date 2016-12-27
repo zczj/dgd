@@ -46,6 +46,69 @@ var headerModel = new Vue({
         }else{
           this.isMobileOrTable = false;
         }
+      },
+      /**
+       * [gz 关注]
+       * @Author: 老苏
+       * @param   {[type]} id   [项目id]
+       * @param   {[type]} item [当前项目对象]
+       * @return  {[type]}      [description]
+       */
+      gz: function(id, item) {
+        var _this = this,
+            state=null;
+        //检测登录
+        if (!headerModel.isLogin) {;
+          (function($) {
+            $.dialog({
+              type: 'warning',
+              message: '请先登录！',
+              buttons: [{
+                text: '登录',
+                type: 'green',
+                callback: function() {
+                  window.location = '/passport/login.html?url='+window.location.href;
+                }
+              }, {
+                text: '取消',
+                type: 'red'
+              }],
+              maskClose: true,
+              effect: true
+            })
+          })(jQuery);
+          return;
+        }
+        $("#loader").fadeIn(300);
+        // 布尔值转换 方便传参
+        if (item.FollowState) {
+          state=1;
+        }else{
+          state=0
+        }
+
+        $.ajax({
+          url: headerModel.api + '/MyCenter/AddFollow',
+          data: {
+            'projectid': id,
+            'type': state,
+            'token': headerModel.token
+          },
+          type: 'post',
+          success: function(response) {
+            $("#loader").fadeOut(300);
+            if (response.resultid == 200) {
+              if (response.message == '取消关注') {
+                item.FollowState = true;
+              }else{
+                item.FollowState = false;
+              }
+            }
+          },
+          error: function() {
+            $("#loader").fadeOut(300);
+          }
+        })
       }
     },
     created: function () {
@@ -61,14 +124,14 @@ var headerModel = new Vue({
       }
 
       $(window).on('scroll', function() {
-        console.log($(window).scrollTop());
         if ($(window).scrollTop() >= 40) {
           $(_this.$refs.header).css({
-            'top': 0
+            'top': 0,
+            'position':'fixed'
           })
         }else{
           $(_this.$refs.header).css({
-            'top': 40+'px'
+            'position': 'static'
           })
         }
       });

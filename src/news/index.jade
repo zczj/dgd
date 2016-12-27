@@ -23,11 +23,11 @@ block content
               li.item(v-for="(item, index) in list").clearfix
                 .item-pic
                   a(v-bind:href="item.ShareUrl")
-                    img(src="../skin/img/default.jpg", alt="" v-if='item.CoverMobilePic == null')
+                    img(src="../skin/img/default.jpg", alt="" v-if='item.CoverMobilePic')
                     img(v-else="", v-bind:src="resizeImg(item.CoverMobilePic,240,150)", alt="")
 
                 .item-desc
-                  a.title.ellipsis(v-bind:href="['index.html?id='+ item.NewsID]") {{item.Title}}
+                  a.title.ellipsis(v-bind:href="['detail.html?id='+ item.NewsID]") {{item.Title}}
                   .item-txt.ellipsis(v-html="item.Abstract")
                   .item-bar.clearfix
                     .item-bar-l

@@ -118,6 +118,18 @@ img{
     clear: both;
 }
 
+@mixin pop() {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.3s cubic-bezier(0.31, 0.57, 0.68, 1.36) 0s;
+  visibility: visible;
+  z-index: 100;
+  top: 44px;
+  left: -20px;
+  &::after{
+    left: 30px;
+  }
+}
 
 @media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5) {
   .border-1px{
@@ -187,7 +199,7 @@ a:hover, a:active {
  */
 
 body{
-  position: relative; min-height: 100%; 
+  position: relative; min-height: 100%;
 }
 .header-top{
   height: 40px;
@@ -205,6 +217,16 @@ body{
       height: 22px;
       line-height: 22px;
       padding-right: 12px;
+      .pop-up{
+        right: auto;
+        left: -30px;
+        a{
+          color: #828fb0;
+          &:hover{
+            color: #00a9e0;
+          }
+        }
+      }
       .icon{
         vertical-align: middle; margin-right: 4px;
         &-sina,&-wx,&-phone,&-msgTop{
@@ -239,9 +261,39 @@ body{
     }
   }
   .header-top-l{
+    span > a{
+      color: #fff;
+      &:hover{
+        color: #5ee075;
+      }
+    }
     span + span {
       border-left: 1px #fff solid;
       padding-left: 12px;
+    }
+    .top-wx{
+      height: 40px;
+      position: relative;
+      &:hover .pop-wx{
+        @include pop();
+        top: 26px;
+        right: -10px;
+        left: auto;
+        min-width: 120px;
+        &::after{
+          right: 12px;
+          left: auto;
+        }
+      }
+    }
+    .app{
+      position: relative;
+      &:hover .pop-app{
+        @include pop();
+        top: 26px;
+        left: 10px;
+        min-width: 120px;
+      }
     }
   }
   .header-top-r{
@@ -250,9 +302,15 @@ body{
       display: inline-block;
       height: 40px;
       line-height: 40px;
+      a{
+        color: #fff;
+      }
       &.top-login{
         position: relative;
-        z-index: 10001;
+        z-index: 10000;
+        a{
+          padding: 0 4px;
+        }
         img{
           width: 30px;
           height: 30px;
@@ -260,22 +318,21 @@ body{
           vertical-align: middle;
           border-radius: 15px;
         }
+        span.user-name{
+          max-width: 60px;
+          overflow: hidden;
+          display: inline-block;
+          vertical-align: middle;
+        }
         .pop-up{
           left: -20px;
           right: auto;
+          top:40px;
+
         }
         &:hover .pop-up{
-          opacity: 1;
-          transform: scale(1);
-          transition: all 0.3s cubic-bezier(0.31, 0.57, 0.68, 1.36) 0s;
-          visibility: visible;
-          z-index: 100;
-          top: 44px;
-          left: -20px;
-          &::after{
-            left: 30px;
-          }
-        } 
+          @include pop();
+        }
       }
     }
   }
@@ -287,10 +344,9 @@ header{
     height: 76px;
     top: 40px;
     width: 100%;
-    z-index: 1000;
+    z-index: 1001;
     background: rgba(255, 255, 255, .8);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
-    position: fixed;
   }
     .container{ height: 100%; width: 100%; position: relative;}
     .nav{

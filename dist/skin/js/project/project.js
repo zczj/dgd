@@ -12,7 +12,7 @@ var project = new Vue({
     endPage: 5,
     list: '',
     pagination: '',
-    subNavShow: true,
+    subNavShow: false,  // 项目筛选
     prevShow: false,
     nextShow: true,
     ellipsis: false

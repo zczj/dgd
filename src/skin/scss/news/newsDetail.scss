@@ -1,4 +1,33 @@
 @import "news.scss";
 // 新闻详情
+.news-warp{
+  min-height: 500px;
+}
 .news-detail{
+  font-size: 1.6rem;
+  color: #1f1f1f;
+  line-height: 1.6;
+  .item-head{
+    font-size: 0;
+    color: #999;
+    .item-title{
+      color: #1f1f2b;
+      font-size: 3rem;
+      font-weight: 700;
+      padding: 0;
+    }
+    .item-souce{
+      &>div{
+        display: inline-block;
+        width: 50%;
+        font-size: 1.4rem;
+        span{
+          padding: 0 6px;
+        }
+        &.item-r{
+          text-align: right;
+        }
+      }
+    }
+  }
 }

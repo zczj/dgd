@@ -8,7 +8,7 @@ block content
     .search-wrapper
       .container
         dl.search-box
-          dt 全部项目：
+          dt 搜索项目：
           dd
             input(type="text")
             i.icon.icon-search
@@ -72,7 +72,7 @@ block content
           ul.common-list
             li.list-item(v-for='(item, ii) in list')
               .list-pic
-                a(:href="['./detail.html?id='+item.ProjectID]")
+                a(v-bind:href="['./detail.html?id='+item.ProjectID]")
                   img(src="../skin/img/default.jpg", alt="" v-if='item.MiddlePic == null')
                   img(v-bind:src="item.MiddlePic", alt="" v-else='item.MiddlePic != null')
                   span.tag(v-bind:class='["tag-"+item.State]')

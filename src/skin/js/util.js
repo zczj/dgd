@@ -1,6 +1,3 @@
-$(window).load(function () {
-   $('#loader').delay(800).fadeOut(300);
-})
 
 ;(function ($) {
   $.extend(jQuery.easing,{
@@ -86,6 +83,11 @@ var Util=function () {
         if (cutTime.min && cutTime.min > 0) {
           return str = cutTime.min + '分钟前';
         }
+        return str;
+      },
+      // 转换日期格式 "年-月-日"
+      _covnerTimeLine: function (date) {
+        var str = date.split('/').join('-');
         return str;
       }
     }

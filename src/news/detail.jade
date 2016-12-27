@@ -7,30 +7,27 @@ block content
     .news-warp
       .container.clearfix
         .main
-          .news-detail
+          .news-detail(v-if="newsData")
             .item-head
-              h1.item-title 王健林的投资并购不仅仅是“有钱”，还有他的逻辑
+              h1.item-title {{newsData.newsinfo.newtitle}}
               .item-souce.clearfix
                 .item-l
-                  span.souce 来源：大股东
-                  span.author 作者：指尖的遐想
-                  span.time 2016-04-11 16:49
+                  span.souce 来源：{{newsData.newsinfo.newform}}
+                  span.author 作者：{{newsData.newsinfo.newman}}
+                  span.time(v-text="formartDate(newsData.newsinfo.newdate)")
                 .item-r
                   span.sc 收藏
                   span.commone 评论（6）
                   span.read 阅读（66）
 
             //- 导读
-            .item-dd.
-              王健林一直强调，万达的海外扩张并非中国“土豪”，见什么买什么，其每一笔投资都有逻辑，比如万达就不会再买俱乐部，因为“不赚钱，有面子没里子，盈利基本都被球员拿走了”。
+            .item-dd {{newsData.newsinfo.newsynopsis}}
 
             //- 新闻详情
-            .item-info
+            .item-info(v-html="newsData.newsinfo.newcontent")
             //- 关键词
             .item-keyWords
-              a(href="#") 互联网金融
-              a(href="#") 互联网金融
-              a(href="#") 互联网金融
+              a(href="#", v-for="item in formartKeyWords(newsData.newsinfo.newkey)" v-if="item") {{item}}
             //- 分享
             .item-share
             //- 申明

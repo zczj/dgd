@@ -92,54 +92,7 @@ var indexModel = new Vue({
 
   },
   methods: {
-    //关注
-    gz: function(id, i) {
-      var _this = this;
-      //检测登录
-      if (!headerModel.isLogin) {;
-        (function($) {
-          $.dialog({
-            type: 'warning',
-            message: '请先登录！',
-            buttons: [{
-              text: '登录',
-              type: 'green',
-              callback: function() {
-                window.location = '/passport/login.html';
-              }
-            }, {
-              text: '取消',
-              type: 'red'
-            }],
-            maskClose: true,
-            effect: true
-          })
-        })(jQuery);
-        return;
-      }
-      $("#loader").fadeIn(300);
-      var state = this.Ad.projectList[i].FollowState = !this.Ad.projectList[i].FollowState;
-      state ? state = 1 : state = 0;
 
-      $.ajax({
-        url: headerModel.api + '/MyCenter/AddFollow',
-        data: {
-          'projectid': id,
-          'type': state,
-          'token': headerModel.token
-        },
-        type: 'post',
-        success: function(response) {
-          $("#loader").fadeOut(300);
-          if (response.resultid == 200) {
-            console.log(response.message ? response.message : '已关注');
-          }
-        },
-        error: function() {
-          $("#loader").fadeOut(300);
-        }
-      })
-    },
     //公告滚动
     ggSlider: function () {
       var _this = this;

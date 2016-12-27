@@ -1,17 +1,23 @@
 section#header
-  .header-top
+  .header-top(v-if="!isMobileOrTable")
     .container.clearfix
       .header-top-l
         span.tel
           i.icon.icon-tel
-          |客服：400-0668-606
+          |客服：400-066-8606
         span.gzus
           |关注我们：
-          i.icon.icon-sina
-          i.icon.icon-wx
+          a(href="http://weibo.com/wow36kr" target="_brank")
+            i.icon.icon-sina
+          span.top-wx
+            i.icon.icon-wx
+            .pop-up.pop-wx
+              img(src="http://www.dgd.vc/skin/img/ewm.png", alt="", width="120", height="120")
         span.app
           i.icon.icon-phone
           |下载APP
+          .pop-up.pop-app
+            img(src="https://www.zczj.com/skin/images/downApp/ma.png", alt="",width="120", height="120")
       .header-top-r
         span.msg
           i.icon.icon-msgTop.icon-msgC
@@ -23,7 +29,7 @@ section#header
         span.top-login(v-else="")
           a(href="/mycenter/index")
             img(v-bind:src="userInfo.Avatar", alt="")
-          span.user-name 老苏
+          span.user-name.ellipsis {{userInfo.UserName}}
           .user-pop.pop-up
             a.userinfo.clearfix(href="/", :title="userInfo.Avatar")
               img(:src="userInfo.Avatar", alt="")
@@ -53,7 +59,7 @@ section#header
           nav(v-bind:class="{ navShow: tag }", v-cloak="")
             a(v-for="(item, index) in navs", :href="item.url", v-bind:class="{ cur : index == 0 }").border-1px {{item.title}}
             a.mobile-show.border-1px(href="javascript:void(0);", v-if="isLogin", v-on:click="loginOut()") 退出
-          .login-btns(v-if="!isMobileOrTable")
+          .login-btns(v-if="isMobileOrTable")
             ul.tool-nav
               li.login-btn(v-if="!isLogin")
                 .item

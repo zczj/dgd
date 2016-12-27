@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-12-26 15:10:35
 * @Last Modified by:   老苏
-* @Last Modified time: 2016-12-26 16:29:59
+* @Last Modified time: 2016-12-27 18:19:45
 */
 
 'use strict';
@@ -10,7 +10,10 @@
 var newsModel = new Vue({
   el:'#model-newsDetail',
   data:{
-    //资讯ID
+    // 资讯数据
+    newsData: null,
+
+    // 资讯ID
     newsId: '',
     // 推荐项目
     Pro: '',
@@ -18,6 +21,27 @@ var newsModel = new Vue({
     TopNews:''
   },
   methods:{
+    // 资讯详情
+    getNews: function () {
+      $("#loader").fadeIn(300)
+      this.$http.get(headerModel.api + '/News/GetNews/'+this.newsId+'?token=' + headerModel.token).then(function(response) {
+        if ( response.data) {
+          if (response.data.message) {
+            console.log(response.data.message);
+          }else{
+            this.newsData = response.data;
+          }
+        }
+        $("#loader").fadeOut(300)
+      })
+    },
+    formartDate: function (time) {
+      return DGDTOOLS.fT._covnerTimeLine(time);
+    },
+    formartKeyWords: function (str) {
+      var res = [];
+      return res =str.split('；');
+    },
     // 推荐项目
     getIntPro: function () {
       $("#loader").fadeIn(300)
@@ -40,13 +64,14 @@ var newsModel = new Vue({
     }
   },
   created: function () {
+
     this.getIntPro();
     this.getIntNew();
-    alert(this.newsId);
   },
   mounted: function () {
+    // 获取url传参过来的资讯id
     this.newsId = window.location.search.split('id=')[1] || 0;
-    alert(this.newsId);
     console.log(this.newsId);
+    this.getNews();
   }
 })

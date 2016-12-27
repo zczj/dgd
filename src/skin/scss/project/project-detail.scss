@@ -47,12 +47,21 @@
         white-space: nowrap;
       }
       .project-handle{
+        position: relative;
         color: #fff;
         font-size: 16px;
+        height: 76px;
         line-height: 2.4;
         a{
           padding: 0 8px;
           color: inherit;
+        }
+        .iShare{
+          font-size: 30px;
+          line-height: 38px;
+          a:hover{
+            opacity: .8;
+          }
         }
       }
     }
@@ -531,24 +540,6 @@
 }
 
 @media screen and (max-width: 1360px) {
-  #detail .detail-box {
-    font-size: 14px;
-    .detail-nav-wrapper{
-      left: -35px;
-    }
-    .detail-nav{
-      border-radius: 0;
-      a{
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-        padding: 0 4px;
-        text-overflow: clip;
-      }
-    }
-  }
-}
-@media screen and (max-width: 1000px) {
   #detail .detail-box{
     .detail-nav{
       display: none!important;
@@ -560,7 +551,6 @@
   #detail{
     padding: 0;
     .banner{
-      // height: 200px;
       &-project-wrapper{
         .detail-intro{
           width: 100%;
@@ -618,6 +608,11 @@
 }
 @media screen and (max-width: 767px) {
   #detail{
+    .banner-project-wrapper{
+      .banner-project-logo{
+        display: none;
+      }
+    }
     .detail-nav-tab{
       li{
         width: 33.33%;

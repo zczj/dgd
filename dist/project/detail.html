@@ -16,10 +16,12 @@
   </head>
   <body>
     <section id="header">
-      <div class="header-top">
+      <div v-if="!isMobileOrTable" class="header-top">
         <div class="container clearfix">
-          <div class="header-top-l"><span class="tel"><i class="icon icon-tel"></i>客服：400-0668-606</span><span class="gzus">关注我们：<i class="icon icon-sina"></i><i class="icon icon-wx"></i></span><span class="app"><i class="icon icon-phone"></i>下载APP</span></div>
-          <div class="header-top-r"><span class="msg"><i class="icon icon-msgTop icon-msgC"></i>我的消息</span><span v-if="!isLogin" class="top-login"><a v-bind:href="['/passport/login.html?url='+window.location.href]">登录</a><span class="line">|</span><a href="/passport/register.html">注册</a></span><span v-else="" class="top-login"><a href="/mycenter/index"><img v-bind:src="userInfo.Avatar" alt=""/></a><span class="user-name">老苏</span>
+          <div class="header-top-l"><span class="tel"><i class="icon icon-tel"></i>客服：400-066-8606</span><span class="gzus">关注我们：<a href="http://weibo.com/wow36kr" target="_brank"><i class="icon icon-sina"></i></a><span class="top-wx"><i class="icon icon-wx"></i>
+                <div class="pop-up pop-wx"><img src="http://www.dgd.vc/skin/img/ewm.png" alt="" width="120" height="120"/></div></span></span><span class="app"><i class="icon icon-phone"></i>下载APP
+              <div class="pop-up pop-app"><img src="https://www.zczj.com/skin/images/downApp/ma.png" alt="" width="120" height="120"/></div></span></div>
+          <div class="header-top-r"><span class="msg"><i class="icon icon-msgTop icon-msgC"></i>我的消息</span><span v-if="!isLogin" class="top-login"><a v-bind:href="['/passport/login.html?url='+window.location.href]">登录</a><span class="line">|</span><a href="/passport/register.html">注册</a></span><span v-else="" class="top-login"><a href="/mycenter/index"><img v-bind:src="userInfo.Avatar" alt=""/></a><span class="user-name ellipsis">{{userInfo.UserName}}</span>
               <div class="user-pop pop-up"><a href="/" :title="userInfo.Avatar" class="userinfo clearfix"><img :src="userInfo.Avatar" alt=""/><span>{{userInfo.UserName}}</span></a>
                 <div class="menu"><a href="#">我的帐户</a><a href="#">我的交易</a><a href="#">我的质押</a><a href="#">我的优惠券</a><a href="#">安全中心</a><a href="javascript:void(0);" v-if="isLogin" v-on:click="loginOut()">退出</a></div>
               </div></span><span class="go-zczj"><a href="http://www.zczj.com">
@@ -32,7 +34,7 @@
             <div v-bind:class="{navLogin: isLogin}" class="nav clearfix"><a href="/" class="logo"><img src="/skin/img/logo.png" alt=""/></a>
               <div class="triggers"><a href="#" v-on:click="showMean" class="mean-btn"><i class="icon icon-catgray"></i></a></div>
               <nav v-bind:class="{ navShow: tag }" v-cloak=""><a v-for="(item, index) in navs" :href="item.url" v-bind:class="{ cur : index == 0 }" class="border-1px">{{item.title}}</a><a href="javascript:void(0);" v-if="isLogin" v-on:click="loginOut()" class="mobile-show border-1px">退出</a></nav>
-              <div v-if="!isMobileOrTable" class="login-btns">
+              <div v-if="isMobileOrTable" class="login-btns">
                 <ul class="tool-nav">
                   <li v-if="!isLogin" class="login-btn">
                     <div class="item"><a v-bind:href="['/passport/login.html?url='+window.location.href]">登录</a><span class="line">|</span><a href="/passport/register.html">注册</a></div>
@@ -64,8 +66,11 @@
             <div class="detail-intro"><img src="../skin/img/project/detail-banner-project-logo.png" alt="" class="banner-project-logo"/>
               <h1 v-bind:title="detail.ProjectName" class="project-name">{{detail.ProjectName}}</h1>
               <p v-bind:title="detail.ShortDesc" class="project-intro">{{detail.ShortDesc}}</p>
-              <p class="project-handle"><a href="javascript:;">关注</a>|<a href="javascript:;" v-on:click="share">分享</a></p>
-              <div class="iShare iShare1"><a href="#" class="iShare_qzone"><i class="icon icon-qzone"></i></a><a href="#" class="iShare_tencent"><i class="icon icon-qzone"></i></a><a href="#" class="iShare_weibo"><i class="icon icon-qzone"></i></a></div>
+              <div class="project-handle"><a href="javascript:;" v-on:click="headerModel.gz(detail.ProjectID, detail)" v-bind:class="{ 'gz-btn-ed': detail.FollowState== true }" v-text="detail.FollowState== true?'关注':'已关注'">关注</a>|<a href="javascript:;">分享</a>
+                <transition name="fade">
+                  <div v-show="shareShow" class="iShare iShare1"><a href="#" class="iShare_qzone"><i class="icon icon-qzone"></i></a><a href="#" class="iShare_weibo"><i class="icon icon-sina"></i></a><a href="#" class="iShare_renren"><i class="icon icon-renren"></i></a><a href="#" class="iShare_douban"><i class="icon icon-douban"></i></a><a href="javascript:;" v-on:click="weChatShare" class="iShare_wx"><i class="icon icon-wx"></i></a></div>
+                </transition>
+              </div>
             </div>
           </div>
         </div>
@@ -199,28 +204,7 @@
       </transition>
     </div>
     <script src="../skin/js/project/project-detail.js"></script>
-    <script src="../skin/js/project/iShare.min.js"></script>
-    <script type="text/javascript">
-      window.onload = function () {
-        window.iShare_config = {container:'.iShare1',config:{
-          title: '分享标题',
-          description: '这是分享描述文本',
-          url: 'https://github.com/zhansingsong',
-          WXoptions:{
-              evenType: 'click',
-              isTitleVisibility: true,
-              title: '二维码标题',
-              isTipVisibility: true,
-              tip: '二维码描述文本',
-              qrcodeW: '120',
-              qrcodeH: '120',
-              qrcodeBgc: '#e1bee7',
-              qrcodeFgc: '#4a148c',
-              bgcolor: '#9c27b0'
-          }
-        }};
-      }
-    </script>
+    <script src="../skin/js/project/iShare-tidy.min.js"></script>
     <!--==================================================-->
     <div class="footer">
       <div class="info">

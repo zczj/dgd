@@ -41,7 +41,7 @@ new Vue({
       _this.number--
       if (_this.number<=0) {
         clearInterval(timer)
-        // window.location.href = window.location.search.split('url=')[1] || '/';
+        window.location.href = window.location.search.split('url=')[1] || '/';
 
       }
     }, 1000)
