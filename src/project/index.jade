@@ -87,7 +87,7 @@ block content
                   a.buy-now(href="#")
                     i.icon.icon-money
                     |我要认购
-                  a.gz-btn(href="javascript:;" v-on:click='gz(ii)')
+                  a.gz-btn(href="javascript:;",v-on:click= "headerModel.gz(item.ProjectID, item)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }")
                 .list-con
                   .list-txt.
                     {{item.ShortDesc}}

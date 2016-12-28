@@ -1,5 +1,5 @@
 Vue.config.devtools = true
-var passortModel = new Vue({
+var passportModel = new Vue({
   el: '.passport-common',
   data: {
     sms: '发送',
@@ -7,25 +7,33 @@ var passortModel = new Vue({
     error: false,  // 表单验证错误提示
     errorMsg: '',  // 表单验证错误提示信息
     delay: 5000,  // 提示消失时间（ms）
+    verify: false  // 验证成功与否
   },
   methods: {
     // 验证手机号码
     verifyTel: function (str) {
       var re = /^1(3|4|5|7|8)\d{9}$/
-      if (!re.test(str)) {
-        return false;
-      } else {
-        return true
-      }
+      return re.test(str)
     },
     // 验证邮箱
     verifyEmail: function (str) {
       var re = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
-      if (!re.test(str)) {
-          return false
-      } else {
-          return true;
-      }
+      return re.test(str)
+    },
+    // 验证图形验证码
+    verifyImage: function (str) {
+      var re = /^[a-zA-Z0-9]{4}$/
+      return re.test(str)
+    },
+    // 验证短信验证码
+    verifySMS: function (str) {
+      var re = /^\d{4}$/
+      return re.test(str)
+    },
+    // 密码长度验证
+    passwordLength: function (str) {
+      var re = /^.{6,20}$/
+      return re.test(str)
     },
     // 提示消失
     cancelNotice: function () {
@@ -93,17 +101,18 @@ var passortModel = new Vue({
         return
       }
       // 图形验证码验证
-      if (imageVerify.value == '') {
-        this.errorFn('请填写图形验证码')
+      if (imageVerify.value == '' || !this.verifyImage(imageVerify.value)) {
+        this.errorFn('请填写正确的图形验证码')
         imageVerify.focus()
         imageVerify.select()
         return
       }
       // 发送短信方法
       if (!this.sended){
-        // this.getSMSVerify(tel.value)
+        this.getSMSVerify(tel.value)
       }
     },
+
   }
 })
 

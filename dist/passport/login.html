@@ -81,7 +81,7 @@
                       <input type="password" placeholder="输入您的密码" ref="password" v-on:keyup.enter="login" class="passport-input password"/>
                     </li>
                     <transition name="fade">
-                      <li v-show="passortModel.error" class="error">{{passortModel.errorMsg}}</li>
+                      <li v-show="passportModel.error" class="error">{{passportModel.errorMsg}}</li>
                     </transition>
                     <li>
                       <label class="remember">
@@ -102,13 +102,13 @@
                       <input type="tel" placeholder="输入您的手机号" ref="telPhoneNum" class="passport-input"/>
                     </li>
                     <li>
-                      <input type="text" placeholder="输入图形验证码" ref="imageVerify" class="passport-input"/><img src="http://www.dgd.vc/Passport/VerifyImage" alt="" ref="verifyImage" class="verify"/><i v-on:click="passortModel.getVerify(loginModel)" class="icon icon-refresh"></i>
+                      <input type="text" placeholder="输入图形验证码" ref="imageVerify" class="passport-input"/><img src="http://www.dgd.vc/Passport/VerifyImage" alt="" ref="verifyImage" class="verify"/><i v-on:click="passportModel.getVerify(loginModel)" class="icon icon-refresh"></i>
                     </li>
                     <li>
-                      <input type="text" placeholder="输入手机验证码" ref="SMSVerify" class="passport-input"/><span v-on:click="passortModel.sendSMS(loginModel)" v-html="passortModel.sms" v-bind:class="{disabled: passortModel.sended}" class="sms"></span>
+                      <input type="text" placeholder="输入手机验证码" ref="SMSVerify" class="passport-input"/><span v-on:click="passportModel.sendSMS(loginModel)" v-html="passportModel.sms" v-bind:class="{disabled: passportModel.sended}" class="sms"></span>
                     </li>
                     <transition name="fade">
-                      <li v-show="passortModel.error" class="error">{{passortModel.errorMsg}}</li>
+                      <li v-show="passportModel.error" class="error">{{passportModel.errorMsg}}</li>
                     </transition>
                   </ul>
                   <button v-on:click="loginBySMS" class="passport-button">登录</button><a href="./register.html" class="passport-button">注册</a>
@@ -181,7 +181,7 @@
       var loaderModel = new Vue({
         el: '#loader',
         data: {
-          showLoader: true
+          showLoader: false
         }
       })
     </script>

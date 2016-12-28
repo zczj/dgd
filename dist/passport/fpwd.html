@@ -93,7 +93,7 @@
                       <input placeholder="输入您的手机或邮箱" ref="telPhoneNum" class="passport-input user-account"/>
                     </li>
                     <transition name="fade">
-                      <li v-show="passortModel.error" class="error">{{passortModel.errorMsg}}</li>
+                      <li v-show="passportModel.error" class="error">{{passportModel.errorMsg}}</li>
                     </transition>
                   </ul>
                 </div><a href="javascript:;" v-on:click="step1" class="passport-button">下一步</a>
@@ -105,13 +105,13 @@
                   <div class="fpwd-item-wrapper">
                     <ul class="passport-form">
                       <li>
-                        <input placeholder="输入手机验证码" ref="SMSVerify" class="passport-input sms-modifycode"/><span v-on:click="passortModel.sendSMS(fpwdModel)" v-html="passortModel.sms" v-bind:class="{disabled: passortModel.sended}" class="sms"></span>
+                        <input placeholder="输入手机验证码" ref="SMSVerify" class="passport-input sms-modifycode"/><span v-on:click="passportModel.sendSMS(fpwdModel)" v-html="passportModel.sms" v-bind:class="{disabled: passportModel.sended}" class="sms"></span>
                       </li>
                       <li>
                         <input type="password" placeholder="输入新密码" ref="newPassword" class="passport-input new-pwd"/><span class="fpwd-notice">(请输入8~16位中英文组合密码)</span>
                       </li>
                       <transition name="fade">
-                        <li v-show="passortModel.error" class="error">{{passortModel.errorMsg}}</li>
+                        <li v-show="passportModel.error" class="error">{{passportModel.errorMsg}}</li>
                       </transition>
                     </ul>
                   </div><a href="javascript:;" v-on:click="step2" class="passport-button">下一步</a>
@@ -185,7 +185,7 @@
       var loaderModel = new Vue({
         el: '#loader',
         data: {
-          showLoader: true
+          showLoader: false
         }
       })
     </script>

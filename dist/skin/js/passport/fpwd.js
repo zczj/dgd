@@ -10,15 +10,15 @@ var fpwdModel = new Vue({
       var _this = this,
           telPhoneNum = this.$refs.telPhoneNum
       if (telPhoneNum.value == '') {
-        passortModel.errorFn('请输入您的手机号码或邮箱')
+        passportModel.errorFn('请输入您的手机号码或邮箱')
         telPhoneNum.focus()
         return false
       } else {
-        if (passortModel.verifyTel(telPhoneNum.value) || passortModel.verifyEmail(telPhoneNum.value)) {
+        if (passportModel.verifyTel(telPhoneNum.value) || passportModel.verifyEmail(telPhoneNum.value)) {
           this.step = 2
           this.tel = telPhoneNum.value
         } else {
-          passortModel.errorFn('请输入正确的手机号码或邮箱')
+          passportModel.errorFn('请输入正确的手机号码或邮箱')
           telPhoneNum.focus()
           telPhoneNum.select()
           return false
@@ -32,12 +32,12 @@ var fpwdModel = new Vue({
           verifySMSUrl = headerModel.api + '/Passport/ValidatePhoneCode'
 
       if (SMSVerify.value == '' ) {
-        passortModel.errorFn('请输入短信验证码')
+        passportModel.errorFn('请输入短信验证码')
         SMSVerify.focus()
         return false
       }
       if (newPassword.value == '') {
-        passortModel.errorFn('请输入您的新密码')
+        passportModel.errorFn('请输入您的新密码')
         newPassword.focus()
         return false
       }
@@ -48,7 +48,7 @@ var fpwdModel = new Vue({
         success: function (res) {
           // 请求成功，但验证失败
           if (res.resultid !== 200) {
-            passortModel.errorFn(res.message)
+            passportModel.errorFn(res.message)
             SMSVerify.select()
             return false
           } else {

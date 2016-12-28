@@ -20,7 +20,7 @@ block content
                   li
                     input.passport-input.password(type='password' placeholder='输入您的密码' ref='password' v-on:keyup.enter='login')
                   transition(name='fade')
-                    li.error(v-show='passortModel.error') {{passortModel.errorMsg}}
+                    li.error(v-show='passportModel.error') {{passportModel.errorMsg}}
                   li
                     label.remember
                       input(type='checkbox' value='checked' v-model='checkName')
@@ -39,12 +39,12 @@ block content
                   li
                     input.passport-input(type='text' placeholder='输入图形验证码' ref='imageVerify')
                     img(src="http://www.dgd.vc/Passport/VerifyImage", alt="" ref='verifyImage').verify
-                    i.icon.icon-refresh(v-on:click='passortModel.getVerify(loginModel)')
+                    i.icon.icon-refresh(v-on:click='passportModel.getVerify(loginModel)')
                   li
                     input.passport-input(type='text' placeholder='输入手机验证码' ref='SMSVerify')
-                    span.sms(v-on:click='passortModel.sendSMS(loginModel)' v-html='passortModel.sms' v-bind:class='{disabled: passortModel.sended}')
+                    span.sms(v-on:click='passportModel.sendSMS(loginModel)' v-html='passportModel.sms' v-bind:class='{disabled: passportModel.sended}')
                   transition(name='fade')
-                    li.error(v-show='passortModel.error') {{passortModel.errorMsg}}
+                    li.error(v-show='passportModel.error') {{passportModel.errorMsg}}
                 button.passport-button(v-on:click='loginBySMS') 登录
                 a(href="./register.html").passport-button 注册
           // 账号登录、手机验证码登录切换按钮

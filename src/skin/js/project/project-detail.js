@@ -142,7 +142,6 @@ var projectDetail = new Vue({
           maskClose: true,
           effect: true
         })
-
         return false
       }
 
@@ -162,7 +161,6 @@ var projectDetail = new Vue({
     // 判断详情图片宽度
     getPicWidth: function () {
       var imgs = $('.item-desc img')
-
       imgs.each(function () {
         if( $(this).width() > $(document).width()) {
           $(this).parent('p').css('overflow-x', 'auto')
@@ -171,74 +169,27 @@ var projectDetail = new Vue({
     },
     // 分享
     share: function () {
-      new iShare({container:'.iShare1',config:{
-        // title: 'title',//分享标题. 默认：document.title
-        // description: 'description',//分享描述文本. 默认：meta的description
-        // url: 'url',//分享的URL. 默认：location.href
-        // initialized: true,//自动创建必须开启字段. isAbroad，isTitle才能生效.默认开启
-        // isAbroad: false,
-        //默认undefined，开启国外分享接口 + 国内分享接口.
-        //为true时，开启国外分享接口: 'iShare_facebook','iShare_linkedin','iShare_twitter','iShare_googleplus','iShare_tumblr','iShare_pinterest'.
-        //为false时，开启国内分享接口：'iShare_weibo','iShare_qq','iShare_wechat','iShare_tencent','iShare_douban','iShare_qzone','iShare_renren','iShare_youdaonote'.
-        // isTitle: true,//开启title提示, 默认是false.
-      }})
+      DGDTOOLS.Ev._share('.iShare1')
     },
     // 微信分享
     weChatShare: function () {
-      var _this = this
-      if (this.isWeixin()){
-        this.wechatShare = true
-      } else {
-        // 不是微信则添加二维码生成库
-        this.webShare = true
-        // 多次点击只添加一次库文件
-        if (this.isAdd) {
-          var script=document.createElement('script')
-          script.setAttribute('type','text/javascript')
-          script.setAttribute('src','/skin/js/project/qrcode.min.js')
-          document.querySelector('head').appendChild(script)
-          this.isAdd = false
-          // 库文件加载完成后再调用二维码生成方法
-          script.onload = function () {
-            _this.createQrcode()
-          }
-        } else {
-          // 给个延时，当元素显示后再生产二维码
+      if (DGDTOOLS.check._isWeixin()) {
+        this.wechatShare = true;
+      }else{
+        this.webShare = true;
+        var js =DGDTOOLS.Ev._loadJS('/skin/js/project/qrcode.min.js');
+        if (js == null) {
           setTimeout(function () {
-            _this.createQrcode()
-          }, 40)
+            DGDTOOLS.Ev._createQrcode(document.querySelector('#canvas'))
+          }, 40);
+          return;
         }
-
-      }
-    },
-    // 微信判断
-    isWeixin: function () {
-      var userAgentString = window.navigator ? window.navigator.userAgent : "";
-      var weixinreg = /MicroMessenger/i;
-      var androidreg = /android/i;
-      if (!weixinreg.test(userAgentString) ) {
-          return false;
-      }
-      return true;
-    },
-    // 生成二维码
-    createQrcode: function () {
-      var shareUrl = window.location.href
-      qr.canvas({
-        canvas: document.querySelector('#canvas'),
-        value: shareUrl,
-        size: 8,
-        cb: function(width, len, px) {
-            var el = document.querySelector('#canvas');
-            var val = 25;
-            if (width < (25*8 - 10)) {
-                val = Math.floor((250 - width) / 2);
-            }
-            el.style.marginLeft = val+"px";
-            el.style.marginTop = val+"px";
+        js.onload=function () {
+          DGDTOOLS.Ev._createQrcode(document.querySelector('#canvas'))
         }
-      });
+      }
     }
+
   },
   computed: {
     // 计算总的跟投人数

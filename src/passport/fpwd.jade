@@ -32,7 +32,7 @@ block content
                   li
                     input.passport-input.user-account(placeholder='输入您的手机或邮箱' ref='telPhoneNum')
                   transition(name='fade')
-                    li.error(v-show='passortModel.error') {{passortModel.errorMsg}}
+                    li.error(v-show='passportModel.error') {{passportModel.errorMsg}}
               a(href="javascript:;" v-on:click='step1').passport-button 下一步
             // 第二步
             transition(name='fade')
@@ -42,12 +42,12 @@ block content
                   ul.passport-form
                     li
                       input.passport-input.sms-modifycode(placeholder='输入手机验证码' ref='SMSVerify')
-                      span.sms(v-on:click='passortModel.sendSMS(fpwdModel)' v-html='passortModel.sms' v-bind:class='{disabled: passortModel.sended}')
+                      span.sms(v-on:click='passportModel.sendSMS(fpwdModel)' v-html='passportModel.sms' v-bind:class='{disabled: passportModel.sended}')
                     li
                       input.passport-input.new-pwd(type='password' placeholder='输入新密码' ref='newPassword')
                       span.fpwd-notice (请输入8~16位中英文组合密码)
                     transition(name='fade')
-                      li.error(v-show='passortModel.error') {{passortModel.errorMsg}}
+                      li.error(v-show='passportModel.error') {{passportModel.errorMsg}}
                 a(href="javascript:;" v-on:click='step2').passport-button 下一步
             // 第三步
             .passport-item(v-show='step==3')

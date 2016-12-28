@@ -14,18 +14,19 @@ var loginModel = new Vue({
 
       console.log(this.checkName)
 
-      if (account.value == '') {
-        passortModel.errorFn('账号不能为空')
+      if (account.value === '') {
+        passportModel.errorFn('账号不能为空')
         account.focus()
+        account.select()
         return false
       }
-      if (password.value == '') {
-        passortModel.errorFn('密码不能为空')
+      if (password.value === '' || !passportModel.passwordLength(password.value)) {
+        passportModel.errorFn('请填写正确的密码')
         password.focus()
+        password.select()
         return false
       }
-
-      $("#loader").fadeIn(300)
+      loaderModel.showLoader = true
       $.ajax({
         url: headerModel.api + '/Passport/Login',
         data: {'Account': account.value,'Password': $.md5($.md5(password.value))},
@@ -35,7 +36,7 @@ var loginModel = new Vue({
             $("#loader").fadeOut(300)
             if(response.resultid !== 200){
               // 请求成功，账号或密码不正确
-              passortModel.errorFn(response.message)
+              passportModel.errorFn(response.message)
               account.focus()
               account.select()
             } else if (response.resultid === 200) {
@@ -44,6 +45,7 @@ var loginModel = new Vue({
               //{"token":"","uid":,"Avatar":"","UserName":"","message":"","resultid":}
               DGDTOOLS.store.save('userInfo', response);
               _this.successFn()
+              loaderModel.showLoader = false
             }
           }
         },
@@ -61,22 +63,29 @@ var loginModel = new Vue({
     loginBySMS: function () {
       var verifySMSUrl = headerModel.api + '/Passport/ValidatePhoneCode',
           telPhoneNum = this.$refs.telPhoneNum,
-          verifyImage = this.$refs.verifyImage,
+          imageVerify = this.$refs.imageVerify,
+          // verifyImage = this.$refs.verifyImage,
           SMSVerify = this.$refs.SMSVerify,
           _this = this
-      if (telPhoneNum.value == '') {
-        passortModel.errorFn('手机号码不能为空')
+      if (telPhoneNum.value === '' || !passportModel.verifyTel(telPhoneNum.value)) {
+        // 电话号码验证
+        passportModel.errorFn('请填写正确的手机号码')
         telPhoneNum.focus()
+        telPhoneNum.select()
         return false
       }
-      if (verifyImage.value == '') {
-        passortModel.errorFn('图形验证码不能为空')
-        verifyImage.focus()
+       if (imageVerify.value === '' || !passportModel.verifyImage(imageVerify.value)) {
+        // 图形验证码验证
+        passportModel.errorFn('请填写正确的图形验证码验证')
+        imageVerify.focus()
+        imageVerify.select()
         return false
       }
-      if (SMSVerify.value == '') {
-        passortModel.errorFn('短信验证码不能为空')
+      if (SMSVerify.value === '' || !passportModel.verifySMS(SMSVerify.value)) {
+        // 短信验证码验证
+        passportModel.errorFn('请填写正确的短信验证码')
         SMSVerify.focus()
+        SMSVerify.select()
         return false
       }
       // 登录验证
@@ -87,7 +96,7 @@ var loginModel = new Vue({
         success: function (res) {
           // 请求成功，但验证失败
           if (res.resultid !== 200) {
-            passortModel.errorFn(res.message)
+            passportModel.errorFn(res.message)
             telPhoneNum.select()
             return false
           } else {
