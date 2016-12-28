@@ -102,7 +102,7 @@
                       <input type="tel" placeholder="输入您的手机号" ref="telPhoneNum" class="passport-input"/>
                     </li>
                     <li>
-                      <input type="text" placeholder="输入图形验证码" class="passport-input"/><img src="http://www.dgd.vc/Passport/VerifyImage" alt="" ref="verifyImage" class="verify"/><i v-on:click="passortModel.getVerify(loginModel)" class="icon icon-refresh"></i>
+                      <input type="text" placeholder="输入图形验证码" ref="imageVerify" class="passport-input"/><img src="http://www.dgd.vc/Passport/VerifyImage" alt="" ref="verifyImage" class="verify"/><i v-on:click="passortModel.getVerify(loginModel)" class="icon icon-refresh"></i>
                     </li>
                     <li>
                       <input type="text" placeholder="输入手机验证码" ref="SMSVerify" class="passport-input"/><span v-on:click="passortModel.sendSMS(loginModel)" v-html="passortModel.sms" v-bind:class="{disabled: passortModel.sended}" class="sms"></span>
@@ -167,11 +167,23 @@
         <div class="container"><span>深圳市网筹互联网金融服务有限公司</span><span>ICP证：粤ICP备14040204号-2</span></div>
       </div>
     </div>
-    <div id="loader" class="loader">
-      <loader-inner class="ball-clip-rotate-pulse">
-        <div></div>
-        <div></div>
-      </loader-inner>
-    </div>
+    <transition name="opacity">
+      <div id="loader" v-show="showLoader" class="loader">
+        <div>
+          <loader-inner class="ball-clip-rotate-pulse">
+            <div></div>
+            <div></div>
+          </loader-inner>
+        </div>
+      </div>
+    </transition>
+    <script>
+      var loaderModel = new Vue({
+        el: '#loader',
+        data: {
+          showLoader: true
+        }
+      })
+    </script>
   </body>
 </html>

@@ -75,7 +75,7 @@ var loginModel = new Vue({
         return false
       }
       if (SMSVerify.value == '') {
-        passortModel.errorFn('图形验证码不能为空')
+        passortModel.errorFn('短信验证码不能为空')
         SMSVerify.focus()
         return false
       }

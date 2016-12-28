@@ -189,11 +189,23 @@
         <div class="container"><span>深圳市网筹互联网金融服务有限公司</span><span>ICP证：粤ICP备14040204号-2</span></div>
       </div>
     </div>
-    <div id="loader" class="loader">
-      <loader-inner class="ball-clip-rotate-pulse">
-        <div></div>
-        <div></div>
-      </loader-inner>
-    </div>
+    <transition name="opacity">
+      <div id="loader" v-show="showLoader" class="loader">
+        <div>
+          <loader-inner class="ball-clip-rotate-pulse">
+            <div></div>
+            <div></div>
+          </loader-inner>
+        </div>
+      </div>
+    </transition>
+    <script>
+      var loaderModel = new Vue({
+        el: '#loader',
+        data: {
+          showLoader: true
+        }
+      })
+    </script>
   </body>
 </html>

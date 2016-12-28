@@ -66,7 +66,7 @@
             <div class="detail-intro"><img src="../skin/img/project/detail-banner-project-logo.png" alt="" class="banner-project-logo"/>
               <h1 v-bind:title="detail.ProjectName" class="project-name">{{detail.ProjectName}}</h1>
               <p v-bind:title="detail.ShortDesc" class="project-intro">{{detail.ShortDesc}}</p>
-              <div class="project-handle"><a href="javascript:;" v-on:click="headerModel.gz(detail.ProjectID, detail)" v-bind:class="{ 'gz-btn-ed': detail.FollowState== true }" v-text="detail.FollowState== true?'关注':'已关注'">关注</a>|<a href="javascript:;">分享</a>
+              <div class="project-handle"><a href="javascript:;" v-on:click="headerModel.gz(detail.ProjectID, detail)" v-bind:class="{ 'gz-btn-ed': detail.FollowState== true }" v-text="detail.FollowState== true?'已关注':'关注'">关注</a>|<a href="javascript:;">分享</a>
                 <transition name="fade">
                   <div v-show="shareShow" class="iShare iShare1"><a href="#" class="iShare_qzone"><i class="icon icon-qzone"></i></a><a href="#" class="iShare_weibo"><i class="icon icon-sina"></i></a><a href="#" class="iShare_renren"><i class="icon icon-renren"></i></a><a href="#" class="iShare_douban"><i class="icon icon-douban"></i></a><a href="javascript:;" v-on:click="weChatShare" class="iShare_wx"><i class="icon icon-wx"></i></a></div>
                 </transition>
@@ -245,11 +245,23 @@
         <div class="container"><span>深圳市网筹互联网金融服务有限公司</span><span>ICP证：粤ICP备14040204号-2</span></div>
       </div>
     </div>
-    <div id="loader" class="loader">
-      <loader-inner class="ball-clip-rotate-pulse">
-        <div></div>
-        <div></div>
-      </loader-inner>
-    </div>
+    <transition name="opacity">
+      <div id="loader" v-show="showLoader" class="loader">
+        <div>
+          <loader-inner class="ball-clip-rotate-pulse">
+            <div></div>
+            <div></div>
+          </loader-inner>
+        </div>
+      </div>
+    </transition>
+    <script>
+      var loaderModel = new Vue({
+        el: '#loader',
+        data: {
+          showLoader: true
+        }
+      })
+    </script>
   </body>
 </html>

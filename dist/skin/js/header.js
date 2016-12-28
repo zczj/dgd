@@ -59,24 +59,7 @@ var headerModel = new Vue({
             state=null;
         //检测登录
         if (!headerModel.isLogin) {;
-          (function($) {
-            $.dialog({
-              type: 'warning',
-              message: '请先登录！',
-              buttons: [{
-                text: '登录',
-                type: 'green',
-                callback: function() {
-                  window.location = '/passport/login.html?url='+window.location.href;
-                }
-              }, {
-                text: '取消',
-                type: 'red'
-              }],
-              maskClose: true,
-              effect: true
-            })
-          })(jQuery);
+          DGDTOOLS.Ev._isLogin();
           return;
         }
         $("#loader").fadeIn(300);

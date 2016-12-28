@@ -196,8 +196,8 @@ var projectDetail = new Vue({
           var script=document.createElement('script')
           script.setAttribute('type','text/javascript')
           script.setAttribute('src','/skin/js/project/qrcode.min.js')
-          this.isAdd = false
           document.querySelector('head').appendChild(script)
+          this.isAdd = false
           // 库文件加载完成后再调用二维码生成方法
           script.onload = function () {
             _this.createQrcode()

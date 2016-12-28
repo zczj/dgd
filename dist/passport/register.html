@@ -59,6 +59,7 @@
     </section>
     <!--==================================================-->
     <link rel="stylesheet" href="/skin/css/passport/passport.css"/>
+    <div class="passport-common"></div>
     <div id="register" v-cloak="v-cloak" class="h-passport-page">
       <div class="container">
         <div class="passport-profile-wrapper">
@@ -72,77 +73,38 @@
                 <h2 class="passport-header">注册</h2>
                 <ul class="passport-form">
                   <li>
-                    <input type="text" placeholder="输入您的手机号" class="passport-input"/>
+                    <input type="text" placeholder="输入您的手机号" ref="telPhoneNum" class="passport-input"/>
                   </li>
                   <li>
-                    <input type="text" placeholder="输入图形验证码" class="passport-input"/><img src="../skin/img/passport/verify.png" alt="" class="verify"/><i v-on:click="refreshVerify()" class="icon icon-refresh"></i>
+                    <input type="text" placeholder="输入图形验证码" ref="imageVerify" class="passport-input"/><img src="http://www.dgd.vc/Passport/VerifyImage" alt="" ref="verifyImage" class="verify"/><i v-on:click="passortModel.getVerify(registerModel)" class="icon icon-refresh"></i>
                   </li>
                   <li>
-                    <input type="text" placeholder="输入手机验证码" class="passport-input"/><span v-on:click="sendSMS" v-html="sms" v-bind:class="{disabled: sended}" class="sms"></span>
+                    <input type="text" placeholder="输入手机验证码" ref="SMSVerify" class="passport-input"/><span v-on:click="passortModel.sendSMS(registerModel)" v-html="passortModel.sms" v-bind:class="{disabled: passortModel.sended}" class="sms"></span>
                   </li>
                   <li>
-                    <input type="password" placeholder="输入您的密码" class="passport-input"/>
+                    <input type="password" placeholder="输入您的密码" ref="password" class="passport-input"/>
                   </li>
                   <li>
                     <input type="text" placeholder="输入推荐码（选填）" class="passport-input"/>
                   </li>
+                  <transition name="fade">
+                    <li v-show="passortModel.error" class="error">{{passortModel.errorMsg}}</li>
+                  </transition>
                   <li>
                     <label class="remember">
                       <input type="checkbox"/>我已阅读及同意<a href="#" class="services">《大股东服务协议》</a>和<a href="#" class="services">《风险揭示书》</a>
                     </label>
                   </li>
                 </ul>
-                <button class="passport-button">注册</button>
+                <button v-on:click="register" class="passport-button">注册</button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <script>
-      new Vue({
-        el: '#register',
-        data: {
-          formShow: true,
-          sms: '发送',
-          sended: false
-        },
-        methods: {
-          sendSMS: function () {
-            if (this.sended){
-              // 已发送短信，倒计时内不可再点击
-              return false
-            } else {
-              // 设置按钮文字状态
-              this.countdown()
-      
-              // 发送短信方法
-              console.log(1)
-            }
-          },
-          // 倒计时
-          countdown: function () {
-            var num = 20, timer = null, _this = this
-            this.sms = '重新发送(<em style="color:red;font-style:normal;">'+num+'</em>)s'
-            this.sended = true
-            timer = setInterval(function () {
-              num--
-              if( num <=0 ){
-                clearInterval(timer)
-                _this.sended = false
-                _this.sms = '重新发送'
-                return
-              }
-              _this.sms = '重新发送(<em style="color:red;font-style:normal;">'+num+'</em>)s'
-            }, 1000)
-          },
-          // 重新获取验证码
-          refreshVerify: function () {
-            console.log('重新获取验证码')
-          }
-        }
-      })
-    </script>
+    <script src="../skin/js/passport/passport.js"></script>
+    <script src="../skin/js/passport/register.js"></script>
     <!--==================================================-->
     <div class="footer">
       <div class="info">
@@ -183,11 +145,23 @@
         <div class="container"><span>深圳市网筹互联网金融服务有限公司</span><span>ICP证：粤ICP备14040204号-2</span></div>
       </div>
     </div>
-    <div id="loader" class="loader">
-      <loader-inner class="ball-clip-rotate-pulse">
-        <div></div>
-        <div></div>
-      </loader-inner>
-    </div>
+    <transition name="opacity">
+      <div id="loader" v-show="showLoader" class="loader">
+        <div>
+          <loader-inner class="ball-clip-rotate-pulse">
+            <div></div>
+            <div></div>
+          </loader-inner>
+        </div>
+      </div>
+    </transition>
+    <script>
+      var loaderModel = new Vue({
+        el: '#loader',
+        data: {
+          showLoader: true
+        }
+      })
+    </script>
   </body>
 </html>

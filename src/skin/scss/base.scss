@@ -1276,12 +1276,20 @@ header{
   top: 0;
   width: 100%;
   height: 100%;
-  background:rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items:center;
-  z-index: 1000;
+  background:#fff;
+  z-index: 99999;
   box-sizing: content-box;
+  > div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+  }
 }
 .ball-clip-rotate-pulse {
   position: relative;
@@ -1301,18 +1309,18 @@ header{
       width: 16px;
       top: 9px;
       left: 9px;
-              animation: scale 1s 0s cubic-bezier(.09, .57, .49, .9) infinite; }
+      animation: scale 1s 0s cubic-bezier(.09, .57, .49, .9) infinite; }
     .ball-clip-rotate-pulse > div:last-child {
       box-sizing: content-box;
       position: absolute;
-      border: 2px solid #1fdab2;
+      // border: 2px solid #1fdab2;
       width: 30px;
       height: 30px;
       background: transparent;
       border: 2px solid;
-      border-color: #fff transparent #fff transparent;
-              animation: rotate 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
-              animation-duration: 1s; }
+      border-color: #1fdab2 transparent #1fdab2 transparent;
+      animation: rotate 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
+      animation-duration: 1s; }
 
   @keyframes rotate {
   0% {
@@ -1323,3 +1331,27 @@ header{
 
   100% {
             transform: rotate(360deg) scale(1); } }
+
+
+
+// 二维码弹层
+.h-modal-mask{
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .6);
+  z-index: 99999;
+  .qrcode{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: 10px;
+    transform: translate3D(-50%, -50%, 0);
+  }
+}

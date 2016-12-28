@@ -68,6 +68,13 @@ var passortModel = new Vue({
         if (res.data.resultid == 200) {
           // 设置按钮文字状态
           this.countdown()
+          // 弹窗提示
+          $.dialog({
+            type: 'ok',
+            message: '发送成功！',
+            delay: 2000,
+            effect: true
+          })
         } else {
           this.errorFn(res.message)
         }
@@ -76,7 +83,7 @@ var passortModel = new Vue({
     // 发送短信
     sendSMS: function (obj) {
       var tel = obj.$refs.telPhoneNum,
-          verifyImage = obj.$refs.verifyImage
+          imageVerify = obj.$refs.imageVerify
 
       // 手机号码验证
       if (tel.value === '' || !this.verifyTel(tel.value)) {
@@ -86,15 +93,15 @@ var passortModel = new Vue({
         return
       }
       // 图形验证码验证
-      if (verifyImage && verifyImage.value == '') {
+      if (imageVerify.value == '') {
         this.errorFn('请填写图形验证码')
-        verifyImage.focus()
-        verifyImage.select()
+        imageVerify.focus()
+        imageVerify.select()
         return
       }
       // 发送短信方法
       if (!this.sended){
-        this.getSMSVerify(tel.value)
+        // this.getSMSVerify(tel.value)
       }
     },
   }

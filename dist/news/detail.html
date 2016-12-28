@@ -61,24 +61,32 @@
     <link rel="stylesheet" href="/skin/plugs/owl/owl.carousel.min.css"/>
     <link rel="stylesheet" href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css"/>
     <link rel="stylesheet" href="/skin/css/news/newsDetail.css"/>
-    <div id="model-newsDetail">
+    <div id="model-newsDetail" v-cloak="v-cloak">
       <div class="news-warp">
         <div class="container clearfix">
           <div class="main">
-            <div v-if="newsData" class="news-detail">
+            <div v-if="newsData" v-bind:class="{'news-mobile': headerModel.isMobileOrTable}" class="news-detail">
+              <div class="iShare item-share"><a href="#" class="item iShare_weibo"><i class="icon icon-sina"></i></a><a href="javascript:;" v-on:click="wechat" class="item iShare_wx"><i class="icon icon-wx"></i></a><a href="#" class="item iShare_qzone"><i class="icon icon-qzone"></i></a><a href="#" class="item iShare_renren"><i class="icon icon-renren"></i></a></div>
               <div class="item-head">
                 <h1 class="item-title">{{newsData.newsinfo.newtitle}}</h1>
                 <div class="item-souce clearfix">
                   <div class="item-l"><span class="souce">来源：{{newsData.newsinfo.newform}}</span><span class="author">作者：{{newsData.newsinfo.newman}}</span><span v-text="formartDate(newsData.newsinfo.newdate)" class="time"></span></div>
-                  <div class="item-r"><span class="sc"> <i class="icon icon-sc"></i>收藏</span><span class="commone">评论（6）</span><span class="read">阅读（66）</span></div>
+                  <div class="item-r"><span v-bind:class="{'sc-ed':newsData.newsinfo.IsCollect}" v-on:click="collection" class="sc"><i class="icon icon-sc"></i>收藏</span><span class="commone">评论（6）</span><span class="read">阅读 {{newsData.newsinfo.newpoint}}</span></div>
                 </div>
               </div>
               <div class="item-dd">{{newsData.newsinfo.newsynopsis}}</div>
               <div v-html="newsData.newsinfo.newcontent" class="item-info"></div>
-              <div class="item-keyWords"><a href="#" v-for="item in formartKeyWords(newsData.newsinfo.newkey)" v-if="item">{{item}}</a></div>
-              <div class="item-share"></div>
-              <div class="item-shengming"><span class="tigger"><i class="icon icon-sm"></i>声明</span>
-                <div class="item-sm-box"></div>
+              <div class="item-keyWords"><span v-for="item in formartKeyWords(newsData.newsinfo.newkey)" v-if="item">{{item}}</span></div>
+              <div class="item-shengming"><span v-on:click="Sm = !Sm" class="tigger"><i class="icon icon-sm"></i>声明</span>
+                <transition name="opacity">
+                  <div v-if="Sm" class="item-sm-box">
+                    <p>1.众筹之家(www.zczj.com)所发布、转载、摘编的文章大多来源于互联网（我们会尽量标注来源和作者）。转载目的在于传递更多信息，不代表本网观点及真实性，如果作品内容、版权和其它问题侵害到您的权益，我们感到很抱歉，并将火速处理。联系方式：0755-82557958，也诚挚地欢迎您给我们投稿，谢谢！</p>
+                      <p>2.众筹之家的原创文章，版权属于众筹之家。允许转载的文章转载请注明作者和“来源：众筹之家(www.zczj.com)”，不允许转载的文章仅供阅读。不尊重原创的行为众筹之家或将追究责任。</p>
+                    
+                    
+                    
+                  </div>
+                </transition>
               </div>
             </div>
           </div>
@@ -100,9 +108,22 @@
           </div>
         </div>
       </div>
+      <!-- 微信分享-->
+      <transition name="opacity">
+        <div v-if="webShareWx" v-on:click="webShareWx = false" class="h-modal-mask"><img src="/skin/img/project/share.png" width="100%" alt=""/></div>
+      </transition>
+      <!-- 移动端非微信端分享-->
+      <transition name="opacity">
+        <div v-if="webShare" v-on:click="webShare = false" class="h-modal-mask">
+          <div class="qrcode">
+            <canvas id="canvas"></canvas>
+          </div>
+        </div>
+      </transition>
     </div>
     <script src="/skin/plugs/owl-carousel/owl.carousel.min.js"></script>
     <script src="/skin/js/news/newsDetail.js"></script>
+    <script src="../skin/js/project/iShare-tidy.min.js"></script>
     <!--==================================================-->
     <div class="footer">
       <div class="info">
@@ -143,11 +164,23 @@
         <div class="container"><span>深圳市网筹互联网金融服务有限公司</span><span>ICP证：粤ICP备14040204号-2</span></div>
       </div>
     </div>
-    <div id="loader" class="loader">
-      <loader-inner class="ball-clip-rotate-pulse">
-        <div></div>
-        <div></div>
-      </loader-inner>
-    </div>
+    <transition name="opacity">
+      <div id="loader" v-show="showLoader" class="loader">
+        <div>
+          <loader-inner class="ball-clip-rotate-pulse">
+            <div></div>
+            <div></div>
+          </loader-inner>
+        </div>
+      </div>
+    </transition>
+    <script>
+      var loaderModel = new Vue({
+        el: '#loader',
+        data: {
+          showLoader: true
+        }
+      })
+    </script>
   </body>
 </html>

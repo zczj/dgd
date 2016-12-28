@@ -11,7 +11,7 @@ block content
             h1.project-name(v-bind:title='detail.ProjectName') {{detail.ProjectName}}
             p.project-intro(v-bind:title='detail.ShortDesc') {{detail.ShortDesc}}
             .project-handle
-              a(href="javascript:;", v-on:click="headerModel.gz(detail.ProjectID, detail)", v-bind:class="{ 'gz-btn-ed': detail.FollowState== true }", v-text="detail.FollowState== true?'关注':'已关注'") 关注
+              a(href="javascript:;", v-on:click="headerModel.gz(detail.ProjectID, detail)", v-bind:class="{ 'gz-btn-ed': detail.FollowState== true }", v-text="detail.FollowState== true?'已关注':'关注'") 关注
               | |
               a(href="javascript:;") 分享
               transition(name='fade')

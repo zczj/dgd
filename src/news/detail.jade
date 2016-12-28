@@ -1,13 +1,25 @@
-extends ../shade/layout
+﻿extends ../shade/layout
 block content
   link(rel="stylesheet", href="/skin/plugs/owl/owl.carousel.min.css")
   link(rel="stylesheet", href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css")
   link(rel="stylesheet", href="/skin/css/news/newsDetail.css")
-  #model-newsDetail
+  #model-newsDetail(v-cloak)
     .news-warp
       .container.clearfix
         .main
-          .news-detail(v-if="newsData")
+          .news-detail(v-if="newsData", v-bind:class="{'news-mobile': headerModel.isMobileOrTable}")
+            //- 分享
+
+            .iShare.item-share
+              a.item(href="#").iShare_weibo
+                i.icon.icon-sina
+              a.item(href="javascript:;", v-on:click="wechat").iShare_wx
+                i.icon.icon-wx
+              a.item(href="#").iShare_qzone
+                i.icon.icon-qzone
+              a.item(href="#").iShare_renren
+                i.icon.icon-renren
+            //- 头部
             .item-head
               h1.item-title {{newsData.newsinfo.newtitle}}
               .item-souce.clearfix
@@ -16,11 +28,11 @@ block content
                   span.author 作者：{{newsData.newsinfo.newman}}
                   span.time(v-text="formartDate(newsData.newsinfo.newdate)")
                 .item-r
-                  span.sc 
+                  span.sc(v-bind:class="{'sc-ed':newsData.newsinfo.IsCollect}" ,v-on:click="collection")
                     i.icon.icon-sc
                     |收藏
                   span.commone 评论（6）
-                  span.read 阅读（66）
+                  span.read 阅读 {{newsData.newsinfo.newpoint}}
 
             //- 导读
             .item-dd {{newsData.newsinfo.newsynopsis}}
@@ -29,15 +41,17 @@ block content
             .item-info(v-html="newsData.newsinfo.newcontent")
             //- 关键词
             .item-keyWords
-              a(href="#", v-for="item in formartKeyWords(newsData.newsinfo.newkey)" v-if="item") {{item}}
-            //- 分享
-            .item-share
+              span( v-for="item in formartKeyWords(newsData.newsinfo.newkey)" v-if="item") {{item}}
+
             //- 申明
             .item-shengming
-              span.tigger
+              span.tigger(v-on:click="Sm = !Sm")
                 i.icon.icon-sm
                 | 声明
-              .item-sm-box
+              transition(name="opacity")
+                .item-sm-box(v-if="Sm").
+                  <p>1.众筹之家(www.zczj.com)所发布、转载、摘编的文章大多来源于互联网（我们会尽量标注来源和作者）。转载目的在于传递更多信息，不代表本网观点及真实性，如果作品内容、版权和其它问题侵害到您的权益，我们感到很抱歉，并将火速处理。联系方式：0755-82557958，也诚挚地欢迎您给我们投稿，谢谢！</p>
+                    <p>2.众筹之家的原创文章，版权属于众筹之家。允许转载的文章转载请注明作者和“来源：众筹之家(www.zczj.com)”，不允许转载的文章仅供阅读。不尊重原创的行为众筹之家或将追究责任。</p>
 
 
 
@@ -67,5 +81,16 @@ block content
                     |{{item.newpoint}}
 
 
+    // 微信分享
+    transition(name='opacity')
+      .h-modal-mask(v-if='webShareWx' v-on:click='webShareWx = false')
+        img(src="/skin/img/project/share.png", width='100%', alt="")
+    // 移动端非微信端分享
+    transition(name='opacity')
+      .h-modal-mask(v-if='webShare' v-on:click='webShare = false')
+        .qrcode
+          canvas#canvas
+
   script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
   script(src="/skin/js/news/newsDetail.js")
+  script(src='../skin/js/project/iShare-tidy.min.js')

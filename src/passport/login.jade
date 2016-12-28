@@ -37,7 +37,7 @@ block content
                   li
                     input.passport-input(type='tel' placeholder='输入您的手机号' ref='telPhoneNum')
                   li
-                    input.passport-input(type='text' placeholder='输入图形验证码')
+                    input.passport-input(type='text' placeholder='输入图形验证码' ref='imageVerify')
                     img(src="http://www.dgd.vc/Passport/VerifyImage", alt="" ref='verifyImage').verify
                     i.icon.icon-refresh(v-on:click='passortModel.getVerify(loginModel)')
                   li

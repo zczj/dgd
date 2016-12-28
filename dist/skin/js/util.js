@@ -40,6 +40,7 @@ var Util=function () {
       }
     }
   }
+  // 时间
   function time() {
     var Ft = {};
     return Ft.prototype = {
@@ -93,11 +94,106 @@ var Util=function () {
     }
 
   }
+  // 检测类
   function check() {
     var Check = {}
     return Check.prototype = {
+      // 是否为数组
       _array:function (obj) {
         return Object.prototype.toString.call(obj) === '[object Array]';
+      },
+      // 是否为微信浏览
+      _isWeixin:function () {
+        var userAgentString = window.navigator ? window.navigator.userAgent : "";
+        var weixinreg = /MicroMessenger/i;
+        var androidreg = /android/i;
+        if (!weixinreg.test(userAgentString) ) {
+            return false;
+        }
+        return true;
+      },
+      // 是否为登录状态 不是跳转到登录页面
+      _isLogin: function () {
+        (function($) {
+            $.dialog({
+              type: 'warning',
+              message: '请先登录！',
+              buttons: [{
+                text: '登录',
+                type: 'green',
+                callback: function() {
+                  window.location = '/passport/login.html?url='+window.location.href;
+                }
+              }, {
+                text: '取消',
+                type: 'red'
+              }],
+              maskClose: true,
+              effect: true
+            })
+          })(jQuery);
+      }
+    }
+  }
+  // 事件
+  function createObj() {
+    var Ev = {}
+    Ev.loadJsLock = false;
+    return Ev.prototype = {
+      // 分享：https://github.com/zhansingsong
+      _share: function (ele) {
+        new iShare({
+          container: ele,
+          config:{
+            // title: 'title',//分享标题. 默认：document.title
+            // description: 'description',//分享描述文本. 默认：meta的description
+            // url: 'url',//分享的URL. 默认：location.href
+            // initialized: true,//自动创建必须开启字段. isAbroad，isTitle才能生效.默认开启
+            // isAbroad: false,
+            //默认undefined，开启国外分享接口 + 国内分享接口.
+            //为true时，开启国外分享接口: 'iShare_facebook','iShare_linkedin','iShare_twitter','iShare_googleplus','iShare_tumblr','iShare_pinterest'.
+            //为false时，开启国内分享接口：'iShare_weibo','iShare_qq','iShare_wechat','iShare_tencent','iShare_douban','iShare_qzone','iShare_renren','iShare_youdaonote'.
+            // isTitle: true,//开启title提示, 默认是false.
+          }
+        })
+      },
+      /**
+       * 生成关于window.location.href二维码
+       * @Author: 老苏
+       * @param   {[type]} ele  [容器元素]
+       * @param   {num} size 二维码大小 默认值 8
+       * @return  {无返回值 }      [description]
+       */
+      _createQrcode:function (ele,size) {
+        var shareUrl = window.location.href
+        size=size?size:8;
+        qr.canvas({
+          canvas: ele,
+          value: shareUrl,
+          size: size,
+          cb: function(width, len, px) {
+              var el = ele;
+              var val = 25;
+              if (width < (25*size - 10)) {
+                  val = Math.floor((250 - width) / 2);
+              }
+              el.style.marginLeft = val+"px";
+              el.style.marginTop = val+"px";
+          }
+        });
+      },
+      // 动态加载js
+      _loadJS: function (url) {
+        if (!this.loadJsLock) {
+          this.loadJsLock = true;
+          var script=document.createElement('script')
+          script.setAttribute('type','text/javascript')
+          script.setAttribute('src', url)
+          document.querySelector('head').appendChild(script);
+          return script;
+        }else{
+          return null;
+        }
       }
     }
   }
@@ -121,6 +217,7 @@ var Util=function () {
          Tools.loginOut = loginOut,
          Tools.fT = time(),
          Tools.check = check(),
+         Tools.Ev = createObj(),
          Tools
 }
 
