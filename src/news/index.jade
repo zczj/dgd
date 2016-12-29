@@ -4,9 +4,9 @@ block content
   link(rel="stylesheet", href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css")
   link(rel="stylesheet", href="/skin/css/news/newsDetail.css")
   #model-news
-    .news-banner
+    .news-banner(v-cloak)
       .owl-carousel.owl-theme#news-banner(ref='slider')
-        div.item(v-for="item in Ad.ChannelList", v-cloak="")
+        div.item(v-for="item in Ad.ChannelList")
           a.item-link(:href="item.Link")
             .item-desc
               p.item-tite.ellipsis {{item.Title}}

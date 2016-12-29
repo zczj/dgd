@@ -14,18 +14,20 @@ block content
               h2.passport-header 注册
               ul.passport-form
                 li
-                  input.passport-input(type='text' placeholder='输入您的手机号' ref='telPhoneNum')
+                  input.passport-input(type='text' placeholder='请输入您的手机号' ref='telPhoneNum')
                 li
-                  input.passport-input(type='text' placeholder='输入图形验证码' ref='imageVerify')
+                  input.passport-input(type='text' placeholder='请输入图形验证码' ref='imageVerify')
                   img(src="http://www.dgd.vc/Passport/VerifyImage", alt="" ref='verifyImage').verify
                   i.icon.icon-refresh(v-on:click='passportModel.getVerify(registerModel)')
                 li
-                  input.passport-input(type='text' placeholder='输入手机验证码' ref='SMSVerify')
+                  input.passport-input(type='text' placeholder='请输入手机验证码' ref='SMSVerify')
                   span.sms(v-on:click='passportModel.sendSMS(registerModel)' v-html='passportModel.sms' v-bind:class='{disabled: passportModel.sended}')
                 li
-                  input.passport-input(type='password' placeholder='输入您的密码' ref='password')
+                  input.passport-input(type='password' placeholder='请输入您的密码' ref='password')
                 li
-                  input.passport-input(type='text' placeholder='输入推荐码（选填）' ref='recommend')
+                  input.passport-input(type='password' placeholder='请确认您的密码' ref='confirmPassword')
+                li
+                  input.passport-input(type='text' placeholder='请输入推荐码（选填）' ref='recommend')
                 transition(name='fade')
                   li.error(v-show='passportModel.error') {{passportModel.errorMsg}}
                 li

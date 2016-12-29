@@ -130,7 +130,7 @@
               <div class="list-main">
                 <div class="list-t">
                   <div class="item"><span>起投金额：</span><span class="price">{{item.LowVote}}</span></div>
-                  <div class="item"><span>项目平台：</span><span class="price">智金汇</span></div><a :href="['/buy/'+ item.ProjectID]" class="buy-now"><i class="icon icon-money"></i>我要认购</a><a href="javascript:void(0);" v-on:click="headerModel.gz(item.ProjectID, item)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }" class="gz-btn"></a>
+                  <div class="item"><span>项目平台：</span><span class="price">智金汇</span></div><a :href="['/order/index.html?id='+ item.ProjectID]" class="buy-now"><i class="icon icon-money"></i>我要认购</a><a href="javascript:void(0);" v-on:click="headerModel.gz(item.ProjectID, item)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }" class="gz-btn"></a>
                 </div>
                 <div class="list-con">
                   <div v-show="item.ShortDesc" class="list-txt">{{item.ShortDesc}}</div>
@@ -274,7 +274,7 @@
       var loaderModel = new Vue({
         el: '#loader',
         data: {
-          showLoader: true
+          showLoader: false
         }
       })
     </script>

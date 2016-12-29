@@ -58,43 +58,75 @@
       </header>
     </section>
     <!--==================================================-->
-    <link rel="stylesheet" href="/skin/plugs/owl/owl.carousel.min.css"/>
-    <link rel="stylesheet" href="/skin/plugs/owl-carousel/owl.carousel.css"/>
-    <link rel="stylesheet" href="/skin/css/about/qa.css"/>
-    <div id="model-qa">
-      <div id="qa-banner" class="qa-banner owl-carousel owl-theme"><img src="/skin/img/about/banner-1200.jpg" alt=""/></div>
-      <div v-bind:class="{ qaHeadMobile: headerModel.isMobileOrTable }" v-cloak="" class="qa-content">
-        <div class="container">
-          <div class="qa-head">
-            <div class="qa-t"><span>个人账户问题</span><em>CLASSIFICATION</em></div>
+    <link rel="stylesheet" href="/skin/css/order/order.css"/>
+    <div id="model-order" v-cloak="v-cloak">
+      <div class="order-warp">
+        <div class="container clearfix">
+          <div class="order-step">
+            <dl class="cur">
+              <dt><i class="icon icon-os"></i></dt>
+              <dd>信息填写</dd>
+            </dl>
+            <dl>
+              <dt><i class="icon icon-os"></i></dt>
+              <dd>订单支付</dd>
+            </dl>
+            <dl>
+              <dt><i class="icon icon-os"></i></dt>
+              <dd>订单完成</dd>
+            </dl>
           </div>
-          <div class="qa-detail">
-            <div class="qa-list">
-              <dl class="item">
-                <dt>Q：大股东上的项目是否安全？</dt>
-                <dd>A：众筹之家对大股东上展示的项目设有严格的入驻标准，并制定符合投资人利益的投资、退款以及项目管理流程，最大程度保障投资人利益，但众筹之家不对各众筹平台运行及项目本身经营情况及未来发展负责。众筹有风险，投资需谨慎。</dd>
-              </dl>
-              <dl class="item">
-                <dt>Q：大股东上的项目是否安全？</dt>
-                <dd>A：众筹之家对大股东上展示的项目设有严格的入驻标准，并制定符合投资人利益的投资、退款以及项目管理流程，最大程度保障投资人利益，但众筹之家不对各众筹平台运行及项目本身经营情况及未来发展负责。众筹有风险，投资需谨慎。</dd>
-              </dl>
-              <dl class="item">
-                <dt>Q：大股东上的项目是否安全？</dt>
-                <dd>A：众筹之家对大股东上展示的项目设有严格的入驻标准，并制定符合投资人利益的投资、退款以及项目管理流程，最大程度保障投资人利益，但众筹之家不对各众筹平台运行及项目本身经营情况及未来发展负责。众筹有风险，投资需谨慎。</dd>
-              </dl>
-              <dl class="item">
-                <dt>Q：大股东上的项目是否安全？</dt>
-                <dd>A：众筹之家对大股东上展示的项目设有严格的入驻标准，并制定符合投资人利益的投资、退款以及项目管理流程，最大程度保障投资人利益，但众筹之家不对各众筹平台运行及项目本身经营情况及未来发展负责。众筹有风险，投资需谨慎。</dd>
-              </dl>
+          <div class="main">
+            <div class="main-box order-info">
+              <div class="order-title ellipsis">订单信息</div>
+              <div class="content">
+                <div class="order-body">
+                  <!-- 无规则-->
+                  <div v-if="buyInfo.ProjectRule" class="order-part"><span class="t-name">认投份数</span><i class="icon icon-cut"></i>
+                    <input type="text" v-model="part"/><i class="icon icon-add"></i><span>份</span>
+                  </div>
+                  <ul>
+                    <li><span class="t-name">投资金额：</span><span class="t-val"><span class="red">50000.00</span>元</span></li>
+                    <li><span class="t-name">管理费：</span><span class="t-val">2500.00元</span></li>
+                    <li v-if="buyInfo.CouponList.length &gt; 0 &amp;&amp;　buyInfo.project.ProjectID != 1078"><span class="t-name">优惠券：</span><span class="t-val">
+                        <select v-model="selected">
+                          <option v-for="item in buyInfo.CouponList" v-bind:value="item.CouponID">{{item.Amount}} 元(有效期{{item.ExpiringDate}})</option>
+                        </select></span></li>
+                  </ul>
+                  <div class="order-way">
+                    <label>
+                      <input type="radio" name="pay-type" checked="checked"/><i class="icon icon-os"></i><span>我要认购并在线支付</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="pay-type"/><i class="icon icon-os"></i><span>我要认购暂不付款</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="order-footer">
+                  <label class="order-rule">
+                    <input type="checkbox"/><i class="icon icon-os"></i><span>我已认真仔细阅读并同意<a href="#">《大股东用户服务协议》</a>和<a href="#">《风险提示书》</a></span>
+                  </label>
+                  <div class="order-btns clearfix">
+                    <div class="order-total-money"><span class="t-name">应付总额：</span><span class="t-val">￥52500.00</span></div><a href="#" class="order-btn">下一步</a>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="qa-more"><a href="qa.html" class="more">查看问题分类</a></div>
+          </div>
+          <div class="side">
+            <div class="side-box investor-info">
+              <div class="order-title">投资人信息</div>
+              <ul class="content">
+                <li><span class="t-name">姓名：</span><span class="t-val">{{buyInfo.BenefitAccount.FullName}}</span></li>
+                <li><span class="t-name">号码：</span><span class="t-val">{{buyInfo.BenefitAccount.Phone}}</span></li>
+                <li><span class="t-name">身份证：</span><span class="t-val">{{buyInfo.authention.IDNumber}}</span></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="qa-Mark"></div>
-    <script src="/skin/plugs/owl-carousel/owl.carousel.min.js"></script>
-    <script src="/skin/js/qa.js"></script>
+    <script src="/skin/js/order/order.js"></script>
     <!--==================================================-->
     <div class="footer">
       <div class="info">

@@ -11,11 +11,40 @@ var registerModel =  new Vue({
           imageVerify = _this.$refs.imageVerify,
           SMSVerify = _this.$refs.SMSVerify,
           password = _this.$refs.password,
+          confirmPassword = _this.$refs.confirmPassword,
           recommend = _this.$refs.recommend
-
+      // 调用form验证方法验证输入
       this.formVerify(this)
       if (this.verify) {
-        console.log('reg')
+        $.ajax({
+          url: headerModel.api + '/Reg/PostUserInfo',
+          type: 'POST',
+          data: {
+            "token": "1",
+            "UserID": 0,
+            "Phone": telPhoneNum.value,
+            "FullName": "",
+            "Password": password.value,
+            "ConfirmPassword": confirmPassword.value,
+            "Email": "",
+            "ImgCode": imageVerify.value,
+            "code": SMSVerify.value,
+            "Account": "",
+            "PromotionCode": "",
+            "RegSource": 0,
+            "WechatID": "",
+            "TradePassword": "",
+            "UserType": ""
+          },
+          success: function (res) {
+            console.log(res)
+            if (res.resultid !== 200) {
+              passportModel.errorFn(res.message)
+            } else {
+              alert('zhucechengg')
+            }
+          }
+        })
       }
     },
     // 表单验证

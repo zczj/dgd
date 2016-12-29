@@ -121,7 +121,7 @@ block content
                 .item
                   span 项目平台：
                   span.price 智金汇
-                a.buy-now(:href="['/buy/'+ item.ProjectID]")
+                a.buy-now(:href="['/order/index.html?id='+ item.ProjectID]")
                   i.icon.icon-money
                   |我要认购
                 a.gz-btn(href="javascript:void(0);", v-on:click= "headerModel.gz(item.ProjectID, item)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }")

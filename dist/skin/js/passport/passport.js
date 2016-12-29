@@ -27,7 +27,7 @@ var passportModel = new Vue({
     },
     // 验证短信验证码
     verifySMS: function (str) {
-      var re = /^\d{4}$/
+      var re = /^\d{6}$/
       return re.test(str)
     },
     // 密码长度验证

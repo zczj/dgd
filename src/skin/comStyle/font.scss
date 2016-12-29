@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 190684 */
-  src: url('//at.alicdn.com/t/font_q45171tsxdxfajor.eot');
-  src: url('//at.alicdn.com/t/font_q45171tsxdxfajor.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_q45171tsxdxfajor.woff') format('woff'),
-  url('//at.alicdn.com/t/font_q45171tsxdxfajor.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_q45171tsxdxfajor.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_4h230kjg82qk6gvi.eot');
+  src: url('//at.alicdn.com/t/font_4h230kjg82qk6gvi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_4h230kjg82qk6gvi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_4h230kjg82qk6gvi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_4h230kjg82qk6gvi.svg#iconfont') format('svg');
 }
 
 .icon{
@@ -16,6 +16,18 @@
     font-family: 'iconfont';
     color: inherit;
     vertical-align: top;
+  }
+  // 加
+  &-add::before{
+    content: '\e603';
+  }
+  // 减
+  &-cut::before{
+    content: '\e609';
+  }
+  // 支付 stepicon
+  &-os::before{
+    content: '\e615';
   }
   // 收藏
   &-sc::before{

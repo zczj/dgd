@@ -1,0 +1,91 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/order/order.css")
+  #model-order(v-cloak)
+    .order-warp
+      .container.clearfix
+        //- 步骤
+        .order-step
+          dl.cur
+            dt
+              i.icon.icon-os
+            dd 信息填写
+          dl
+            dt
+              i.icon.icon-os
+            dd 订单支付
+          dl
+            dt
+              i.icon.icon-os
+            dd 订单完成
+
+        //- 左侧
+        .main
+          //- 订单信息
+          .main-box.order-info
+            .order-title.ellipsis 订单信息
+            .content
+              .order-body
+                // 无规则
+                .order-part(v-if="buyInfo.ProjectRule")
+                  span.t-name 认投份数
+                  i.icon.icon-cut
+                  input(type="text" v-model="part")
+                  i.icon.icon-add
+                  span 份
+                ul
+                  li
+                    span.t-name 投资金额：
+                    span.t-val
+                      span.red 50000.00
+                      |元
+                  li
+                    span.t-name 管理费：
+                    span.t-val 2500.00元
+                  li(v-if="buyInfo.CouponList.length > 0 &&　buyInfo.project.ProjectID != 1078")
+                    span.t-name 优惠券：
+                    span.t-val
+                      select(v-model="selected" )
+                        option(v-for="item in buyInfo.CouponList" v-bind:value ="item.CouponID") {{item.Amount}} 元(有效期{{item.ExpiringDate}})
+                .order-way
+                  label
+                    input(type="radio", name="pay-type" checked)
+                    i.icon.icon-os
+                    span 我要认购并在线支付
+                  label
+                    input(type="radio" name="pay-type")
+                    i.icon.icon-os
+                    span 我要认购暂不付款
+              .order-footer
+                label.order-rule
+                  input(type="checkbox")
+                  i.icon.icon-os
+                  span.
+                    我已认真仔细阅读并同意<a href="#">《大股东用户服务协议》</a>和<a href="#">《风险提示书》</a>
+                .order-btns.clearfix
+                  .order-total-money
+                    span.t-name 应付总额：
+                    span.t-val ￥52500.00
+                  a.order-btn(href="#") 下一步
+
+        //- 右侧
+        .side
+          //- 投资人信息
+          .side-box.investor-info
+            .order-title 投资人信息
+            ul.content
+              li
+                span.t-name 姓名：
+                span.t-val {{buyInfo.BenefitAccount.FullName}}
+              li
+                span.t-name 号码：
+                span.t-val {{buyInfo.BenefitAccount.Phone}}
+              li
+                span.t-name 身份证：
+                span.t-val {{buyInfo.authention.IDNumber}}
+
+
+
+  script(src="/skin/js/order/order.js")
+
+

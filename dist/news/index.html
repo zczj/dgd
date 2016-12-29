@@ -62,9 +62,9 @@
     <link rel="stylesheet" href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css"/>
     <link rel="stylesheet" href="/skin/css/news/newsDetail.css"/>
     <div id="model-news">
-      <div class="news-banner">
+      <div v-cloak="v-cloak" class="news-banner">
         <div id="news-banner" ref="slider" class="owl-carousel owl-theme">
-          <div v-for="item in Ad.ChannelList" v-cloak="" class="item"><a :href="item.Link" class="item-link">
+          <div v-for="item in Ad.ChannelList" class="item"><a :href="item.Link" class="item-link">
               <div class="item-desc">
                 <p class="item-tite ellipsis">{{item.Title}}</p>
                 <p v-if="item.Remark" class="item-txt">{{item.Remark}}</p>
@@ -168,7 +168,7 @@
       var loaderModel = new Vue({
         el: '#loader',
         data: {
-          showLoader: true
+          showLoader: false
         }
       })
     </script>

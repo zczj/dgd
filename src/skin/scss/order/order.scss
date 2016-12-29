@@ -1,0 +1,303 @@
+/*
+* @Author: suzhihui
+* @Date:   2016-12-29 10:25:57
+* @Last Modified by:   老苏
+* @Last Modified time: 2016-12-29 16:38:01
+*/
+html,body{
+  background:#f4f4f4;
+}
+// scss变量
+$orderC: #41d4dc;
+
+//- 步骤
+.order-step{
+  background:#fff;
+  margin-top: 24px;
+  font-size: 0;
+  padding: 5% 5% 3%;
+  margin-bottom: 20px;
+  dl{
+    font-size:1.7rem;
+    font-weight: 700;
+    color: #dee3e9;
+    display: inline-block;
+    width: 33.333333333333%;
+    text-align: center;
+
+    dt{
+      height: 18px;
+      background:#dee3e9;
+      text-align: center;
+      .icon-os{
+        width: 38px;
+        height: 38px;
+        margin-top: -10px;
+        border-radius: 19px;
+        line-height: 38px;
+        font-size: 3.7rem;
+        color: #dee3e9;
+        position: relative;
+        &::before{
+          vertical-align: middle;
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 2;
+        }
+        &::after{
+          position: absolute;
+          content: '';
+          display: inline-block;
+          width: 80%;
+          height: 80%;
+          border-radius: 19px;
+          background:#dee3e9;
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+
+    dd{
+      margin-top: 15px;
+    }
+    &.cur{
+      color: $orderC;
+      dt{
+        background:$orderC;
+        .icon-os{
+          width: 38px;
+          height: 38px;
+          margin-top: -9px;
+          color: $orderC;
+          &::after{
+            vertical-align: middle;
+            background:#fff;
+          }
+        }
+      }
+    }
+    &:nth-of-type(1){
+      dt{
+        border-radius: 9px 0 0 9px;
+      }
+    }
+    &:nth-of-type(3){
+      dt{
+        border-radius: 0 9px 9px 0 ;
+      }
+    }
+  }
+}
+
+.order-warp{
+  min-height: 700px;
+  font-size: 1.6rem;
+  .order-title{
+    height: 48px;
+    line-height: 48px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $orderC;
+    border-bottom: 1px #d8dcdf solid;
+  }
+
+  //- 左侧
+  .main{
+    float: left;
+    width: calc(100% - 332px);
+    background:#fff;
+
+  }
+
+  //- 订单信息
+  .order-info{
+    padding: 0 20px;
+    .order-body{
+      width: 380px;
+      margin: 0 auto;
+
+      .order-part{
+        width: 310px;
+        padding: 4px 50px 4px 100px;
+        text-align: center;
+        border: 2px #329da3 solid;
+        box-shadow: 3px 3px 3px #ccc;
+        margin: 28px auto 0;
+        line-height: 50px;
+        color: #b2b9bf;
+        font-size: 1.6rem;
+        position: relative;
+        span{
+          position: absolute;
+          right: 10px;
+          padding: 0 6px;
+          display: inline-block;
+          &.t-name{
+            right: auto;
+            left: 0;
+            color: #616a73;
+          }
+        }
+        input{
+          width: 80px;
+          border: none;
+          background:none;
+          text-align: center;
+          font-weight: 700;
+          font-size: 3rem;
+          display: inline-block;
+          vertical-align: middle;
+        }
+        .icon{
+          width: 26px;
+          height: 26px;
+          background:$orderC;
+          vertical-align: middle;
+          line-height: 26px;
+          border-radius: 4px;
+          color: #fff;
+          margin-top: -2px;
+          cursor: pointer;
+        }
+      }
+
+      ul{
+        margin-top: 10px;
+        li{
+          text-align: center;
+          height: 30px;
+          line-height: 30px;
+          .red{
+            color: #fe3242;
+          }
+        }
+        .t-val{
+          select{
+            // color: #99a0a7;
+            height: 30px;
+            line-height: 30px;
+            // width: 80px;
+          }
+        }
+      }
+
+      .order-way{
+        color: #3e4149;
+        text-align: center;
+        margin-top: 6px;
+        input[name='pay-type']{
+          opacity:0;
+          display: none;
+          & + i.icon{
+            width: 16px;
+            height: 16px;
+            color: #e0e4e9;
+            font-size: 1.6rem;
+            margin-right: 4px;
+          }
+          &:checked + i.icon{
+            color: $orderC;
+          }
+        }
+        label{
+          &:hover{
+            cursor: pointer;
+          }
+        }
+        label+label{
+          margin-left: 20px;
+        }
+      }
+
+    }
+    .order-footer{
+      padding-bottom: 20px;
+      padding-top: 16px;
+      margin-top: 16px;
+      border-top: 1px #d8dcdf solid;
+      .order-rule{
+        display: block;
+        input[type="checkbox"]{
+          display: none;
+          opacity:0;
+          & + .icon-os{
+            font-size: 1.6rem;
+            color: #e0e4e9;
+            margin-right: 4px;
+            &::after{
+              vertical-align: middle;
+            }
+          }
+          &:checked + .icon-os{
+            color: $orderC;
+          }
+        }
+
+
+
+        a{
+          color: #3e85ff;
+        }
+      }
+      .order-btns{
+        padding-top: 10px;
+        .order-total-money{
+          float: left;
+          color: #b2b9bf;
+          span.t-val{
+            color: $orderC;
+            font-weight: 700;
+            font-size: 2rem;
+          }
+        }
+        .order-btn{
+          float: right;
+          display: inline-block;
+          background:$orderC;
+          color: #fff;
+          padding: 5px 32px;
+          border-radius: 10px;
+          &:hover{
+            opacity:.9;
+          }
+        }
+      }
+    }
+  }
+
+
+  //- 右侧
+  .side{
+    float: right;
+    width: 312px;
+    background:#fff;
+    min-height: 200px;
+    padding: 0 15px;
+  }
+  //- 投资人信息
+  .investor-info{
+    ul{
+      margin-top: 10px;
+    }
+    li{
+      margin: 4px 0;
+      color: #a0a6ad;
+      font-size: 1.6rem;
+      height: 30px;
+      line-height: 30px;
+      .t-name{
+        display: inline-block;
+        vertical-align: middle;
+        width: 70px;
+        text-align: right;
+      }
+      .t-val{
+        display: inline-block;
+        vertical-align: middle;
+        color: #3e4149;
+      }
+    }
+  }
+}
