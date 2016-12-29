@@ -81,10 +81,15 @@
               <div class="order-title ellipsis">订单信息</div>
               <div class="content">
                 <div class="order-body">
-                  <!-- 无规则-->
-                  <div v-if="buyInfo.ProjectRule" class="order-part"><span class="t-name">认投份数</span><i class="icon icon-cut"></i>
-                    <input type="text" v-model="part"/><i class="icon icon-add"></i><span>份</span>
+                  <div v-if="buyInfo.ProjectRule != null" data-type="有规则">
+                    <div v-if="buyInfo.ProjectRule.Type == 1" data-type="按金额整数倍累加" class="order-part"><span class="t-name">认投份数</span><i class="icon icon-cut"></i>
+                      <input type="text" v-model="part"/><i class="icon icon-add"></i><span>份</span>
+                    </div>
+                    <div v-else="v-else" class="order-part"><span class="t-name">认投份数</span><i class="icon icon-cut"></i>
+                      <input type="text" v-model="part"/><i class="icon icon-add"></i><span>份</span>
+                    </div>
                   </div>
+                  <div v-else="v-else" data-type="无规则"></div>
                   <ul>
                     <li><span class="t-name">投资金额：</span><span class="t-val"><span class="red">50000.00</span>元</span></li>
                     <li><span class="t-name">管理费：</span><span class="t-val">2500.00元</span></li>
