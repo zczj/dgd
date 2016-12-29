@@ -36,7 +36,7 @@ block content
                     i.icon.icon-add
                     span 份
                   //- 按份数累加
-                  .order-part(v-else)
+                  .order-part(v-else data-type="按份数")
                     span.t-name 认投份数
                     i.icon.icon-cut
                     input(type="text" v-model="part")

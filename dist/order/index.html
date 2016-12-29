@@ -85,7 +85,7 @@
                     <div v-if="buyInfo.ProjectRule.Type == 1" data-type="按金额整数倍累加" class="order-part"><span class="t-name">认投份数</span><i class="icon icon-cut"></i>
                       <input type="text" v-model="part"/><i class="icon icon-add"></i><span>份</span>
                     </div>
-                    <div v-else="v-else" class="order-part"><span class="t-name">认投份数</span><i class="icon icon-cut"></i>
+                    <div v-else="v-else" data-type="按份数" class="order-part"><span class="t-name">认投份数</span><i class="icon icon-cut"></i>
                       <input type="text" v-model="part"/><i class="icon icon-add"></i><span>份</span>
                     </div>
                   </div>
