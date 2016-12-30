@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-12-29 10:25:57
 * @Last Modified by:   老苏
-* @Last Modified time: 2016-12-29 16:38:01
+* @Last Modified time: 2016-12-30 15:45:29
 */
 html,body{
   background:#f4f4f4;
@@ -149,6 +149,10 @@ $orderC: #41d4dc;
           font-size: 3rem;
           display: inline-block;
           vertical-align: middle;
+          &.type1{
+            width: 100%;
+            border-bottom: 1px #d8dcdf  solid;
+          }
         }
         .icon{
           width: 26px;
@@ -162,7 +166,15 @@ $orderC: #41d4dc;
           cursor: pointer;
         }
       }
+      .order-tips{
 
+        font-size: 1.4rem;
+        margin-top: 10px;
+        text-align: center;
+        .red{
+          color: #fe3242;
+        }
+      }
       ul{
         margin-top: 10px;
         li{
@@ -300,4 +312,22 @@ $orderC: #41d4dc;
       }
     }
   }
+}
+
+@mixin order-warp-950() {
+
+}
+
+@mixin order-warp-800() {
+  .order-warp{
+    .main,.side{ width: 100%; float: none;}
+    .main{ margin-top: 20px;}
+  }
+}
+
+@media only screen and( max-width: 59.375em){
+  @include order-warp-950();
+}
+@media only screen and( max-width: 50em){
+  @include order-warp-800();
 }

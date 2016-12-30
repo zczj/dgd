@@ -3,8 +3,8 @@ var orderModel = new Vue({
   data: {
     proId: '',
     buyInfo: '',
-    part: 1, // 认投份数
-    selected: '' // 选择的coupon
+    part: '1', // 认投份数
+    selected: '0' // 选择的coupon
   },
   methods: {
     getBuyInfo: function () {
@@ -24,10 +24,10 @@ var orderModel = new Vue({
           type: 'post',
           success: function (response) {
             $("#loader").fadeOut(300);
-            console.log(response);
             if (response.resultid == 200) {
               _this.buyInfo = response;
-              _this.selected = response.CouponList[0].CouponID;
+              response.CouponList =[{Amount:0,CouponID:0}].concat(response.CouponList)
+              // _this.selected = response.CouponList[0]?response.CouponList[0].CouponID:_this.selected;
             }
             else{
               console.log(response.message);
@@ -38,15 +38,54 @@ var orderModel = new Vue({
           }
         })
       }
+    },
+    numEv: function (e) {
+      this.amount = this.amount ==''?1:this.amount;
+      return DGDTOOLS.check._isNumPoint(e)
     }
   },
   computed: {
-
+    /**
+     * 是否有订单规则
+     * @Author: 老苏
+     * @return  {boolen} 布尔值
+     */
+    orderRule: function () {
+      return this.buyInfo.ProjectRule;
+    },
+    /**
+     * 计算总金额
+     * @Author: 老苏
+     * @return  {[type]} [description]
+     */
+    totleResult: function () {
+      var res = 0;
+      return res;
+    },
+    // 认投金额
+    amount: function () {
+      return this.buyInfo.project.OriginalLowVote;
+    },
+    // ManagerFee 管理费
+    manageFree: function () {
+      return (this.buyInfo.ProjectRule.ManagerFee * this.buyInfo.project.OriginalLowVote).toFixed(2);
+    },
+    // Coupon
+    coupon: function () {
+      var res = 0;
+      for (var i = 0; i < this.buyInfo.CouponList.length; i++) {
+        if (this.buyInfo.CouponList[i].id=this.selected) {
+          return res = this.buyInfo.CouponList[i].Amount
+        }
+      }
+      return res;
+    }
   },
   mounted: function () {
     // 获取url传参过来的资讯id
     this.proId = window.location.search.split('id=')[1] || 0;
-    this.proId = '1037'
+    // this.proId = '1037' // 有规则
+    // this.proId = '1272' // 无规则
     this.getBuyInfo();
   }
 })

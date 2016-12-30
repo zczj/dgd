@@ -382,6 +382,9 @@
       border: 1px solid #dcdcdc;
       padding: 12px;
       resize: none;
+      &:focus{
+        border-color: #46c9d0;
+      }
     }
     .qa-submit-wrapper{
       overflow: hidden;
@@ -402,7 +405,7 @@
       }
     }
     .qa-list{
-      padding-bottom: 27px;
+      // padding-bottom: 27px;
       margin-bottom: 24px;
       border-bottom: 1px solid #e5e5e5;
       dt{
@@ -421,13 +424,21 @@
           font-size: 14px;
           background-color: #46c9d1;
         }
+        .qa-con{
+          font-size: 14px;
+          opacity: .8;
+        }
+        .qa-from-user{
+          padding: 16px 0;
+          text-align: right;
+        }
         .time{
-          float: right;
           color: #b2b9bf;
           margin-left: 10px;
         }
         .qa-avatar{
-          float: right;
+          display: inline-block;
+          vertical-align: bottom;
           width: 20px;
           height: 20px;
           overflow: hidden;

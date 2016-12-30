@@ -21,8 +21,10 @@ var indexModel = new Vue({
     TimesRotationMap: ['种子期', '天使期', 'pre-A轮', 'A轮', 'B轮', 'C轮']
   },
   created: function() {
+    $('#loader').fadeIn(300);
     this.$http.get(headerModel.api + '/ZhongChou/GetList?pagesize=3&state=0&currentpage=20&token=' + headerModel.token).then(function(response) {
       this.Ad = response.data;
+      $('#loader').fadeOut(300);
     })
   },
   updated: function() {

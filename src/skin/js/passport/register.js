@@ -1,8 +1,8 @@
 var registerModel =  new Vue({
   el: '#register',
   data: {
-    formShow: true,
-    verify: false
+    verify: false,  //  form验证
+    checboxSelected: false  // checkbox是否选中
   },
   methods: {
     register: function () {
@@ -16,6 +16,8 @@ var registerModel =  new Vue({
       // 调用form验证方法验证输入
       this.formVerify(this)
       if (this.verify) {
+        // loading
+        headerModel.loading = true;
         $.ajax({
           url: headerModel.api + '/Reg/PostUserInfo',
           type: 'POST',
@@ -37,11 +39,15 @@ var registerModel =  new Vue({
             "UserType": ""
           },
           success: function (res) {
-            console.log(res)
             if (res.resultid !== 200) {
+              passportModel.getVerify(_this)
+              headerModel.loading = false
               passportModel.errorFn(res.message)
+              telPhoneNum.focus()
+              telPhoneNum.select()
             } else {
-              alert('zhucechengg')
+              DGDTOOLS.store.save('userInfo', res)
+              window.location.href='./success.html?register'
             }
           }
         })
@@ -52,7 +58,8 @@ var registerModel =  new Vue({
       var telPhoneNum = this.$refs.telPhoneNum, // 手机号码
           imageVerify = this.$refs.imageVerify, // 图形验证码
           SMSVerify = this.$refs.SMSVerify,  // 短信验证码
-          password =  this.$refs.password  // 密码
+          password =  this.$refs.password,  // 密码
+          confirmPassword =  this.$refs.confirmPassword  // 确认密码
 
       if (telPhoneNum.value === '' || !passportModel.verifyTel(telPhoneNum.value)) {
         // 电话号码验证
@@ -78,12 +85,20 @@ var registerModel =  new Vue({
         this.verify = false
         password.focus()
         password.select()
+      } else if (password.value !== confirmPassword.value){
+        passportModel.errorFn('两次输入的密码不一致')
+        this.verify = false
+        confirmPassword.focus()
+        confirmPassword.select()
+      } else if (!this.checboxSelected) {
+        passportModel.errorFn('请阅读并勾选服务协议和风险揭示书')
       } else {
         this.verify = true
       }
     }
   },
   mounted: function () {
+    $('#loader').fadeOut("300")
     this.$refs.telPhoneNum.focus()
   }
 })

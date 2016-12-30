@@ -1,3 +1,4 @@
+$color: #41d4dc;
 #transfer-list{
   background-color: #fafafa;
   margin-bottom: -20px;
@@ -35,7 +36,7 @@
     &::after{
       width: 112px;
       height: 3px;
-      background-color: #41d4dc;
+      background-color: $color;
       transform: translate3d(-50%, 50%, 0)
     }
   }
@@ -101,10 +102,17 @@
         }
       }
       &.transfer-over{
-        color: #41d4dc;
-        border: 1px solid #41d4dc;
+        color: $color;
+        border: 1px solid $color;
         &::after{
           content: '已转让'
+        }
+      }
+      &.transfer-finished{
+        color: #d2d3d3;
+        border: 1px solid #d2d3d3;
+        &::after{
+          content: '已完成'
         }
       }
     }
@@ -122,6 +130,9 @@
     &-association{
       color: #0b50fe;
       font-size: 15px;
+      &:hover{
+        text-decoration: underline;
+      }
     }
     //
     &-content{
@@ -161,20 +172,37 @@
         text-align: center;
         margin: 5px 0;
         font-size: 20px;
-        border: 1px solid #41d4dc;
+        border: 1px solid $color;
         border-radius: 5px;
         transition: .2s;
         &:hover{
           opacity: .8;
         }
         &.interview-button{
-          color: #41d4dc;
+          color: $color;
           background-color: #fff;
+          &.finished-button{
+            color: #d2d3d3;
+            border-color: #d2d3d3;
+            cursor: default;
+            &:hover{
+              opacity: 1;
+            }
+          }
         }
         &.purchase-button{
           color: #fff;
-          background-color: #41d4dc;
+          background-color: $color;
+          &.finished-button{
+            border-color: #d2d3d3;
+            background-color: #d2d3d3;
+            cursor: default;
+            &:hover{
+              opacity: 1;
+            }
+          }
         }
+
       }
     }
   }

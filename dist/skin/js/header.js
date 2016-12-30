@@ -14,6 +14,7 @@ var headerModel = new Vue({
       isLogin: false, //是否登录
       userInfo: null,
       token: '',
+      loading: false,
       isMobileOrTable: false // 当前视口宽度是否是处于非PC样式
     },
     methods: {
@@ -58,8 +59,8 @@ var headerModel = new Vue({
         var _this = this,
             state=null;
         //检测登录
-        if (!headerModel.isLogin) {;
-          DGDTOOLS.Ev._isLogin();
+        if (!headerModel.isLogin) {
+          DGDTOOLS.check._isLogin();
           return;
         }
         $("#loader").fadeIn(300);

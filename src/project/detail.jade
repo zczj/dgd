@@ -94,7 +94,7 @@ block content
                 transition(name='opacity')
                   ul.detail-nav(v-show='detailNav' ref='detailNav')
                     li(v-for='(item, index) in detail.descList')
-                      a(v-bind:href="['#detailnav'+index]" v-bind:class='{current: index == detailNavCur}' ref='detailNavBtn') {{item.Title}}
+                      a(v-bind:href="['#detailnav'+index]" v-bind:class='{current: index == detailNavCur}' ref='detailNavBtn') {{item.Title?item.Title:'项目介绍'}}
               // 项目详情
               .item-desc
                 .content-item(v-for='(item, index) in detail.descList' v-bind:id='["detailnav"+index]')
@@ -104,17 +104,19 @@ block content
 
             // 项目问答
             .content-box.detail-qa(v-show='tabShow == 1')
-              textarea.qa-texarea(placeholder='请输入您的任何疑惑，我们会第一时间答复您')
+              textarea.qa-texarea(placeholder='请输入您的任何疑惑，我们会第一时间答复您' ref='qaText')
               .qa-submit-wrapper
                 a(href="javascript:;" v-on:click='AddProjectQA').qa-submit-button 提交问题
               .empty(v-if='projectQAList.length == 0')
                 h3 暂无问答
               dl.qa-list(v-else v-for='qa in projectQAList')
-                dt {{qa.Content}}
-                  span.time {{qa.PostDate}}
-                  span.time {{qa.UserName}}
-                  span.qa-avatar
-                    img(v-bind:src="qa.Avatar", v-bind:alt="qa.UserName" width='100%' height='100%')
+                dt
+                  p.qa-con {{qa.Content}}
+                  .qa-from-user
+                    span.qa-avatar
+                      img(v-bind:src="qa.Avatar", v-bind:alt="qa.UserName" width='100%' height='100%')
+                    span.time {{qa.UserName}}
+                    span.time {{qa.PostDate}}
                 dd(v-if='qa.ChlidList.length' v-for='qachild in qa.ChlidList')
                   h2
                     img(v-bind:src="qachild.Avatar", alt="").qa-avatar
@@ -144,6 +146,7 @@ block content
       .h-modal-mask(v-if='webShare' v-on:click='webShare = false')
         .qrcode
           canvas#canvas
+
 
 
   script(src='../skin/js/project/project-detail.js')

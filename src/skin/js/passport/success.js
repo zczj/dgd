@@ -4,7 +4,7 @@ new Vue({
   data: {
     formShow: false,
     from: false,
-    number: 5,
+    number: 50,
     fpwd: false
   },
   computed: {

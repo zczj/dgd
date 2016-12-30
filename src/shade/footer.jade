@@ -33,18 +33,3 @@
       .container
         span 深圳市网筹互联网金融服务有限公司
         span ICP证：粤ICP备14040204号-2
-
-transition(name='opacity')
-  .loader#loader(v-show='showLoader')
-    div
-      loader-inner.ball-clip-rotate-pulse
-        div
-        div
-
-script.
-  var loaderModel = new Vue({
-    el: '#loader',
-    data: {
-      showLoader: false
-    }
-  })

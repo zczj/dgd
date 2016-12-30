@@ -1,4 +1,16 @@
+// 页面切换加载动画
+#loader.loader
+  div
+    loader-inner.ball-clip-rotate-pulse
+      div
+      div
 section#header
+  // 操作loading动画
+  transition(name='opacity')
+    .detail-loading.g-dialog-contianer(v-show='loading')
+      .dialog-window
+        .dialog-header.loading
+
   .header-top(v-if="!isMobileOrTable")
     .container.clearfix
       .header-top-l
@@ -90,4 +102,7 @@ section#header
     //- 遮罩层
     .mask( v-bind:class="{'mask-show': tag}", v-on:click="closeMean")
     input#userId(type="hidden")
+
+
+
     script(src="/skin/js/header.js")

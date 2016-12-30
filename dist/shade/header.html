@@ -1,5 +1,22 @@
 
+<!-- 页面切换加载动画-->
+<div id="loader" class="loader">
+  <div>
+    <loader-inner class="ball-clip-rotate-pulse">
+      <div></div>
+      <div></div>
+    </loader-inner>
+  </div>
+</div>
 <section id="header">
+  <!-- 操作loading动画-->
+  <transition name="opacity">
+    <div v-show="loading" class="detail-loading g-dialog-contianer">
+      <div class="dialog-window">
+        <div class="dialog-header loading"></div>
+      </div>
+    </div>
+  </transition>
   <div v-if="!isMobileOrTable" class="header-top">
     <div class="container clearfix">
       <div class="header-top-l"><span class="tel"><i class="icon icon-tel"></i>客服：400-066-8606</span><span class="gzus">关注我们：<a href="http://weibo.com/wow36kr" target="_brank"><i class="icon icon-sina"></i></a><span class="top-wx"><i class="icon icon-wx"></i>

@@ -132,6 +132,18 @@ var Util=function () {
               effect: true
             })
           })(jQuery);
+      },
+      // 是否为数字，包括小数点。
+      _isNumPoint: function (e) {
+        var event =window.e||e;
+        event.returnValue = this._isNum(event) || event.keyCode === 46?true:false;
+        return  event.returnValue;
+        // return event.returnValue = (this._isNum(e.keyCode) && e.keyCode === 46);
+      },
+      // 是否为数字
+      _isNum:function (e) {
+        var event =window.e||e;
+        return e.returnValue = (/[\d]/.test(String.fromCharCode(e.keyCode)))?true:false;
       }
     }
   }

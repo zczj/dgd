@@ -1,0 +1,62 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/transfer/detail.css")
+  #transfer-detail
+    .container.clearfix
+      .transfer-detail-content
+        div
+          // 详情
+          .detail-desc
+            .detail-desc-header
+              ul
+                li
+                  .detail-tag.detail-ing
+                  .detail-title 真功夫邀你来做股东
+                li
+                  .detail-intro 老板融资开新店，以老店利润分红
+                    a(href="#").detail-association 查看关联项目>
+            .detail-desc-con
+              ul.clearfix
+                li 转让金额（元）:
+                  span 40,000.00
+                li 转让方：
+                  span 张 * *
+              ul.clearfix
+                li 转让份额（元）:
+                  span 1.25%
+                li 原始投资时间：
+                  span 2016年07月03日15:00
+              ul.clearfix
+                li 原始金额（元）:
+                  span 40,000.00
+                li 转让剩余时间：
+                  span 10天10小时10分10秒
+              a(href="javascrip:;").detail-button 约谈
+          // 流程
+          .process
+            .process-header
+              h2 转让流程
+            .process-con
+              img(src="../skin/img/transfer/process.png", alt="")
+      // 侧边栏
+      .transfer-detail-sidebar
+        .sidebar-header
+          h2 可用余额：
+            span 12,000.00元
+        ul.sidebar-con
+          li 购买余额：
+            input(type="text")
+            | 元
+          li 交易密码：
+            input(type="text")
+          li.forgot-pwd
+            span 交易密码：
+            a(href="#") 忘记密码
+        ul.btns
+          li
+            label
+              input(type="checkbox")
+              | 同意
+              a(href="#") 《大股东权益转让协议》
+          li
+            a(href="#").button 确认购买

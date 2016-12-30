@@ -26,7 +26,7 @@ var loginModel = new Vue({
         password.select()
         return false
       }
-      loaderModel.showLoader = true
+      headerModel.loading = true
       $.ajax({
         url: headerModel.api + '/Passport/Login',
         data: {'Account': account.value,'Password': $.md5($.md5(password.value))},
@@ -45,7 +45,7 @@ var loginModel = new Vue({
               //{"token":"","uid":,"Avatar":"","UserName":"","message":"","resultid":}
               DGDTOOLS.store.save('userInfo', response);
               _this.successFn()
-              loaderModel.showLoader = false
+              headerModel.loading = false
             }
           }
         },
@@ -122,6 +122,7 @@ var loginModel = new Vue({
     }
   },
   mounted: function () {
+    $('#loader').fadeOut("300")
     this.$refs.account.focus()
   }
 })

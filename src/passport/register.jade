@@ -32,7 +32,7 @@ block content
                   li.error(v-show='passportModel.error') {{passportModel.errorMsg}}
                 li
                   label.remember
-                    input(type='checkbox')
+                    input(type='checkbox' v-model='checboxSelected')
                     |我已阅读及同意
                     a(href="#").services 《大股东服务协议》
                     |和

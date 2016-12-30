@@ -101,7 +101,7 @@ var passportModel = new Vue({
         return
       }
       // 图形验证码验证
-      if (imageVerify.value == '' || !this.verifyImage(imageVerify.value)) {
+      if (imageVerify && (imageVerify.value == '' || !this.verifyImage(imageVerify.value))) {
         this.errorFn('请填写正确的图形验证码')
         imageVerify.focus()
         imageVerify.select()

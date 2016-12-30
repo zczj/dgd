@@ -15,7 +15,24 @@
     <script src="/skin/js/util.js"></script>
   </head>
   <body>
+    <!-- 页面切换加载动画-->
+    <div id="loader" class="loader">
+      <div>
+        <loader-inner class="ball-clip-rotate-pulse">
+          <div></div>
+          <div></div>
+        </loader-inner>
+      </div>
+    </div>
     <section id="header">
+      <!-- 操作loading动画-->
+      <transition name="opacity">
+        <div v-show="loading" class="detail-loading g-dialog-contianer">
+          <div class="dialog-window">
+            <div class="dialog-header loading"></div>
+          </div>
+        </div>
+      </transition>
       <div v-if="!isMobileOrTable" class="header-top">
         <div class="container clearfix">
           <div class="header-top-l"><span class="tel"><i class="icon icon-tel"></i>客服：400-066-8606</span><span class="gzus">关注我们：<a href="http://weibo.com/wow36kr" target="_brank"><i class="icon icon-sina"></i></a><span class="top-wx"><i class="icon icon-wx"></i>
@@ -76,23 +93,36 @@
               <dd>订单完成</dd>
             </dl>
           </div>
+          <div class="side">
+            <div class="side-box investor-info">
+              <div class="order-title">投资人信息</div>
+              <ul class="content">
+                <li><span class="t-name">姓名：</span><span class="t-val">{{buyInfo.BenefitAccount.FullName}}</span></li>
+                <li><span class="t-name">号码：</span><span class="t-val">{{buyInfo.BenefitAccount.Phone}}</span></li>
+                <li><span class="t-name">身份证：</span><span class="t-val">{{buyInfo.authention.IDNumber}}</span></li>
+              </ul>
+            </div>
+          </div>
           <div class="main">
             <div class="main-box order-info">
               <div class="order-title ellipsis">订单信息</div>
               <div class="content">
                 <div class="order-body">
-                  <div v-if="buyInfo.ProjectRule != null" data-type="有规则">
-                    <div v-if="buyInfo.ProjectRule.Type == 1" data-type="按金额整数倍累加" class="order-part"><span class="t-name">认投份数</span><i class="icon icon-cut"></i>
-                      <input type="text" v-model="part"/><i class="icon icon-add"></i><span>份</span>
+                  <div v-if="orderRule != null" data-type="有规则">
+                    <div v-if="orderRule.Type == 1" data-type="按金额整数倍累加" class="order-part"><span class="t-name">认投金额</span>
+                      <input type="number" step="0.01" v-model="amount" v-on:keypress="numEv(event)" class="type1"/><span>元</span>
                     </div>
+                    <div v-if="orderRule.Type == 1" class="order-tips"><span>最低{{buyInfo.project.OriginalLowVote}}元起,整数倍累加最高跟投2000000.00元</span><span class="red">
+                        + 管理费(平台收取)({{manageFree}}元)
+                        </span></div>
                     <div v-else="v-else" data-type="按份数" class="order-part"><span class="t-name">认投份数</span><i class="icon icon-cut"></i>
                       <input type="text" v-model="part"/><i class="icon icon-add"></i><span>份</span>
                     </div>
                   </div>
                   <div v-else="v-else" data-type="无规则"></div>
                   <ul>
-                    <li><span class="t-name">投资金额：</span><span class="t-val"><span class="red">50000.00</span>元</span></li>
-                    <li><span class="t-name">管理费：</span><span class="t-val">2500.00元</span></li>
+                    <li v-if="orderRule != null &amp;&amp;　orderRule.Type !== 1"><span class="t-name">投资金额：</span><span class="t-val"><span class="red">50000.00</span>元</span></li>
+                    <li><span class="t-name">管理费：</span><span class="t-val">{{manageFree}}元</span></li>
                     <li v-if="buyInfo.CouponList.length &gt; 0 &amp;&amp;　buyInfo.project.ProjectID != 1078"><span class="t-name">优惠券：</span><span class="t-val">
                         <select v-model="selected">
                           <option v-for="item in buyInfo.CouponList" v-bind:value="item.CouponID">{{item.Amount}} 元(有效期{{item.ExpiringDate}})</option>
@@ -112,20 +142,10 @@
                     <input type="checkbox"/><i class="icon icon-os"></i><span>我已认真仔细阅读并同意<a href="#">《大股东用户服务协议》</a>和<a href="#">《风险提示书》</a></span>
                   </label>
                   <div class="order-btns clearfix">
-                    <div class="order-total-money"><span class="t-name">应付总额：</span><span class="t-val">￥52500.00</span></div><a href="#" class="order-btn">下一步</a>
+                    <div class="order-total-money"><span class="t-name">应付总额：</span><span class="t-val">{{totleResult}}</span></div><a href="#" class="order-btn">下一步</a>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="side">
-            <div class="side-box investor-info">
-              <div class="order-title">投资人信息</div>
-              <ul class="content">
-                <li><span class="t-name">姓名：</span><span class="t-val">{{buyInfo.BenefitAccount.FullName}}</span></li>
-                <li><span class="t-name">号码：</span><span class="t-val">{{buyInfo.BenefitAccount.Phone}}</span></li>
-                <li><span class="t-name">身份证：</span><span class="t-val">{{buyInfo.authention.IDNumber}}</span></li>
-              </ul>
             </div>
           </div>
         </div>
@@ -172,23 +192,5 @@
         <div class="container"><span>深圳市网筹互联网金融服务有限公司</span><span>ICP证：粤ICP备14040204号-2</span></div>
       </div>
     </div>
-    <transition name="opacity">
-      <div id="loader" v-show="showLoader" class="loader">
-        <div>
-          <loader-inner class="ball-clip-rotate-pulse">
-            <div></div>
-            <div></div>
-          </loader-inner>
-        </div>
-      </div>
-    </transition>
-    <script>
-      var loaderModel = new Vue({
-        el: '#loader',
-        data: {
-          showLoader: false
-        }
-      })
-    </script>
   </body>
 </html>

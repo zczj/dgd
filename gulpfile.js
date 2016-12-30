@@ -37,7 +37,9 @@ gulp.task('css', function () {
       cascade: true,
       remove: true
     }))
-    .pipe(base64())
+    .pipe(base64({
+      exclude: ['.eot', '.woff', '.ttf', '.svg']
+    }))
     .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('dist/skin/css'))
     .pipe(browserSync.reload({stream: true}));

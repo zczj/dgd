@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-12-21 15:19:11
 * @Last Modified by:   老苏
-* @Last Modified time: 2016-12-26 15:12:03
+* @Last Modified time: 2016-12-30 09:50:42
 */
 
 var newsModel = new Vue({
@@ -26,8 +26,15 @@ var newsModel = new Vue({
   },
   methods: {
     getNewsList: function (category) {
+      console.log(category);
+      if (category == undefined) {
+        headerModel.loading=false;
+        $('#loader').fadeIn(300);
+      }else{
+        headerModel.loading=true;
+      }
       var ca = category!== undefined ? category:this.cat;
-      $("#loader").fadeIn(300)
+
       this.$http.get(headerModel.api + '/News/GetList?token='+ headerModel.token +'&category='+ca+'&newkey=0&pagesize='+ this.pageSize +'&currentpage='+ this.currentpage).then(function(response) {
           this.Ad = response.data;
 
@@ -38,7 +45,8 @@ var newsModel = new Vue({
             this.bannerSlider();
           });
 
-        $("#loader").fadeOut(300)
+        headerModel.loading=false;
+         $('#loader').fadeOut(300);
       })
     },
     //缓存数据
@@ -56,10 +64,8 @@ var newsModel = new Vue({
     },
     // 推荐项目
     getIntPro: function () {
-      $("#loader").fadeIn(300)
       this.$http.get(headerModel.api + '/ZhongChou/GetList?pagesize=2&state=0&currentpage=1&token=' + headerModel.token).then(function(response) {
         this.Pro = response.data;
-        $("#loader").fadeOut(300)
       })
     },
     // banner

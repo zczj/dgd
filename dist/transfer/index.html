@@ -15,7 +15,24 @@
     <script src="/skin/js/util.js"></script>
   </head>
   <body>
+    <!-- 页面切换加载动画-->
+    <div id="loader" class="loader">
+      <div>
+        <loader-inner class="ball-clip-rotate-pulse">
+          <div></div>
+          <div></div>
+        </loader-inner>
+      </div>
+    </div>
     <section id="header">
+      <!-- 操作loading动画-->
+      <transition name="opacity">
+        <div v-show="loading" class="detail-loading g-dialog-contianer">
+          <div class="dialog-window">
+            <div class="dialog-header loading"></div>
+          </div>
+        </div>
+      </transition>
       <div v-if="!isMobileOrTable" class="header-top">
         <div class="container clearfix">
           <div class="header-top-l"><span class="tel"><i class="icon icon-tel"></i>客服：400-066-8606</span><span class="gzus">关注我们：<a href="http://weibo.com/wow36kr" target="_brank"><i class="icon icon-sina"></i></a><span class="top-wx"><i class="icon icon-wx"></i>
@@ -111,7 +128,7 @@
         </div>
         <div class="transfer-list">
           <div class="transfer-header">
-            <div class="transfer-tag transfer-ing"></div>
+            <div class="transfer-tag transfer-over"></div>
             <div class="transfer-project-title">真功夫邀你来做股东</div>
             <div class="transfer-project-intro">老板融资开新店，以老店利润分红</div><a href="#" class="transfer-association">查看关联项目></a>
           </div>
@@ -128,12 +145,12 @@
                 <li>原始投资时间：<span>2016年07月03日15:00</span></li>
               </ul>
             </div>
-            <div class="buttons clearfix"><a href="javascript:;" class="button interview-button">约谈</a><a href="#" class="button purchase-button">我要购买</a></div>
+            <div class="buttons clearfix"><a href="javascript:;" class="button interview-button finished-button">约谈</a><a href="#" class="button purchase-button finished-button">我要购买</a></div>
           </div>
         </div>
         <div class="transfer-list">
           <div class="transfer-header">
-            <div class="transfer-tag transfer-ing"></div>
+            <div class="transfer-tag transfer-finished"></div>
             <div class="transfer-project-title">真功夫邀你来做股东</div>
             <div class="transfer-project-intro">老板融资开新店，以老店利润分红</div><a href="#" class="transfer-association">查看关联项目></a>
           </div>
@@ -150,7 +167,7 @@
                 <li>原始投资时间：<span>2016年07月03日15:00</span></li>
               </ul>
             </div>
-            <div class="buttons clearfix"><a href="javascript:;" class="button interview-button">约谈</a><a href="#" class="button purchase-button">我要购买</a></div>
+            <div class="buttons clearfix"><a href="javascript:;" class="button interview-button finished-button">约谈</a><a href="#" class="button purchase-button finished-button">我要购买</a></div>
           </div>
         </div>
       </div>
@@ -195,23 +212,5 @@
         <div class="container"><span>深圳市网筹互联网金融服务有限公司</span><span>ICP证：粤ICP备14040204号-2</span></div>
       </div>
     </div>
-    <transition name="opacity">
-      <div id="loader" v-show="showLoader" class="loader">
-        <div>
-          <loader-inner class="ball-clip-rotate-pulse">
-            <div></div>
-            <div></div>
-          </loader-inner>
-        </div>
-      </div>
-    </transition>
-    <script>
-      var loaderModel = new Vue({
-        el: '#loader',
-        data: {
-          showLoader: false
-        }
-      })
-    </script>
   </body>
 </html>

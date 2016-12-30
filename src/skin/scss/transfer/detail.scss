@@ -1,0 +1,266 @@
+$color: #41d4dc;
+#transfer-detail{
+  background-color: #e6e6e6;
+  margin-bottom: -20px;
+  padding-bottom: 20px;
+  padding-top: 40px;
+  .transfer-detail{
+    &-content{
+      float: left;
+      width: 100%;
+      padding-right: 374px;
+      > div{
+        width: 100%;
+        height: 100%;
+      }
+      // 转让详情
+      .detail-desc{
+        padding: 0 18px;
+        background-color: #fff;
+        &-header{
+          position: relative;
+          padding-top: 30px;
+          border-bottom: 1px solid #ececec;
+          li{
+            margin-bottom: 14px;
+          }
+        }
+        // 标签
+        .detail-tag{
+          display: inline-block;
+          vertical-align: top;
+          position: relative;
+          left: 0;
+          width: 86px;
+          height: 32px;
+          line-height: 32px;
+          text-align: center;
+          font-size: 19px;
+          // margin-top: 21px;
+          border-radius: 5px;
+          &::after{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+          }
+          &.detail-ing{
+            color: #fe6840;
+            border: 1px solid #fe6840;
+            &::after{
+              content: '转让中'
+            }
+          }
+          &.detail-over{
+            color: $color;
+            border: 1px solid $color;
+            &::after{
+              content: '已转让'
+            }
+          }
+          &.detail-finished{
+            color: #d2d3d3;
+            border: 1px solid #d2d3d3;
+            &::after{
+              content: '已完成'
+            }
+          }
+        }
+        // 项目名称
+        .detail-title{
+          display: inline-block;
+          font-size: 25px;
+          color: #333;
+          line-height: 32px;
+          vertical-align: top;
+          margin-left: 12px;
+        }
+        // 项目简介
+        .detail-intro{
+          font-size: 17px;
+          color: #969696;
+        }
+        // 关联项目
+        .detail-association{
+          margin-left: 16px;
+          font-size: 15px;
+          color: #0b50fe;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+
+
+        // 内容区
+        .detail-desc-con{
+          position: relative;
+          padding: 22px 0 33px;
+          ul{
+            margin: 12px 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          li{
+            float: left;
+            width: 33%;
+            min-width: 300px;
+            font-size: 16px;
+            color: #969696;
+          }
+          span{
+            color: #505050;
+          }
+          // 按钮
+          .detail-button{
+            position: absolute;
+            width: 153px;
+            right: 0;
+            bottom: 33px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            color: $color;
+            font-size: 19px;
+            border: 1px solid $color;
+            background-color: #fff;
+            border-radius: 5px;
+            &:hover{
+              opacity: .8;
+            }
+          }
+        }
+      }
+      // 转让流程
+      .process{
+        margin-top: 18px;
+        background-color: #fff;
+        &-header{
+          height: 60px;
+          border-bottom: 1px solid #ececec;
+          h2{
+            width: 180px;
+            height: 100%;
+            line-height: 60px;
+            text-align: center;
+            font-size: 19px;
+            color: #505050;
+            border-bottom: 3px solid $color;
+            margin-bottom: -1px;
+          }
+        }
+        &-con{
+          text-align: center;
+          padding: 0 8px;
+          img{
+            width: 100%;
+          }
+        }
+      }
+    }
+    // 侧边栏
+    &-sidebar{
+      float: right;
+      width: 356px;
+      margin-left: -356px;
+      padding: 0 10px;
+      background-color: #fff;
+      .sidebar-header{
+        padding-top: 22px;
+        border-bottom: 1px solid #ececec;
+        h2{
+          font-size: 16px;
+          color: #505050;
+          text-align: center;
+          margin: 22px 0;
+        }
+        span{
+          font-size: 28px;
+          color: $color;
+        }
+      }
+
+      .sidebar-con{
+        padding-top: 22px;
+        font-size: 16px;
+        color: #505050;
+        li{
+          margin-left: 16px;
+          margin-bottom: 12px;
+          input{
+            width: 185px;
+            height: 40px;
+            border: 1px solid #d2d2d2;
+            margin-right: 6px;
+            text-indent: 10px;
+            &:focus{
+              border-color: $color;
+            }
+          }
+          &.forgot-pwd{
+            span{
+              opacity: 0;
+            }
+            a{
+              opacity: 1;
+              font-size: 15px;
+              color: #969696;
+              &:hover{
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+
+      .btns{
+        font-size: 15px;
+        color: #969696;
+        text-align: center;
+        margin-top: 40px;
+        li{
+          margin-bottom: 24px;
+        }
+        input[type='checkbox']{
+          margin-right: 8px;
+        }
+        .button{
+          display: block;
+          width: 100%;
+          height: 56px;
+          line-height: 56px;
+          text-align: center;
+          font-size: 19px;
+          color: #fff;
+          background-color: $color;
+          border-radius: 5px;
+          &:hover{
+            opacity: .8;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// ipad竖屏
+@media (min-width: 768px) and (max-width: 1023px) {
+  #transfer-detail {
+    .transfer-detail-content{
+      float: none;
+      padding: 0;
+    }
+    .transfer-detail-sidebar{
+      float: none;
+      margin: 0;
+      width: 100%;
+      margin-top: 20px;
+      padding-bottom: 1px;
+      .sidebar-con li input{
+        width: 80%;
+      }
+    }
+  }
+}

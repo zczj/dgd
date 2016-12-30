@@ -15,7 +15,24 @@
     <script src="/skin/js/util.js"></script>
   </head>
   <body>
+    <!-- 页面切换加载动画-->
+    <div id="loader" class="loader">
+      <div>
+        <loader-inner class="ball-clip-rotate-pulse">
+          <div></div>
+          <div></div>
+        </loader-inner>
+      </div>
+    </div>
     <section id="header">
+      <!-- 操作loading动画-->
+      <transition name="opacity">
+        <div v-show="loading" class="detail-loading g-dialog-contianer">
+          <div class="dialog-window">
+            <div class="dialog-header loading"></div>
+          </div>
+        </div>
+      </transition>
       <div v-if="!isMobileOrTable" class="header-top">
         <div class="container clearfix">
           <div class="header-top-l"><span class="tel"><i class="icon icon-tel"></i>客服：400-066-8606</span><span class="gzus">关注我们：<a href="http://weibo.com/wow36kr" target="_brank"><i class="icon icon-sina"></i></a><span class="top-wx"><i class="icon icon-wx"></i>
@@ -142,7 +159,7 @@
                 <div class="detail-nav-wrapper">
                   <transition name="opacity">
                     <ul v-show="detailNav" ref="detailNav" class="detail-nav">
-                      <li v-for="(item, index) in detail.descList"><a v-bind:href="['#detailnav'+index]" v-bind:class="{current: index == detailNavCur}" ref="detailNavBtn">{{item.Title}}</a></li>
+                      <li v-for="(item, index) in detail.descList"><a v-bind:href="['#detailnav'+index]" v-bind:class="{current: index == detailNavCur}" ref="detailNavBtn">{{item.Title?item.Title:'项目介绍'}}</a></li>
                     </ul>
                   </transition>
                 </div>
@@ -158,13 +175,16 @@
               </div>
               <!-- 项目问答-->
               <div v-show="tabShow == 1" class="content-box detail-qa">
-                <textarea placeholder="请输入您的任何疑惑，我们会第一时间答复您" class="qa-texarea"></textarea>
+                <textarea placeholder="请输入您的任何疑惑，我们会第一时间答复您" ref="qaText" class="qa-texarea"></textarea>
                 <div class="qa-submit-wrapper"><a href="javascript:;" v-on:click="AddProjectQA" class="qa-submit-button">提交问题</a></div>
                 <div v-if="projectQAList.length == 0" class="empty">
                   <h3>暂无问答</h3>
                 </div>
                 <dl v-else="v-else" v-for="qa in projectQAList" class="qa-list">
-                  <dt>{{qa.Content}}<span class="time">{{qa.PostDate}}</span><span class="time">{{qa.UserName}}</span><span class="qa-avatar"><img v-bind:src="qa.Avatar" v-bind:alt="qa.UserName" width="100%" height="100%"/></span></dt>
+                  <dt>
+                    <p class="qa-con">{{qa.Content}}</p>
+                    <div class="qa-from-user"><span class="qa-avatar"><img v-bind:src="qa.Avatar" v-bind:alt="qa.UserName" width="100%" height="100%"/></span><span class="time">{{qa.UserName}}</span><span class="time">{{qa.PostDate}}</span></div>
+                  </dt>
                   <dd v-if="qa.ChlidList.length" v-for="qachild in qa.ChlidList">
                     <h2><img v-bind:src="qachild.Avatar" alt="" class="qa-avatar"/>
                       <div class="qa-user-wrapper">
@@ -245,23 +265,5 @@
         <div class="container"><span>深圳市网筹互联网金融服务有限公司</span><span>ICP证：粤ICP备14040204号-2</span></div>
       </div>
     </div>
-    <transition name="opacity">
-      <div id="loader" v-show="showLoader" class="loader">
-        <div>
-          <loader-inner class="ball-clip-rotate-pulse">
-            <div></div>
-            <div></div>
-          </loader-inner>
-        </div>
-      </div>
-    </transition>
-    <script>
-      var loaderModel = new Vue({
-        el: '#loader',
-        data: {
-          showLoader: false
-        }
-      })
-    </script>
   </body>
 </html>

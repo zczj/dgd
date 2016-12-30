@@ -2,7 +2,7 @@ var fpwdModel = new Vue({
   el: '#fpwd',
   data: {
     step: 3,
-    tel: '18675594174'
+    tel: ''
   },
   methods: {
     // 第一步
@@ -41,17 +41,24 @@ var fpwdModel = new Vue({
         newPassword.focus()
         return false
       }
+      // loading
+      headerModel.loading = true;
       $.ajax({
         url: verifySMSUrl,
         type: 'POST',
         data: {"Phone": _this.tel, "Code": SMSVerify.value},
         success: function (res) {
+          if (!res) {
+            return false
+          }
+          headerModel.loading = false
           // 请求成功，但验证失败
           if (res.resultid !== 200) {
             passportModel.errorFn(res.message)
             SMSVerify.select()
-            return false
           } else {
+            _this.step = 3
+            console.log(_this.step)
             // window.location.href = './success.html?fpwd'
           }
         },
@@ -68,6 +75,7 @@ var fpwdModel = new Vue({
 
   },
   mounted: function () {
-    // this.$refs.step1text.focus()
+    $('#loader').fadeOut("300")
+    this.$refs.telPhoneNum.focus()
   }
 })

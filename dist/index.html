@@ -15,7 +15,24 @@
     <script src="/skin/js/util.js"></script>
   </head>
   <body>
+    <!-- 页面切换加载动画-->
+    <div id="loader" class="loader">
+      <div>
+        <loader-inner class="ball-clip-rotate-pulse">
+          <div></div>
+          <div></div>
+        </loader-inner>
+      </div>
+    </div>
     <section id="header">
+      <!-- 操作loading动画-->
+      <transition name="opacity">
+        <div v-show="loading" class="detail-loading g-dialog-contianer">
+          <div class="dialog-window">
+            <div class="dialog-header loading"></div>
+          </div>
+        </div>
+      </transition>
       <div v-if="!isMobileOrTable" class="header-top">
         <div class="container clearfix">
           <div class="header-top-l"><span class="tel"><i class="icon icon-tel"></i>客服：400-066-8606</span><span class="gzus">关注我们：<a href="http://weibo.com/wow36kr" target="_brank"><i class="icon icon-sina"></i></a><span class="top-wx"><i class="icon icon-wx"></i>
@@ -81,7 +98,6 @@
           {title: '项目详情',url: 'project/detail.html'},
           {title: '转让列表',url: 'transfer/index.html'},
           {title: '转让详情',url: 'transfer/detail.html'},
-          {title: '转让介绍',url: 'transfer/equity.html'},
           ]
         }],
         l: [{
@@ -159,23 +175,5 @@
         <div class="container"><span>深圳市网筹互联网金融服务有限公司</span><span>ICP证：粤ICP备14040204号-2</span></div>
       </div>
     </div>
-    <transition name="opacity">
-      <div id="loader" v-show="showLoader" class="loader">
-        <div>
-          <loader-inner class="ball-clip-rotate-pulse">
-            <div></div>
-            <div></div>
-          </loader-inner>
-        </div>
-      </div>
-    </transition>
-    <script>
-      var loaderModel = new Vue({
-        el: '#loader',
-        data: {
-          showLoader: false
-        }
-      })
-    </script>
   </body>
 </html>
