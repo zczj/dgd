@@ -66,12 +66,19 @@ var orderModel = new Vue({
     },
     // ManagerFee 管理费
     manageFree: function () {
+      if (!this.buyInfo.ProjectRule) {
+        return;
+      }
       return (this.buyInfo.ProjectRule.ManagerFee * this.buyInfo.project.OriginalLowVote).toFixed(2);
     },
-    // 定义coupon 数组
-    couponList: function () {
-      var res = this.buyInfo.CouponList;
-      // this.selected = res[0]?res[0].CouponID:this.selected;
+    // 计算coupon
+    coupon: function () {
+      var res = 0;
+      for (var i = 0; i < buyInfo.project.ProjectID.length; i++) {
+        if (buyInfo.project.ProjectID[i].CouponId == selected) {
+          return res = buyInfo.project.ProjectID[i].Amount;
+        }
+      }
       return res
     }
   },
@@ -79,6 +86,7 @@ var orderModel = new Vue({
     // 获取url传参过来的资讯id
     this.proId = window.location.search.split('id=')[1] || 0;
     // this.proId = '1037' // 有规则
+    // this.proId = '1273' // 有规则
     // this.proId = '1272' // 无规则
     this.getBuyInfo();
   }

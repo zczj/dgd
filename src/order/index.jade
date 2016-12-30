@@ -75,7 +75,7 @@ block content
                   li
                     span.t-name 管理费：
                     span.t-val {{manageFree}}元
-                  li(v-if="couponList.length > 0 &&　buyInfo.project.ProjectID != 1078")
+                  li(v-if="buyInfo.project.ProjectID.length > 0 &&　buyInfo.project.ProjectID != 1078")
                     span.t-name 优惠券：
                     span.t-val
                       select(v-model="selected" )
