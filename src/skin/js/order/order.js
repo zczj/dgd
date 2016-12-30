@@ -26,8 +26,6 @@ var orderModel = new Vue({
             $("#loader").fadeOut(300);
             if (response.resultid == 200) {
               _this.buyInfo = response;
-              response.CouponList =[{Amount:0,CouponID:0}].concat(response.CouponList)
-              // _this.selected = response.CouponList[0]?response.CouponList[0].CouponID:_this.selected;
             }
             else{
               console.log(response.message);
@@ -70,15 +68,11 @@ var orderModel = new Vue({
     manageFree: function () {
       return (this.buyInfo.ProjectRule.ManagerFee * this.buyInfo.project.OriginalLowVote).toFixed(2);
     },
-    // Coupon
-    coupon: function () {
-      var res = 0;
-      for (var i = 0; i < this.buyInfo.CouponList.length; i++) {
-        if (this.buyInfo.CouponList[i].id=this.selected) {
-          return res = this.buyInfo.CouponList[i].Amount
-        }
-      }
-      return res;
+    // 定义coupon 数组
+    couponList: function () {
+      var res = this.buyInfo.CouponList;
+      // this.selected = res[0]?res[0].CouponID:this.selected;
+      return res
     }
   },
   mounted: function () {

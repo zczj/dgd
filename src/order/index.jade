@@ -75,11 +75,13 @@ block content
                   li
                     span.t-name 管理费：
                     span.t-val {{manageFree}}元
-                  li(v-if="buyInfo.CouponList.length > 0 &&　buyInfo.project.ProjectID != 1078")
+                  li(v-if="couponList.length > 0 &&　buyInfo.project.ProjectID != 1078")
                     span.t-name 优惠券：
                     span.t-val
                       select(v-model="selected" )
-                        option(v-for="item in buyInfo.CouponList" v-bind:value ="item.CouponID") {{item.Amount}} 元(有效期{{item.ExpiringDate}})
+                        option(v-bind:value = "0" selected) 请选择
+                        option(v-for="item in buyInfo.CouponList" v-bind:value ="item.CouponID")
+                          {{item.Amount}} 元(有效期{{item.ExpiringDate}})
 
 
 

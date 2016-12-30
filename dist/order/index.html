@@ -123,8 +123,9 @@
                   <ul>
                     <li v-if="orderRule != null &amp;&amp;　orderRule.Type !== 1"><span class="t-name">投资金额：</span><span class="t-val"><span class="red">50000.00</span>元</span></li>
                     <li><span class="t-name">管理费：</span><span class="t-val">{{manageFree}}元</span></li>
-                    <li v-if="buyInfo.CouponList.length &gt; 0 &amp;&amp;　buyInfo.project.ProjectID != 1078"><span class="t-name">优惠券：</span><span class="t-val">
+                    <li v-if="couponList.length &gt; 0 &amp;&amp;　buyInfo.project.ProjectID != 1078"><span class="t-name">优惠券：</span><span class="t-val">
                         <select v-model="selected">
+                          <option v-bind:value="0" selected="selected">请选择</option>
                           <option v-for="item in buyInfo.CouponList" v-bind:value="item.CouponID">{{item.Amount}} 元(有效期{{item.ExpiringDate}})</option>
                         </select></span></li>
                   </ul>
