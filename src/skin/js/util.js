@@ -223,6 +223,21 @@ var Util=function () {
     })
     return Tools.store.clearOne('userInfo');
   }
+
+  function tips() {
+    var Tip = {}
+    return Tip.prototype={
+      _tip: function (msg, callback) {
+        $.dialog({
+          type: 'warning',
+          message: msg,
+          delay: 2000,
+          effect: true,
+          delayCallback: callback && callback()
+        })
+      }
+    }
+  }
   var Tools = {};
   return Tools.store = store(),
          Tools.checkLogin = checkLogin,
@@ -230,6 +245,7 @@ var Util=function () {
          Tools.fT = time(),
          Tools.check = check(),
          Tools.Ev = createObj(),
+         Tools.tip= tips(),
          Tools
 }
 

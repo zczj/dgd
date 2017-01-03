@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-12-29 10:25:57
 * @Last Modified by:   老苏
-* @Last Modified time: 2016-12-30 15:45:29
+* @Last Modified time: 2017-01-03 17:02:17
 */
 html,body{
   background:#f4f4f4;
@@ -115,7 +115,7 @@ $orderC: #41d4dc;
   .order-info{
     padding: 0 20px;
     .order-body{
-      width: 380px;
+      // width: 380px;
       margin: 0 auto;
 
       .order-part{
@@ -175,14 +175,28 @@ $orderC: #41d4dc;
           color: #fe3242;
         }
       }
+      .order-note{
+        font-size: 1.4rem;
+        margin-top: 10px;
+        border-top: 1px #ccc dashed;
+        padding: 6px 0;
+      }
       ul{
         margin-top: 10px;
         li{
           text-align: center;
-          height: 30px;
-          line-height: 30px;
+          padding: 4px 0;
           .red{
             color: #fe3242;
+          }
+          &.coupon-list{
+            line-height: 1.4;
+            font-size:1.4rem;
+            padding: 10px 0;
+            .red{
+              margin-top: 10px;
+              text-align: left;
+            }
           }
         }
         .t-val{

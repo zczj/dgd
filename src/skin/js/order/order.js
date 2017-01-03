@@ -4,7 +4,8 @@ var orderModel = new Vue({
     proId: '',
     buyInfo: '',
     part: '1', // 认投份数
-    selected: '0' // 选择的coupon
+    selected: '0', // 选择的coupon
+    amount:0 // 认投金额
   },
   methods: {
     getBuyInfo: function () {
@@ -26,6 +27,7 @@ var orderModel = new Vue({
             $("#loader").fadeOut(300);
             if (response.resultid == 200) {
               _this.buyInfo = response;
+              _this.amount = response.project.OriginalLowVote;
             }
             else{
               console.log(response.message);
@@ -37,9 +39,23 @@ var orderModel = new Vue({
         })
       }
     },
+    // 禁用非数字型
     numEv: function (e) {
-      this.amount = this.amount ==''?1:this.amount;
       return DGDTOOLS.check._isNumPoint(e)
+    },
+    // 检测转入是否规范
+    numCh: function () {
+      var _this = this;
+      if (this.amount == '' || this.amount < this.buyInfo.project.OriginalLowVote - 0) {
+        this.amount = this.buyInfo.project.OriginalLowVote;
+        DGDTOOLS.tip._tip('金额必须大于最低跟投小于最高跟投',function () {
+          _this.$refs.amount.focus()
+        })
+      }
+    },
+    couponCh: function () {
+      var _this = this;
+
     }
   },
   computed: {
@@ -60,16 +76,12 @@ var orderModel = new Vue({
       var res = 0;
       return res;
     },
-    // 认投金额
-    amount: function () {
-      return this.buyInfo.project.OriginalLowVote;
-    },
     // ManagerFee 管理费
     manageFree: function () {
-      if (!this.buyInfo.ProjectRule) {
-        return;
+      var res = 0
+      if (this.orderRule) {
+        return (this.buyInfo.ProjectRule.ManagerFee * this.amount).toFixed(2);
       }
-      return (this.buyInfo.ProjectRule.ManagerFee * this.buyInfo.project.OriginalLowVote).toFixed(2);
     },
     // 计算coupon
     coupon: function () {
@@ -85,8 +97,8 @@ var orderModel = new Vue({
   mounted: function () {
     // 获取url传参过来的资讯id
     this.proId = window.location.search.split('id=')[1] || 0;
-    // this.proId = '1037' // 有规则
-    // this.proId = '1273' // 有规则
+    // this.proId = '1037' // 有规则(按份数)
+    // this.proId = '1034' // 有规则(按份数)
     // this.proId = '1272' // 无规则
     this.getBuyInfo();
   }

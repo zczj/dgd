@@ -43,24 +43,28 @@ block content
                 //- 有规则
                 div(v-if="orderRule != null" data-type="有规则")
                   //- 按金额整数倍累加
-                  .order-part(v-if="orderRule.Type == 1"  data-type="按金额整数倍累加")
-                    span.t-name 认投金额
-                    input.type1(type="number" step="0.01" v-model="amount"  v-on:keypress="numEv(event)")
-                    span 元
+                  div(v-if="orderRule.Type == 1"  data-type="按金额整数倍累加")
+                    .order-part
+                      span.t-name 认投金额
+                      input.type1(type="text" v-model.trim="amount"  v-on:keypress="numEv(event)" v-on:blur="numCh" ref="amount")
+                      span 元
 
-                  .order-tips(v-if="orderRule.Type == 1")
-                    span.
-                      最低{{buyInfo.project.OriginalLowVote}}元起,整数倍累加最高跟投2000000.00元
-                    span.red.
-                      + 管理费(平台收取)({{manageFree}}元)
+                    .order-tips
+                      span.
+                        最低{{buyInfo.project.OriginalLowVote}}元起,整数倍累加最高跟投2000000.00元
+                      span.red.
+                        + 管理费(平台收取)({{manageFree}}元)
+                    .order-note.
+                      投资基本信息：非常感谢您投资了{{buyInfo.project.ProjectName}}，投资意向金为 {{amount}} 元，所认投的股份份额，需要在项目融资成功后确定
 
                   //- 按份数累加
-                  .order-part(v-else data-type="按份数")
-                    span.t-name 认投份数
-                    i.icon.icon-cut
-                    input(type="text" v-model="part")
-                    i.icon.icon-add
-                    span 份
+                  div(v-else data-type="按份数")
+                    .order-part
+                      span.t-name 认投份数
+                      i.icon.icon-cut
+                      input(type="text" v-model="part")
+                      i.icon.icon-add
+                      span 份
                 div(v-else data-type="无规则")
 
 
@@ -75,13 +79,15 @@ block content
                   li
                     span.t-name 管理费：
                     span.t-val {{manageFree}}元
-                  li(v-if="buyInfo.project.ProjectID.length > 0 &&　buyInfo.project.ProjectID != 1078")
+                  li.coupon-list(v-if="orderModel.buyInfo.CouponList.length > 0 &&　buyInfo.project.ProjectID != 1078")
                     span.t-name 优惠券：
                     span.t-val
-                      select(v-model="selected" )
+                      select(v-model="selected" v-on:change="couponCh")
                         option(v-bind:value = "0" selected) 请选择
                         option(v-for="item in buyInfo.CouponList" v-bind:value ="item.CouponID")
                           {{item.Amount}} 元(有效期{{item.ExpiringDate}})
+                    div.red.
+                      提示：投资满1万可抵扣50元；投资满2万可抵扣100元，投资满3万可抵扣150元，投资满4万可抵扣200元，投资满5万可抵扣500元,每次投资只能使用一张优惠抵扣
 
 
 
