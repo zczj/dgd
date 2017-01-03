@@ -56,6 +56,22 @@ var orderModel = new Vue({
     couponCh: function () {
       var _this = this;
 
+      if (_this.buyInfo.project.ProjectID == "1217") {
+        DGDTOOLS.tip._tip('此项目不能使用抵扣劵',function () {
+          _this.selected='0';
+        })
+      }
+
+      // 定期项目不能使用优惠劵
+      if (_this.buyInfo.project.StandType == 1) {
+        DGDTOOLS.tip._tip('定期项目不能使用优惠劵',function () {
+          _this.selected='0';
+        })
+      }
+
+
+
+
     }
   },
   computed: {
