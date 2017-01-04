@@ -1,0 +1,39 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/novice/index.css")
+  #novice
+    .page
+      .banner
+      .cat.container
+        .cat-title 服务项目
+        .cat-list.clearfix
+          a(href="#")
+            img(src="/skin/img/novice/xinshoutiyan.png", alt="")
+            p 新手体验
+          a(href="#")
+            img(src="/skin/img/novice/standbao.png", alt="")
+            p 站岗宝
+          a(href="#")
+            img(src="/skin/img/novice/guquanzhiya.png", alt="")
+            p 股权质押
+          a(href="#")
+            img(src="/skin/img/novice/guquanzhuanrang.png", alt="")
+            p 股权转让
+
+
+
+
+  script.
+    $(function(){
+      //- loading动画
+      $('#loader').fadeOut(300)
+
+
+
+      //-
+      var $banner = $('.banner'),
+          $cat = $('.cat')
+      $banner.css({
+        'height': $(window).height() * .565
+      })
+    })

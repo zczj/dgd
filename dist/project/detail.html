@@ -185,7 +185,7 @@
                     <p class="qa-con">{{qa.Content}}</p>
                     <div class="qa-from-user"><span class="qa-avatar"><img v-bind:src="qa.Avatar" v-bind:alt="qa.UserName" width="100%" height="100%"/></span><span class="time">{{qa.UserName}}</span><span class="time">{{qa.PostDate}}</span></div>
                   </dt>
-                  <dd v-if="qa.ChlidList.length" v-for="qachild in qa.ChlidList">
+                  <dd v-if="qa &amp;&amp; qa.ChlidList.length" v-for="qachild in qa.ChlidList">
                     <h2><img v-bind:src="qachild.Avatar" alt="" class="qa-avatar"/>
                       <div class="qa-user-wrapper">
                         <h3>{{qachild.UserName}}</h3><span>大股东管理员</span>
@@ -197,7 +197,7 @@
               </div>
               <!-- 跟投人-->
               <div v-show="tabShow == 2" class="content-box invest-list">
-                <div v-if="detail.FollowPerson.length == 0" class="empty">
+                <div v-if="detail &amp;&amp; detail.FollowPerson.length == 0" class="empty">
                   <h3>暂无跟投人</h3>
                 </div>
                 <ul v-else="v-else">

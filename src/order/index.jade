@@ -61,11 +61,15 @@ block content
                   div(v-else data-type="按份数")
                     .order-part
                       span.t-name 认投份数
-                      i.icon.icon-cut
-                      input(type="text" v-model="part")
-                      i.icon.icon-add
+                      i.icon.icon-cut(v-on:click="partCut")
+                      input(type="text" v-model.trim="part" v-on:keypress="DGDTOOLS.check._isNum(event)" v-on:blur="partCh" ref="part")
+                      i.icon.icon-add(v-on:click="partAdd")
                       span 份
                 div(v-else data-type="无规则")
+                  .order-part
+                    span.t-name 认投金额
+                    input.type1(type="text" v-model.trim="amount"  v-on:keypress="numEv(event)" v-on:blur="numCh" ref="amount")
+                    span 元
 
 
 
@@ -74,9 +78,9 @@ block content
                   li(v-if="orderRule != null &&　orderRule.Type !== 1")
                     span.t-name 投资金额：
                     span.t-val
-                      span.red 50000.00
+                      span.red {{amount}}
                       |元
-                  li
+                  li(v-if="manageFree !== 0")
                     span.t-name 管理费：
                     span.t-val {{manageFree}}元
                   li.coupon-list(v-if="orderModel.buyInfo.CouponList.length > 0 &&　buyInfo.project.ProjectID != 1078")
@@ -93,11 +97,11 @@ block content
 
                 .order-way
                   label
-                    input(type="radio", name="pay-type" checked)
+                    input(type="radio", name="pay-type" v-model="OrderType" value="1" checked)
                     i.icon.icon-os
                     span 我要认购并在线支付
                   label
-                    input(type="radio" name="pay-type")
+                    input(type="radio" name="pay-type" v-model="OrderType" value="0")
                     i.icon.icon-os
                     span 我要认购暂不付款
 
@@ -105,7 +109,7 @@ block content
 
               .order-footer
                 label.order-rule
-                  input(type="checkbox")
+                  input(type="checkbox" v-model="readyRule")
                   i.icon.icon-os
                   span.
                     我已认真仔细阅读并同意<a href="#">《大股东用户服务协议》</a>和<a href="#">《风险提示书》</a>
@@ -113,7 +117,7 @@ block content
                   .order-total-money
                     span.t-name 应付总额：
                     span.t-val {{totleResult}}
-                  a.order-btn(href="#") 下一步
+                  a.order-btn(href="javascript:void(0);" v-on:click="nextFn") 下一步
 
 
 

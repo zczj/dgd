@@ -17,19 +17,25 @@ block content
                     a(href="#").detail-association 查看关联项目>
             .detail-desc-con
               ul.clearfix
-                li 转让金额（元）:
+                li
+                  span 转让金额（元）:
                   span 40,000.00
-                li 转让方：
+                li
+                  span 转让方：
                   span 张 * *
               ul.clearfix
-                li 转让份额（元）:
+                li
+                  span 转让份额（元）:
                   span 1.25%
-                li 原始投资时间：
+                li
+                  span 原始投资时间：
                   span 2016年07月03日15:00
               ul.clearfix
-                li 原始金额（元）:
+                li
+                  span 原始金额（元）:
                   span 40,000.00
-                li 转让剩余时间：
+                li
+                  span 转让剩余时间：
                   span 10天10小时10分10秒
               a(href="javascrip:;").detail-button 约谈
           // 流程
@@ -44,10 +50,12 @@ block content
           h2 可用余额：
             span 12,000.00元
         ul.sidebar-con
-          li 购买余额：
+          li
+            span 购买余额：
             input(type="text")
             | 元
-          li 交易密码：
+          li
+            span 交易密码：
             input(type="text")
           li.forgot-pwd
             span 交易密码：
@@ -60,3 +68,7 @@ block content
               a(href="#") 《大股东权益转让协议》
           li
             a(href="#").button 确认购买
+  script.
+    $(function(){
+      $('#loader').fadeOut('300')
+    })

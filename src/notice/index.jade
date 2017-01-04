@@ -1,0 +1,56 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/notice/index.css")
+  #notice-list.container
+    h2.notice-title 平台公告
+    ul.notice-list
+      li
+        a(href="#") 澄清公告
+          span 2015-10-21
+      li
+        a(href="#") 澄清公告
+          span 2015-10-21
+      li
+        a(href="#") 澄清公告
+          span 2015-10-21
+      li
+        a(href="#") 澄清公告
+          span 2015-10-21
+      li
+        a(href="#") 澄清公告
+          span 2015-10-21
+      li
+        a(href="#") 澄清公告
+          span 2015-10-21
+
+
+
+
+
+
+
+
+
+
+  script.
+    $(function(){
+      //- loading动画
+      $('#loader').fadeOut(300)
+
+      setHeight()
+      function setHeight() {
+        //- 设置最小高度
+        var $header = $('#header'),
+            $footer = $('.footer'),
+            $notice = $('#notice-list'),
+            $height = $(window).height(),
+            h = $height - $header.outerHeight(true) - $footer.outerHeight(true)
+        if ($notice.height() < h) {
+          $notice.css({
+            'min-height':h
+          })
+        }
+      }
+
+    })
+

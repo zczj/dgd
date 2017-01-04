@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-12-29 10:25:57
 * @Last Modified by:   老苏
-* @Last Modified time: 2017-01-03 17:02:17
+* @Last Modified time: 2017-01-04 18:04:58
 */
 html,body{
   background:#f4f4f4;
@@ -119,8 +119,9 @@ $orderC: #41d4dc;
       margin: 0 auto;
 
       .order-part{
-        width: 310px;
-        padding: 4px 50px 4px 100px;
+        max-width: 310px;
+        width: 100%;
+        padding: 4px 50px 4px 80px;
         text-align: center;
         border: 2px #329da3 solid;
         box-shadow: 3px 3px 3px #ccc;
@@ -141,7 +142,9 @@ $orderC: #41d4dc;
           }
         }
         input{
-          width: 80px;
+          width: 30%;
+          max-width: 80px;
+          min-width: 50px;
           border: none;
           background:none;
           text-align: center;
@@ -208,35 +211,35 @@ $orderC: #41d4dc;
           }
         }
       }
-
-      .order-way{
-        color: #3e4149;
-        text-align: center;
-        margin-top: 6px;
-        input[name='pay-type']{
-          opacity:0;
-          display: none;
-          & + i.icon{
-            width: 16px;
-            height: 16px;
-            color: #e0e4e9;
-            font-size: 1.6rem;
-            margin-right: 4px;
+      @at-root{
+        .order-way{
+          color: #3e4149;
+          text-align: center;
+          margin-top: 6px;
+          input[name='pay-type']{
+            opacity:0;
+            display: none;
+            & + i.icon{
+              width: 16px;
+              height: 16px;
+              color: #e0e4e9;
+              font-size: 1.6rem;
+              margin-right: 4px;
+            }
+            &:checked + i.icon{
+              color: $orderC;
+            }
           }
-          &:checked + i.icon{
-            color: $orderC;
+          label{
+            &:hover{
+              cursor: pointer;
+            }
           }
-        }
-        label{
-          &:hover{
-            cursor: pointer;
+          label+label{
+            margin-left: 20px;
           }
-        }
-        label+label{
-          margin-left: 20px;
         }
       }
-
     }
     .order-footer{
       padding-bottom: 20px;
@@ -300,7 +303,7 @@ $orderC: #41d4dc;
     width: 312px;
     background:#fff;
     min-height: 200px;
-    padding: 0 15px;
+    padding: 0 15px 10px;
   }
   //- 投资人信息
   .investor-info{
@@ -325,22 +328,53 @@ $orderC: #41d4dc;
         color: #3e4149;
       }
     }
+
+    &.order-infoS{
+      li{
+        .t-name{width: 80px;}
+
+      }
+      .order-footer{
+        border-top: 1px #d8dcdf solid;
+        margin-top: 15px;
+        ul{
+          margin-top: 0;
+
+        }
+        li{
+          .t-val{
+            font-size: 18px;
+            color: #41d4dc;
+            font-weight: 700;
+          }
+        }
+      }
+    }
   }
 }
 
-@mixin order-warp-950() {
 
-}
+
 
 @mixin order-warp-800() {
   .order-warp{
     .main,.side{ width: 100%; float: none;}
     .main{ margin-top: 20px;}
   }
+  .order-way{
+    label{
+      display: block;
+      margin: 5px 0;
+      text-align: left;
+    }
+    label+label{
+      margin-left: 0;
+    }
+  }
 }
 
 @media only screen and( max-width: 59.375em){
-  @include order-warp-950();
+  // @include order-warp-950();
 }
 @media only screen and( max-width: 50em){
   @include order-warp-800();

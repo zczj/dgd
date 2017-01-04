@@ -75,69 +75,40 @@
       </header>
     </section>
     <!--==================================================-->
-    <section id="pageList" v-cloak="v-cloak" class="pageList">
-      <dl v-for="item in items.l">
-        <dt>{{item.catgray}}</dt>
-        <dd v-for="list in item.list"><a :href="list.url">{{list.title}}</a></dd>
-      </dl>
-      <dl v-for="item in items.h">
-        <dt>{{item.catgray}}</dt>
-        <dd v-for="list in item.list"><a :href="list.url">{{list.title}}</a></dd>
-      </dl>
-    </section>
+    <link rel="stylesheet" href="/skin/css/notice/index.css"/>
+    <div id="notice-list" class="container">
+      <h2 class="notice-title">平台公告</h2>
+      <ul class="notice-list">
+        <li><a href="#">澄清公告<span>2015-10-21</span></a></li>
+        <li><a href="#">澄清公告<span>2015-10-21</span></a></li>
+        <li><a href="#">澄清公告<span>2015-10-21</span></a></li>
+        <li><a href="#">澄清公告<span>2015-10-21</span></a></li>
+        <li><a href="#">澄清公告<span>2015-10-21</span></a></li>
+        <li><a href="#">澄清公告<span>2015-10-21</span></a></li>
+      </ul>
+    </div>
     <script>
-      var data={
-        h:[{
-          catgray:'登录注册页面...',
-          list:[
-          {title: '登录',url: 'passport/login.html'},
-          {title: '注册',url: 'passport/register.html'},
-          {title: '成功',url: 'passport/success.html'},
-          {title: '忘记密码',url: 'passport/fpwd.html'},
-          {title: '项目列表',url: 'project/index.html'},
-          {title: '项目详情',url: 'project/detail.html'},
-          {title: '转让列表',url: 'transfer/index.html'},
-          {title: '转让详情',url: 'transfer/detail.html'},
-          {title: '公告列表',url: 'notice/index.html'},
-          {title: '公告内容',url: 'notice/detail.html'},
-          {title: '新手课堂',url: 'novice/index.html'},
-          ]
-        }],
-        l: [{
-          catgray: '首页',
-          list:[
-          {title: '首页',url: 'index/index.html'},
-          {title: '资讯列表',url: 'news/index.html'},
-          {title: '资讯详情',url: 'news/detail.html'},
-          {title: '常见问题分类', url: 'about/qa.html'},
-          {title: '常见详情', url: 'about/qaDetail.html'},
-          {title: '支付', url: 'order/index.html'},
-          {title: '项目预约', url: 'about/qaDetail.html'},
-          {title: '提问', url: 'about/qaAsk.html'}
-          ]
-        }]
-      }
-      new Vue({
-        el: '#pageList',
-        data: {
-          items: data
-        }
-      })
-      $(function () {
-        $("#loader").hide()
-      })
+      $(function(){
+        //- loading动画
+        $('#loader').fadeOut(300)
       
+        setHeight()
+        function setHeight() {
+          //- 设置最小高度
+          var $header = $('#header'),
+              $footer = $('.footer'),
+              $notice = $('#notice-list'),
+              $height = $(window).height(),
+              h = $height - $header.outerHeight(true) - $footer.outerHeight(true)
+          if ($notice.height() < h) {
+            $notice.css({
+              'min-height':h
+            })
+          }
+        }
+      
+      })
     </script>
-    <style>
-      body{background:#fff;}
-      .pageList{ width: 800px-; margin: 0 auto; padding: 20px 0; background: #fff; }
-      .pageList dl{ padding: 0 20px; margin-top: 20px; }
-      .pageList dl:first-child{margin-top: 0;}
-      .pageList dl dt, .pageList dl dd{ padding: 0 20px; border-bottom: 1px #ccc solid; height: 30px; line-height: 30px; }
-      .pageList dl dt{ background: #f8f8f8; font-size: 14px; color: #333; font-weight: bold; height: 50px; line-height: 50px; }
-      .pageList dl dd{text-indent: 20px;}
-      .pageList dl dd a{ display: block; }
-    </style>
     <!--==================================================-->
     <div class="footer">
       <div class="info">

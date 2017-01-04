@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 190684 */
-  src: url('//at.alicdn.com/t/font_4h230kjg82qk6gvi.eot');
-  src: url('//at.alicdn.com/t/font_4h230kjg82qk6gvi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_4h230kjg82qk6gvi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_4h230kjg82qk6gvi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_4h230kjg82qk6gvi.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_hlrm9ifzrdlsor.eot');
+  src: url('//at.alicdn.com/t/font_hlrm9ifzrdlsor.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_hlrm9ifzrdlsor.woff') format('woff'),
+  url('//at.alicdn.com/t/font_hlrm9ifzrdlsor.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_hlrm9ifzrdlsor.svg#iconfont') format('svg');
 }
 
 .icon{
@@ -112,5 +112,9 @@
   // 向下
   &-down::before{
     content: '\e971';
+  }
+  // 向左
+  &-left::before{
+    content: '\e604';
   }
 }

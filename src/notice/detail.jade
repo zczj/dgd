@@ -1,0 +1,39 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/notice/index.css")
+  #notice-detail.container
+    h2.notice-title 澄清公告
+      a(href="javascript:history.go(-1);").goback
+        i.icon.icon-left
+        | 返回
+    .notice-list(style='height: 100%')
+      iframe(src="http://test.dgd.vc/h5/Notice?ID=6", frameborder="0", width='100%',height='100%')
+
+
+
+
+
+
+
+
+  script.
+    $(function(){
+      //- loading动画
+      $('#loader').fadeOut(300)
+
+      setHeight()
+      function setHeight() {
+        //- 设置最小高度
+        var $header = $('#header'),
+            $footer = $('.footer'),
+            $notice = $('#notice-detail'),
+            $height = $(window).height(),
+            h = $height - $header.outerHeight(true) - $footer.outerHeight(true)
+        if ($notice.height() < h) {
+          $notice.css({
+            'height':h
+          })
+        }
+      }
+
+    })

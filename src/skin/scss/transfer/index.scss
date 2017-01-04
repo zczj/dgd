@@ -239,3 +239,113 @@ $color: #41d4dc;
     }
   }
 }
+
+
+// 手机端
+@media screen and (max-width: 767px) {
+  #transfer-list{
+    .banner{
+      height: 150px;
+      background-position: center bottom;
+    }
+    .transfer-title{
+      font-size: 20px;
+      margin-top: 20px;
+      &::before{
+        width: 100%;
+      }
+    }
+    .container{
+      margin-top: 20px;
+    }
+    .transfer-list{
+      padding: 0 10px;
+    }
+    //
+    .transfer-header{
+      height: auto;
+      padding: 0;
+      line-height: normal;
+      padding-top: 10px;
+      text-align: center;
+      &::after{
+        display: none;
+      }
+      > *:not(.transfer-tag){
+        float: none;
+        width: 100%;
+        height: auto;
+      }
+    }
+    .transfer-tag{
+      position: relative;
+      font-size: 14px;
+      margin: 0;
+    }
+    .transfer-project-title{
+      font-size: 20px;
+      height: 44px;
+      line-height: 44px;
+    }
+    .transfer-project-intro{
+      font-size: 14px;
+      height: 30px;
+      line-height: 30px;
+    }
+    .transfer-association{
+      position: absolute;
+      top: 10px;
+      right: 0;
+      text-align: right;
+      font-size: 13px;
+      height: 32px;
+      line-height: 32px;
+    }
+    //
+    .transfer-content{
+      padding-top: 10px;
+      .param{
+        float: none;
+        width: 100%;
+        padding: 0;
+      }
+      .amount{
+        margin: 0;
+        li{
+          float: none;
+          width: 100%;
+          line-height: 1.8;
+          font-size: 14px;
+        }
+        .name{
+          display: inline-block;
+          width: 110px;
+        }
+        span{
+          &:last-child{
+            margin-left: 10px;
+          }
+        }
+      }
+      .buttons{
+        float: none;
+        width: 100%;
+        padding: 5px;
+      }
+      .button{
+        float: none;
+        display: inline-block;
+        width: 44%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        &:first-child{
+          float: left;
+        }
+        &:last-child{
+          float: right;
+        }
+      }
+    }
+  }
+}

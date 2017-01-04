@@ -1,0 +1,90 @@
+html, body, #novice, .page{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.banner{
+  width: 100%;
+  height: 537px;
+  background-image: url(/skin/img/novice/banner.jpg);
+  background-position: center center;
+  background-size: auto 100%;
+  overflow: hidden;
+}
+.cat{
+  &-title{
+    position: relative;
+    font-size: 36px;
+    color: #010f19;
+    text-align: center;
+    margin-top: 44px;
+    padding-bottom: 18px;
+    &::after{
+      content: ' ';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 87px;
+      height: 3px;
+      background-color: #4adf65;
+      transform: translateX(-50%);
+    }
+  }
+  &-list{
+    > a{
+      float: left;
+      width: 25%;
+      text-align: center;
+    }
+    p{
+      font-size: 24px;
+      color: #696969;
+    }
+  }
+}
+
+
+
+
+
+
+@media (min-width:768px) and (max-width:1100px) {
+  .banner{
+    height: 405px;
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  .banner{
+    height: 300px;
+  }
+  .cat{
+    &-title{
+      margin-top: 10px;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    &-list{
+      img{
+        width: 50px;
+      }
+      p{
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .cat{
+    &-title{
+      margin-top: 10px;
+    }
+    &-list{
+      img{
+        width: 50px;
+      }
+    }
+  }
+}

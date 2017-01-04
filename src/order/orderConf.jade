@@ -1,0 +1,67 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/order/order.css")
+  #model-orderConf(v-cloak)
+    .order-warp
+      .container.clearfix
+        //- 步骤
+        .order-step
+          dl.cur
+            dt
+              i.icon.icon-os
+            dd 信息填写
+          dl.cur
+            dt
+              i.icon.icon-os
+            dd 订单支付
+          dl
+            dt
+              i.icon.icon-os
+            dd 订单完成
+        //- 右侧
+        .side
+          //- 投资人信息
+          .side-box.investor-info.order-infoS
+            .order-title 订单信息
+            ul.content
+              li
+                span.t-name 项目名称：
+                span.t-val {{orderInfo.project.ProjectName}}
+              li
+                span.t-name 投资类别：
+                span.t-val 个人投资
+              li(v-if="orderInfo.project.Number")
+                span.t-name 投资份额：
+                span.t-val
+              li
+                span.t-name 投资金额：
+                span.t-val {{orderInfo.order.Amount.toFixed(2)}}元
+              li
+                span.t-name 管理费：
+                span.t-val {{orderInfo.order.ManagementExpense}}元
+              li
+                span.t-name 优惠券：
+                span.t-val {{orderInfo.order.CouponAmount}}元
+            .order-footer
+              ul
+                li
+                  span.t-name 应付总额：
+                  span.t-val ￥{{orderInfo.order.PayAmount.toFixed(2)}}
+
+        //- 左侧
+        .main
+          //- 订单信息
+          .main-box.order-info
+            .order-title.ellipsis 支付方式
+            .content
+              .order-body
+                .order-tab
+                  a.cur(href="javascript:void(0);") 在线支付
+                  a(href="javascript:void(0);") 余额支付
+                  a(href="javascript:void(0);") 站岗宝支付
+                  a(href="javascript:void(0);") 线下支付
+
+              .order-footer
+
+
+  script(src="/skin/js/order/orderConf.js")
