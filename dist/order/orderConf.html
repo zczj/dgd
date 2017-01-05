@@ -116,15 +116,64 @@
               <div class="order-title ellipsis">支付方式</div>
               <div class="content">
                 <div class="order-body">
-                  <div class="order-tab"><a href="javascript:void(0);" class="cur">在线支付</a><a href="javascript:void(0);">余额支付</a><a href="javascript:void(0);">站岗宝支付</a><a href="javascript:void(0);">线下支付</a></div>
+                  <div class="order-tab"><a href="javascript:void(0);" v-on:click="toggleTab(1)" v-bind:class="{cur: payMethod == 1}">在线支付</a><a href="javascript:void(0);" v-on:click="toggleTab(0)" v-bind:class="{cur: payMethod == 0}">余额支付</a><a href="javascript:void(0);" v-on:click="toggleTab(3)" v-bind:class="{cur: payMethod == 3}">站岗宝支付</a><a href="javascript:void(0);" v-on:click="toggleTab(2)" v-bind:class="{cur: payMethod == 2}">线下支付</a></div>
+                  <div v-if="payMethod == 1" class="order-box order-online">
+                    <div class="order-content">
+                      <dl>
+                        <dt>选择支付平台：</dt>
+                        <dd>
+                          <label v-bind:class="{cur : payMethod==0 }" class="baofu">
+                            <input type="radio" v-model="payMethod" v-bind:value="0"/>
+                          </label>
+                          <label v-bind:class="{cur : payMethod==1 }" class="fuyou">
+                            <input type="radio" v-model="payMethod" v-bind:value="1"/>
+                          </label>
+                        </dd>
+                      </dl>
+                    </div>
+                  </div>
+                  <div v-if="payMethod == 0" class="order-box order-overage">
+                    <div class="order-content"><span class="t-name">账户余额：{{userBaseInfo.AvailableBalance.toFixed(2)}}元</span><a href="http://test.dgd.vc/mycenter/recharge" class="recharge">充值>></a></div>
+                  </div>
+                  <div v-if="payMethod == 3" class="order-box order-standBao">
+                    <div class="order-content"><span class="t-name">站岗宝余额：{{userBaseInfo.Stand_AvailableBalance}}元</span><a href="http://test.dgd.vc/mycenter/recharge" class="recharge">充值>></a></div>
+                  </div>
+                  <div v-if="payMethod == 2" class="order-box order-underLine">
+                    <div class="order-content">
+                      <dl>
+                        <dt><i class="icon icon-zfb"></i>支付宝转帐</dt>
+                        <dd>
+                          <p>开户名称： 深圳市网筹互联网金融服务有限公司</p>
+                          <p>支付宝帐号：  service@zczj.com (转账备注请务必填写："姓名+注册手机号",打款后，扫描二维码截图发给之家妹)</p>
+                        </dd>
+                      </dl>
+                      <dl>
+                        <dt><i class="icon icon-bank"></i>银行卡转帐</dt>
+                        <dd>
+                          <p>开户名称： 深圳市网筹互联网金融服务有限公司</p>
+                          <p>开户账号： 8110 3010 1220 0031 835</p>
+                          <p>开户行：中信银行深圳深南支行</p>
+                          <p> (转账备注请务必填写："姓名+注册手机号",打款后，扫描二维码截图发给之家妹)</p>
+                          <p class="zjmCode"><img src="http://test.dgd.vc/skin/images/zjmCode.jpg" alt="" width="100" height="100"/><span>之家妹二维码</span></p>
+                        </dd>
+                      </dl>
+                    </div>
+                  </div>
+                  <div v-if="payMethod !==2" class="order-footer">
+                    <div class="order-zf"><span>支付密码：</span>
+                      <input type="password" v-model.trim="payPwd" ref="payPwd" v-on:keyup.enter="buyNow" class="pwd"/><a href="http://test.dgd.vc/mycenter/getpaypassword" class="forgetPwd">忘记密码</a>
+                      <button v-if="payPwd.length&gt;=6" v-on:click="buyNow" class="buy buyOk">确认认购</button>
+                      <button disabled="disabled" v-else="v-else" class="buy">确认认购</button>
+                    </div>
+                  </div>
                 </div>
-                <div class="order-footer"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <script src="/skin/js/passport/jquery-md5.min.js"></script>
     <script src="/skin/js/order/orderConf.js"></script>
     <!--==================================================-->
     <div class="footer">

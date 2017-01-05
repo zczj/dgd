@@ -2,7 +2,7 @@
 * @Author: suzhihui
 * @Date:   2016-12-29 10:25:57
 * @Last Modified by:   老苏
-* @Last Modified time: 2017-01-04 18:04:58
+* @Last Modified time: 2017-01-05 15:46:56
 */
 html,body{
   background:#f4f4f4;
@@ -154,6 +154,7 @@ $orderC: #41d4dc;
           vertical-align: middle;
           &.type1{
             width: 100%;
+            max-width: 130px;
             border-bottom: 1px #d8dcdf  solid;
           }
         }
@@ -293,7 +294,154 @@ $orderC: #41d4dc;
           }
         }
       }
+      .order-zf{
+        text-align: center;
+        font-size: 0;
+        color: #99a0a7;
+        span{
+          font-size: 16px;
+        }
+        .buy{
+          background:#ccc;
+          color: #fff;
+          border: none;
+          height: 36px;
+          line-height: 36px;
+          padding: 0 22px;
+          border-radius: 5px;
+          font-weight: bold;
+          font-size: 16px;
+          transition: all .5s;
+          cursor: not-allowed;
+          &.buyOk{
+            background:$orderC;
+            cursor: pointer;
+          }
+        }
+        .forgetPwd{
+          display: inline-block;
+          font-size: 16px;
+          color: #99a0a7;
+          margin-right: 40px;
+        }
+        .pwd{
+          font-size: 16px;
+          width: 120px;
+          height: 30px;
+          border: 1px #cad1d9 solid;
+          padding: 0 8px;
+          margin-right: 10px;
+          margin-bottom: 10px;
+        }
+
+      }
     }
+    @at-root{
+
+
+      // 支付方式
+      .order-tab{
+        font-size: 0;
+        text-align: center;
+        margin-top: 20px;
+        a+a{
+          border-left: 1px #fff solid;
+        }
+        a{
+          display: inline-block;
+          padding: 15px 0;
+          width: 25%;
+          max-width: 120px;
+          font-size: 1.6rem;
+          background:#cccfd3;
+          color: #fff;
+          &.cur,&:hover{
+            background:$orderC;
+          }
+        }
+      }
+    }
+
+    @at-root{
+    .order-box{
+      .order-content{
+          text-align: center;
+          padding: 30px 0;
+          .recharge,.t-name{
+            display: inline-block;
+          }
+          .t-name{margin-right: 30px;}
+          .recharge{
+            color: $orderC;
+          }
+      }
+      // 在线支付
+      &.order-online{
+        text-align: center;
+        padding: 30px 0;
+        dt{
+          height: 30px;
+          line-height: 30px;
+          margin-bottom: 10px;
+        }
+        label{
+          display: inline-block;
+          width: 118px;
+          height: 40px;
+          border: 1px #d8dcdf solid;
+          background-size: cover;
+          padding: 1px;
+          cursor: pointer;
+          &.baofu{
+            background-image: url(/skin/img/order/icon-baofu.png);
+          }
+          &.fuyou{
+            background-image: url(/skin/img/order/icon-fuyou.png);
+          }
+          &.cur{
+            padding: 0;
+            border-width: 2px;
+            border-color: $orderC;
+          }
+        }
+      }
+      &.order-underLine{
+        padding-bottom: 30px;
+        .order-content{
+          background:#f4f4f4;
+          padding: 20px 30px;
+          margin: 10px auto 0;
+          text-align: left;
+          color: #6b7c93;
+          line-height: 30px;
+          max-width: 90%;
+          .icon{
+            color: $orderC;
+            margin-right: 4px;
+            font-size: 2.6rem;
+          }
+          dt{
+            color: #3e4149;
+            margin-bottom: 6px;
+          }
+          dl+dl{
+            margin-top: 24px;
+          }
+          .zjmCode{
+            text-align: center;
+            padding-top: 10px;
+            span{
+              display: block;
+            }
+          }
+          &-m{
+            background:red;
+          }
+        }
+      }
+    }
+    }
+
   }
 
 
@@ -352,8 +500,39 @@ $orderC: #41d4dc;
     }
   }
 }
+@mixin order-box-800() {
+  .order-box{
+    &.order-underLine{
+      .order-content{
+        max-width: 100%;
+      }
+    }
+  }
+}
 
+@mixin order-box-480() {
+  .order-box{
+    &.order-underLine{
+      .order-content{
+        max-width: 100%;
+        font-size: 1.4rem;
+        line-height: 24px;
+      }
+    }
+  }
+}
 
+@mixin orderTab-480() {
+  .order-tab a{
+    font-size: 1.4rem;
+  }
+}
+
+@mixin orderTab-350() {
+  .order-tab a{
+    font-size: 1.2rem;
+  }
+}
 
 
 @mixin order-warp-800() {
@@ -373,9 +552,16 @@ $orderC: #41d4dc;
   }
 }
 
-@media only screen and( max-width: 59.375em){
-  // @include order-warp-950();
-}
+
 @media only screen and( max-width: 50em){
   @include order-warp-800();
+  @include order-box-800();
+}
+
+@media only screen and( max-width: 30em){
+  @include orderTab-480();
+  @include order-box-480();
+}
+@media only screen and( max-width: 21.875em){
+  @include orderTab-350();
 }

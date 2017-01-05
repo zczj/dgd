@@ -56,12 +56,62 @@ block content
             .content
               .order-body
                 .order-tab
-                  a.cur(href="javascript:void(0);") 在线支付
-                  a(href="javascript:void(0);") 余额支付
-                  a(href="javascript:void(0);") 站岗宝支付
-                  a(href="javascript:void(0);") 线下支付
+                  a(href="javascript:void(0);" v-on:click="toggleTab(1)" v-bind:class="{cur: payMethod == 1}") 在线支付
+                  a(href="javascript:void(0);" v-on:click="toggleTab(0)" v-bind:class="{cur: payMethod == 0}") 余额支付
+                  a(href="javascript:void(0);" v-on:click="toggleTab(3)" v-bind:class="{cur: payMethod == 3}") 站岗宝支付
+                  a(href="javascript:void(0);" v-on:click="toggleTab(2)" v-bind:class="{cur: payMethod == 2}") 线下支付
+                //- 在线支付
+                .order-box.order-online(v-if="payMethod == 1")
+                  .order-content
+                    dl
+                      dt 选择支付平台：
+                      dd
+                        label.baofu(v-bind:class="{cur : payMethod==0 }")
+                          input(type="radio" v-model='payMethod' v-bind:value="0")
+                        label.fuyou(v-bind:class="{cur : payMethod==1 }")
+                          input(type="radio" v-model='payMethod' v-bind:value="1")
+                //- 余额支付
+                .order-box.order-overage(v-if="payMethod == 0")
+                  .order-content
+                    span.t-name 账户余额：{{userBaseInfo.AvailableBalance.toFixed(2)}}元
+                    a.recharge(href="http://test.dgd.vc/mycenter/recharge") 充值>>
+                //- 站岗宝支付
+                .order-box.order-standBao(v-if="payMethod == 3")
+                  .order-content
+                    span.t-name 站岗宝余额：{{userBaseInfo.Stand_AvailableBalance}}元
+                    a.recharge(href="http://test.dgd.vc/mycenter/recharge") 充值>>
+                //- 线下支付
+                .order-box.order-underLine(v-if="payMethod == 2")
+                  .order-content
+                    dl
+                      dt
+                        i.icon.icon-zfb
+                        |支付宝转帐
+                      dd
+                        p 开户名称： 深圳市网筹互联网金融服务有限公司
+                        p 支付宝帐号：  service@zczj.com (转账备注请务必填写："姓名+注册手机号",打款后，扫描二维码截图发给之家妹)
+                    dl
+                      dt
+                        i.icon.icon-bank
+                        |银行卡转帐
+                      dd
+                        p 开户名称： 深圳市网筹互联网金融服务有限公司
+                        p 开户账号： 8110 3010 1220 0031 835
+                        p 开户行：中信银行深圳深南支行
+                        p  (转账备注请务必填写："姓名+注册手机号",打款后，扫描二维码截图发给之家妹)
+                        p.zjmCode
+                          img(src="http://test.dgd.vc/skin/images/zjmCode.jpg", alt="", width="100", height="100")
+                          span 之家妹二维码
 
-              .order-footer
+
+                .order-footer(v-if="payMethod !==2")
+                  .order-zf
+                    span 支付密码：
+                    input.pwd(type="password" v-model.trim="payPwd" ref="payPwd" v-on:keyup.enter="buyNow")
+                    a.forgetPwd(href="http://test.dgd.vc/mycenter/getpaypassword") 忘记密码
+                    button.buy.buyOk(v-if="payPwd.length>=6" v-on:click="buyNow") 确认认购
+                    button.buy(disabled="disabled" v-else) 确认认购
 
 
+  script(src='/skin/js/passport/jquery-md5.min.js')
   script(src="/skin/js/order/orderConf.js")

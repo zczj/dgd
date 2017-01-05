@@ -75,71 +75,25 @@
       </header>
     </section>
     <!--==================================================-->
-    <section id="pageList" v-cloak="v-cloak" class="pageList">
-      <dl v-for="item in items.l">
-        <dt>{{item.catgray}}</dt>
-        <dd v-for="list in item.list"><a :href="list.url">{{list.title}}</a></dd>
-      </dl>
-      <dl v-for="item in items.h">
-        <dt>{{item.catgray}}</dt>
-        <dd v-for="list in item.list"><a :href="list.url">{{list.title}}</a></dd>
-      </dl>
-    </section>
-    <script>
-      var data={
-        h:[{
-          catgray:'登录注册页面...',
-          list:[
-          {title: '登录',url: 'passport/login.html'},
-          {title: '注册',url: 'passport/register.html'},
-          {title: '成功',url: 'passport/success.html'},
-          {title: '忘记密码',url: 'passport/fpwd.html'},
-          {title: '项目列表',url: 'project/index.html'},
-          {title: '项目详情',url: 'project/detail.html'},
-          {title: '转让列表',url: 'transfer/index.html'},
-          {title: '转让详情',url: 'transfer/detail.html'},
-          {title: '公告列表',url: 'notice/index.html'},
-          {title: '公告内容',url: 'notice/detail.html'},
-          {title: '新手课堂',url: 'novice/index.html'},
-          ]
-        }],
-        l: [{
-          catgray: '首页',
-          list:[
-          {title: '首页',url: 'index/index.html'},
-          {title: '资讯列表',url: 'news/index.html'},
-          {title: '资讯详情',url: 'news/detail.html'},
-          {title: '常见问题分类', url: 'about/qa.html'},
-          {title: '常见详情', url: 'about/qaDetail.html'},
-          {title: '支付', url: 'order/index.html'},
-          {title: '支付确认', url: 'order/orderConf.html'},
-          {title: '支付完成', url: 'order/complete.html'},
-          {title: '项目预约', url: 'about/qaDetail.html'},
-          {title: '提问', url: 'about/qaAsk.html'}
-          ]
-        }]
-      }
-      new Vue({
-        el: '#pageList',
-        data: {
-          items: data
-        }
-      })
-      $(function () {
-        $("#loader").hide()
-      })
-      
-    </script>
-    <style>
-      body{background:#fff;}
-      .pageList{ width: 800px-; margin: 0 auto; padding: 20px 0; background: #fff; }
-      .pageList dl{ padding: 0 20px; margin-top: 20px; }
-      .pageList dl:first-child{margin-top: 0;}
-      .pageList dl dt, .pageList dl dd{ padding: 0 20px; border-bottom: 1px #ccc solid; height: 30px; line-height: 30px; }
-      .pageList dl dt{ background: #f8f8f8; font-size: 14px; color: #333; font-weight: bold; height: 50px; line-height: 50px; }
-      .pageList dl dd{text-indent: 20px;}
-      .pageList dl dd a{ display: block; }
-    </style>
+    <link rel="stylesheet" href="/skin/css/order/order.css"/>
+    <div class="order-warp">
+      <div class="container clearfix">
+        <div class="order-step">
+          <dl class="cur">
+            <dt><i class="icon icon-os"></i></dt>
+            <dd>信息填写</dd>
+          </dl>
+          <dl class="cur">
+            <dt><i class="icon icon-os"></i></dt>
+            <dd>订单支付</dd>
+          </dl>
+          <dl class="cur">
+            <dt><i class="icon icon-os"></i></dt>
+            <dd>订单完成</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
     <!--==================================================-->
     <div class="footer">
       <div class="info">

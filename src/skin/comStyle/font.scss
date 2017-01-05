@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 190684 */
-  src: url('//at.alicdn.com/t/font_hlrm9ifzrdlsor.eot');
-  src: url('//at.alicdn.com/t/font_hlrm9ifzrdlsor.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_hlrm9ifzrdlsor.woff') format('woff'),
-  url('//at.alicdn.com/t/font_hlrm9ifzrdlsor.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_hlrm9ifzrdlsor.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_tm7juk7g04jqncdi.eot');
+  src: url('//at.alicdn.com/t/font_tm7juk7g04jqncdi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_tm7juk7g04jqncdi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_tm7juk7g04jqncdi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_tm7juk7g04jqncdi.svg#iconfont') format('svg');
 }
 
 .icon{
@@ -16,6 +16,14 @@
     font-family: 'iconfont';
     color: inherit;
     vertical-align: top;
+  }
+  // 支付宝
+  &-zfb::before{
+    content: '\e605';
+  }
+  // 银行卡
+  &-bank::before{
+    content: '\e640';
   }
   // 加
   &-add::before{
