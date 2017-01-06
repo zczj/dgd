@@ -1,20 +1,19 @@
-#detail{
+#detail {
   background-color: #ebebeb;
   padding-bottom: 20px;
   margin-bottom: -20px;
-
-  .banner{
+  .banner {
     width: 100%;
-    .container{
+    .container {
       position: relative;
       height: 100%;
       overflow: hidden;
-      .detail-img{
+      .detail-img {
         width: 100%;
         min-height: 200px;
       }
     }
-    &-project-wrapper{
+    &-project-wrapper {
       position: absolute;
       left: 0;
       top: 0;
@@ -22,23 +21,22 @@
       height: 100%;
       text-align: center;
       background-color: rgba(0, 0, 0, .4);
-
-      .detail-intro{
+      .detail-intro {
         position: absolute;
         left: 50%;
         bottom: 10px;
         transform: translateX(-50%);
       }
-      .banner-project-logo{
+      .banner-project-logo {
         width: 124px;
         height: 124px;
         border-radius: 20px;
       }
-      .project-name{
+      .project-name {
         color: #fff;
         font-size: 30px;
       }
-      .project-intro{
+      .project-intro {
         color: #2cecf8;
         font-size: 20px;
         height: 30px;
@@ -46,20 +44,20 @@
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-      .project-handle{
+      .project-handle {
         position: relative;
         color: #fff;
         font-size: 16px;
         height: 76px;
         line-height: 2.4;
-        a{
+        a {
           padding: 0 8px;
           color: inherit;
         }
-        .iShare{
+        .iShare {
           font-size: 30px;
           line-height: 38px;
-          a:hover{
+          a:hover {
             opacity: .8;
           }
         }
@@ -67,11 +65,11 @@
     }
   }
   // main
-  .main-wrapper{
+  .main-wrapper {
     margin-top: 37px;
-    .container{
+    .container {
       position: relative;
-      &::after{
+      &::after {
         content: '.';
         display: block;
         width: 0;
@@ -82,36 +80,36 @@
     }
   }
   // 侧边栏
-  .sidebar-wrapper{
+  .sidebar-wrapper {
     position: relative;
     float: right;
     width: 27.5%;
     margin-left: -27.5%;
     z-index: 999;
-    .invest-item{
+    .invest-item {
       margin-bottom: 20px;
       padding-bottom: 18px;
       background-color: #fff;
-      &.kf-wechat{
-        .invest-item-body{
+      &.kf-wechat {
+        .invest-item-body {
           text-align: center;
           padding-top: 18px;
         }
-        .detail-nav-tab{
-          li{
+        .detail-nav-tab {
+          li {
             width: 100px;
             height: 40px;
             line-height: 40px;
           }
         }
       }
-      .detail-nav-tab{
-        li{
+      .detail-nav-tab {
+        li {
           width: 160px;
         }
       }
     }
-    .invest-item-head{
+    .invest-item-head {
       position: relative;
       height: 72px;
       padding: 10px 0;
@@ -119,41 +117,39 @@
       text-align: center;
       background-color: #4ad3da;
       overflow: hidden;
-      h2{
+      h2 {
         margin: 0;
       }
     }
-    .line{
+    .line {
       position: absolute;
       left: 50%;
       width: 1px;
       height: 75%;
       background-color: #fff;
     }
-    .invest-from{
+    .invest-from {
       float: left;
       width: 50%;
     }
-    .invest-target{
+    .invest-target {
       float: left;
       width: 50%;
     }
-
-    .invest-item-body{
+    .invest-item-body {
       padding: 0 14px;
       font-size: 16px;
-
     }
-    .invest-head{
+    .invest-head {
       color: #515151;
       font-size: 18px;
       text-align: center;
-      span{
+      span {
         color: #4ad3da;
         font-size: 26px;
       }
     }
-    .progress-wrapper{
+    .progress-wrapper {
       position: relative;
       width: 100%;
       height: 12px;
@@ -161,7 +157,7 @@
       background-color: #dee3e9;
       border-radius: 10px;
       // overflow-x: hidden;
-      .progress{
+      .progress {
         position: absolute;
         max-width: 100%;
         height: 100%;
@@ -169,7 +165,7 @@
         left: 0;
         background-color: #fe6840;
         border-radius: 10px;
-        span{
+        span {
           position: absolute;
           top: -22px;
           left: 90%;
@@ -177,32 +173,32 @@
         }
       }
     }
-    .invest-type{
+    .invest-type {
       margin: 18px 0;
       overflow: hidden;
-      li{
+      li {
         width: 33.33%;
         float: left;
         text-align: center;
       }
-      a{
+      a {
         display: inline-block;
         width: 60px;
         height: 25px;
         border: 1px solid currentColor;
         border-radius: 5px;
-        &.pledge{
+        &.pledge {
           color: #00b7ee;
         }
-        &.stand{
+        &.stand {
           color: #5f52a0;
         }
-        &.transfer{
+        &.transfer {
           color: #3e85ff;
         }
       }
     }
-    .invest-button{
+    .invest-button {
       display: inline-block;
       width: 100%;
       height: 50px;
@@ -212,32 +208,30 @@
       font-size: 18px;
       background-color: #4ad3da;
       border-radius: 5px;
-      &:hover{
+      &:hover {
         opacity: .8;
       }
     }
-    .invest-desc-list{
+    .invest-desc-list {
       font-size: 16px;
       margin-top: 22px;
       padding-left: 20px;
-      li{
+      li {
         color: #6b7c93;
         margin-bottom: 10px;
       }
-      span{
+      span {
         color: #4f4f4f;
       }
     }
   }
-
-
   // tab切换
-  .detail-nav-tab{
+  .detail-nav-tab {
     width: 100%;
     background-color: #fff;
     border-bottom: 1px solid #ececec;
     overflow: hidden;
-    li{
+    li {
       float: left;
       width: 25%;
       height: 68px;
@@ -247,13 +241,14 @@
       color: #4ad3da;
       border-bottom: 2px solid #4ad3da;
     }
-    &.detail-tab{
+    &.detail-tab {
       margin-bottom: 10px;
-      li{
+      li {
         // color: #000;
         border-bottom: none;
         cursor: pointer;
-        &.current, &:hover{
+        &.current,
+        &:hover {
           color: #fff;
           background-color: #4ad3da;
           border-bottom: 2px solid #4ad3da;
@@ -261,36 +256,33 @@
       }
     }
   }
-
   // 无数据时
-  .empty{
+  .empty {
     text-align: center;
     color: #b2b9bf;
   }
-
   // 主体
-  .content-wrapper{
+  .content-wrapper {
     float: left;
     width: 100%;
-    .content-item-wrapper{
+    .content-item-wrapper {
       margin-right: 29%;
     }
   }
-
   //  项目详情
-  .detail-box{
+  .detail-box {
     position: relative;
-    .detail-nav-wrapper{
+    .detail-nav-wrapper {
       position: absolute;
       left: -80px;
     }
-    .detail-nav{
+    .detail-nav {
       position: fixed;
       top: 50%;
       border-radius: 5px;
       overflow: hidden;
       transform: translateY(-50%);
-      a{
+      a {
         display: block;
         width: 68px;
         height: 46px;
@@ -299,34 +291,34 @@
         background-color: #fff;
         overflow: hidden;
         transition: all .25s;
-        &.current, &:hover{
+        &.current,
+        &:hover {
           color: #fff;
           background-color: #4ad3da;
         }
       }
     }
-    .content-item{
+    .content-item {
       margin-bottom: 20px;
       color: #505050;
       background-color: #fff;
     }
-    .content-box{
+    .content-box {
       padding: 22px;
       overflow: hidden;
-      .video{
+      .video {
         width: 39%;
         height: 210px;
         float: left;
         margin: 36px 0;
-
       }
-      .detail{
+      .detail {
         float: left;
         margin-left: 52px;
         padding-top: 50px;
         font-size: 16px;
         line-height: 30px;
-        .button{
+        .button {
           display: block;
           width: 100px;
           height: 37px;
@@ -336,12 +328,12 @@
           background-color: #4ad3da;
           color: #fff;
           border-radius: 5px;
-          &:hover{
+          &:hover {
             opacity: .8;
           }
         }
       }
-      .sub{
+      .sub {
         position: relative;
         color: #49d6df;
         font-size: 18px;
@@ -349,7 +341,7 @@
         line-height: 28px;
         margin-left: 18px;
         margin-bottom: 28px;
-        &::before{
+        &::before {
           content: ' ';
           position: absolute;
           top: 0;
@@ -360,36 +352,34 @@
         }
       }
     }
-    .investment-highlights{
+    .investment-highlights {
       font-size: 16px;
-      li{
+      li {
         list-style: decimal;
         line-height: 36px;
       }
     }
   }
-
   // 项目问答
-  .detail-qa{
+  .detail-qa {
     padding: 32px 12px;
     font-size: 16px;
     margin-bottom: 20px;
     background-color: #fff;
     overflow: hidden;
-    .qa-texarea{
+    .qa-texarea {
       width: 100%;
       height: 95px;
       border: 1px solid #dcdcdc;
       padding: 12px;
-      resize: none;
-      &:focus{
+      &:focus {
         border-color: #46c9d0;
       }
     }
-    .qa-submit-wrapper{
+    .qa-submit-wrapper {
       overflow: hidden;
     }
-    .qa-submit-button{
+    .qa-submit-button {
       float: right;
       display: block;
       width: 150px;
@@ -400,19 +390,19 @@
       margin-bottom: 48px;
       background-color: #46c9d0;
       border-radius: 5px;
-      &:hover{
+      &:hover {
         opacity: .8;
       }
     }
-    .qa-list{
+    .qa-list {
       // padding-bottom: 27px;
       margin-bottom: 24px;
       border-bottom: 1px solid #e5e5e5;
-      dt{
+      dt {
         position: relative;
         margin-left: 32px;
         line-height: 21px;
-        &::before{
+        &::before {
           position: absolute;
           left: -32px;
           content: 'Q';
@@ -424,19 +414,19 @@
           font-size: 14px;
           background-color: #46c9d1;
         }
-        .qa-con{
+        .qa-con {
           font-size: 14px;
           opacity: .8;
         }
-        .qa-from-user{
+        .qa-from-user {
           padding: 16px 0;
           text-align: right;
         }
-        .time{
+        .time {
           color: #b2b9bf;
           margin-left: 10px;
         }
-        .qa-avatar{
+        .qa-avatar {
           display: inline-block;
           vertical-align: bottom;
           width: 20px;
@@ -445,14 +435,14 @@
           border-radius: 50%;
         }
       }
-      dd{
+      dd {
         position: relative;
         background-color: #f6f6f6;
         margin-top: 18px;
         padding: 22px 16px;
         font-size: 14px;
         color: #616a73;
-        &::before{
+        &::before {
           content: 'A';
           position: absolute;
           left: 0;
@@ -465,9 +455,9 @@
           font-size: 14px;
           background-color: #46c9d1;
         }
-        h2{
+        h2 {
           overflow: hidden;
-          .qa-avatar{
+          .qa-avatar {
             float: left;
             width: 54px;
             height: 54px;
@@ -475,15 +465,15 @@
             border: 1px solid;
             border-radius: 50%;
           }
-          .qa-user-wrapper{
+          .qa-user-wrapper {
             float: left;
             font-size: 14px;
           }
-          h3{
+          h3 {
             margin: 0;
             color: #3f403d;
           }
-          span{
+          span {
             display: block;
             width: 109px;
             height: 23px;
@@ -498,15 +488,14 @@
       }
     }
   }
-
   // 跟投人
-  .invest-list{
+  .invest-list {
     margin-bottom: 20px;
     background-color: #fff;
-    ul{
+    ul {
       overflow: hidden;
     }
-    li{
+    li {
       width: 25%;
       min-height: 100px;
       float: left;
@@ -514,117 +503,115 @@
       margin-top: 40px;
       margin-bottom: 40px;
     }
-    .invest-avatar{
+    .invest-avatar {
       width: 82px;
       height: 82px;
       border-radius: 50%;
     }
-    .invest-name{
+    .invest-name {
       line-height: 40px;
       font-size: 16px;
     }
-    .invest-time{
+    .invest-time {
       color: #aaa;
     }
   }
 }
 
-
 @media screen and (max-width: 1360px) {
-  #detail .detail-box{
-    .detail-nav{
+  #detail .detail-box {
+    .detail-nav {
       display: none!important;
     }
   }
 }
 
 @media screen and (max-width: 900px) {
-  #detail{
+  #detail {
     padding: 0;
-    .banner{
-      &-project-wrapper{
-        .detail-intro{
+    .banner {
+      &-project-wrapper {
+        .detail-intro {
           width: 100%;
           padding: 0 20px;
         }
-        .banner-project-logo{
+        .banner-project-logo {
           width: 60px;
           height: 60px;
         }
-        .project-name{
+        .project-name {
           margin: .3em;
         }
-        .project-intro{
+        .project-intro {
           font-size: 14px;
         }
       }
-      &-tab{
+      &-tab {
         display: none;
       }
     }
-    .main-wrapper{
+    .main-wrapper {
       margin-top: 20px;
     }
-    .content-wrapper{
-      .content-item-wrapper{
+    .content-wrapper {
+      .content-item-wrapper {
         width: 100%;
       }
     }
     // 侧边栏
-    .sidebar-wrapper{
+    .sidebar-wrapper {
       float: none;
       width: 100%;
       margin: 0;
-      .invest-item-head{
+      .invest-item-head {
         height: 50px;
         padding: 4px 0;
       }
-      .invest-desc-list{
+      .invest-desc-list {
         overflow: hidden;
-        li{
+        li {
           width: 50%;
           float: left;
         }
       }
-      .invest-item{
-        &:first-child{
-
-        }
-        &:last-child{
+      .invest-item {
+        &:first-child {}
+        &:last-child {
           display: none;
         }
       }
     }
   }
 }
+
 @media screen and (max-width: 767px) {
-  #detail{
-    .banner-project-wrapper{
-      .banner-project-logo{
+  #detail {
+    .banner-project-wrapper {
+      .banner-project-logo {
         display: none;
       }
     }
-    .detail-nav-tab{
-      li{
+    .detail-nav-tab {
+      li {
         width: 33.33%;
       }
     }
-    .invest-list{
-      li{
+    .invest-list {
+      li {
         width: 50%;
         margin: 20px 0;
       }
     }
-    .detail-box{
-      .content-box{
-        .video{
+    .detail-box {
+      .content-box {
+        .video {
           float: none;
           width: 100%;
-          img{
+          img {
             height: 100%;
           }
         }
-        .detail{
+        .detail {
           float: none;
           width: 100%;
           padding-top: 0;
@@ -634,9 +621,9 @@
       }
     }
     // 侧边栏
-    .sidebar-wrapper{
-      .invest-desc-list{
-        li{
+    .sidebar-wrapper {
+      .invest-desc-list {
+        li {
           float: none;
           width: 100%;
         }

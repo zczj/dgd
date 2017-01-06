@@ -1,0 +1,84 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/about/index.css")
+  #about
+    
+    // banner
+    .banner
+      h1.about-title 关于我们
+      .container
+        .slider-wrapper
+          .slider-item.left
+            img(src="/skin/img/about/index-slider1.png", alt="")
+          .slider-item.center
+            img(src="/skin/img/about/index-slider2.png", alt="")
+          .slider-item.right
+            img(src="/skin/img/about/index-slider3.png", alt="")
+    // 精英团队
+    .about-item
+      .about-item-title 
+        h2 精英团队
+      .about-item-content.team
+    // 加入我们
+    .about-item.joinus 
+      .about-item-title
+        h2 加入我们
+      .about-item-content.container
+        ul.list
+          li 扁平化管理，与CEO勾肩谈未来，谈理想，与其他大咖切磋技术；
+          li 来了就是Darma人，我们很重视你的每一个意见和建议；
+          li 每天水果、零食、咖啡、饮料不限量供应并且带你吃遍方圆几百里的美食；
+          li 每月几次的Team Building，好吃好喝好玩享不停（不满意你可以当面骂我~）；
+          li 帅哥美女同事：别的不敢说，咱公司都是颜值巨高的帅哥美女，不来别不后悔！
+          li 人生经验共享：小伙伴定期分享人生精华，现场传授生活技能，穿衣装扮、篮球健身，只有想不到，没有做不到。
+        a(href="#").about-joinus-button 查看职位 >>
+
+    // 联系我们
+    .about-item 
+      .about-item-title
+        h2 联系我们
+      .about-item-content.container.clearfix
+        .about-location
+          img(src="/skin/img/about/about-location.png", alt="")
+        .about-contactus
+          ul.linkman
+            li 市场合作：15907671505（陈先生）
+            li 投资资讯：0755-82557958（客服）
+            li 联系地址：深圳市南山区科技园中区讯美科技广场 3栋14层A03
+          .textarea
+            .textarea-head 我要留言
+              div
+                label
+                  input(type="radio" name='textarea')
+                  | 匿名留言
+                label
+                  input(type="radio" name='textarea')
+                  | 登录留言
+            textarea(name="")
+          a(href="javascript:;").textarea-button 提交
+
+
+
+
+
+
+
+
+  script.
+    $(function(){
+      $('#loader').fadeOut(300)
+    })
+    // 轮播
+    $(function () {
+      if (headerModel.isMobileOrTable) {
+        // 调用手机端轮播方法
+        mobileSliderFn()
+      } else {
+        // PC端轮播方法
+      }
+    })
+
+
+    function mobileSliderFn() {
+      console.log('手机轮播图方法')
+    }
