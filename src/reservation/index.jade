@@ -7,21 +7,29 @@ block content
         //- 右侧
         .side
           //- 投资人信息
-          .side-box.investor-info
+          .side-box.resvera-info
             .order-title 
               span 融资概况
             .content
-
+              .tag-amount
+                span {{buyInfo.project.TargetAmount}}
+                p 目标金额
               ul
                   li
-                    span.t-name 姓名：
-                    span.t-val {{buyInfo.BenefitAccount.FullName}}
+                    span.t-name.ellipsis 众筹轮次
+                    span.t-val.ellipsis {{TimesRotation[buyInfo.project.TimesRotation]}}
                   li
-                    span.t-name 号码：
-                    span.t-val {{buyInfo.BenefitAccount.Phone}}
+                    span.t-name.ellipsis 领投人
+                    span.t-val.ellipsis 老苏
                   li
-                    span.t-name 身份证：
-                    span.t-val {{buyInfo.authention.IDNumber}}
+                    span.t-name.ellipsis 最低跟投
+                    span.t-val.ellipsis {{buyInfo.project.LowVote}}
+                  li
+                    span.t-name.ellipsis 目标人数
+                    span.t-val.ellipsis {{buyInfo.project.TargetNumber}}
+                  li
+                    span.t-name.ellipsis 出让份额
+                    span.t-val.ellipsis {{buyInfo.project.SellStock}}
         //- 左侧
         .main
           //- 项目信息

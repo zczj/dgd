@@ -575,7 +575,59 @@ $orderC: #41d4dc;
       }
     }
   }
+  // 预约项目信息
+  .resvera-info{
+    .order-title{
+      height: auto;
+      padding: 10px 0;
+      overflow: hidden;
 
+      span{
+        display: inline-block;
+        float:left;
+        width: 134px;
+        height: 38px;
+        font-size: 1.5rem;
+        text-align: center;
+        color:#fff;
+        background: $orderC;
+        line-height: 38px;
+        vertical-align: middle;
+        font-weight: 400;
+        border-radius: 6px;
+      }
+    }
+    .content{
+      color:#616a73;
+      .tag-amount{
+        font-size:1.5rem;
+        text-align: center;
+        line-height: 1.2;
+        padding: 10px 0;
+        span{
+          color:$orderC;
+          font-weight: 700;
+          font-size: 2.5rem;
+        }
+      }
+      li{
+        font-size: 0;
+        padding: 4px 0;
+        span{
+          width: 50%;
+          display: inline-block;
+          font-size: 1.5rem;
+          &.t-name{
+            text-align: left;
+          }
+          &.t-val{
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+  
   // 预约项目
   &.reserva-warp{
     padding-top: 30px;

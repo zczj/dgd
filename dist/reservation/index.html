@@ -80,13 +80,18 @@
       <div class="order-warp reserva-warp">
         <div class="container clearfix">
           <div class="side">
-            <div class="side-box investor-info">
+            <div class="side-box resvera-info">
               <div class="order-title"> <span>融资概况</span></div>
               <div class="content">
+                <div class="tag-amount"><span>{{buyInfo.project.TargetAmount}}</span>
+                  <p>目标金额</p>
+                </div>
                 <ul>
-                  <li><span class="t-name">姓名：</span><span class="t-val">{{buyInfo.BenefitAccount.FullName}}</span></li>
-                  <li><span class="t-name">号码：</span><span class="t-val">{{buyInfo.BenefitAccount.Phone}}</span></li>
-                  <li><span class="t-name">身份证：</span><span class="t-val">{{buyInfo.authention.IDNumber}}</span></li>
+                  <li><span class="t-name ellipsis">众筹轮次</span><span class="t-val ellipsis">{{TimesRotation[buyInfo.project.TimesRotation]}}</span></li>
+                  <li><span class="t-name ellipsis">领投人</span><span class="t-val ellipsis">老苏</span></li>
+                  <li><span class="t-name ellipsis">最低跟投</span><span class="t-val ellipsis">{{buyInfo.project.LowVote}}</span></li>
+                  <li><span class="t-name ellipsis">目标人数</span><span class="t-val ellipsis">{{buyInfo.project.TargetNumber}}</span></li>
+                  <li><span class="t-name ellipsis">出让份额</span><span class="t-val ellipsis">{{buyInfo.project.SellStock}}</span></li>
                 </ul>
               </div>
             </div>
