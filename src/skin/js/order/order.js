@@ -195,7 +195,7 @@ var orderModel = new Vue({
                   "AmountNum": _this.part,
                   "ckCoupon": _this.selected =='0'?'':_this.selected,
                   "token": headerModel.token,
-                  "hgadm": _this.gdAccountS,
+                  "hgadm": _this.gdAccountS =='0'?'':_this.selected,
                   "remark": "",
                   "UserID": _this.buyInfo.userinfo.UserID,
                   "FullName": "",
