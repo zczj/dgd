@@ -258,6 +258,7 @@ $orderC: #41d4dc;
         }
       }
     }
+    @at-root{
     .order-footer{
       padding-bottom: 20px;
       padding-top: 16px;
@@ -334,6 +335,9 @@ $orderC: #41d4dc;
             cursor: pointer;
           }
         }
+        p{
+          display: inline;
+        }
         .forgetPwd{
           display: inline-block;
           font-size: 16px;
@@ -351,6 +355,7 @@ $orderC: #41d4dc;
         }
 
       }
+    }
     }
     @at-root{
 
@@ -408,6 +413,10 @@ $orderC: #41d4dc;
           background-size: cover;
           padding: 1px;
           cursor: pointer;
+          input{
+            opacity: 0;
+            display: none;
+          }
           &.baofu{
             background-image: url(/skin/img/order/icon-baofu.png);
           }
@@ -516,6 +525,19 @@ $orderC: #41d4dc;
     }
   }
 }
+
+@mixin order-footer-850(){
+  .order-footer .order-zf{
+    text-align: left;
+    p{
+      display: block;
+      .forgetPwd{
+        margin-right: 22px;
+      }
+    }
+  }
+}
+
 @mixin order-box-800() {
   .order-box{
     &.order-underLine{
@@ -568,6 +590,10 @@ $orderC: #41d4dc;
   }
 }
 
+
+@media only screen and( max-width: 53.125em){
+  @include order-footer-850();
+}
 
 @media only screen and( max-width: 50em){
   @include order-warp-800();

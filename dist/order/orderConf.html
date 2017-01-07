@@ -162,9 +162,11 @@
                   </div>
                   <div v-if="payMethod !==2" class="order-footer">
                     <div class="order-zf"><span>支付密码：</span>
-                      <input type="password" v-model.trim="payPwd" ref="payPwd" v-on:keyup.enter="buyNow" class="pwd"/><a href="http://test.dgd.vc/mycenter/getpaypassword" class="forgetPwd">忘记密码</a>
-                      <button v-if="payPwd.length&gt;=6" v-on:click="buyNow" class="buy buyOk">确认认购</button>
-                      <button disabled="disabled" v-else="v-else" class="buy">确认认购</button>
+                      <input type="password" v-model.trim="payPwd" ref="payPwd" v-on:keyup.enter="buyNow" class="pwd"/>
+                      <p><a href="http://test.dgd.vc/mycenter/getpaypassword" class="forgetPwd">忘记密码</a>
+                        <button v-if="payPwd.length&gt;=6" v-on:click="buyNow" class="buy buyOk">确认认购</button>
+                        <button disabled="disabled" v-else="v-else" class="buy">确认认购</button>
+                      </p>
                     </div>
                   </div>
                 </div>

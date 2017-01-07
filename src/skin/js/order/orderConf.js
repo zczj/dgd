@@ -126,11 +126,11 @@ var orderConfModel = new Vue({
             _this.payLock = false;
             if(response.resultid == 200){
               document.body.innerHTML = response.HTML;
-              if(this.payLine == 0){
+              if(_this.payLine == 0){
+                console.log(0);
                 document.getElementById('pay').submit();
               }else{
-                console.log('ok');
-                document.getElementById('form1').submit();
+                //document.getElementById('form1').submit();
               }
             }else{
               DGDTOOLS.tip._tip(response.message);
