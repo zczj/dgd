@@ -305,6 +305,9 @@ var orderModel = new Vue({
   mounted: function() {
     // 获取url传参过来的资讯id
     this.proId = window.location.search.split('id=')[1] || 0;
+    if(this.proId==0){
+      window.location.href="../project/index.html"
+    }
     // this.proId = '1037' // 有规则(按份数)
     // this.proId = '1034' // 有规则(按金额)
     // this.proId = '1022' // 有规则(按金额 (0.01))

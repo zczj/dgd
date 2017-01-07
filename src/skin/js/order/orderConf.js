@@ -107,9 +107,10 @@ var orderConfModel = new Vue({
         _this.payLock = true;
       }
       // 1.4 根据支付方式做对应处理
+      headerModel.loading=true;
       if (_this.payMethod == 1) {
         // 1.4.1 在线支付 68539.75
-        headerModel.loading=true;
+        
         $.ajax({
           url: headerModel.api + '/Pay/PayForPC',
           data: {
@@ -127,10 +128,10 @@ var orderConfModel = new Vue({
             if(response.resultid == 200){
               document.body.innerHTML = response.HTML;
               if(_this.payLine == 0){
-                console.log(0);
                 document.getElementById('pay').submit();
               }else{
-                //document.getElementById('form1').submit();
+                // 接口没有form提交地址
+                document.getElementById('form1').submit();
               }
             }else{
               DGDTOOLS.tip._tip(response.message);
@@ -161,12 +162,13 @@ var orderConfModel = new Vue({
               headerModel.loading=false;
               _this.payLock=false;
               if (response.resultid==200) {
-                window.location.href='complete.html'
+                window.location.href='complete.html?orderId='+ _this.orderId;
               } else {
                 DGDTOOLS.tip._tip(response.message);
               }
             },
             error: function(e) {
+              headerModel.loading=false;
               _this.payLock=false;
               console.error(e.status + ":" + e.responseText);
             }
@@ -181,9 +183,8 @@ var orderConfModel = new Vue({
   },
   mounted: function () {
     this.orderId = window.location.search.split('orderId=')[1] || 0;
-    console.log(this.orderId);
     if (!this.orderId) {
-      window.location.href="index.html"
+      window.location.href="../project/index.html"
     }
     // 103752
     this.getOrderInfo();

@@ -467,6 +467,51 @@ $orderC: #41d4dc;
     }
     }
 
+    // 支付完成 
+    .order-complete{
+      min-width: 280px;
+      margin: 0 auto;
+      padding: 40px 0;
+      dt{
+        width: 140px;
+        height: 140px;
+        background:url(/skin/img/order/success.png) center center no-repeat;
+        margin: 0 auto;
+      }
+      dd{
+        &.com-t{
+          font-size: 2.5rem;
+          color: #6b7c93;
+          font-weight: 700;
+          text-align: center;
+          line-height: 1.8;
+          margin-top: 10px;
+        }
+        &.com-btns{
+          text-align:center;
+          font-size: 0;
+          margin-top: 15px;
+          .btn + .btn {
+            margin-left: 10px;
+          }
+          .btn{
+            font-size: 1.6rem;
+            color: #6b7c93;
+            display: inline-block;
+            border: 2px #6b7c93 solid;
+            padding: 4px 10px;
+            border-radius: 5px;
+            transition: all .3s;
+            &:hover{
+              color: #fff;
+              background: #616a73;
+            }
+          }
+        }
+      }
+    }
+    
+    
   }
 
 

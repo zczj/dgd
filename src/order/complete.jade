@@ -1,19 +1,70 @@
 extends ../shade/layout
 block content
   link(rel="stylesheet", href="/skin/css/order/order.css")
-  .order-warp
-    .container.clearfix
-      //- 步骤
-      .order-step
-        dl.cur
-          dt
-            i.icon.icon-os
-          dd 信息填写
-        dl.cur
-          dt
-            i.icon.icon-os
-          dd 订单支付
-        dl.cur
-          dt
-            i.icon.icon-os
-          dd 订单完成
+  #model-orderComplete(v-cloak)
+    .order-warp
+      .container.clearfix
+        //- 步骤
+        .order-step
+          dl.cur
+            dt
+              i.icon.icon-os
+            dd 信息填写
+          dl.cur
+            dt
+              i.icon.icon-os
+            dd 订单支付
+          dl
+            dt
+              i.icon.icon-os
+            dd 订单完成
+        //- 右侧
+        .side
+          //- 投资人信息
+          .side-box.investor-info.order-infoS
+            .order-title 订单信息
+            ul.content
+              li
+                span.t-name 项目名称：
+                span.t-val {{orderInfo.project.ProjectName}}
+              li
+                span.t-name 投资类别：
+                span.t-val 个人投资
+              li(v-if="orderInfo.project.Number")
+                span.t-name 投资份额：
+                span.t-val
+              li
+                span.t-name 投资金额：
+                span.t-val {{orderInfo.order.Amount.toFixed(2)}}元
+              li
+                span.t-name 管理费：
+                span.t-val {{orderInfo.order.ManagementExpense}}元
+              li
+                span.t-name 优惠券：
+                span.t-val {{orderInfo.order.CouponAmount}}元
+              li(v-if="orderInfo.GDRebateAmount !=0")
+                span.t-name 股东券：
+                span.t-val {{orderInfo.GDRebateAmount.toFixed(2)}}元
+            .order-footer
+              ul
+                li
+                  span.t-name 应付总额：
+                  span.t-val ￥{{orderInfo.order.PayAmount.toFixed(2)}}
+
+        //- 左侧
+        .main
+          //- 订单信息
+          .main-box.order-info
+            .content
+              .order-body
+                dl.order-complete
+                  dt
+                  dd.com-t 项目认购成功！
+                  dd.com-btns
+                    a(href="http://test.dgd.vc/mycenter", title="返回用户中心").btn 返回用户中心 
+                    a(href="../project/index.html", title="继续浏览项目").btn 继续浏览项目 
+
+
+  
+  script(src='../skin/js/passport/jquery-md5.min.js')
+  script(src="../skin/js/order/orderComplete.js")

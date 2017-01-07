@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
     <title>Document</title>
-    <link rel="stylesheet" href="../skin/plugs/normalize-css/normalize.css"/>
-    <link rel="stylesheet" href="../skin/css/base.css"/>
-    <link rel="stylesheet" href="../skin/css/dialog.css"/>
+    <link rel="stylesheet" href="/skin/plugs/normalize-css/normalize.css"/>
+    <link rel="stylesheet" href="/skin/css/base.css"/>
+    <link rel="stylesheet" href="/skin/css/dialog.css"/>
     <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
-    <script src="../skin/plugs/dialog/js/dialog.js"></script>
-    <script src="../skin/js/util.js"></script>
+    <script src="/skin/plugs/dialog/js/dialog.js"></script>
+    <script src="/skin/js/util.js"></script>
   </head>
   <body>
     <!-- 页面切换加载动画-->
@@ -71,29 +71,65 @@
         </div>
         <div v-bind:class="{'mask-show': tag}" v-on:click="closeMean" class="mask"></div>
         <input id="userId" type="hidden"/>
-        <script src="../skin/js/header.js"></script>
+        <script src="/skin/js/header.js"></script>
       </header>
     </section>
     <!--==================================================-->
     <link rel="stylesheet" href="/skin/css/order/order.css"/>
-    <div class="order-warp">
-      <div class="container clearfix">
-        <div class="order-step">
-          <dl class="cur">
-            <dt><i class="icon icon-os"></i></dt>
-            <dd>信息填写</dd>
-          </dl>
-          <dl class="cur">
-            <dt><i class="icon icon-os"></i></dt>
-            <dd>订单支付</dd>
-          </dl>
-          <dl class="cur">
-            <dt><i class="icon icon-os"></i></dt>
-            <dd>订单完成</dd>
-          </dl>
+    <div id="model-orderComplete" v-cloak="v-cloak">
+      <div class="order-warp">
+        <div class="container clearfix">
+          <div class="order-step">
+            <dl class="cur">
+              <dt><i class="icon icon-os"></i></dt>
+              <dd>信息填写</dd>
+            </dl>
+            <dl class="cur">
+              <dt><i class="icon icon-os"></i></dt>
+              <dd>订单支付</dd>
+            </dl>
+            <dl>
+              <dt><i class="icon icon-os"></i></dt>
+              <dd>订单完成</dd>
+            </dl>
+          </div>
+          <div class="side">
+            <div class="side-box investor-info order-infoS">
+              <div class="order-title">订单信息</div>
+              <ul class="content">
+                <li><span class="t-name">项目名称：</span><span class="t-val">{{orderInfo.project.ProjectName}}</span></li>
+                <li><span class="t-name">投资类别：</span><span class="t-val">个人投资</span></li>
+                <li v-if="orderInfo.project.Number"><span class="t-name">投资份额：</span><span class="t-val"></span></li>
+                <li><span class="t-name">投资金额：</span><span class="t-val">{{orderInfo.order.Amount.toFixed(2)}}元</span></li>
+                <li><span class="t-name">管理费：</span><span class="t-val">{{orderInfo.order.ManagementExpense}}元</span></li>
+                <li><span class="t-name">优惠券：</span><span class="t-val">{{orderInfo.order.CouponAmount}}元</span></li>
+                <li v-if="orderInfo.GDRebateAmount !=0"><span class="t-name">股东券：</span><span class="t-val">{{orderInfo.GDRebateAmount.toFixed(2)}}元</span></li>
+              </ul>
+              <div class="order-footer">
+                <ul>
+                  <li><span class="t-name">应付总额：</span><span class="t-val">￥{{orderInfo.order.PayAmount.toFixed(2)}}</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="main">
+            <div class="main-box order-info">
+              <div class="content">
+                <div class="order-body">
+                  <dl class="order-complete">
+                    <dt></dt>
+                    <dd class="com-t">项目认购成功！</dd>
+                    <dd class="com-btns"><a href="http://test.dgd.vc/mycenter" title="返回用户中心" class="btn">返回用户中心 </a><a href="../project/index.html" title="继续浏览项目" class="btn">继续浏览项目 </a></dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <script src="../skin/js/passport/jquery-md5.min.js"></script>
+    <script src="../skin/js/order/orderComplete.js"></script>
     <!--==================================================-->
     <div class="footer">
       <div class="info">
