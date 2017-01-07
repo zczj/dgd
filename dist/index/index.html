@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
     <title>Document</title>
-    <link rel="stylesheet" href="../skin/plugs/normalize-css/normalize.css"/>
-    <link rel="stylesheet" href="../skin/css/base.css"/>
-    <link rel="stylesheet" href="../skin/css/dialog.css"/>
+    <link rel="stylesheet" href="/skin/plugs/normalize-css/normalize.css"/>
+    <link rel="stylesheet" href="/skin/css/base.css"/>
+    <link rel="stylesheet" href="/skin/css/dialog.css"/>
     <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
-    <script src="../skin/plugs/dialog/js/dialog.js"></script>
-    <script src="../skin/js/util.js"></script>
+    <script src="/skin/plugs/dialog/js/dialog.js"></script>
+    <script src="/skin/js/util.js"></script>
   </head>
   <body>
     <!-- 页面切换加载动画-->
@@ -71,13 +71,13 @@
         </div>
         <div v-bind:class="{'mask-show': tag}" v-on:click="closeMean" class="mask"></div>
         <input id="userId" type="hidden"/>
-        <script src="../skin/js/header.js"></script>
+        <script src="/skin/js/header.js"></script>
       </header>
     </section>
     <!--==================================================-->
-    <link rel="stylesheet" href="../skin/plugs/owl/owl.carousel.min.css"/>
-    <link rel="stylesheet" href="../skin/plugs/owl-carousel/assets/owl.theme.default.min.css"/>
-    <link rel="stylesheet" href="../skin/css/index/index.css"/>
+    <link rel="stylesheet" href="/skin/plugs/owl/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css"/>
+    <link rel="stylesheet" href="/skin/css/index/index.css"/>
     <div id="model-index">
       <div class="dgd-ad">
         <div id="dgd-ad" class="owl-carousel owl-theme">
@@ -143,11 +143,11 @@
           <div class="common-t"><span>融资的项目</span></div>
           <ul class="common-list">
             <li v-for="item in Ad.projectList" class="list-item">
-              <div class="list-pic"><a v-bind:href="['../project/detail.html?id='+ item.ProjectID]"><img v-if="item.BigPic==null" src="../skin/img/default.jpg" alt=""/><img v-else="item.BigPic!=null" v-bind:src="item.BigPic"/><span v-bind:class="[&quot;tag-&quot;+item.State]" class="tag"></span></a></div>
+              <div class="list-pic"><a v-bind:href="['/project/detail.html?id='+ item.ProjectID]"><img v-if="item.BigPic==null" src="/skin/img/default.jpg" alt=""/><img v-else="item.BigPic!=null" v-bind:src="item.BigPic"/><span v-bind:class="[&quot;tag-&quot;+item.State]" class="tag"></span></a></div>
               <div class="list-main">
                 <div class="list-t">
                   <div class="item"><span>起投金额：</span><span class="price">{{item.LowVote}}</span></div>
-                  <div class="item"><span>项目平台：</span><span class="price">智金汇</span></div><a :href="['../order/index.html?id='+ item.ProjectID]" class="buy-now"><i class="icon icon-money"></i>我要认购</a><a href="javascript:void(0);" v-on:click="headerModel.gz(item.ProjectID, item)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }" class="gz-btn"></a>
+                  <div class="item"><span>项目平台：</span><span class="price">智金汇</span></div><a :href="['/order/index.html?id='+ item.ProjectID]" class="buy-now"><i class="icon icon-money"></i>我要认购</a><a href="javascript:void(0);" v-on:click="headerModel.gz(item.ProjectID, item)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }" class="gz-btn"></a>
                 </div>
                 <div class="list-con">
                   <div v-show="item.ShortDesc" class="list-txt">{{item.ShortDesc}}</div>
@@ -218,12 +218,12 @@
           <div class="player-con clearfix">
             <div class="player-bar"><span class="prev-btn"></span><span class="next-btn"></span></div>
             <div id="player-list" class="player-list owl-carousel owl-theme">
-              <div class="item"><img src="../skin/img/index/p1.jpg" alt=""/></div>
-              <div class="item"><img src="../skin/img/index/p1.jpg" alt=""/></div>
-              <div class="item"><img src="../skin/img/index/p1.jpg" alt=""/></div>
-              <div class="item"><img src="../skin/img/index/p1.jpg" alt=""/></div>
-              <div class="item"><img src="../skin/img/index/p1.jpg" alt=""/></div>
-              <div class="item"><img src="../skin/img/index/p1.jpg" alt=""/></div>
+              <div class="item"><img src="/skin/img/index/p1.jpg" alt=""/></div>
+              <div class="item"><img src="/skin/img/index/p1.jpg" alt=""/></div>
+              <div class="item"><img src="/skin/img/index/p1.jpg" alt=""/></div>
+              <div class="item"><img src="/skin/img/index/p1.jpg" alt=""/></div>
+              <div class="item"><img src="/skin/img/index/p1.jpg" alt=""/></div>
+              <div class="item"><img src="/skin/img/index/p1.jpg" alt=""/></div>
             </div>
           </div>
         </div>
@@ -235,8 +235,8 @@
         </div>
       </section>
     </div>
-    <script src="../skin/plugs/owl-carousel/owl.carousel.min.js"></script>
-    <script src="../skin/js/index.js"></script>
+    <script src="/skin/plugs/owl-carousel/owl.carousel.min.js"></script>
+    <script src="/skin/js/index.js"></script>
     <!--==================================================-->
     <div class="footer">
       <div class="info">
