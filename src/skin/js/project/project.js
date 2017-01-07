@@ -28,6 +28,15 @@ var project = new Vue({
         $("#loader").fadeOut(300)
       })
     },
+    buyNow:function  (id) {
+      // 检测登录
+      if (!headerModel.isLogin) {;
+        DGDTOOLS.check._isLogin();
+        return;
+      } else{
+        window.location.href= "/order/index.html?id="+ id
+      }
+    },
     // 下一页
     nextPage: function () {
       this.currentpage++

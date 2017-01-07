@@ -4,11 +4,12 @@ var orderModel = new Vue({
     proId: '',
     buyInfo: '',
     part: 1, // 认投份数
-    selected: '', // 选择的coupon
+    selected: '0', // 选择的coupon
     amount: 0, // 认投金额
     OrderType: '1', // 认购方式 1.认购并在线支付 0.认购不付款
     readyRule: true,
-    formLock: false
+    formLock: false,
+    gdCh: false // 股东券
   },
   methods: {
     getBuyInfo: function() {
@@ -48,7 +49,7 @@ var orderModel = new Vue({
     // 检测转入是否规范
     numCh: function() {
       var _this = this;
-      if (this.amount == '' || this.amount < this.buyInfo.project.OriginalLowVote - 0) {
+      if (this.amount == '' || this.amount < this.buyInfo.project.OriginalLowVote - 0 ) {
         this.amount = this.buyInfo.project.OriginalLowVote;
         DGDTOOLS.tip._tip('金额必须大于最低跟投小于最高跟投', function() {
           _this.$refs.amount.focus()
@@ -84,8 +85,13 @@ var orderModel = new Vue({
 
       // 判断投之家分配 (缺接口)
       // 当前项目已经使用过抵扣劵,同一项目不能重复使用 (缺接口)
-      // 使用了股东劵不能再使用优惠券 (缺接口)
 
+      // 使用了股东劵不能再使用优惠券
+      if(_this.gdCh){
+        DGDTOOLS.tip._tip('使用了股东劵不能再使用优惠券', this.initCoupon)
+      }
+      
+      
       if (_this.coupon.Remark != "抵用券活动") {
         var amount = _this.amount * _this.part,
           camount = _this.coupon.Amount;
@@ -115,6 +121,15 @@ var orderModel = new Vue({
         if (amount < 20000) {
           DGDTOOLS.tip._tip('认投金额小于2万不能使用', this.initCoupon)
         }
+      }
+    },
+    // 检测 股东券是否可用
+    gdAccountCh: function  () {
+      var _this = this
+      if(_this.selected != '0' ){
+        DGDTOOLS.tip._tip('使用了优惠券不能再使用股东劵', function  () {
+          _this.gdCh = false;
+        })
       }
     },
     partAdd: function () {
@@ -154,7 +169,8 @@ var orderModel = new Vue({
           "Num": _this.part,
           "ProjectID": _this.buyInfo.project.ProjectID,
           "Amount": _this.amount*1,
-          "Coupon": _this.selected
+          "Coupon":  _this.selected =='0'?'':_this.selected,
+          "IsGDRebate": _this.gdCh
         },
         type: 'post',
         success: function(response) {
@@ -177,9 +193,9 @@ var orderModel = new Vue({
                   "pphone": "",
                   "paddress": "",
                   "AmountNum": _this.part,
-                  "ckCoupon": _this.selected,
+                  "ckCoupon": _this.selected =='0'?'':_this.selected,
                   "token": headerModel.token,
-                  "hgadm": "",
+                  "hgadm": _this.gdAccountS,
                   "remark": "",
                   "UserID": _this.buyInfo.userinfo.UserID,
                   "FullName": "",
@@ -201,11 +217,6 @@ var orderModel = new Vue({
                   }
                 }
               })
-
-
-
-
-
             }else{
               _this.formLock = false;
               headerModel.loading = false;
@@ -223,6 +234,7 @@ var orderModel = new Vue({
         error: function(e) {
           _this.formLock = false;
           headerModel.loading = false;
+          DGDTOOLS.tip._tip(e.status + ":"+'接口异常')
           console.error(e.status + ":" + e.responseText);
         }
       })
@@ -248,14 +260,34 @@ var orderModel = new Vue({
       if (!this.coupon.Amount) {
         this.coupon.Amount = 0;
       }
-      var res = parseInt(this.amount)* this.part*1 + (this.manageFree * 1) - this.coupon.Amount;
+      var res = parseInt(this.amount)* this.part*1 + (this.manageFree * 1) - this.coupon.Amount - this.gdAccountS;
       return res.toFixed(2);
     },
     // ManagerFee 管理费
     manageFree: function() {
-      var res = 0
+      var res = 0;
+      this.amount = isNaN(this.amount)? this.buyInfo.project.OriginalLowVote : this.amount ;
       if (this.orderRule) {
         return (this.buyInfo.ProjectRule.ManagerFee*this.part * this.amount).toFixed(2);
+      }
+      return res;
+    },
+    // 股东券
+    gdAccount: function(){
+      var res = null;
+      if(this.buyInfo.gdAccount){
+            var lowVote = this.buyInfo.project.OriginalLowVote* 0.01,
+            availableBalance = this.buyInfo.gdAccount.AvailableBalance; 
+
+        return  res = availableBalance<lowVote?availableBalance: lowVote;
+      }
+      return res;
+    },
+    // 选择股东券 面值
+    gdAccountS: function  () {
+      var res = 0;
+      if(this.gdAccount && this.gdCh){
+        res = this.gdAccount.toFixed(2);
       }
       return res;
     },

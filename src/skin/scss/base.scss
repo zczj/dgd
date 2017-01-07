@@ -928,20 +928,20 @@ header {
         font-size: 1.4rem;
         z-index: 2;
         border-radius: 4px;
-        .tag-1 {
+        &.tag-1 {
           &::after {
             content: '预热中';
             display: block;
             color: #fff;
           }
         }
-        .tag-2 {
+        &.tag-2 {
           &::after {
             content: '融资中';
             color: #30d1fb;
           }
         }
-        .tag-3 {
+        &.tag-3 {
           &::after {
             content: '已完成';
             color: #fff;

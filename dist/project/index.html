@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
     <title>Document</title>
-    <link rel="stylesheet" href="/skin/plugs/normalize-css/normalize.css"/>
-    <link rel="stylesheet" href="/skin/css/base.css"/>
-    <link rel="stylesheet" href="/skin/css/dialog.css"/>
+    <link rel="stylesheet" href="../skin/plugs/normalize-css/normalize.css"/>
+    <link rel="stylesheet" href="../skin/css/base.css"/>
+    <link rel="stylesheet" href="../skin/css/dialog.css"/>
     <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
-    <script src="/skin/plugs/dialog/js/dialog.js"></script>
-    <script src="/skin/js/util.js"></script>
+    <script src="../skin/plugs/dialog/js/dialog.js"></script>
+    <script src="../skin/js/util.js"></script>
   </head>
   <body>
     <!-- 页面切换加载动画-->
@@ -71,7 +71,7 @@
         </div>
         <div v-bind:class="{'mask-show': tag}" v-on:click="closeMean" class="mask"></div>
         <input id="userId" type="hidden"/>
-        <script src="/skin/js/header.js"></script>
+        <script src="../skin/js/header.js"></script>
       </header>
     </section>
     <!--==================================================-->
@@ -148,7 +148,7 @@
                 <div class="list-main">
                   <div class="list-t">
                     <div class="item"><span>起投金额：</span><span class="price">{{item.LowVote}}</span></div>
-                    <div class="item"><span>项目平台：</span><span class="price">{{ii}} - 智金汇 {{item.ProjectID}}</span></div><a href="#" class="buy-now"><i class="icon icon-money"></i>我要认购</a><a href="javascript:;" v-on:click="headerModel.gz(item.ProjectID, item)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }" class="gz-btn"></a>
+                    <div class="item"><span>项目平台：</span><span class="price">{{ii}} - 智金汇 {{item.ProjectID}}</span></div><a href="javascript:;" v-on:click="buyNow(item.ProjectID)" class="buy-now"><i class="icon icon-money"></i>我要认购</a><a href="javascript:;" v-on:click="headerModel.gz(item.ProjectID, item)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }" class="gz-btn"></a>
                   </div>
                   <div class="list-con">
                     <div class="list-txt">{{item.ShortDesc}}</div>

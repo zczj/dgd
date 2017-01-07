@@ -1,6 +1,6 @@
 extends ../shade/layout
 block content
-  link(rel="stylesheet", href="/skin/css/order/order.css")
+  link(rel="stylesheet", href="/content/dist/skin/css/order/order.css")
   #model-orderConf(v-cloak)
     .order-warp
       .container.clearfix
@@ -42,6 +42,9 @@ block content
               li
                 span.t-name 优惠券：
                 span.t-val {{orderInfo.order.CouponAmount}}元
+              li(v-if="orderInfo.GDRebateAmount !=0")
+                span.t-name 股东券：
+                span.t-val {{orderInfo.GDRebateAmount.toFixed(2)}}元
             .order-footer
               ul
                 li
@@ -66,10 +69,10 @@ block content
                     dl
                       dt 选择支付平台：
                       dd
-                        label.baofu(v-bind:class="{cur : payMethod==0 }")
-                          input(type="radio" v-model='payMethod' v-bind:value="0")
-                        label.fuyou(v-bind:class="{cur : payMethod==1 }")
-                          input(type="radio" v-model='payMethod' v-bind:value="1")
+                        label.baofu(v-bind:class="{cur : payLine=='0' }")
+                          input(type="radio" v-model='payLine' v-bind:value="0")
+                        label.fuyou(v-bind:class="{cur : payLine=='1' }")
+                          input(type="radio" v-model='payLine' v-bind:value="1")
                 //- 余额支付
                 .order-box.order-overage(v-if="payMethod == 0")
                   .order-content
@@ -113,5 +116,5 @@ block content
                     button.buy(disabled="disabled" v-else) 确认认购
 
 
-  script(src='/skin/js/passport/jquery-md5.min.js')
-  script(src="/skin/js/order/orderConf.js")
+  script(src='../skin/js/passport/jquery-md5.min.js')
+  script(src="../skin/js/order/orderConf.js")

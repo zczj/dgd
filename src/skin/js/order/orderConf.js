@@ -12,6 +12,14 @@ var orderConfModel = new Vue({
     3:站岗宝支付
      */
     payMethod: 1,
+    payLine: 0, // 在线支付方式
+    payLineMap:[{
+      'bankcode': '006',
+      'bankName': '宝付支付'
+    },{
+      'bankcode': '005',
+      'bankName': '富友支付'
+    }] ,
     payPwd:'', //支付密码
     payLock: false
   },
@@ -89,20 +97,56 @@ var orderConfModel = new Vue({
         return;
       }
 
-      // 1.3 根据支付方式做对应处理
+      if (_this.payPwd == '') {
+        DGDTOOLS.tip._tip("请输入支付密码");
+      }
+      
+      if (_this.payLock) {
+        return;
+      } else {
+        _this.payLock = true;
+      }
+      // 1.4 根据支付方式做对应处理
       if (_this.payMethod == 1) {
-        // 1.3.1 线上支付 68539.75
-        console.log('在线支付');
-      }else{
-        // 1.3.2 余额 && 站岗宝支付
-        if (_this.payPwd == '') {
-          DGDTOOLS.tip._tip("请输入支付密码");
-        }else{
-          if (_this.payLock) {
-            return;
-          }else{
-            _this.payLock = true;
+        // 1.4.1 在线支付 68539.75
+        headerModel.loading=true;
+        $.ajax({
+          url: headerModel.api + '/Pay/PayForPC',
+          data: {
+            "Token": headerModel.token,
+            "Amount": _this.orderInfo.order.PayAmount,
+            "AssociatedBank": _this.payLineMap[_this.payLine].bankName,
+            "bankcode": _this.payLineMap[_this.payLine].bankcode,
+            "orderid": _this.orderId,
+            "payPassword": $.md5($.md5(_this.payPwd))
+          },
+          type: 'post',
+          success: function  (response) {
+            headerModel.loading=false;
+            _this.payLock = false;
+            if(response.resultid == 200){
+              document.body.innerHTML = response.HTML;
+              if(this.payLine == 0){
+                document.getElementById('pay').submit();
+              }else{
+                console.log('ok');
+                document.getElementById('form1').submit();
+              }
+            }else{
+              DGDTOOLS.tip._tip(response.message);
+            }
+          },
+          error: function  (e) {
+            headerModel.loading=false;
+            _this.payLock = false;
+            console.error(e.status + ":" + e.responseText);
           }
+        })
+        
+        
+      }else{
+        // 1.4.2 余额 && 站岗宝支付
+          
           $.ajax({
             url: headerModel.api + '/Order/PostOrder',
             data: {
@@ -117,7 +161,7 @@ var orderConfModel = new Vue({
               headerModel.loading=false;
               _this.payLock=false;
               if (response.resultid==200) {
-                console.log(response);
+                window.location.href='complete.html'
               } else {
                 DGDTOOLS.tip._tip(response.message);
               }
@@ -127,8 +171,6 @@ var orderConfModel = new Vue({
               console.error(e.status + ":" + e.responseText);
             }
           })
-
-        }
       }
 
 

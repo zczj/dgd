@@ -51,7 +51,7 @@ gulp.task('js', function () {
     .pipe(changed('dist/skin/js', {extension: '.js'}))
     .pipe(debug({title: '编译：'}))
     // .pipe(rename({ suffix: '.min'}))
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('dist/skin/js'))
 })
 

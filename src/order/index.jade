@@ -92,8 +92,13 @@ block content
                           {{item.Amount}} 元(有效期{{item.ExpiringDate}})
                     div.red.
                       提示：投资满1万可抵扣50元；投资满2万可抵扣100元，投资满3万可抵扣150元，投资满4万可抵扣200元，投资满5万可抵扣500元,每次投资只能使用一张优惠抵扣
-
-
+                  
+                  // 股东券
+                  li.gd-account(v-if="gdAccount")
+                    label
+                      input(type="checkbox", v-model="gdCh" v-on:change="gdAccountCh")
+                      i.icon.icon-os
+                      span 使用股东返利金（可使用{{gdAccount.toFixed(2)}}元,共{{buyInfo.gdAccount.AvailableBalance.toFixed(2)}}元）
 
                 .order-way
                   label

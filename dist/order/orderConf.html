@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
     <title>Document</title>
-    <link rel="stylesheet" href="/skin/plugs/normalize-css/normalize.css"/>
-    <link rel="stylesheet" href="/skin/css/base.css"/>
-    <link rel="stylesheet" href="/skin/css/dialog.css"/>
+    <link rel="stylesheet" href="../skin/plugs/normalize-css/normalize.css"/>
+    <link rel="stylesheet" href="../skin/css/base.css"/>
+    <link rel="stylesheet" href="../skin/css/dialog.css"/>
     <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
-    <script src="/skin/plugs/dialog/js/dialog.js"></script>
-    <script src="/skin/js/util.js"></script>
+    <script src="../skin/plugs/dialog/js/dialog.js"></script>
+    <script src="../skin/js/util.js"></script>
   </head>
   <body>
     <!-- 页面切换加载动画-->
@@ -71,11 +71,11 @@
         </div>
         <div v-bind:class="{'mask-show': tag}" v-on:click="closeMean" class="mask"></div>
         <input id="userId" type="hidden"/>
-        <script src="/skin/js/header.js"></script>
+        <script src="../skin/js/header.js"></script>
       </header>
     </section>
     <!--==================================================-->
-    <link rel="stylesheet" href="/skin/css/order/order.css"/>
+    <link rel="stylesheet" href="/content/dist/skin/css/order/order.css"/>
     <div id="model-orderConf" v-cloak="v-cloak">
       <div class="order-warp">
         <div class="container clearfix">
@@ -103,6 +103,7 @@
                 <li><span class="t-name">投资金额：</span><span class="t-val">{{orderInfo.order.Amount.toFixed(2)}}元</span></li>
                 <li><span class="t-name">管理费：</span><span class="t-val">{{orderInfo.order.ManagementExpense}}元</span></li>
                 <li><span class="t-name">优惠券：</span><span class="t-val">{{orderInfo.order.CouponAmount}}元</span></li>
+                <li v-if="orderInfo.GDRebateAmount !=0"><span class="t-name">股东券：</span><span class="t-val">{{orderInfo.GDRebateAmount.toFixed(2)}}元</span></li>
               </ul>
               <div class="order-footer">
                 <ul>
@@ -122,11 +123,11 @@
                       <dl>
                         <dt>选择支付平台：</dt>
                         <dd>
-                          <label v-bind:class="{cur : payMethod==0 }" class="baofu">
-                            <input type="radio" v-model="payMethod" v-bind:value="0"/>
+                          <label v-bind:class="{cur : payLine=='0' }" class="baofu">
+                            <input type="radio" v-model="payLine" v-bind:value="0"/>
                           </label>
-                          <label v-bind:class="{cur : payMethod==1 }" class="fuyou">
-                            <input type="radio" v-model="payMethod" v-bind:value="1"/>
+                          <label v-bind:class="{cur : payLine=='1' }" class="fuyou">
+                            <input type="radio" v-model="payLine" v-bind:value="1"/>
                           </label>
                         </dd>
                       </dl>
@@ -173,8 +174,8 @@
         </div>
       </div>
     </div>
-    <script src="/skin/js/passport/jquery-md5.min.js"></script>
-    <script src="/skin/js/order/orderConf.js"></script>
+    <script src="../skin/js/passport/jquery-md5.min.js"></script>
+    <script src="../skin/js/order/orderConf.js"></script>
     <!--==================================================-->
     <div class="footer">
       <div class="info">

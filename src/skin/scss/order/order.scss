@@ -202,6 +202,22 @@ $orderC: #41d4dc;
               text-align: left;
             }
           }
+          &.gd-account{
+            input[type="checkbox"]{
+              opacity:0;
+              display: none;
+              & + i.icon{
+                width: 16px;
+                height: 16px;
+                color:#e0e4e9;
+                font-size: 1.6rem;
+                margin-right: 4px;
+              }
+              &:checked + i.icon{
+                color: $orderC;
+              }
+            }
+          }
         }
         .t-val{
           select{
