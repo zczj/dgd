@@ -28,13 +28,19 @@ var project = new Vue({
         $("#loader").fadeOut(300)
       })
     },
-    buyNow:function  (id) {
+    buyNow:function  (id,index) {
+      var _this = this;
       // 检测登录
       if (!headerModel.isLogin) {;
         DGDTOOLS.check._isLogin();
         return;
       } else{
-        window.location.href= "/order/index.html?id="+ id
+        // 预约项目
+        if(_this.list[index].ISReservation){
+          window.location.href= "/reservation/index.html?id="+ id
+        }else{
+          window.location.href= "/order/index.html?id="+ id
+        }
       }
     },
     // 下一页

@@ -76,96 +76,49 @@
     </section>
     <!--==================================================-->
     <link rel="stylesheet" href="/skin/css/order/order.css"/>
-    <div id="model-order" v-cloak="v-cloak">
-      <div class="order-warp">
+    <div id="model-reserva" v-cloak="v-cloak">
+      <div class="order-warp reserva-warp">
         <div class="container clearfix">
-          <div class="order-step">
-            <dl class="cur">
-              <dt><i class="icon icon-os"></i></dt>
-              <dd>信息填写</dd>
-            </dl>
-            <dl>
-              <dt><i class="icon icon-os"></i></dt>
-              <dd>订单支付</dd>
-            </dl>
-            <dl>
-              <dt><i class="icon icon-os"></i></dt>
-              <dd>订单完成</dd>
-            </dl>
-          </div>
           <div class="side">
             <div class="side-box investor-info">
-              <div class="order-title">投资人信息</div>
-              <ul class="content">
-                <li><span class="t-name">姓名：</span><span class="t-val">{{buyInfo.BenefitAccount.FullName}}</span></li>
-                <li><span class="t-name">号码：</span><span class="t-val">{{buyInfo.BenefitAccount.Phone}}</span></li>
-                <li><span class="t-name">身份证：</span><span class="t-val">{{buyInfo.authention.IDNumber}}</span></li>
-              </ul>
+              <div class="order-title"> <span>融资概况</span></div>
+              <div class="content">
+                <ul>
+                  <li><span class="t-name">姓名：</span><span class="t-val">{{buyInfo.BenefitAccount.FullName}}</span></li>
+                  <li><span class="t-name">号码：</span><span class="t-val">{{buyInfo.BenefitAccount.Phone}}</span></li>
+                  <li><span class="t-name">身份证：</span><span class="t-val">{{buyInfo.authention.IDNumber}}</span></li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="main">
+            <div class="main-box order-note clearfix">
+              <div class="pic"><img v-bind:src="buyInfo.project.MoblePic" v-bind:alt="buyInfo.project.ProjectName"/></div>
+              <div class="note">
+                <div class="note-t">{{buyInfo.project.ProjectName}}</div>
+                <div class="note-con">{{buyInfo.project.ShortDesc}}</div>
+              </div>
+            </div>
             <div class="main-box order-info">
               <div class="order-title ellipsis">订单信息</div>
               <div class="content">
                 <div class="order-body">
-                  <div v-if="orderRule != null" data-type="有规则">
-                    <div v-if="orderRule.Type == 1" data-type="按金额整数倍累加">
-                      <div class="order-part"><span class="t-name">认投金额</span>
-                        <input type="text" v-model.trim="amount" v-on:keypress="numEv(event)" v-on:blur="numCh" ref="amount" class="type1"/><span>元</span>
-                      </div>
-                      <div class="order-tips"><span>最低{{buyInfo.project.OriginalLowVote}}元起,整数倍累加最高跟投2000000.00元</span><span class="red">+ 管理费(平台收取)({{manageFree}}元)</span></div>
-                      <div class="order-note">
-                        投资基本信息：非常感谢您投资了{{buyInfo.project.ProjectName}}，投资意向金为 {{amount}} 元，所认投的股份份额，需要在项目融资成功后确定
-                        
-                      </div>
-                    </div>
-                    <div v-else="v-else" data-type="按份数">
-                      <div class="order-part"><span class="t-name">认投份数</span><i v-on:click="partCut" class="icon icon-cut"></i>
-                        <input type="text" v-model.trim="part" v-on:keypress="DGDTOOLS.check._isNum(event)" v-on:blur="partCh" ref="part"/><i v-on:click="partAdd" class="icon icon-add"></i><span>份</span>
-                      </div>
-                    </div>
+                  <div class="order-part"><span class="t-name">预约份数</span><i v-on:click="partCut" class="icon icon-cut"></i>
+                    <input type="text" v-model.trim="part" v-on:keypress="DGDTOOLS.check._isNum(event)" v-on:blur="partCh" ref="part"/><i v-on:click="partAdd" class="icon icon-add"></i><span>份</span>
                   </div>
-                  <div v-else="v-else" data-type="无规则">
-                    <div class="order-part"><span class="t-name">认投金额</span>
-                      <input type="text" v-model.trim="amount" v-on:keypress="numEv(event)" v-on:blur="numCh" ref="amount" class="type1"/><span>元</span>
-                    </div>
-                  </div>
-                  <ul>
-                    <li v-if="orderRule != null &amp;&amp;　orderRule.Type !== 1"><span class="t-name">投资金额：</span><span class="t-val"><span class="red">{{amount*part}}</span>元</span></li>
-                    <li v-if="manageFree !== 0"><span class="t-name">管理费：</span><span class="t-val">{{manageFree}}元</span></li>
-                    <li v-if="orderModel.buyInfo.CouponList.length &gt; 0 &amp;&amp;　buyInfo.project.ProjectID != 1078" class="coupon-list"><span class="t-name">优惠券：</span><span class="t-val">
-                        <select v-model="selected" v-on:change="couponCh">
-                          <option v-bind:value="0" selected="selected">请选择</option>
-                          <option v-for="item in buyInfo.CouponList" v-bind:value="item.CouponID">{{item.Amount}} 元(有效期{{item.ExpiringDate}})</option>
-                        </select></span>
-                      <div class="red">
-                        提示：投资满1万可抵扣50元；投资满2万可抵扣100元，投资满3万可抵扣150元，投资满4万可抵扣200元，投资满5万可抵扣500元,每次投资只能使用一张优惠抵扣
-                        
-                      </div>
-                    </li>
-                    <!-- 股东券-->
-                    <li v-if="gdAccount" class="gd-account">
-                      <label>
-                        <input type="checkbox" v-model="gdCh" v-on:change="gdAccountCh"/><i class="icon icon-os"></i><span>使用股东返利金（可使用{{gdAccount.toFixed(2)}}元,共{{buyInfo.gdAccount.AvailableBalance.toFixed(2)}}元）</span>
-                      </label>
-                    </li>
-                  </ul>
-                  <div class="order-way">
-                    <label>
-                      <input type="radio" name="pay-type" v-model="OrderType" value="1" checked="checked"/><i class="icon icon-os"></i><span>我要认购并在线支付</span>
-                    </label>
-                    <label>
-                      <input type="radio" name="pay-type" v-model="OrderType" value="0"/><i class="icon icon-os"></i><span>我要认购暂不付款</span>
-                    </label>
-                  </div>
-                </div>
-                <div class="order-footer">
+                  <dl class="order-rules">
+                    <dt>预约规则</dt>
+                    <dd>1.一个工作日内，之家妹会联系您；</dd>
+                    <dd>2.取得联系后，会建立交流群；</dd>
+                    <dd>3.此项目为特殊项目，只开放给合格投资人</dd>
+                  </dl>
                   <label class="order-rule">
-                    <input type="checkbox" v-model="readyRule"/><i class="icon icon-os"></i><span>我已认真仔细阅读并同意<a href="#">《大股东用户服务协议》</a>和<a href="#">《风险提示书》</a></span>
+                    <input type="checkbox" v-model="readyRule"/><i class="icon icon-os"></i><span>同意<a href="#">《大股东用户协议》</a> 所述条款和协议</span>
                   </label>
-                  <div class="order-btns clearfix">
-                    <div class="order-total-money"><span class="t-name">应付总额：</span><span class="t-val">{{totleResult}}</span></div>
-                    <button href="javascript:void(0);" v-on:click="nextFn" class="order-btn">下一步</button>
+                  <div class="order-footer">
+                    <div class="order-btns">
+                      <button v-on:click="nextFn" class="order-btn">确定</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -174,7 +127,7 @@
         </div>
       </div>
     </div>
-    <script src="/skin/js/order/order.js"></script>
+    <script src="../skin/js/reservation/reserva.js"></script>
     <!--==================================================-->
     <div class="footer">
       <div class="info">

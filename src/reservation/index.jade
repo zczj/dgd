@@ -1,0 +1,67 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/order/order.css")
+  #model-reserva(v-cloak)
+    .order-warp.reserva-warp
+      .container.clearfix
+        //- 右侧
+        .side
+          //- 投资人信息
+          .side-box.investor-info
+            .order-title 
+              span 融资概况
+            .content
+
+              ul
+                  li
+                    span.t-name 姓名：
+                    span.t-val {{buyInfo.BenefitAccount.FullName}}
+                  li
+                    span.t-name 号码：
+                    span.t-val {{buyInfo.BenefitAccount.Phone}}
+                  li
+                    span.t-name 身份证：
+                    span.t-val {{buyInfo.authention.IDNumber}}
+        //- 左侧
+        .main
+          //- 项目信息
+          .main-box.order-note.clearfix
+            .pic
+              img(v-bind:src="buyInfo.project.MoblePic", v-bind:alt="buyInfo.project.ProjectName")
+            .note
+              .note-t {{buyInfo.project.ProjectName}}
+              .note-con {{buyInfo.project.ShortDesc}}
+          //- 订单信息
+          .main-box.order-info
+            .order-title.ellipsis 订单信息
+            .content
+              .order-body
+                //- 按份数累加
+                .order-part
+                  span.t-name 预约份数
+                  i.icon.icon-cut(v-on:click="partCut")
+                  input(type="text" v-model.trim="part" v-on:keypress="DGDTOOLS.check._isNum(event)" v-on:blur="partCh" ref="part")
+                  i.icon.icon-add(v-on:click="partAdd")
+                  span 份
+                
+                dl.order-rules
+                  dt 预约规则
+                  dd 1.一个工作日内，之家妹会联系您；
+                  dd 2.取得联系后，会建立交流群；
+                  dd 3.此项目为特殊项目，只开放给合格投资人
+                
+                label.order-rule
+                  input(type="checkbox" v-model="readyRule")
+                  i.icon.icon-os
+                  span.
+                    同意<a href="#">《大股东用户协议》</a> 所述条款和协议
+                .order-footer
+                  .order-btns
+                    button.order-btn(v-on:click="nextFn") 确定
+
+
+
+
+
+  
+  script(src="../skin/js/reservation/reserva.js")

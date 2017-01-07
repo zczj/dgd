@@ -78,7 +78,7 @@ block content
                   li(v-if="orderRule != null &&　orderRule.Type !== 1")
                     span.t-name 投资金额：
                     span.t-val
-                      span.red {{amount}}
+                      span.red {{amount*part}}
                       |元
                   li(v-if="manageFree !== 0")
                     span.t-name 管理费：
@@ -122,7 +122,7 @@ block content
                   .order-total-money
                     span.t-name 应付总额：
                     span.t-val {{totleResult}}
-                  a.order-btn(href="javascript:void(0);" v-on:click="nextFn") 下一步
+                  button.order-btn(href="javascript:void(0);" v-on:click="nextFn") 下一步
 
 
 

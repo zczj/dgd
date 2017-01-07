@@ -94,6 +94,7 @@ $orderC: #41d4dc;
 .order-warp{
   min-height: 700px;
   font-size: 1.6rem;
+  
   .order-title{
     height: 48px;
     line-height: 48px;
@@ -107,7 +108,9 @@ $orderC: #41d4dc;
   .main{
     float: left;
     width: calc(100% - 332px);
-    background:#fff;
+    .main-box{
+      background:#fff;
+    }
 
   }
 
@@ -264,28 +267,30 @@ $orderC: #41d4dc;
       padding-top: 16px;
       margin-top: 16px;
       border-top: 1px #d8dcdf solid;
-      .order-rule{
-        display: block;
-        input[type="checkbox"]{
-          display: none;
-          opacity:0;
-          & + .icon-os{
-            font-size: 1.6rem;
-            color: #e0e4e9;
-            margin-right: 4px;
-            &::after{
-              vertical-align: middle;
+      @at-root{
+        .order-rule{
+          display: block;
+          input[type="checkbox"]{
+            display: none;
+            opacity:0;
+            & + .icon-os{
+              font-size: 1.6rem;
+              color: #e0e4e9;
+              margin-right: 4px;
+              &::after{
+                vertical-align: middle;
+              }
+            }
+            &:checked + .icon-os{
+              color: $orderC;
             }
           }
-          &:checked + .icon-os{
-            color: $orderC;
+
+
+
+          a{
+            color: #3e85ff;
           }
-        }
-
-
-
-        a{
-          color: #3e85ff;
         }
       }
       .order-btns{
@@ -300,6 +305,7 @@ $orderC: #41d4dc;
           }
         }
         .order-btn{
+          border:none;
           float: right;
           display: inline-block;
           background:$orderC;
@@ -565,6 +571,65 @@ $orderC: #41d4dc;
             color: #41d4dc;
             font-weight: 700;
           }
+        }
+      }
+    }
+  }
+
+  // 预约项目
+  &.reserva-warp{
+    padding-top: 30px;
+    .order-note{
+      padding: 20px 5%;
+      margin-bottom: 15px;
+      .pic{
+        float:left;
+        img{
+          width: 80px;
+          height: 80px;
+          border-radius: 40px;
+        }
+      }
+      .note{
+        float: right;
+        width: calc(100% - 100px);
+        .note-t{
+          color:#282828;
+          font-size: 2rem;
+        }
+        .note-con{
+          color:#616a73;
+          font-size: 1.5rem;
+          padding-top: 6px;
+        }
+      }
+    }
+
+    // 预约规则
+    .order-rules{
+      width: 100%;
+      max-width: 310px;
+      text-align: left;
+      margin: 20px auto 0;
+      color:#6b7c93;
+      
+    }
+    .order-rule{
+      width: 100%;
+      max-width: 310px;
+      font-size: 1.5rem;
+      color:#b2b9bf;
+      margin: 20px auto 0;
+    }
+    .order-footer{
+      .order-btns{
+        padding: 10px 0;
+        text-align: center;
+        .order-btn{
+          width: 200px;
+          height: 44px;
+          float:none;
+          font-size: 2rem;
         }
       }
     }

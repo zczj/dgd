@@ -133,7 +133,7 @@ var orderModel = new Vue({
       }
     },
     partAdd: function () {
-      this.part ++
+      this.part ++;
     },
     partCut: function () {
       if (this.part==1) {
@@ -215,6 +215,10 @@ var orderModel = new Vue({
                   }else{
                     DGDTOOLS.tip._tip(response.message)
                   }
+                },
+                error: function (e) {
+                  DGDTOOLS.tip._tip(e.status + ":" + '接口异常')
+                  console.error(e.status + ":" + e.responseText);
                 }
               })
             }else{
@@ -307,6 +311,11 @@ var orderModel = new Vue({
     this.proId = window.location.search.split('id=')[1] || 0;
     if(this.proId==0){
       window.location.href="../project/index.html"
+    }
+    if(this.buyInfo.project){
+      console.log('预约项目');
+    }else{
+      console.log('普通项目');
     }
     // this.proId = '1037' // 有规则(按份数)
     // this.proId = '1034' // 有规则(按金额)
