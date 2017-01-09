@@ -144,6 +144,19 @@ var Util=function () {
       _isNum:function (e) {
         var event =window.e||e;
         return e.returnValue = (/[\d]/.test(String.fromCharCode(e.keyCode)))?true:false;
+      },
+      // 是否为移动端
+      _isMobileOrPad:function() {
+        var e = navigator.userAgent.toLowerCase(),
+          t = "ipad" == e.match(/ipad/i),
+          i = "iphone os" == e.match(/iphone os/i),
+          n = "midp" == e.match(/midp/i),
+          r = "rv:1.2.3.4" == e.match(/rv:1.2.3.4/i),
+          a = "ucweb" == e.match(/ucweb/i),
+          o = "android" == e.match(/android/i),
+          d = "windows ce" == e.match(/windows ce/i),
+          m = "windows mobile" == e.match(/windows mobile/i);
+        return t || i || n || r || a || o || d || m
       }
     }
   }

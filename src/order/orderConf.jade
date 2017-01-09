@@ -71,7 +71,7 @@ block content
                       dd
                         label.baofu(v-bind:class="{cur : payLine=='0' }")
                           input(type="radio" v-model='payLine' v-bind:value="0")
-                        label.fuyou(v-bind:class="{cur : payLine=='1' }")
+                        label.fuyou(v-bind:class="{cur : payLine=='1' }" v-if="!headerModel.isMobile")
                           input(type="radio" v-model='payLine' v-bind:value="1")
                 //- 余额支付
                 .order-box.order-overage(v-if="payMethod == 0")

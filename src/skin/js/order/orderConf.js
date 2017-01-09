@@ -110,41 +110,66 @@ var orderConfModel = new Vue({
       headerModel.loading=true;
       if (_this.payMethod == 1) {
         // 1.4.1 在线支付 68539.75
-        
-        $.ajax({
-          url: headerModel.api + '/Pay/PayForPC',
-          data: {
-            "Token": headerModel.token,
-            "Amount": _this.orderInfo.order.PayAmount,
-            "AssociatedBank": _this.payLineMap[_this.payLine].bankName,
-            "bankcode": _this.payLineMap[_this.payLine].bankcode,
-            "orderid": _this.orderId,
-            "payPassword": $.md5($.md5(_this.payPwd))
-          },
-          type: 'post',
-          success: function  (response) {
-            headerModel.loading=false;
-            _this.payLock = false;
-            if(response.resultid == 200){
-              document.body.innerHTML = response.HTML;
-              if(_this.payLine == 0){
-                document.getElementById('pay').submit();
-              }else{
-                // 接口没有form提交地址
-                document.getElementById('form1').submit();
+
+         
+          if(headerModel.isMobile){
+             // 1.4.1.1 移动端支付
+             console.log('移动端支付')
+              // 1.4.1.1 查询是否绑卡了
+             this.$http.get(headerModel.api + '/Pay/QueryCard?token=' + headerModel.token).then(function (response) {
+               
+               if(response.data.retCode === '1')
+               {
+                 // 已绑定卡
+                 headerModel.loading=false;
+                _this.payLock = false;
+
+               }else{                 
+                 // 未绑定卡
+                 headerModel.loading=false;
+                _this.payLock = false;
+                 DGDTOOLS.tip._tip(response.data.retMsg,function () {
+                   window.location.href='../MyCenter/bindCard.html?orderId='+ _this.orderId;
+                 });
+               }
+             })
+          }else{
+
+            // 1.4.1.2 Pc 支付
+            $.ajax({
+              url: headerModel.api + '/Pay/PayForPC',
+              data: {
+                "Token": headerModel.token,
+                "Amount": _this.orderInfo.order.PayAmount,
+                "AssociatedBank": _this.payLineMap[_this.payLine].bankName,
+                "bankcode": _this.payLineMap[_this.payLine].bankcode,
+                "orderid": _this.orderId,
+                "payPassword": $.md5($.md5(_this.payPwd))
+              },
+              type: 'post',
+              success: function  (response) {
+                headerModel.loading=false;
+                _this.payLock = false;
+                if(response.resultid == 200){
+                  document.body.innerHTML = response.HTML;
+                  if(_this.payLine == 0){
+                    document.getElementById('pay').submit();
+                  }else{
+                    document.getElementById('form1').submit();
+                  }
+                }else{
+                  DGDTOOLS.tip._tip(response.message);
+                }
+              },
+              error: function  (e) {
+                headerModel.loading=false;
+                _this.payLock = false;
+                console.error(e.status + ":" + e.responseText);
               }
-            }else{
-              DGDTOOLS.tip._tip(response.message);
-            }
-          },
-          error: function  (e) {
-            headerModel.loading=false;
-            _this.payLock = false;
-            console.error(e.status + ":" + e.responseText);
+            })
           }
-        })
-        
-        
+          
+          
       }else{
         // 1.4.2 余额 && 站岗宝支付
           

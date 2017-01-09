@@ -94,7 +94,7 @@ var reservaModel = new Vue({
           if (response.resultid == 200) {
             // 提交成功跳转到预约成功页面
             DGDTOOLS.tip._tip('预约成功!!!', function () {
-              //window.location.href = "orderConf.html?orderId=" + response.orderid;
+            window.location.href = "complete.html?proId="+ _this.proId;
             })
 
           } else {

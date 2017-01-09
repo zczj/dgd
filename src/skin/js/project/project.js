@@ -15,7 +15,8 @@ var project = new Vue({
     subNavShow: false,  // 项目筛选
     prevShow: false,
     nextShow: true,
-    ellipsis: false
+    ellipsis: false,
+    authen: '' // 认证人信息
   },
   methods: {
     //- vue-resource 获取数据
@@ -28,6 +29,14 @@ var project = new Vue({
         $("#loader").fadeOut(300)
       })
     },
+    // 获取认证信息
+    getAuthen: function () {
+      $("#loader").fadeIn(300)
+      this.$http.get(headerModel.api + '/Pay/QueryAuthenticator?token=' + headerModel.token).then(function (response) {
+        $('#loader').fadeOut(300);
+        this.authen = response.data.State
+      })
+    },
     buyNow:function  (id,index) {
       var _this = this;
       // 检测登录
@@ -35,6 +44,15 @@ var project = new Vue({
         DGDTOOLS.check._isLogin();
         return;
       } else{
+        // 是否认证投资人        
+        if(!this.authen){
+          DGDTOOLS.tip._tip('请认证投资人！', function () {
+            var url = window.location.href;
+            window.location.href = 'http://test.dgd.vc/mycenter/authentication?url=' + window.location.href;
+          });
+          return;
+        }
+        
         // 预约项目
         if(_this.list[index].ISReservation){
           window.location.href= "/reservation/index.html?id="+ id
@@ -148,5 +166,6 @@ var project = new Vue({
   // 页码加载时获取数据
   created: function () {
     this.getData()
+    this.getAuthen()
   }
 })

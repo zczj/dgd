@@ -15,7 +15,13 @@ var headerModel = new Vue({
       userInfo: null,
       token: '',
       loading: false,
-      isMobileOrTable: false // 当前视口宽度是否是处于非PC样式
+      isMobileOrTable: false, // 当前视口宽度是否是处于非PC样式
+    },
+    computed:{
+      // 是否为移动端
+      isMobile: function  () {
+        return DGDTOOLS.check._isMobileOrPad();
+      }
     },
     methods: {
       showMean: function() {

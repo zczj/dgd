@@ -1,0 +1,56 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/order/order.css")
+  #model-reserva(v-cloak)
+    .order-warp.reserva-warp
+      .container.clearfix
+        //- 右侧
+        .side
+          //- 投资人信息
+          .side-box.resvera-info
+            .order-title 
+              span 融资概况
+            .content
+              .tag-amount
+                span {{buyInfo.project.TargetAmount}}
+                p 目标金额
+              ul
+                  li
+                    span.t-name.ellipsis 众筹轮次
+                    span.t-val.ellipsis {{TimesRotation[buyInfo.project.TimesRotation-1]}}
+                  li
+                    span.t-name.ellipsis 领投人
+                    span.t-val.ellipsis 老苏
+                  li
+                    span.t-name.ellipsis 最低跟投
+                    span.t-val.ellipsis {{buyInfo.project.LowVote}}
+                  li
+                    span.t-name.ellipsis 目标人数
+                    span.t-val.ellipsis {{buyInfo.project.TargetNumber}}
+                  li
+                    span.t-name.ellipsis 出让份额
+                    span.t-val.ellipsis {{buyInfo.project.SellStock}}
+        //- 左侧
+        .main
+          //- 项目信息
+          .main-box.order-note.clearfix
+            .pic
+              img(v-bind:src="buyInfo.project.MoblePic", v-bind:alt="buyInfo.project.ProjectName")
+            .note
+              .note-t {{buyInfo.project.ProjectName}}
+              .note-con {{buyInfo.project.ShortDesc}}
+          
+          //- 订单信息
+          .main-box.order-complete
+            .content
+              .order-body
+                dl
+                  dt
+                  dd.com-t 项目预约成功！
+                  dd.com-t 客服将尽快联系您，请耐心等待
+                  dd.com-btns
+                    a(href="http://test.dgd.vc/mycenter", title="返回用户中心").btn 返回用户中心 
+
+
+  
+  script(src="../skin/js/reservation/reservaComplete.js")

@@ -126,7 +126,7 @@
                           <label v-bind:class="{cur : payLine=='0' }" class="baofu">
                             <input type="radio" v-model="payLine" v-bind:value="0"/>
                           </label>
-                          <label v-bind:class="{cur : payLine=='1' }" class="fuyou">
+                          <label v-bind:class="{cur : payLine=='1' }" v-if="!headerModel.isMobile" class="fuyou">
                             <input type="radio" v-model="payLine" v-bind:value="1"/>
                           </label>
                         </dd>

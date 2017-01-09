@@ -1,0 +1,62 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/bindCard.css")
+  // 绑定银行卡
+  #model-bindCard(v-cloak)
+    .bc-warp
+      .container
+        ul
+          li.border-1px
+            span.t-name 持卡本人:
+            span.t-val {{authen.FullName}}
+          li.border-1px
+            span.t-name 身份证号:
+            span.t-val {{authen.IDNumber}}
+          li.border-1px.tips
+            span.t-name 开户银行:
+            span.t-val 
+              select(name="", v-model="bankSelected")
+                option( v-for="(item,i) in bankListMap" v-bind:value="i") {{item.bankName}}
+          li.border-1px
+            span.t-name 银行卡号:
+            span.t-val 
+              input(type="text", placeholder="请输入银行卡号")
+          li.border-1px.tips.area
+            span.t-name 开户地区:
+            span.t-val
+              span
+                select(name="" v-on:focus="getCitys(provinceS)" v-model="provinceS" ref="xxx")
+                  option( v-for="item in provinced" v-bind:value="item.ID") {{item.CityName}}
+              span
+                select(name="" v-on:focus="getCitys(cityS)")
+                  //- option( v-for="item in city" v-bind:value="item.ID") 
+          li.border-1px
+            span.t-name 开户支行:
+            span.t-val 
+              input(type="text" placeholder="请输入支行名称")
+          li.border-1px
+            span.t-name 预留手机:
+            span.t-val
+              input(type="text" placeholder="请输入银行卡预留手机号")
+          li.border-1px
+            span.t-name 支付金额:
+            span.t-val {{orderInfo.order.PayAmount.toFixed(2)}} 元
+        .bc-btns
+          button 立即支付
+        
+        .bc-seePric
+          a(href="#", title="查看银行限额") 查看银行限额>>
+        
+        dl.bc-tips
+          dt 温馨提示
+          dd.
+            1.移动端充值和提现必须为同一张很行卡，并且是储蓄卡;
+          dd.
+            2.绑定银行卡后，如需修改银行信息，请联系我们的客服人员。
+        .bc-tel
+          |客服电话：
+          a(href="tel:400-066-8606") 400-066-8606
+  
+
+  script(src="/skin/js/mycenter/bindCard.js")
+  
