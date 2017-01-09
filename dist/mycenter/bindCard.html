@@ -90,8 +90,11 @@
             <li class="border-1px"><span class="t-name">银行卡号:</span><span class="t-val"> 
                 <input type="text" placeholder="请输入银行卡号"/></span></li>
             <li class="border-1px tips area"><span class="t-name">开户地区:</span><span class="t-val"><span>
-                  <select name="" v-on:focus="getCitys(provinceS)" v-model="provinceS" ref="xxx">
-                    <option v-for="item in provinced" v-bind:value="item.ID">{{item.CityName}}</option>
+                  <select v-if="showProvince" v-model="provinceS" ref="xxx" data="show">
+                    <option v-for="item in province" v-bind:value="item.ID">{{item.CityName}}</option>
+                  </select>
+                  <select v-else="v-else" ref="xxx" v-on:focus="getCity(0)">
+                    <option></option>
                   </select></span><span>
                   <select name="" v-on:focus="getCitys(cityS)">
                   </select></span></span></li>

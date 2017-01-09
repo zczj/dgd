@@ -7,11 +7,18 @@ var bindCardModel = new Vue({
   data: {
     orderId:'',
     orderInfo:'',
-    bankSelected: '0',
-    authen:'',
+    bankSelected: '0', // 银行
+    authen:'', // 用户信息
     provinceS:'0',
     cityS:'',
-    province:[],    
+    province:'', 
+
+    showProvince: false,
+    showCity:false,
+
+
+
+
     // 银行信息
     bankListMap: [{
       'payCode':
@@ -113,6 +120,9 @@ var bindCardModel = new Vue({
         headerModel.loading=false;
         _this.province = response.data.cityList;
         console.log(response.data.cityList);
+        _this.$nextTick(function () {
+          _this.showProvince = true;
+        });
         // if(id=='0'){
         //   _this.provinced = response.data.cityList;
         //   console.log(_this.provinced);
@@ -122,14 +132,17 @@ var bindCardModel = new Vue({
       })
     },
     getCitys: function  (id) {
-      var _this = this
+      var _this = this;
+      headerModel.loading=true;
       $.ajax({
         url: headerModel.api + '/Help/GetCity?provinceid=' + id,
         type: 'get',
-        async: false,
+        async: true,
         success: function (response) {
           setTimeout(function  () {
             _this.province= response.cityList;
+            _this.showProvince = true;
+            headerModel.loading = false;
           },1000)
         },
         error: function (e) {
@@ -140,27 +153,7 @@ var bindCardModel = new Vue({
     }
   },
   computed: {
-    provinced: function () {
-      // 省份
-     var province = [{
-        "ID": 0,
-        "CityID": '',
-        "FatherID": '',
-        "CityName": ""
-      }];
 
-      return province.concat(this.province);
-        // 城市
-        // city:[{
-        //   "ID": 0,
-        //   "CityID": '',
-        //   "FatherID": '',
-        //   "CityName": ""
-        // }],
-    },
-    city: function  () {
-      return '';
-    }
   },
   mounted: function () {
     this.orderId = window.location.search.split('orderId=')[1] || 0;

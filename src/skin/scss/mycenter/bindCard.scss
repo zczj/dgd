@@ -34,6 +34,9 @@ $aColor:#3e85ff;
           border-bottom:1px #ccc solid;
           background: transparent;
           height:auto;
+          option{
+            min-height: 30px;
+          }
         }
         input{
           border: none;

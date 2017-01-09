@@ -25,8 +25,11 @@ block content
             span.t-name 开户地区:
             span.t-val
               span
-                select(name="" v-on:focus="getCitys(provinceS)" v-model="provinceS" ref="xxx")
-                  option( v-for="item in provinced" v-bind:value="item.ID") {{item.CityName}}
+                select(v-if="showProvince" v-model="provinceS" ref="xxx" data="show")
+                  option( v-for="item in province" v-bind:value="item.ID") {{item.CityName}}
+                select(v-else  ref="xxx"  v-on:focus="getCity(0)")
+                  option()
+
               span
                 select(name="" v-on:focus="getCitys(cityS)")
                   //- option( v-for="item in city" v-bind:value="item.ID") 
