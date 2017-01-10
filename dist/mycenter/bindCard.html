@@ -88,24 +88,22 @@
                   <option v-for="(item,i) in bankListMap" v-bind:value="i">{{item.bankName}}</option>
                 </select></span></li>
             <li class="border-1px"><span class="t-name">银行卡号:</span><span class="t-val"> 
-                <input type="text" placeholder="请输入银行卡号"/></span></li>
-            <li class="border-1px tips area"><span class="t-name">开户地区:</span><span class="t-val"><span>
-                  <select v-if="showProvince" v-model="provinceS" ref="xxx" data="show">
-                    <option v-for="item in province" v-bind:value="item.ID">{{item.CityName}}</option>
-                  </select>
-                  <select v-else="v-else" ref="xxx" v-on:focus="getCity(0)">
-                    <option></option>
-                  </select></span><span>
-                  <select name="" v-on:focus="getCitys(cityS)">
+                <input type="text" placeholder="请输入银行卡号" v-model="backCode" ref="backCode"/></span></li>
+            <li class="border-1px tips area"><span class="t-name">开户地区:</span><span class="t-val"><span v-bind:class="{changed:provinceS!=0}">
+                  <select v-if="showProvince" v-model="provinceS" ref="xxx" size="1" data="show" v-on:change="getCity(provinceS)">
+                    <option v-for="item in province" v-bind:value="item.CityID">{{item.CityName}}</option>
+                  </select></span><span v-bind:class="{changed:cityS}">
+                  <select v-model="cityS">
+                    <option v-for="item in city" v-bind:value="item.CityID">{{item.CityName}}</option>
                   </select></span></span></li>
             <li class="border-1px"><span class="t-name">开户支行:</span><span class="t-val"> 
-                <input type="text" placeholder="请输入支行名称"/></span></li>
+                <input type="text" v-model="masterBank" placeholder="请输入支行名称" ref="masterBank"/></span></li>
             <li class="border-1px"><span class="t-name">预留手机:</span><span class="t-val">
-                <input type="text" placeholder="请输入银行卡预留手机号"/></span></li>
-            <li class="border-1px"><span class="t-name">支付金额:</span><span class="t-val">{{orderInfo.order.PayAmount.toFixed(2)}} 元</span></li>
+                <input type="text" placeholder="请输入银行卡预留手机号" v-model="tel" ref="tel"/></span></li>
+            <li class="border-1px"><span class="t-name">支付金额:</span><span class="t-val">{{orderInfo &&orderInfo.order.PayAmount.toFixed(2)}} 元</span></li>
           </ul>
           <div class="bc-btns">
-            <button>立即支付</button>
+            <button v-on:click="bindFn">立即支付</button>
           </div>
           <div class="bc-seePric"><a href="#" title="查看银行限额">查看银行限额>></a></div>
           <dl class="bc-tips">

@@ -9,13 +9,17 @@ var bindCardModel = new Vue({
     orderInfo:'',
     bankSelected: '0', // 银行
     authen:'', // 用户信息
-    provinceS:'0',
-    cityS:'',
+    provinceS:'0', // 选中的省份
+    cityS:'', // 选中的城市
     province:'', 
-
+    city:'',
+    backCode:'', // 银行卡号
+    masterBank:'', // 支行名称
+    tel:'', // 预留手机号
     showProvince: false,
     showCity:false,
-
+    buyLock:false,
+    
 
 
 
@@ -115,45 +119,154 @@ var bindCardModel = new Vue({
     // 城市二级联动
     getCity: function  (id) {
       var _this = this;
-      headerModel.loading=true;
+      if(id!=0){
+        headerModel.loading=true;
+      }
       _this.$http.get(headerModel.api + '/Help/GetCity?provinceid=' + id).then(function (response) {
         headerModel.loading=false;
-        _this.province = response.data.cityList;
-        console.log(response.data.cityList);
-        _this.$nextTick(function () {
-          _this.showProvince = true;
-        });
-        // if(id=='0'){
-        //   _this.provinced = response.data.cityList;
-        //   console.log(_this.provinced);
-        // }else{
-        //   _this.city= response.data;
-        // }
+        _this.showProvince = true;
+        if(id!=0){
+          _this.city = response.data.cityList;
+          _this.cityS = '0';
+        }else{
+          _this.province = response.data.cityList;
+          
+        }
       })
     },
-    getCitys: function  (id) {
-      var _this = this;
-      headerModel.loading=true;
-      $.ajax({
-        url: headerModel.api + '/Help/GetCity?provinceid=' + id,
-        type: 'get',
-        async: true,
-        success: function (response) {
-          setTimeout(function  () {
-            _this.province= response.cityList;
-            _this.showProvince = true;
-            headerModel.loading = false;
-          },1000)
-        },
-        error: function (e) {
-            console.error(e.status + ":" + e.responseText);
+    getCityStr: function  () {
+      var _this = this,
+          str = '';
+      if(_this.provinceS && _this.cityS){
+        for(var i=0; i<_this.province.length; i++){
+          if(_this.province[i].CityID === _this.provinceS){
+            str += _this.province[i].CityName + ',';
+            break;
           }
+        }
+        for(var i=0; i<_this.city.length; i++){
+          if(_this.city[i].CityID === _this.cityS){
+            str += _this.city[i].CityName;
+            break;
+          }
+        }        
+      }
+      return str;
+    },
+    bindFn: function  () {
+      var _this = this;
+      if(_this.bankSelected == '0'){
+        DGDTOOLS.tip._tip('请选择开户银行卡')
+        return;
+      }
+      if(_this.backCode ==''){
+        DGDTOOLS.tip._tip('请输入银行卡号',function  () {
+          _this.$refs.backCode.focus();
+        })
+        return
+      }
+      if(isNaN(_this.backCode)|| _this.backCode.length<16){
+        DGDTOOLS.tip._tip('银行卡号输入不合法',function  () {
+          _this.$refs.backCode.focus();
+        })
+        return
+      }
+      if(!_this.provinceS || !_this.cityS){
+        DGDTOOLS.tip._tip('请选择银行卡开户省市')
+        return;
+      }
+      if(_this.masterBank == ''){
+        DGDTOOLS.tip._tip('请输入支行名称',function  () {
+          _this.$refs.masterBank.focus();
+        })
+        return;
+      }
+      if(_this.tel == ''){
+        DGDTOOLS.tip._tip('请输入银行卡预留手机号',function  () {
+          _this.$refs.tel.focus();
+        })
+        return;
+      }
+      if(!DGDTOOLS.check._isPhone(_this.tel)){
+        DGDTOOLS.tip._tip('预留手机号不合法！',function  () {
+          _this.$refs.tel.focus();
+        })
+        return;
+      }
+
+      $.dialog({
+        type: 'warning',
+        message: '使用该卡进行支付后会自动绑定该卡作为以后充值、支付、提现的唯一卡',
+        buttons: [{
+          text: '确认',
+          type: 'green',
+          callback: function () {
+            // 前端验证通过 可以提交了。。。
+            if (_this.buyLock) {
+              return;
+            }else{
+              _this.buyLock = true;
+            }
+
+            // 提交
+
+            $.ajax({
+                url: headerModel.api + '/Pay/Deal',
+                data: {
+                  "PayCode": _this.bankListMap[_this.bankSelected].payCode, // 银行的编号
+                  "AccNo": _this.backCode, // 银行卡号
+                  "IdHolder": _this.authen.FullName, // 持卡人（真实姓名）
+                  "IdCard":  _this.authen.IDNumber,// 身份证
+                  "Mobile": _this.tel,// 手机号码
+                  "TxnAmt": _this.orderInfo.order.PayAmount.toFixed(2),// 交易金额
+                  "TradeNo": _this.orderId,// 订单号
+                  "Token": headerModel.token,
+                  "City": _this.getCityStr(), // 省份和城市信息的组合
+                  "BankName": _this.bankListMap[_this.bankSelected].bankName,// 银行名称
+                  "BranchName": _this.masterBank  // 支行名称         
+                },
+                type: 'post',
+                success: function (response) {
+                  if (response.resultid == 200) {
+                    // 提交成功跳转到订单确认页面，根据定单id
+                    DGDTOOLS.tip._tip(response.retMsg,function () {
+                      // window.location.href="orderConf.html?orderId="+ response.orderid;
+                    })
+
+                  }else{
+                    DGDTOOLS.tip._tip(response.retMsg)
+                  }
+                },
+                error: function (e) {
+                  DGDTOOLS.tip._tip(e.status + ":" + '接口异常')
+                  console.error(e.status + ":" + e.responseText);
+                }
+              })
+
+
+          }
+        }, {
+          text: '取消',
+          type: 'red'
+        }],
+        maskClose: true,
+        effect: true
+      })
+      
+      
+      
+      
+      
+    }
+    
+  },
+  computed: {
+    sheng: function  () {
+      this.$nextTick(function () {
+        return this.province; // => '更新完成'
       })
       
     }
-  },
-  computed: {
-
   },
   mounted: function () {
     this.orderId = window.location.search.split('orderId=')[1] || 0;
@@ -163,5 +276,6 @@ var bindCardModel = new Vue({
     // 103775
     this.getOrderInfo()
     this.getAuthen()
+    this.getCity(0)
   }
 })

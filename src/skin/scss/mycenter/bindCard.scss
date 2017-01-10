@@ -3,7 +3,9 @@
 $orderC: #41d4dc;
 $aColor:#3e85ff;
 
-
+html,body{
+  overflow-x: hidden;
+}
 .bc-warp{
   margin-top: 20px;
   font-size: 1.5rem;
@@ -53,12 +55,26 @@ $aColor:#3e85ff;
             &::after{
               position: absolute;
               left: 0;
-              content:'xxx';
+              content:'省份';
               color:#c1c1c1;
-            }          
+              transition: all .3s;
+
+            } 
+
+            &.changed{
+              &::after{
+                transform:translateY(-18px);
+                color:#3e85ff;
+                font-size: 1.2rem;
+              }
+            }
+                     
           }
           span+span{
             margin-left: 20px;
+            &::after{
+              content: '城市';
+            }
           }
         }
       }

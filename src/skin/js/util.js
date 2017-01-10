@@ -145,6 +145,10 @@ var Util=function () {
         var event =window.e||e;
         return e.returnValue = (/[\d]/.test(String.fromCharCode(e.keyCode)))?true:false;
       },
+      // 移动电话
+      _isPhone: function  (str) {
+        return /^0?(13[0-9]|15[0-9]|17[0-9]|18[0-9]|14[57])[0-9]{8}$/.test(str)
+      },
       // 是否为移动端
       _isMobileOrPad:function() {
         var e = navigator.userAgent.toLowerCase(),
