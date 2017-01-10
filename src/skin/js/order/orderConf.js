@@ -98,7 +98,7 @@ var orderConfModel = new Vue({
         return;
       }
 
-      if (_this.payPwd == '') {
+      if (_this.payPwd == '' && !headerModel.isMobile) {
         DGDTOOLS.tip._tip("请输入支付密码");
       }
 

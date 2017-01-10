@@ -221,15 +221,15 @@ var bindCardModel = new Vue({
                   "TxnAmt": _this.orderInfo.order.PayAmount.toFixed(2),// 交易金额
                   "TradeNo": _this.orderId,// 订单号
                   "Token": headerModel.token,
-                  "City": _this.getCityStr(), // 省份和城市信息的组合
+                  "City": _this.provinceS+','+ _this.cityS, // 省份和城市信息的组合
                   "BankName": _this.bankListMap[_this.bankSelected].bankName,// 银行名称
                   "BranchName": _this.masterBank  // 支行名称         
                 },
                 type: 'post',
                 success: function (response) {
-                  if (response.resultid == 200) {
+                  if (response.retCode == '0000') {
                     // 提交成功跳转到订单确认页面，根据定单id
-                    DGDTOOLS.tip._tip(response.retMsg,function () {
+                    DGDTOOLS.tip._tip('银行卡绑定成功',function () {
                       // window.location.href="orderConf.html?orderId="+ response.orderid;
                     })
 

@@ -134,10 +134,12 @@
                     </div>
                   </div>
                   <div v-if="payMethod == 0" class="order-box order-overage">
-                    <div class="order-content"><span class="t-name">账户余额：{{userBaseInfo.AvailableBalance.toFixed(2)}}元</span><a href="http://test.dgd.vc/mycenter/recharge" class="recharge">充值>></a></div>
+                    <div class="order-content"><span class="t-name">账户余额：{{userBaseInfo.AvailableBalance.toFixed(2)}}元</span>
+                    </div>
                   </div>
                   <div v-if="payMethod == 3" class="order-box order-standBao">
-                    <div class="order-content"><span class="t-name">站岗宝余额：{{userBaseInfo.Stand_AvailableBalance}}元</span><a href="http://test.dgd.vc/mycenter/recharge" class="recharge">充值>></a></div>
+                    <div class="order-content"><span class="t-name">站岗宝余额：{{userBaseInfo.Stand_AvailableBalance}}元</span>
+                    </div>
                   </div>
                   <div v-if="payMethod == 2" class="order-box order-underLine">
                     <div class="order-content">

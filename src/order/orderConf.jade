@@ -77,12 +77,12 @@ block content
                 .order-box.order-overage(v-if="payMethod == 0")
                   .order-content
                     span.t-name 账户余额：{{userBaseInfo.AvailableBalance.toFixed(2)}}元
-                    a.recharge(href="http://test.dgd.vc/mycenter/recharge") 充值>>
+                    //- a.recharge(href="http://test.dgd.vc/mycenter/recharge") 充值>>
                 //- 站岗宝支付
                 .order-box.order-standBao(v-if="payMethod == 3")
                   .order-content
                     span.t-name 站岗宝余额：{{userBaseInfo.Stand_AvailableBalance}}元
-                    a.recharge(href="http://test.dgd.vc/mycenter/recharge") 充值>>
+                    //- a.recharge(href="http://test.dgd.vc/mycenter/recharge") 充值>>
                 //- 线下支付
                 .order-box.order-underLine(v-if="payMethod == 2")
                   .order-content
