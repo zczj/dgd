@@ -82,7 +82,6 @@ var newsModel = new Vue({
     },
     //推荐文章
     getIntNew: function () {
-      // http://devapi.zczj.com:80/api/News/GetTopRecommend?count=5&categoryid=0
       this.$http.get(headerModel.api + '/News/GetTopRecommend?count=10&categoryid=0').then(function(response) {
         this.TopNews = response.data;
       })
@@ -142,7 +141,7 @@ var newsModel = new Vue({
       if ($(this.$refs.iconZan).eq(i).parent('span').hasClass('icon-zaned')) {
         return;
       }
-      $("#loader").fadeIn(300)
+      headerModel.loading=true;
       var _this = this;
       this.$http.get(headerModel.api+'/News/ClickLike?newsid='+id).then(function (response) {
         if (response.data.resultid == 200) {
@@ -150,7 +149,7 @@ var newsModel = new Vue({
           $(_this.$refs.iconZan).eq(i).parent('span').addClass('icon-zaned')
           $(this.$refs.iconZan).eq(i).css('cursor','not-allowed')
         }
-        $("#loader").fadeOut(300)
+        headerModel.loading=false;
       })
     }
 

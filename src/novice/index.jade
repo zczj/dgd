@@ -1,39 +1,70 @@
 extends ../shade/layout
 block content
+  link(rel="stylesheet", href="//cdn.bootcss.com/fullPage.js/2.9.2/jquery.fullPage.min.css")
   link(rel="stylesheet", href="/skin/css/novice/index.css")
   #novice
-    .page
-      .banner
-      .cat.container
-        .cat-title 服务项目
-        .cat-list.clearfix
-          a(href="#")
-            img(src="/skin/img/novice/xinshoutiyan.png", alt="")
-            p 新手体验
-          a(href="#")
-            img(src="/skin/img/novice/standbao.png", alt="")
-            p 站岗宝
-          a(href="#")
-            img(src="/skin/img/novice/guquanzhiya.png", alt="")
-            p 股权质押
-          a(href="#")
-            img(src="/skin/img/novice/guquanzhuanrang.png", alt="")
-            p 股权转让
+    div
+      .page.section
+        .banner
+          .container
+            ul.clearfix
+              li
+                img(src='/skin/img/novice/banner-step1.png' width='100%')
+              li
+                img(src='/skin/img/novice/banner-step2.png' width='100%')
+              li
+                img(src='/skin/img/novice/banner-step3.png' width='100%')
+              li
+                img(src='/skin/img/novice/banner-step4.png' width='100%')
+              li
+                img(src='/skin/img/novice/banner-step5.png' width='100%')
+        .cat.container
+          .cat-title 服务项目
+          .cat-list.clearfix
+            a(href="javascript:;", v-on:click='addActiveClass(2)')
+              img(src="/skin/img/novice/xinshoutiyan.png", alt="")
+              p 新手体验
+            a(href="javascript:;", v-on:click='addActiveClass(3)')
+              img(src="/skin/img/novice/standbao.png", alt="")
+              p 站岗宝
+            a(href="javascript:;", v-on:click='addActiveClass(4)')
+              img(src="/skin/img/novice/guquanzhiya.png", alt="")
+              p 股权质押
+            a(href="javascript:;", v-on:click='addActiveClass(5)')
+              img(src="/skin/img/novice/guquanzhuanrang.png", alt="")
+              p 股权转让
 
+      .section
+        a(href="#").button 立即体验
+      .section
+        a(href="#").button 立即体验
+      .section
+        a(href="#").button 立即抢购
+      .section
+        a(href="#").button 立即申请
 
-
-
+  script(src='//cdn.bootcss.com/fullPage.js/2.9.2/jquery.fullPage.min.js')
   script.
-    $(function(){
-      //- loading动画
-      $('#loader').fadeOut(300)
+    var noviceModel = new Vue({
+      el: '#novice',
+      data: {},
+      methods: {
+        addActiveClass: function (i) {
+          $.fn.fullpage.moveTo(i)
+        }
+      },
+      mounted: function () {
+        // loading动画
+        $('#loader').fadeOut(300);
 
+        //- 
+        $('#novice > div').fullpage({
+          navigation: true,
+          navigationColor: '#4adf65',
+          css3: true
+        });
 
-
-      //-
-      var $banner = $('.banner'),
-          $cat = $('.cat')
-      $banner.css({
-        'height': $(window).height() * .565
-      })
+        //- 
+        
+      }
     })

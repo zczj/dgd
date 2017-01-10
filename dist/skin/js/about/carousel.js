@@ -1,0 +1,1 @@
+!function(n){var o=function(){console.log("Carousel插件测试")};o.prototype={},o.init=function(o){var i=this;o.each(function(o,t){new i(n(this))})},window.Carousel=o}(jQuery);

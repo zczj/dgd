@@ -13,18 +13,19 @@ block content
 
     //- 注册人数
     section.dgd-num.border-1px
-      span.item
-        span.item-r
-          span.num 234,600
-          span.title 总注册人数
-      span.item
+      .dgd-num-warp
+        span.item
           span.item-r
-            span.num 234
-            span.title 总项目数
-      span.item
-          span.item-r
-            span.num 234,60
-            span.title 总融资金额（万元）
+            span.num 234,600
+            span.title 总注册人数
+        span.item
+            span.item-r
+              span.num 234
+              span.title 总项目数
+        span.item
+            span.item-r
+              span.num 234,60
+              span.title 总融资金额（万元）
 
     section.dgd-ga
       .container.clearfix
@@ -42,29 +43,22 @@ block content
 
         .ga-main.ga-tab
           .ga-tab-btns.clearfix
-            a.ga-tab-btn.cur(href="javascript:void(0);") 众筹
-            a.ga-tab-btn(href="javascript:void(0);") 政策
-            a.ga-tab-btn(href="javascript:void(0);") 国际
-            a.ga-tab-btn(href="javascript:void(0);") 研究
-            a.ga-tab-btn(href="javascript:void(0);") 创投
-            a.more(href="#") 更多资讯 >>
+            a.ga-tab-btn(href="javascript:void(0);", v-for="(item, index) in tabs", v-bind:class="{ cur : index == 0 }", v-on:click="tabFn(CategoryMap[index], index)", ref='tab-btns'){{item}}
+            a.more(href="/news/index.html" target="_blank") 更多资讯 >>
 
           .ga-tab-box
             ul
-              li.first.clearfix
+              li(v-for="(item, index) in list" v-if="index==0").first.clearfix
                 a(href="#").pic
                   img(src="../skin/img/project/list-img01.jpg", alt="")
-                a(href="#").title.ellipsis 十张图看清BAT之间的实力对比
-                p.txt.
-                  近日，百度、阿里、腾讯都相继发布了三季度财报，作为中国互
-                  联网的三大巨头，三者的营收体量、利润和业务结构各有什么区
-                  别？我们从这两年三者的季度财报中看看。
-              li
-                span.time 25分钟前
-                a(href="#").title.ellipsis 特朗普：上任第一天就将发布命令退出TPP上任第一天就将发布命令退出TPP上任第一天就将发布命令退出TPP上任第一天就将发布命令退出TPP
-              li
-                span.time 10分钟前
-                a(href="#").title.ellipsis 支付机构泄露千万银行卡信息 用户损失3900多万
+                .desc
+                  a(v-bind:href="['detail.html?id='+ item.NewsID]").title.ellipsis {{item.Title}}
+                  p.txt(v-html="item.Abstract")
+              li(v-else)
+                span.time(v-text="timeFormart(new Date().getFullYear()+'/'+item.PostDate)")
+                a(v-bind:href="['detail.html?id='+ item.NewsID]").title.ellipsis {{item.Title}}
+              
+                
 
     //- 站岗宝
     section.stand-bao
@@ -85,7 +79,7 @@ block content
                 //- .item
                 //-   span 可购余额：
                 //-   span.price 103000元
-                .list-st {{Ad.StandGuard.Title}}
+                .list-st {{Ad.StandGuard&&Ad.StandGuard.Title}}
                 a.buy-now(href="#")
                   i.icon.icon-money
                   |我要认购
@@ -94,12 +88,12 @@ block content
 
                   "站岗宝 复合年化利率高达8%"
                   p.item
-                    span{{Ad.StandGuard.DailyIncome}}
+                    span{{Ad.StandGuard&&Ad.StandGuard.DailyIncome}}
                   p.item
-                    span{{Ad.StandGuard.Summary}}
+                    span{{Ad.StandGuard&&Ad.StandGuard.Summary}}
                   p.item.price
                     span 可购余额：
-                    span {{Ad.StandGuard.Amount}}
+                    span {{Ad.StandGuard&&Ad.StandGuard.Amount}}
 
     //- 融资的项目
     section.stand-bao

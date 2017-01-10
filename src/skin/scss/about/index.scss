@@ -42,6 +42,7 @@
       height: 100%;
       z-index: 4;
       box-shadow: 0 0 0 transparent, 15px 0 15px rgba(0, 0, 0, .6), 0 0 0 transparent, -15px 0 15px rgba(0, 0, 0, .6);
+      transition: all 1s;
       &.left,
       &.right {
         z-index: 2;
@@ -64,6 +65,12 @@
       }
       img {
         height: 100%;
+      }
+      &.prev {
+        transform: translateX(-50%) scale(.8);
+      }
+      &.next {
+        transform: translateX(-50%) scale(.8);
       }
     }
   }

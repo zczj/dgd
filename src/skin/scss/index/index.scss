@@ -23,11 +23,15 @@
 //- 注册人数
 .dgd-num{
   background:#fff;
-
+  
   text-align: center;
   padding:17px 0;
   @include border-1px(#ccc);
   overflow: hidden;
+  .dgd-num-warp{
+    max-width: 1200px;
+    margin: 0 auto;
+  }
   .item{
     width: 33.333333333333%;
     height: 100%;
@@ -122,8 +126,8 @@
 //- 平台公告
 .dgd-ga{
   .container{ margin-top: 30px;}
-  .container > .ga-side{
-    border-left: 1px #ccc solid;
+  .container > .ga-main{
+    border-right: 1px #ccc solid;
   }
   .ga-tab-btns,.dgd-plat-gg .title{
     height: 30px;
@@ -159,11 +163,13 @@
       li.first{
         width: 100%;
         margin-bottom: 10px;
+        font-size:0;
         .pic{
           width: 200px;
           height: 125px;
           display: inline-block;
           float: left;
+          font-size: 1.5rem;
           margin-right: 10px;
           img{
             width: 100%;
@@ -171,11 +177,17 @@
             border-radius: 5px;
           }
         }
+        .desc{
+          display: inline-block;
+          font-size:1.5rem;
+          width: calc(100% - 210px)
+        }
         .title{
           height: 36px;
           line-height: 36px;
           font-size: 1.5rem;
           color: #3e4149;
+          display: block;
         }
         .txt{
           color: #99a0a7;
@@ -336,6 +348,8 @@
       .ga-tab-btn{
         font-size: 1.6rem;
         padding: 0 8px;
+        width: 15%;
+        text-align: center;
       }
       .more{
         font-size: 0;

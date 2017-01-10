@@ -75,33 +75,61 @@
       </header>
     </section>
     <!--==================================================-->
+    <link rel="stylesheet" href="//cdn.bootcss.com/fullPage.js/2.9.2/jquery.fullPage.min.css"/>
     <link rel="stylesheet" href="/skin/css/novice/index.css"/>
     <div id="novice">
-      <div class="page">
-        <div class="banner"></div>
-        <div class="cat container">
-          <div class="cat-title">服务项目</div>
-          <div class="cat-list clearfix"><a href="#"><img src="/skin/img/novice/xinshoutiyan.png" alt=""/>
-              <p>新手体验</p></a><a href="#"><img src="/skin/img/novice/standbao.png" alt=""/>
-              <p>站岗宝</p></a><a href="#"><img src="/skin/img/novice/guquanzhiya.png" alt=""/>
-              <p>股权质押</p></a><a href="#"><img src="/skin/img/novice/guquanzhuanrang.png" alt=""/>
-              <p>股权转让</p></a></div>
+      <div>
+        <div class="page section">
+          <div class="banner">
+            <div class="container">
+              <ul class="clearfix">
+                <li><img src="/skin/img/novice/banner-step1.png" width="100%"/></li>
+                <li><img src="/skin/img/novice/banner-step2.png" width="100%"/></li>
+                <li><img src="/skin/img/novice/banner-step3.png" width="100%"/></li>
+                <li><img src="/skin/img/novice/banner-step4.png" width="100%"/></li>
+                <li><img src="/skin/img/novice/banner-step5.png" width="100%"/></li>
+              </ul>
+            </div>
+          </div>
+          <div class="cat container">
+            <div class="cat-title">服务项目</div>
+            <div class="cat-list clearfix"><a href="javascript:;" v-on:click="addActiveClass(2)"><img src="/skin/img/novice/xinshoutiyan.png" alt=""/>
+                <p>新手体验</p></a><a href="javascript:;" v-on:click="addActiveClass(3)"><img src="/skin/img/novice/standbao.png" alt=""/>
+                <p>站岗宝</p></a><a href="javascript:;" v-on:click="addActiveClass(4)"><img src="/skin/img/novice/guquanzhiya.png" alt=""/>
+                <p>股权质押</p></a><a href="javascript:;" v-on:click="addActiveClass(5)"><img src="/skin/img/novice/guquanzhuanrang.png" alt=""/>
+                <p>股权转让</p></a></div>
+          </div>
         </div>
+        <div class="section"><a href="#" class="button">立即体验</a></div>
+        <div class="section"><a href="#" class="button">立即体验</a></div>
+        <div class="section"><a href="#" class="button">立即抢购</a></div>
+        <div class="section"><a href="#" class="button">立即申请</a></div>
       </div>
     </div>
+    <script src="//cdn.bootcss.com/fullPage.js/2.9.2/jquery.fullPage.min.js"></script>
     <script>
-      $(function(){
-        //- loading动画
-        $('#loader').fadeOut(300)
+      var noviceModel = new Vue({
+        el: '#novice',
+        data: {},
+        methods: {
+          addActiveClass: function (i) {
+            $.fn.fullpage.moveTo(i)
+          }
+        },
+        mounted: function () {
+          // loading动画
+          $('#loader').fadeOut(300);
       
+          //- 
+          $('#novice > div').fullpage({
+            navigation: true,
+            navigationColor: '#4adf65',
+            css3: true
+          });
       
-      
-        //-
-        var $banner = $('.banner'),
-            $cat = $('.cat')
-        $banner.css({
-          'height': $(window).height() * .565
-        })
+          //- 
+          
+        }
       })
     </script>
     <!--==================================================-->

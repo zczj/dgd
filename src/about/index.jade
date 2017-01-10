@@ -1,18 +1,18 @@
 extends ../shade/layout
 block content
+  link(rel="stylesheet", href="/skin/plugs/poster/posterTvGrid.css")
   link(rel="stylesheet", href="/skin/css/about/index.css")
-  #about
-    
+  #about    
     // banner
     .banner
       h1.about-title 关于我们
       .container
         .slider-wrapper
-          .slider-item.left
+          .slider-item
             img(src="/skin/img/about/index-slider1.png", alt="")
-          .slider-item.center
-            img(src="/skin/img/about/index-slider2.png", alt="")
           .slider-item.right
+            img(src="/skin/img/about/index-slider2.png", alt="")
+          .slider-item.left
             img(src="/skin/img/about/index-slider3.png", alt="")
     // 精英团队
     .about-item
@@ -31,7 +31,7 @@ block content
           li 每月几次的Team Building，好吃好喝好玩享不停（不满意你可以当面骂我~）；
           li 帅哥美女同事：别的不敢说，咱公司都是颜值巨高的帅哥美女，不来别不后悔！
           li 人生经验共享：小伙伴定期分享人生精华，现场传授生活技能，穿衣装扮、篮球健身，只有想不到，没有做不到。
-        a(href="#").about-joinus-button 查看职位 >>
+        a(href="./joinus.html").about-joinus-button 查看职位 >>
 
     // 联系我们
     .about-item 
@@ -54,31 +54,81 @@ block content
                 label
                   input(type="radio" name='textarea')
                   | 登录留言
-            textarea(name="")
-          a(href="javascript:;").textarea-button 提交
+            textarea(name="", ref='feedBackContent')
+          a(href="javascript:;", v-on:click='addFeedBack').textarea-button 提交
 
 
-
-
-
-
-
-
+  
+  script(src='/skin/js/about/carousel.js')
   script.
-    $(function(){
-      $('#loader').fadeOut(300)
-    })
-    // 轮播
-    $(function () {
-      if (headerModel.isMobileOrTable) {
-        // 调用手机端轮播方法
-        mobileSliderFn()
-      } else {
-        // PC端轮播方法
+    var aboutModel = new Vue({
+      el: '#about',
+      data: {},
+      methods: {
+        mobileSliderFn: function () {
+          console.log('手机轮播图方法')
+        },
+        PCSliderFn: function () {
+          console.log('PC端轮播方法')
+        },
+        // 添加反馈
+        addFeedBack: function () {
+          var feedBackContent = this.$refs.feedBackContent
+          if (feedBackContent.value == '') {
+            feedBackContent.focus()
+            return false
+          }
+          // 提交反馈
+          if (headerModel.token) {
+            this.sendPost(feedBackContent.value)
+          } else {
+            $.dialog({
+              type: 'warning',
+              message: '请先登录！',
+              buttons: [{
+                text: '登录',
+                type: 'green',
+                callback: function() {
+                  window.location = '/passport/login.html?url='+window.location.href;
+                }
+              }, {
+                text: '取消',
+                type: 'red'
+              }],
+              maskClose: true,
+              effect: true
+            })
+          }
+        },
+        // 发送请求
+        sendPost: function (value) {
+          $.ajax({
+            url: headerModel.api + '/ZhongChou/AddFeedBack',
+            type: 'POST',
+            data: {
+              "Token": headerModel.token,
+              "Content": value,
+              "Source": ""
+            },
+            success: function (res) {
+              if (res && res.resultid == 200) {
+                alert('提交成功')
+              }
+            }
+          })
+        }
+      },
+      mounted: function () {
+        // loading 动画
+        $('#loader').fadeOut(300);
+
+        // 轮播图方法
+        if (headerModel.isMobileOrTable) {
+          // 调用手机端轮播方法
+          this.mobileSliderFn()
+        } else {
+          // PC端轮播方法
+          this.PCSliderFn()
+        }
       }
     })
-
-
-    function mobileSliderFn() {
-      console.log('手机轮播图方法')
-    }
