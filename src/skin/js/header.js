@@ -69,7 +69,7 @@ var headerModel = new Vue({
           DGDTOOLS.check._isLogin();
           return;
         }
-        $("#loader").fadeIn(300);
+        headerModel.loading = true;
         // 布尔值转换 方便传参
         if (item.FollowState) {
           state=1;
@@ -86,7 +86,7 @@ var headerModel = new Vue({
           },
           type: 'post',
           success: function(response) {
-            $("#loader").fadeOut(300);
+            headerModel.loading = false;
             if (response.resultid == 200) {
               if (response.message == '取消关注') {
                 item.FollowState = true;
@@ -96,7 +96,7 @@ var headerModel = new Vue({
             }
           },
           error: function() {
-            $("#loader").fadeOut(300);
+            headerModel.loading = false;
           }
         })
       }
