@@ -12,7 +12,8 @@
     <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
     <script src="/skin/plugs/dialog/js/dialog.js"></script>
-    <script src="/skin/js/util.js"></script>
+    <script src="/skin/js/util.js"></script><!--[if lte IE 8]>
+    <script src="/skin/js/unsupport.js"></script><![endif]-->
   </head>
   <body>
     <!-- 页面切换加载动画-->
@@ -75,18 +76,14 @@
       </header>
     </section>
     <!--==================================================-->
-    <link rel="stylesheet" href="/skin/plugs/poster/posterTvGrid.css"/>
     <link rel="stylesheet" href="/skin/css/about/index.css"/>
     <div id="about">   
       <!-- banner-->
       <div class="banner">
         <h1 class="about-title">关于我们</h1>
         <div class="container">
-          <div class="slider-wrapper">
-            <div class="slider-item"><img src="/skin/img/about/index-slider1.png" alt=""/></div>
-            <div class="slider-item right"><img src="/skin/img/about/index-slider2.png" alt=""/></div>
-            <div class="slider-item left"><img src="/skin/img/about/index-slider3.png" alt=""/></div>
-          </div>
+          <div id="posterTvGrid" class="slider-wrapper"></div>
+          <div class="slider-wrapper owl-carousel"><img src="/skin/img/about/index-slider1.png" alt=""/><img src="/skin/img/about/index-slider2.png" alt=""/><img src="/skin/img/about/index-slider3.png" alt=""/></div>
         </div>
       </div>
       <!-- 精英团队-->
@@ -126,33 +123,51 @@
               <li>联系地址：深圳市南山区科技园中区讯美科技广场 3栋14层A03</li>
             </ul>
             <div class="textarea">
-              <div class="textarea-head">我要留言
-                <div>
-                  <label>
-                    <input type="radio" name="textarea"/>匿名留言
-                  </label>
-                  <label>
-                    <input type="radio" name="textarea"/>登录留言
-                  </label>
-                </div>
-              </div>
+              <div class="textarea-head">我要留言</div>
               <textarea name="" ref="feedBackContent"></textarea>
             </div><a href="javascript:;" v-on:click="addFeedBack" class="textarea-button">提交</a>
           </div>
         </div>
       </div>
     </div>
-    <script src="/skin/js/about/carousel.js"></script>
     <script>
       var aboutModel = new Vue({
         el: '#about',
         data: {},
         methods: {
+          // 手机端轮播方法
           mobileSliderFn: function () {
             console.log('手机轮播图方法')
+      
+            $('.owl-carousel').owlCarousel({
+              items: 1,
+              loop: true
+            })
           },
+          // PC端轮播方法
           PCSliderFn: function () {
             console.log('PC端轮播方法')
+      
+            new posterTvGrid('posterTvGrid', {
+              className: "posterTvGrid",
+              //- height: 390
+            }, [{
+                "img": "/skin/img/about/index-slider1.png",
+                "title": "",
+                "url": "#"
+            }, {
+                "img": "/skin/img/about/index-slider2.png",
+                "title": "",
+                "url": "#"
+            }, {
+                "img": "/skin/img/about/index-slider3.png",
+                "title": "",
+                "url": "#"
+            }, {
+                "img": "/skin/img/about/index-slider1.png",
+                "title": "",
+                "url": "#"
+            }]);
           },
           // 添加反馈
           addFeedBack: function () {
@@ -165,22 +180,7 @@
             if (headerModel.token) {
               this.sendPost(feedBackContent.value)
             } else {
-              $.dialog({
-                type: 'warning',
-                message: '请先登录！',
-                buttons: [{
-                  text: '登录',
-                  type: 'green',
-                  callback: function() {
-                    window.location = '/passport/login.html?url='+window.location.href;
-                  }
-                }, {
-                  text: '取消',
-                  type: 'red'
-                }],
-                maskClose: true,
-                effect: true
-              })
+              DGDTOOLS.check._isLogin()
             }
           },
           // 发送请求
@@ -208,10 +208,43 @@
           // 轮播图方法
           if (headerModel.isMobileOrTable) {
             // 调用手机端轮播方法
-            this.mobileSliderFn()
+            var script=document.createElement('script'), 
+                link=document.createElement('link'),
+                _this = this
+            //- script
+            script.setAttribute('type','text/javascript')
+            script.setAttribute('src','/skin/plugs/owl/owl.carousel.min.js')
+            document.querySelector('head').appendChild(script)
+            //- style
+            link.setAttribute('rel','stylesheet')
+            link.setAttribute('href','/skin/plugs/owl/owl.carousel.min.css')
+            document.querySelector('head').appendChild(link)
+            //- 
+            link.onload = function () {
+              script.onload = function () {
+                _this.mobileSliderFn()
+              }
+            }
           } else {
             // PC端轮播方法
-            this.PCSliderFn()
+      
+            var script=document.createElement('script'), 
+                link=document.createElement('link'),
+                _this = this
+            //- script
+            script.setAttribute('type','text/javascript')
+            script.setAttribute('src','/skin/plugs/poster/posterTvGrid.js')
+            document.querySelector('head').appendChild(script)
+            //- style
+            link.setAttribute('rel','stylesheet')
+            link.setAttribute('href','/skin/plugs/poster/posterTvGrid.css')
+            document.querySelector('head').appendChild(link)
+            //- 
+            link.onload = function () {
+              script.onload = function () {
+                _this.PCSliderFn()
+              }
+            }
           }
         }
       })
@@ -256,5 +289,23 @@
         <div class="container"><span>深圳市网筹互联网金融服务有限公司</span><span>ICP证：粤ICP备14040204号-2</span></div>
       </div>
     </div>
+    <div id="go-top"><i class="icon icon-up"></i></div>
+    <script>
+      var goTop = $('#go-top');
+      //- 滚动显示隐藏
+      $(window).scroll(function () {
+        var scrollTop = $('body').scrollTop();
+        
+        if (scrollTop >= 500) {
+          goTop.addClass('show');
+        } else {
+          goTop.removeClass('show');
+        }
+      })
+      //- 点击事件
+      goTop.on('click', function () {
+        $('body').scrollTop(0)
+      })
+    </script>
   </body>
 </html>

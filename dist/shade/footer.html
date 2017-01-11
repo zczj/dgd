@@ -38,3 +38,21 @@
     <div class="container"><span>深圳市网筹互联网金融服务有限公司</span><span>ICP证：粤ICP备14040204号-2</span></div>
   </div>
 </div>
+<div id="go-top"><i class="icon icon-up"></i></div>
+<script>
+  var goTop = $('#go-top');
+  //- 滚动显示隐藏
+  $(window).scroll(function () {
+    var scrollTop = $('body').scrollTop();
+    
+    if (scrollTop >= 500) {
+      goTop.addClass('show');
+    } else {
+      goTop.removeClass('show');
+    }
+  })
+  //- 点击事件
+  goTop.on('click', function () {
+    $('body').scrollTop(0)
+  })
+</script>

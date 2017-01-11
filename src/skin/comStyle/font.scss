@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 190684 */
-  src: url('//at.alicdn.com/t/font_v7l7j66lrdxwdn29.eot');
-  src: url('//at.alicdn.com/t/font_v7l7j66lrdxwdn29.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_v7l7j66lrdxwdn29.woff') format('woff'),
-  url('//at.alicdn.com/t/font_v7l7j66lrdxwdn29.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_v7l7j66lrdxwdn29.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_mjfbzh66dlutmx6r.eot');
+  src: url('//at.alicdn.com/t/font_mjfbzh66dlutmx6r.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_mjfbzh66dlutmx6r.woff') format('woff'),
+  url('//at.alicdn.com/t/font_mjfbzh66dlutmx6r.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_mjfbzh66dlutmx6r.svg#iconfont') format('svg');
 }
 
 .icon{
@@ -16,6 +16,10 @@
     font-family: 'iconfont';
     color: inherit;
     vertical-align: top;
+  }
+  // 留言点赞
+  &-com-zan::before{
+    content: '\e69b';
   }
   // 支付宝
   &-zfb::before{

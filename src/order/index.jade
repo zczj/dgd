@@ -26,13 +26,13 @@ block content
             ul.content
               li
                 span.t-name 姓名：
-                span.t-val {{buyInfo.BenefitAccount.FullName}}
+                span.t-val {{buyInfo&&buyInfo.BenefitAccount.FullName}}
               li
                 span.t-name 号码：
-                span.t-val {{buyInfo.BenefitAccount.Phone}}
+                span.t-val {{buyInfo&&buyInfo.BenefitAccount.Phone}}
               li
                 span.t-name 身份证：
-                span.t-val {{buyInfo.authention.IDNumber}}
+                span.t-val {{buyInfo&&buyInfo.authention.IDNumber}}
         //- 左侧
         .main
           //- 订单信息
@@ -51,11 +51,11 @@ block content
 
                     .order-tips
                       span.
-                        最低{{buyInfo.project.OriginalLowVote}}元起,整数倍累加最高跟投2000000.00元
+                        最低{{buyInfo&&buyInfo.project.OriginalLowVote}}元起,整数倍累加最高跟投2000000.00元
                       span.red.
                         + 管理费(平台收取)({{manageFree}}元)
                     .order-note.
-                      投资基本信息：非常感谢您投资了{{buyInfo.project.ProjectName}}，投资意向金为 {{amount}} 元，所认投的股份份额，需要在项目融资成功后确定
+                      投资基本信息：非常感谢您投资了{{buyInfo&&buyInfo.project.ProjectName}}，投资意向金为 {{amount}} 元，所认投的股份份额，需要在项目融资成功后确定
 
                   //- 按份数累加
                   div(v-else data-type="按份数")
@@ -83,7 +83,7 @@ block content
                   li(v-if="manageFree !== 0")
                     span.t-name 管理费：
                     span.t-val {{manageFree}}元
-                  li.coupon-list(v-if="orderModel.buyInfo.CouponList.length > 0 &&　buyInfo.project.ProjectID != 1078")
+                  li.coupon-list(v-if="buyInfo.CouponList.length > 0 &&　buyInfo.project.ProjectID != 1078")
                     span.t-name 优惠券：
                     span.t-val
                       select(v-model="selected" v-on:change="couponCh")

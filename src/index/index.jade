@@ -52,7 +52,7 @@ block content
                 a(href="#").pic
                   img(src="../skin/img/project/list-img01.jpg", alt="")
                 .desc
-                  a(v-bind:href="['detail.html?id='+ item.NewsID]").title.ellipsis {{item.Title}}
+                  a(v-bind:href="['/news/detail.html?id='+ item.NewsID]").title.ellipsis {{item.Title}}
                   p.txt(v-html="item.Abstract")
               li(v-else)
                 span.time(v-text="timeFormart(new Date().getFullYear()+'/'+item.PostDate)")

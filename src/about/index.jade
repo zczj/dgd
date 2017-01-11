@@ -1,18 +1,16 @@
 extends ../shade/layout
 block content
-  link(rel="stylesheet", href="/skin/plugs/poster/posterTvGrid.css")
+  //- link(rel="stylesheet", href="/skin/plugs/poster/posterTvGrid.css")
   link(rel="stylesheet", href="/skin/css/about/index.css")
   #about    
     // banner
     .banner
       h1.about-title 关于我们
       .container
-        .slider-wrapper
-          .slider-item
+        .slider-wrapper#posterTvGrid
+        .slider-wrapper.owl-carousel
             img(src="/skin/img/about/index-slider1.png", alt="")
-          .slider-item.right
             img(src="/skin/img/about/index-slider2.png", alt="")
-          .slider-item.left
             img(src="/skin/img/about/index-slider3.png", alt="")
     // 精英团队
     .about-item
@@ -47,29 +45,50 @@ block content
             li 联系地址：深圳市南山区科技园中区讯美科技广场 3栋14层A03
           .textarea
             .textarea-head 我要留言
-              div
-                label
-                  input(type="radio" name='textarea')
-                  | 匿名留言
-                label
-                  input(type="radio" name='textarea')
-                  | 登录留言
             textarea(name="", ref='feedBackContent')
           a(href="javascript:;", v-on:click='addFeedBack').textarea-button 提交
 
 
   
-  script(src='/skin/js/about/carousel.js')
+  //- script(src='/skin/plugs/poster/posterTvGrid.js')
   script.
     var aboutModel = new Vue({
       el: '#about',
       data: {},
       methods: {
+        // 手机端轮播方法
         mobileSliderFn: function () {
           console.log('手机轮播图方法')
+
+          $('.owl-carousel').owlCarousel({
+            items: 1,
+            loop: true
+          })
         },
+        // PC端轮播方法
         PCSliderFn: function () {
           console.log('PC端轮播方法')
+
+          new posterTvGrid('posterTvGrid', {
+            className: "posterTvGrid",
+            //- height: 390
+          }, [{
+              "img": "/skin/img/about/index-slider1.png",
+              "title": "",
+              "url": "#"
+          }, {
+              "img": "/skin/img/about/index-slider2.png",
+              "title": "",
+              "url": "#"
+          }, {
+              "img": "/skin/img/about/index-slider3.png",
+              "title": "",
+              "url": "#"
+          }, {
+              "img": "/skin/img/about/index-slider1.png",
+              "title": "",
+              "url": "#"
+          }]);
         },
         // 添加反馈
         addFeedBack: function () {
@@ -82,22 +101,7 @@ block content
           if (headerModel.token) {
             this.sendPost(feedBackContent.value)
           } else {
-            $.dialog({
-              type: 'warning',
-              message: '请先登录！',
-              buttons: [{
-                text: '登录',
-                type: 'green',
-                callback: function() {
-                  window.location = '/passport/login.html?url='+window.location.href;
-                }
-              }, {
-                text: '取消',
-                type: 'red'
-              }],
-              maskClose: true,
-              effect: true
-            })
+            DGDTOOLS.check._isLogin()
           }
         },
         // 发送请求
@@ -125,10 +129,43 @@ block content
         // 轮播图方法
         if (headerModel.isMobileOrTable) {
           // 调用手机端轮播方法
-          this.mobileSliderFn()
+          var script=document.createElement('script'), 
+              link=document.createElement('link'),
+              _this = this
+          //- script
+          script.setAttribute('type','text/javascript')
+          script.setAttribute('src','/skin/plugs/owl/owl.carousel.min.js')
+          document.querySelector('head').appendChild(script)
+          //- style
+          link.setAttribute('rel','stylesheet')
+          link.setAttribute('href','/skin/plugs/owl/owl.carousel.min.css')
+          document.querySelector('head').appendChild(link)
+          //- 
+          link.onload = function () {
+            script.onload = function () {
+              _this.mobileSliderFn()
+            }
+          }
         } else {
           // PC端轮播方法
-          this.PCSliderFn()
+
+          var script=document.createElement('script'), 
+              link=document.createElement('link'),
+              _this = this
+          //- script
+          script.setAttribute('type','text/javascript')
+          script.setAttribute('src','/skin/plugs/poster/posterTvGrid.js')
+          document.querySelector('head').appendChild(script)
+          //- style
+          link.setAttribute('rel','stylesheet')
+          link.setAttribute('href','/skin/plugs/poster/posterTvGrid.css')
+          document.querySelector('head').appendChild(link)
+          //- 
+          link.onload = function () {
+            script.onload = function () {
+              _this.PCSliderFn()
+            }
+          }
         }
       }
     })

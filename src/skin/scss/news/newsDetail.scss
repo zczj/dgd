@@ -8,6 +8,7 @@
   color: #1f1f1f;
   line-height: 1.6;
   position: relative;
+  padding-left: 70px;
   .item-head{
     font-size: 0;
     color: #999;
@@ -78,8 +79,8 @@
     width: 60px;
     float: left;
     position: fixed;
-    left: 0;
     margin-top: 30px;
+    margin-left: -70px;
     a.item+a.item{
       border-top: 1px #f0f0f0 solid;
     }
@@ -175,10 +176,12 @@
 
   &.news-mobile{
     padding-bottom: 70px;
+    padding-left: 0;
     .item-share{
       position: absolute;
       bottom: 0;
       left: 0;
+      margin-left: 0;
       width: 100%;
       a.item+a.item{
         border-left: 1px #f0f0f0 solid;
@@ -201,6 +204,125 @@
 
   }
 }
+
+.comment{
+  margin-top: 20px;
+  width: 100%;
+  color:#616a73;
+  font-size: 1.5rem;
+  .com-header{
+    font-size: 1.8rem;
+    .com-num{
+      color:#3574f7;
+    }
+  }
+  
+  .com-form{
+    margin-top: 10px;
+    .com-box{
+      padding: 5px 8px;
+      font-size: 1.4rem;
+      width: 100%;
+      border:1px #c5c3c3 solid;
+      line-height: normal;
+      height: 8rem;
+    }
+    .com-ft{
+      margin-top: 10px;
+      .com-tips{
+        float:left;
+      }
+      button{
+        float:right;
+        color:#fff;
+        background: #009ff0;
+        font-size: 2rem;
+        padding: 12px 28px;
+        border:none;
+        border-radius: 5px;
+      }
+    }
+  }
+  //- 评论列表
+  .com-list{
+    margin-top: 20px;
+    .item{
+      font-size: 0;
+      padding: 20px 0 10px;
+      border-top: 1px #e3e3e3 dashed;
+      .com-photo{
+        font-size: 1.5rem;
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        background: #ccc;
+        border-radius: 20px;
+        vertical-align: top;
+      }
+      .com-cont{
+        width: calc(100% - 50px);
+        display: inline-block;
+        margin-left: 10px;
+        font-size: 1.5rem;
+        .com-t{
+          color:#a8a9ab;
+          .author{
+            float:left;
+          }
+          .time{
+            float:right;
+          }
+        }
+        .com-tools{
+          text-align: right;
+          margin-top: 6px;
+        }
+        //- 二级评论
+        .com-list-sub{
+          margin-top: 6px;
+          padding: 0 12px;
+          background:#f2f2f5;
+          .list-li{
+            padding: 5px 0 7px;
+            font-size:0;
+            .repay-info{
+              display: block;
+              font-size: 1.4rem;
+              line-height: 1.2;
+              padding: 4px 0;
+              .repay-name{
+                display: inline-block;
+                width: calc(100% - 110px);
+                .blue{
+                  color:#3e85ff;
+                }
+              }
+              .time{
+                display: inline-block;
+                font-size: 1.2rem;
+                width: 110px;
+                text-align: right;
+                vertical-align: top;
+                color:#a8a9ab;
+              }
+            }
+            .repay-txt{
+              font-size: 1.4rem;
+            }
+          }
+          .list-li+.list-li{
+            border-top: 1px #e3e3e3 solid;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
 
 @mixin news-detail--600() {
   .news-detail{

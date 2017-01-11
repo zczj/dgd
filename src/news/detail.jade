@@ -53,6 +53,62 @@ block content
                   <p>1.众筹之家(www.zczj.com)所发布、转载、摘编的文章大多来源于互联网（我们会尽量标注来源和作者）。转载目的在于传递更多信息，不代表本网观点及真实性，如果作品内容、版权和其它问题侵害到您的权益，我们感到很抱歉，并将火速处理。联系方式：0755-82557958，也诚挚地欢迎您给我们投稿，谢谢！</p>
                     <p>2.众筹之家的原创文章，版权属于众筹之家。允许转载的文章转载请注明作者和“来源：众筹之家(www.zczj.com)”，不允许转载的文章仅供阅读。不尊重原创的行为众筹之家或将追究责任。</p>
 
+            //- 评论
+            #comment(v-cloak)
+              .comment
+                .com-header.
+                  评论（<span class="com-num">2</span> 条评论）
+                .com-form
+                  .com-inner
+                    textarea( class="com-box" tabindex="1" autocomplete="off" placeholder="来说两句吧……")
+                  .com-ft.clearfix
+                    span.com-tips 
+                      |请先
+                      a(href="/passport/login.html" target="_blank") 登录
+                    button.material-design(data-color="#fff") 发表评论
+                
+                //- 评论列表
+                .com-list
+                  .item.clearfix
+                    //- 头像
+                    .com-photo
+                    //- 内容
+                    .com-cont
+                      .com-t.clearfix
+                        span.author 老苏
+                        span.time 2016-07-08
+                      .com-txt.
+                        写的有点意思，好文章，值得收藏！
+                        
+                      //- 二级评论
+                      ul.com-list-sub
+                        li.list-li.clearfix
+                          span.repay-info 
+                            span.repay-name 
+                              span.blue 习近平
+                              |回复
+                              span.blue 老苏:
+                            span.time 2017-01-11 15:30
+                          span.repay-txt.
+                            说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好
+                        li.list-li.clearfix
+                          span.repay-info 
+                            span.repay-name 
+                              span.blue 习近平
+                              |回复
+                              span.blue 老苏:
+                            span.time 2017-01-11 15:30
+                          span.repay-txt.
+                            说得好说得好说得好
+
+                      .com-tools
+                        a.jb 举报
+                        a.repay 回复
+                        a.zan
+
+                  
+
+                  
 
 
         .side
@@ -93,4 +149,4 @@ block content
 
   script(src="/skin/plugs/owl-carousel/owl.carousel.min.js")
   script(src="/skin/js/news/newsDetail.js")
-  script(src='../skin/js/project/iShare-tidy.min.js')
+  script(src='/skin/js/project/iShare-tidy.min.js')

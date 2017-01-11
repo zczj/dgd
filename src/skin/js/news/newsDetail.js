@@ -40,6 +40,8 @@ var newsModel = new Vue({
             console.log(response.data.message);
           }else{
             this.newsData = response.data;
+            
+            DGDTOOLS.Ev._btnCs();
           }
         }
         $("#loader").fadeOut(300)
@@ -118,8 +120,8 @@ var newsModel = new Vue({
         this.webShareWx = true;
       }else{
         this.webShare = true;
-
-        var js =DGDTOOLS.Ev._loadJS('/skin/js/project/qrcode.min.js');
+        var js =new DGDTOOLS.Ev._loadJS('/skin/js/project/qrcode.min.js');
+      
         if (js == null) {
           setTimeout(function () {
             DGDTOOLS.Ev._createQrcode(document.querySelector('#canvas'))
@@ -139,8 +141,10 @@ var newsModel = new Vue({
     this.getNews();
     this.getIntPro();
     this.getIntNew();
+    
     window.onload=function () {
       DGDTOOLS.Ev._share('.item-share');
+      
     }
   }
 })

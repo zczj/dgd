@@ -14,6 +14,10 @@ html(lang="zh-CN")
     script(src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js")
     script(src="/skin/plugs/dialog/js/dialog.js")
     script(src="/skin/js/util.js")
+    <!--[if lte IE 8]>
+    script(src='/skin/js/unsupport.js')
+    <![endif]-->
+      
   body
     include header
     //==================================================

@@ -12,7 +12,8 @@
     <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
     <script src="/skin/plugs/dialog/js/dialog.js"></script>
-    <script src="/skin/js/util.js"></script>
+    <script src="/skin/js/util.js"></script><!--[if lte IE 8]>
+    <script src="/skin/js/unsupport.js"></script><![endif]-->
   </head>
   <body>
     <!-- 页面切换加载动画-->
@@ -100,10 +101,42 @@
                     <p>1.众筹之家(www.zczj.com)所发布、转载、摘编的文章大多来源于互联网（我们会尽量标注来源和作者）。转载目的在于传递更多信息，不代表本网观点及真实性，如果作品内容、版权和其它问题侵害到您的权益，我们感到很抱歉，并将火速处理。联系方式：0755-82557958，也诚挚地欢迎您给我们投稿，谢谢！</p>
                       <p>2.众筹之家的原创文章，版权属于众筹之家。允许转载的文章转载请注明作者和“来源：众筹之家(www.zczj.com)”，不允许转载的文章仅供阅读。不尊重原创的行为众筹之家或将追究责任。</p>
                     
-                    
-                    
                   </div>
                 </transition>
+              </div>
+              <div id="comment" v-cloak="v-cloak">
+                <div class="comment">
+                  <div class="com-header">评论（<span class="com-num">2</span> 条评论）</div>
+                  <div class="com-form">
+                    <div class="com-inner">
+                      <textarea tabindex="1" autocomplete="off" placeholder="来说两句吧……" class="com-box"></textarea>
+                    </div>
+                    <div class="com-ft clearfix"><span class="com-tips">
+                         
+                        请先<a href="/passport/login.html" target="_blank">登录</a></span>
+                      <button data-color="#fff" class="material-design">发表评论</button>
+                    </div>
+                  </div>
+                  <div class="com-list">
+                    <div class="item clearfix">
+                      <div class="com-photo"></div>
+                      <div class="com-cont">
+                        <div class="com-t clearfix"><span class="author">老苏</span><span class="time">2016-07-08</span></div>
+                        <div class="com-txt">
+                          写的有点意思，好文章，值得收藏！
+                          
+                        </div>
+                        <ul class="com-list-sub">
+                          <li class="list-li clearfix"><span class="repay-info"> <span class="repay-name"> <span class="blue">习近平</span>回复<span class="blue">老苏:</span></span><span class="time">2017-01-11 15:30</span></span><span class="repay-txt">说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好说得好</span></li>
+                          <li class="list-li clearfix"><span class="repay-info"> <span class="repay-name"> <span class="blue">习近平</span>回复<span class="blue">老苏:</span></span><span class="time">2017-01-11 15:30</span></span><span class="repay-txt">
+                              说得好说得好说得好
+                              </span></li>
+                        </ul>
+                        <div class="com-tools"><a class="jb">举报</a><a class="repay">回复</a><a class="zan"></a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -140,7 +173,7 @@
     </div>
     <script src="/skin/plugs/owl-carousel/owl.carousel.min.js"></script>
     <script src="/skin/js/news/newsDetail.js"></script>
-    <script src="../skin/js/project/iShare-tidy.min.js"></script>
+    <script src="/skin/js/project/iShare-tidy.min.js"></script>
     <!--==================================================-->
     <div class="footer">
       <div class="info">

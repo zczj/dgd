@@ -28,7 +28,6 @@ html {
   font-family: "微软雅黑";
 }
 
-
 textarea,
 input,
 select,
@@ -38,6 +37,7 @@ button {
 
 textarea {
   resize: none;
+  display: block;
 }
 
 html,
@@ -413,8 +413,11 @@ header {
       position: absolute;
       left: 15px;
       top: 15px;
+      display: inline-block;
+      width: 119px;
       img {
         height: 46px;
+        width: 100%;
       }
     }
     .triggers {
@@ -1448,3 +1451,32 @@ header {
     transform: translate3D(-50%, -50%, 0);
   }
 }
+
+// 返回到顶部
+#go-top {
+  position: fixed;
+  bottom: 40px;
+  right: -80px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all .4s;
+  transform-origin: center center;
+  &:hover {
+    color: #4ad3da;
+    transform: rotate(-360deg);
+  }
+  &.show {
+    right: 80px;
+    transform: rotate(-720deg);
+  }
+}
+// 按钮水波纹
+.material-design{
+  position: relative;
+  overflow: hidden;
+  canvas{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: .25;
+  }

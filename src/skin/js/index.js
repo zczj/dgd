@@ -40,17 +40,7 @@ var indexModel = new Vue({
         console.log(indexModel.Ad.projectList[i].FollowState = false);
       }
     }
-    //首页轮播图
-    ;(function () {
-      var dgdAd = $('#dgd-ad');
-      dgdAd.owlCarousel({
-        items: 1,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 5000,
-        autoplayHoverPause: true
-      });
-    })('首页轮播图');
+    
 
 
     //合作伙伴
@@ -95,11 +85,26 @@ var indexModel = new Vue({
 
   },
   methods: {
+    // 首页轮播图
+    bannerSlider: function () {
+      var dgdAd = $('#dgd-ad');
+      dgdAd.owlCarousel({
+        items: 1,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true
+      });
+    },
+    
     getAd: function  () {
       $('#loader').fadeIn(300);
       this.$http.get(headerModel.api + '/ZhongChou/GetList?pagesize=3&state=0&currentpage=20&token=' + headerModel.token).then(function (response) {
         this.Ad = response.data;
         $('#loader').fadeOut(300);
+        this.$nextTick(function () {
+            this.bannerSlider();
+          });
       })
     },
     //公告滚动

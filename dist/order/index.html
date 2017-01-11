@@ -12,7 +12,8 @@
     <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
     <script src="/skin/plugs/dialog/js/dialog.js"></script>
-    <script src="/skin/js/util.js"></script>
+    <script src="/skin/js/util.js"></script><!--[if lte IE 8]>
+    <script src="/skin/js/unsupport.js"></script><![endif]-->
   </head>
   <body>
     <!-- 页面切换加载动画-->
@@ -97,9 +98,9 @@
             <div class="side-box investor-info">
               <div class="order-title">投资人信息</div>
               <ul class="content">
-                <li><span class="t-name">姓名：</span><span class="t-val">{{buyInfo.BenefitAccount.FullName}}</span></li>
-                <li><span class="t-name">号码：</span><span class="t-val">{{buyInfo.BenefitAccount.Phone}}</span></li>
-                <li><span class="t-name">身份证：</span><span class="t-val">{{buyInfo.authention.IDNumber}}</span></li>
+                <li><span class="t-name">姓名：</span><span class="t-val">{{buyInfo&&buyInfo.BenefitAccount.FullName}}</span></li>
+                <li><span class="t-name">号码：</span><span class="t-val">{{buyInfo&&buyInfo.BenefitAccount.Phone}}</span></li>
+                <li><span class="t-name">身份证：</span><span class="t-val">{{buyInfo&&buyInfo.authention.IDNumber}}</span></li>
               </ul>
             </div>
           </div>
@@ -113,9 +114,9 @@
                       <div class="order-part"><span class="t-name">认投金额</span>
                         <input type="text" v-model.trim="amount" v-on:keypress="numEv(event)" v-on:blur="numCh" ref="amount" class="type1"/><span>元</span>
                       </div>
-                      <div class="order-tips"><span>最低{{buyInfo.project.OriginalLowVote}}元起,整数倍累加最高跟投2000000.00元</span><span class="red">+ 管理费(平台收取)({{manageFree}}元)</span></div>
+                      <div class="order-tips"><span>最低{{buyInfo&&buyInfo.project.OriginalLowVote}}元起,整数倍累加最高跟投2000000.00元</span><span class="red">+ 管理费(平台收取)({{manageFree}}元)</span></div>
                       <div class="order-note">
-                        投资基本信息：非常感谢您投资了{{buyInfo.project.ProjectName}}，投资意向金为 {{amount}} 元，所认投的股份份额，需要在项目融资成功后确定
+                        投资基本信息：非常感谢您投资了{{buyInfo&&buyInfo.project.ProjectName}}，投资意向金为 {{amount}} 元，所认投的股份份额，需要在项目融资成功后确定
                         
                       </div>
                     </div>
@@ -133,7 +134,7 @@
                   <ul>
                     <li v-if="orderRule != null &amp;&amp;　orderRule.Type !== 1"><span class="t-name">投资金额：</span><span class="t-val"><span class="red">{{amount*part}}</span>元</span></li>
                     <li v-if="manageFree !== 0"><span class="t-name">管理费：</span><span class="t-val">{{manageFree}}元</span></li>
-                    <li v-if="orderModel.buyInfo.CouponList.length &gt; 0 &amp;&amp;　buyInfo.project.ProjectID != 1078" class="coupon-list"><span class="t-name">优惠券：</span><span class="t-val">
+                    <li v-if="buyInfo.CouponList.length &gt; 0 &amp;&amp;　buyInfo.project.ProjectID != 1078" class="coupon-list"><span class="t-name">优惠券：</span><span class="t-val">
                         <select v-model="selected" v-on:change="couponCh">
                           <option v-bind:value="0" selected="selected">请选择</option>
                           <option v-for="item in buyInfo.CouponList" v-bind:value="item.CouponID">{{item.Amount}} 元(有效期{{item.ExpiringDate}})</option>

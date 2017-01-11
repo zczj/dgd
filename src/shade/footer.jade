@@ -1,35 +1,58 @@
 //- 底部
 .footer
-    .info
-      .container.clearfix
-        dl
-          dt 关于大股东
-          dd 关于我们
-          dd 平台公告
-          dd 联系我们
-          dd 招贤纳士
-        dl
-          dt 帮助中心
-          dd 注册登录
-          dd 转让质押
-          dd 资费标准
-          dd 投资
-        dl
-          dt 资讯与活动
-          dd 站内资讯
-          dd 行业快讯
-          dd 众筹之家
-          dd 平台活动
-        dl
-          dt 联系我们
-          dd
-            //- img(src="http://www.dgd.vc/skin/img/ewm.png", alt="大股东")
-            p 联系地址：深圳市南山区科技园中区讯美科技广场3栋14层A03
-            p 联系人：股东妹
-            p 联系电话：0755-82557958
-            p 投资Q群：306742456
+  .info
+    .container.clearfix
+      dl
+        dt 关于大股东
+        dd 关于我们
+        dd 平台公告
+        dd 联系我们
+        dd 招贤纳士
+      dl
+        dt 帮助中心
+        dd 注册登录
+        dd 转让质押
+        dd 资费标准
+        dd 投资
+      dl
+        dt 资讯与活动
+        dd 站内资讯
+        dd 行业快讯
+        dd 众筹之家
+        dd 平台活动
+      dl
+        dt 联系我们
+        dd
+          //- img(src="http://www.dgd.vc/skin/img/ewm.png", alt="大股东")
+          p 联系地址：深圳市南山区科技园中区讯美科技广场3栋14层A03
+          p 联系人：股东妹
+          p 联系电话：0755-82557958
+          p 投资Q群：306742456
 
-    .bottom
+  .bottom
       .container
         span 深圳市网筹互联网金融服务有限公司
         span ICP证：粤ICP备14040204号-2
+
+
+
+#go-top
+  i.icon.icon-up
+
+
+script.
+  var goTop = $('#go-top');
+  //- 滚动显示隐藏
+  $(window).scroll(function () {
+    var scrollTop = $('body').scrollTop();
+    
+    if (scrollTop >= 500) {
+      goTop.addClass('show');
+    } else {
+      goTop.removeClass('show');
+    }
+  })
+  //- 点击事件
+  goTop.on('click', function () {
+    $('body').scrollTop(0)
+  })
