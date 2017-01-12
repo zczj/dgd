@@ -43,8 +43,8 @@ section#header
             img(v-bind:src="userInfo.Avatar", alt="")
           span.user-name.ellipsis {{userInfo.UserName}}
           .user-pop.pop-up
-            a.userinfo.clearfix(href="/", :title="userInfo.Avatar")
-              img(:src="userInfo.Avatar", alt="")
+            a.userinfo.clearfix(href="/", v-bind:title="userInfo.Avatar")
+              img(v-bind:src="userInfo.Avatar", alt="")
               span {{userInfo.UserName}}
             .menu
               a(href="#") 我的帐户
@@ -69,7 +69,7 @@ section#header
             a(href="#", v-on:click="showMean").mean-btn
               i.icon.icon-catgray
           nav(v-bind:class="{ navShow: tag }", v-cloak="")
-            a(v-for="(item, index) in navs", :href="item.url", v-bind:class="{ cur : index == 0 }").border-1px {{item.title}}
+            a(v-for="(item, index) in navs", v-bind:href="item.url", v-bind:class="{ cur : index == 0 }").border-1px {{item.title}}
             a.mobile-show.border-1px(href="javascript:void(0);", v-if="isLogin", v-on:click="loginOut()") 退出
           .login-btns(v-if="isMobileOrTable")
             ul.tool-nav
@@ -81,10 +81,10 @@ section#header
               li.login-btn(v-else="")
                 .item.avatar
                   a(href="/mycenter/index")
-                    img(:src="userInfo.Avatar", alt="")
+                    img(v-bind:src="userInfo.Avatar", alt="")
                   .user-pop.pop-up
-                    a.userinfo.clearfix(href="/", :title="userInfo.Avatar")
-                      img(:src="userInfo.Avatar", alt="")
+                    a.userinfo.clearfix(href="/", v-bind:title="userInfo.Avatar")
+                      img(v-bind:src="userInfo.Avatar", alt="")
                       span {{userInfo.UserName}}
                     .menu
                       a(href="#") 我的帐户

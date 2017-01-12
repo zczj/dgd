@@ -114,15 +114,14 @@ var Util = function () {
       },
       // 是否为登录状态 不是跳转到登录页面
       _isLogin: function () {
-        (function ($) {
-          $.dialog({
+        $.dialog({
             type: 'warning',
             message: '请先登录！',
             buttons: [{
               text: '登录',
               type: 'green',
               callback: function () {
-                window.location = '/passport/login.html?url=' + window.location.href;
+                window.location = '/passport/login?url=' + window.location.href;
               }
             }, {
               text: '取消',
@@ -131,7 +130,7 @@ var Util = function () {
             maskClose: true,
             effect: true
           })
-        })(jQuery);
+
       },
       // 是否为数字，包括小数点。
       _isNumPoint: function (e) {

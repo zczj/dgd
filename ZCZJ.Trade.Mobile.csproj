@@ -108,7 +108,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\MyCenterController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\NoticeController.cs" />
+    <Compile Include="Controllers\NoviceController.cs" />
+    <Compile Include="Controllers\PassportController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
+    <Compile Include="Controllers\TransferController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -119,6 +129,174 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
+    <Content Include="skin\css\about\about.css" />
+    <Content Include="skin\css\about\index.css" />
+    <Content Include="skin\css\about\joinus.css" />
+    <Content Include="skin\css\about\qa.css" />
+    <Content Include="skin\css\base.css" />
+    <Content Include="skin\css\font.css" />
+    <Content Include="skin\css\index\index.css" />
+    <Content Include="skin\css\mixin.css" />
+    <Content Include="skin\css\mycenter\bindCard.css" />
+    <Content Include="skin\css\news\news.css" />
+    <Content Include="skin\css\news\newsDetail.css" />
+    <Content Include="skin\css\notice\index.css" />
+    <Content Include="skin\css\novice\index.css" />
+    <Content Include="skin\css\order\order.css" />
+    <Content Include="skin\css\passport\login.css" />
+    <Content Include="skin\css\passport\passport.css" />
+    <Content Include="skin\css\project\project-detail.css" />
+    <Content Include="skin\css\project\project.css" />
+    <Content Include="skin\css\transfer\detail.css" />
+    <Content Include="skin\css\transfer\index.css" />
+    <Content Include="skin\img\about\about-location.png" />
+    <Content Include="skin\img\about\banner-1200.jpg" />
+    <Content Include="skin\img\about\c1.png" />
+    <Content Include="skin\img\about\c2.png" />
+    <Content Include="skin\img\about\c3.png" />
+    <Content Include="skin\img\about\c4.png" />
+    <Content Include="skin\img\about\c5.png" />
+    <Content Include="skin\img\about\c6.png" />
+    <Content Include="skin\img\about\index-banner-bg.jpg" />
+    <Content Include="skin\img\about\index-slider1.png" />
+    <Content Include="skin\img\about\index-slider2.png" />
+    <Content Include="skin\img\about\index-slider3.png" />
+    <Content Include="skin\img\about\joinus-banner.jpg" />
+    <Content Include="skin\img\default.jpg" />
+    <Content Include="skin\img\icon-zczj-b.png" />
+    <Content Include="skin\img\icon-zczj.png" />
+    <Content Include="skin\img\index\ad01-l.jpg" />
+    <Content Include="skin\img\index\ad01-m.jpg" />
+    <Content Include="skin\img\index\i1.png" />
+    <Content Include="skin\img\index\i2.png" />
+    <Content Include="skin\img\index\i3.png" />
+    <Content Include="skin\img\index\i4.png" />
+    <Content Include="skin\img\index\i5.png" />
+    <Content Include="skin\img\index\i6.png" />
+    <Content Include="skin\img\index\jtR.png" />
+    <Content Include="skin\img\index\next.png" />
+    <Content Include="skin\img\index\p1.jpg" />
+    <Content Include="skin\img\index\prev.png" />
+    <Content Include="skin\img\index\speck.png" />
+    <Content Include="skin\img\index\tag.png" />
+    <Content Include="skin\img\logo.png" />
+    <Content Include="skin\img\novice\banner-step1.png" />
+    <Content Include="skin\img\novice\banner-step2.png" />
+    <Content Include="skin\img\novice\banner-step3.png" />
+    <Content Include="skin\img\novice\banner-step4.png" />
+    <Content Include="skin\img\novice\banner-step5.png" />
+    <Content Include="skin\img\novice\banner.jpg" />
+    <Content Include="skin\img\novice\guquanzhiya.png" />
+    <Content Include="skin\img\novice\guquanzhuanrang.png" />
+    <Content Include="skin\img\novice\section1-bg.jpg" />
+    <Content Include="skin\img\novice\section2.jpg" />
+    <Content Include="skin\img\novice\section3.jpg" />
+    <Content Include="skin\img\novice\section4.jpg" />
+    <Content Include="skin\img\novice\section5.jpg" />
+    <Content Include="skin\img\novice\section_mo2.jpg" />
+    <Content Include="skin\img\novice\section_mo3.jpg" />
+    <Content Include="skin\img\novice\section_mo4.jpg" />
+    <Content Include="skin\img\novice\section_mo5.jpg" />
+    <Content Include="skin\img\novice\section_pad2.jpg" />
+    <Content Include="skin\img\novice\section_pad3.jpg" />
+    <Content Include="skin\img\novice\section_pad4.jpg" />
+    <Content Include="skin\img\novice\section_pad5.jpg" />
+    <Content Include="skin\img\novice\standbao.png" />
+    <Content Include="skin\img\novice\xinshoutiyan.png" />
+    <Content Include="skin\img\order\bank_gdyh.png" />
+    <Content Include="skin\img\order\bank_gfyh.png" />
+    <Content Include="skin\img\order\bank_gsyh.png" />
+    <Content Include="skin\img\order\bank_hxyh.png" />
+    <Content Include="skin\img\order\bank_jsyh.png" />
+    <Content Include="skin\img\order\bank_jtyh.png" />
+    <Content Include="skin\img\order\bank_msyh.png" />
+    <Content Include="skin\img\order\bank_nyyh.png" />
+    <Content Include="skin\img\order\bank_payh.png" />
+    <Content Include="skin\img\order\bank_pfyh.png" />
+    <Content Include="skin\img\order\bank_shyh.png" />
+    <Content Include="skin\img\order\bank_xyyh.png" />
+    <Content Include="skin\img\order\bank_yzcxyh.png" />
+    <Content Include="skin\img\order\bank_zgyh.png" />
+    <Content Include="skin\img\order\bank_zsyh.png" />
+    <Content Include="skin\img\order\bank_zxyh.png" />
+    <Content Include="skin\img\order\icon-baofu.png" />
+    <Content Include="skin\img\order\icon-fuyou.png" />
+    <Content Include="skin\img\order\success.png" />
+    <Content Include="skin\img\passport\fpwd-item-header-bg.png" />
+    <Content Include="skin\img\passport\login-bg.jpg" />
+    <Content Include="skin\img\passport\login-item-header-bg.png" />
+    <Content Include="skin\img\passport\profile.png" />
+    <Content Include="skin\img\passport\register-item-header-bg.png" />
+    <Content Include="skin\img\passport\success-item-header%40x2.png" />
+    <Content Include="skin\img\passport\success-item-header.png" />
+    <Content Include="skin\img\passport\success-ok.png" />
+    <Content Include="skin\img\passport\verify.png" />
+    <Content Include="skin\img\project\banner.jpg" />
+    <Content Include="skin\img\project\detail-banner-project-logo.png" />
+    <Content Include="skin\img\project\detail-banner-tab1.jpg" />
+    <Content Include="skin\img\project\detail-banner.jpg" />
+    <Content Include="skin\img\project\detail-body01.png" />
+    <Content Include="skin\img\project\detail-body02.png" />
+    <Content Include="skin\img\project\detail-item-video.png" />
+    <Content Include="skin\img\project\list-img01.jpg" />
+    <Content Include="skin\img\project\qa-avatar.png" />
+    <Content Include="skin\img\project\share.png" />
+    <Content Include="skin\img\transfer\banner_s.jpg" />
+    <Content Include="skin\img\transfer\process.png" />
+    <Content Include="skin\img\unsupport_bg.png" />
+    <Content Include="skin\js\header.js" />
+    <Content Include="skin\js\index.js" />
+    <Content Include="skin\js\mycenter\bindCard.js" />
+    <Content Include="skin\js\news\comment.js" />
+    <Content Include="skin\js\news\news.js" />
+    <Content Include="skin\js\news\newsDetail.js" />
+    <Content Include="skin\js\order\order.js" />
+    <Content Include="skin\js\order\orderComplete.js" />
+    <Content Include="skin\js\order\orderConf.js" />
+    <Content Include="skin\js\passport\fpwd.js" />
+    <Content Include="skin\js\passport\jquery-md5.min.js" />
+    <Content Include="skin\js\passport\login.js" />
+    <Content Include="skin\js\passport\passport.js" />
+    <Content Include="skin\js\passport\register.js" />
+    <Content Include="skin\js\passport\success.js" />
+    <Content Include="skin\js\project\iShare-tidy.min.js" />
+    <Content Include="skin\js\project\project-detail.js" />
+    <Content Include="skin\js\project\project.js" />
+    <Content Include="skin\js\project\qrcode.min.js" />
+    <Content Include="skin\js\qa.js" />
+    <Content Include="skin\js\reservation\reserva.js" />
+    <Content Include="skin\js\reservation\reservaComplete.js" />
+    <Content Include="skin\js\unsupport.js" />
+    <Content Include="skin\js\util.js" />
+    <Content Include="skin\plugs\bscroll\bscroll.min.js" />
+    <Content Include="skin\plugs\button\prefixfree.min.js" />
+    <Content Include="skin\plugs\dialog\css\dialog.css" />
+    <Content Include="skin\plugs\dialog\js\dialog.js" />
+    <Content Include="skin\plugs\normalize-css\normalize.css" />
+    <Content Include="skin\plugs\owl-carousel\AjaxLoader.gif" />
+    <Content Include="skin\plugs\owl-carousel\assets\ajax-loader.gif" />
+    <Content Include="skin\plugs\owl-carousel\assets\owl.carousel.css" />
+    <Content Include="skin\plugs\owl-carousel\assets\owl.carousel.min.css" />
+    <Content Include="skin\plugs\owl-carousel\assets\owl.theme.default.css" />
+    <Content Include="skin\plugs\owl-carousel\assets\owl.theme.default.min.css" />
+    <Content Include="skin\plugs\owl-carousel\assets\owl.theme.green.css" />
+    <Content Include="skin\plugs\owl-carousel\assets\owl.theme.green.min.css" />
+    <Content Include="skin\plugs\owl-carousel\assets\owl.video.play.png" />
+    <Content Include="skin\plugs\owl-carousel\grabbing.png" />
+    <Content Include="skin\plugs\owl-carousel\owl.carousel.css" />
+    <Content Include="skin\plugs\owl-carousel\owl.carousel.js" />
+    <Content Include="skin\plugs\owl-carousel\owl.carousel.min.js" />
+    <Content Include="skin\plugs\owl-carousel\owl.theme.css" />
+    <Content Include="skin\plugs\owl-carousel\owl.transitions.css" />
+    <Content Include="skin\plugs\poster\carousel.js" />
+    <Content Include="skin\plugs\poster\img\1.png" />
+    <Content Include="skin\plugs\poster\img\2.png" />
+    <Content Include="skin\plugs\poster\img\leftShadow.png" />
+    <Content Include="skin\plugs\poster\img\rightShadow.png" />
+    <Content Include="skin\plugs\poster\img\slide_next_btn.png" />
+    <Content Include="skin\plugs\poster\img\slide_prev_btn.png" />
+    <Content Include="skin\plugs\poster\posterTvGrid.css" />
+    <Content Include="skin\plugs\poster\posterTvGrid.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -130,6 +308,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +316,115 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Index\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Header.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Passport\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Passport\Register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Passport\Fpwd.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Passport\Success.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Project\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Project\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Notice\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Notice\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Novice\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transfer\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transfer\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MyCenter\BindCard.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\News\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\News\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\About\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\About\Joinus.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\About\Qa.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\About\QaAsk.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\About\QaDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Order\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Order\OrderConf.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Order\Complete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reservation\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Reservation\Complete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="skin\css\maps\about\about.css.map" />
+    <Content Include="skin\css\maps\about\index.css.map" />
+    <Content Include="skin\css\maps\about\joinus.css.map" />
+    <Content Include="skin\css\maps\about\qa.css.map" />
+    <Content Include="skin\css\maps\base.css.map" />
+    <Content Include="skin\css\maps\font.css.map" />
+    <Content Include="skin\css\maps\index\index.css.map" />
+    <Content Include="skin\css\maps\mixin.css.map" />
+    <Content Include="skin\css\maps\mycenter\bindCard.css.map" />
+    <Content Include="skin\css\maps\news\news.css.map" />
+    <Content Include="skin\css\maps\news\newsDetail.css.map" />
+    <Content Include="skin\css\maps\notice\index.css.map" />
+    <Content Include="skin\css\maps\novice\index.css.map" />
+    <Content Include="skin\css\maps\order\order.css.map" />
+    <Content Include="skin\css\maps\passport\login.css.map" />
+    <Content Include="skin\css\maps\passport\passport.css.map" />
+    <Content Include="skin\css\maps\project\project-detail.css.map" />
+    <Content Include="skin\css\maps\project\project.css.map" />
+    <Content Include="skin\css\maps\transfer\detail.css.map" />
+    <Content Include="skin\css\maps\transfer\index.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZCZJ.Share\ZCZJ.Share.csproj">
+      <Project>{ced4c721-b2e0-43d5-abb7-b28c5c3a0794}</Project>
+      <Name>ZCZJ.Share</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

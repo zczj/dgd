@@ -1,19 +1,6 @@
-$(document).ready(function() {
-
-  //- var transferList = $('#transfer-list');
-  //- var oUl = $('#transfer-list ul');
-  //- var aLi = oUl.find('li');
-  //- oUl.width( aLi.length * (aLi.eq(0).width() + 20 ) -20 +'px');
-  //- var scroll = new BScroll(document.getElementById('transfer-list'), {
-
-  //- })
-
-
-});
-
-
-
-
+/**
+ * 首页js
+ */
 var indexModel = new Vue({
   el: '#model-index',
   data: {
@@ -26,18 +13,20 @@ var indexModel = new Vue({
     CategoryMap: ['53','54','55','56','57'],
     currentpage: 1,
     pageSize: 3,
-    cat: '53'
+    cat: '53',
+    fcLink:'' // 友情链接
   },
   created: function() {
     this.getAd();
     this.getNewsList();
+    this.getFriendLink();
   },
   updated: function() {
     var _this = this;
     // 退出重置关注状态
     if (!headerModel.isLogin) {
-      for (var i = 0; i < indexModel.Ad.projectList.length; i++) {
-        console.log(indexModel.Ad.projectList[i].FollowState = false);
+      for (var i = 0; i < _this.Ad.projectList.length; i++) {
+        console.log(_this.Ad.projectList[i].FollowState = false);
       }
     }
     
@@ -100,7 +89,9 @@ var indexModel = new Vue({
     getAd: function  () {
       $('#loader').fadeIn(300);
       this.$http.get(headerModel.api + '/ZhongChou/GetList?pagesize=3&state=0&currentpage=20&token=' + headerModel.token).then(function (response) {
-        this.Ad = response.data;
+        if(response.data){
+          this.Ad = response.data;
+        }
         $('#loader').fadeOut(300);
         this.$nextTick(function () {
             this.bannerSlider();
@@ -162,6 +153,17 @@ var indexModel = new Vue({
 
         headerModel.loading=false;
          $('#loader').fadeOut(300);
+      })
+    },
+    // 友情链接
+    getFriendLink: function  () {
+      $('#loader').fadeIn(300);
+      this.$http.get(headerModel.api + '/FriendLink/Get').then(function (response) {
+        if(response.data){
+          this.fcLink = response.data;
+        }
+        $('#loader').fadeOut(300);
+      
       })
     },
     /**

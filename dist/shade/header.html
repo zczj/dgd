@@ -23,7 +23,7 @@
             <div class="pop-up pop-wx"><img src="http://www.dgd.vc/skin/img/ewm.png" alt="" width="120" height="120"/></div></span></span><span class="app"><i class="icon icon-phone"></i>下载APP
           <div class="pop-up pop-app"><img src="https://www.zczj.com/skin/images/downApp/ma.png" alt="" width="120" height="120"/></div></span></div>
       <div class="header-top-r"><span class="msg"><i class="icon icon-msgTop icon-msgC"></i>我的消息</span><span v-if="!isLogin" class="top-login"><a v-bind:href="['/passport/login.html?url='+window.location.href]">登录</a><span class="line">|</span><a href="/passport/register.html">注册</a></span><span v-else="" class="top-login"><a href="/mycenter/index"><img v-bind:src="userInfo.Avatar" alt=""/></a><span class="user-name ellipsis">{{userInfo.UserName}}</span>
-          <div class="user-pop pop-up"><a href="/" :title="userInfo.Avatar" class="userinfo clearfix"><img :src="userInfo.Avatar" alt=""/><span>{{userInfo.UserName}}</span></a>
+          <div class="user-pop pop-up"><a href="/" v-bind:title="userInfo.Avatar" class="userinfo clearfix"><img v-bind:src="userInfo.Avatar" alt=""/><span>{{userInfo.UserName}}</span></a>
             <div class="menu"><a href="#">我的帐户</a><a href="#">我的交易</a><a href="#">我的质押</a><a href="#">我的优惠券</a><a href="#">安全中心</a><a href="javascript:void(0);" v-if="isLogin" v-on:click="loginOut()">退出</a></div>
           </div></span><span class="go-zczj"><a href="http://www.zczj.com">
             <div class="icon icon-zczj-b"></div>前往之家</a></span></div>
@@ -34,15 +34,15 @@
       <div class="container clearfix">
         <div v-bind:class="{navLogin: isLogin}" class="nav clearfix"><a href="/" class="logo"><img src="/skin/img/logo.png" alt=""/></a>
           <div class="triggers"><a href="#" v-on:click="showMean" class="mean-btn"><i class="icon icon-catgray"></i></a></div>
-          <nav v-bind:class="{ navShow: tag }" v-cloak=""><a v-for="(item, index) in navs" :href="item.url" v-bind:class="{ cur : index == 0 }" class="border-1px">{{item.title}}</a><a href="javascript:void(0);" v-if="isLogin" v-on:click="loginOut()" class="mobile-show border-1px">退出</a></nav>
+          <nav v-bind:class="{ navShow: tag }" v-cloak=""><a v-for="(item, index) in navs" v-bind:href="item.url" v-bind:class="{ cur : index == 0 }" class="border-1px">{{item.title}}</a><a href="javascript:void(0);" v-if="isLogin" v-on:click="loginOut()" class="mobile-show border-1px">退出</a></nav>
           <div v-if="isMobileOrTable" class="login-btns">
             <ul class="tool-nav">
               <li v-if="!isLogin" class="login-btn">
                 <div class="item"><a v-bind:href="['/passport/login.html?url='+window.location.href]">登录</a><span class="line">|</span><a href="/passport/register.html">注册</a></div>
               </li>
               <li v-else="" class="login-btn">
-                <div class="item avatar"><a href="/mycenter/index"><img :src="userInfo.Avatar" alt=""/></a>
-                  <div class="user-pop pop-up"><a href="/" :title="userInfo.Avatar" class="userinfo clearfix"><img :src="userInfo.Avatar" alt=""/><span>{{userInfo.UserName}}</span></a>
+                <div class="item avatar"><a href="/mycenter/index"><img v-bind:src="userInfo.Avatar" alt=""/></a>
+                  <div class="user-pop pop-up"><a href="/" v-bind:title="userInfo.Avatar" class="userinfo clearfix"><img v-bind:src="userInfo.Avatar" alt=""/><span>{{userInfo.UserName}}</span></a>
                     <div class="menu"><a href="#">我的帐户</a><a href="#">我的交易</a><a href="#">我的质押</a><a href="#">我的优惠券</a><a href="#">安全中心</a><a href="javascript:void(0);" v-if="isLogin" v-on:click="loginOut()">退出</a></div>
                   </div>
                 </div>

@@ -55,9 +55,9 @@ var project = new Vue({
         
         // 预约项目
         if(_this.list[index].ISReservation){
-          window.location.href= "/reservation/index.html?id="+ id
+          window.location.href= "/reservation/index?id="+ id
         }else{
-          window.location.href= "/order/index.html?id="+ id
+          window.location.href= "/order/index?id="+ id
         }
       }
     },

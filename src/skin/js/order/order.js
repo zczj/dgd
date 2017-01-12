@@ -209,7 +209,7 @@ var orderModel = new Vue({
                   if (response.resultid == 200) {
                     // 提交成功跳转到订单确认页面，根据定单id
                     DGDTOOLS.tip._tip(response.message,function () {
-                      window.location.href="orderConf.html?orderId="+ response.orderid;
+                      window.location.href="orderConf?orderId="+ response.orderid;
                     })
 
                   }else{
@@ -280,7 +280,7 @@ var orderModel = new Vue({
     gdAccount: function(){
       var res = null;
       if(this.buyInfo.gdAccount){
-            var lowVote = this.buyInfo.project.OriginalLowVote* 0.01,
+            var lowVote = this.buyInfo.project.OriginalLowVote*this.part* 0.01,
             availableBalance = this.buyInfo.gdAccount.AvailableBalance; 
 
         return  res = availableBalance<lowVote?availableBalance: lowVote;

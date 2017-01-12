@@ -1,6 +1,6 @@
 extends ../shade/layout
 block content
-  link(rel="stylesheet", href="/skin/plugs/owl/owl.carousel.min.css")
+  link(rel="stylesheet", href="/skin/plugs/owl-carousel/assets/owl.carousel.min.css")
   link(rel="stylesheet", href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css")
   link(rel="stylesheet", href="/skin/css/index/index.css")
 
@@ -8,7 +8,7 @@ block content
     .dgd-ad
       .owl-carousel.owl-theme#dgd-ad
          div.item(v-for="item in Ad.ChannelList", v-cloak="")
-          a(:href="item.Link")
+          a(v-bind:href="item.Link")
             img(v-bind:src="item.Pic", alt="", v-cloak="")
 
     //- 注册人数

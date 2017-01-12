@@ -134,7 +134,7 @@ var orderConfModel = new Vue({
               headerModel.loading = false;
               _this.payLock = false;
               DGDTOOLS.tip._tip(response.data.retMsg, function () {
-                window.location.href = '../MyCenter/bindCard.html?orderId=' + _this.orderId;
+                window.location.href = '../MyCenter/bindCard?orderId=' + _this.orderId;
               });
             }
           })
@@ -192,7 +192,7 @@ var orderConfModel = new Vue({
             headerModel.loading = false;
             _this.payLock = false;
             if (response.resultid == 200) {
-              window.location.href = 'complete.html?orderId=' + _this.orderId;
+              window.location.href = 'complete?orderId=' + _this.orderId;
             } else {
               DGDTOOLS.tip._tip(response.message);
             }

@@ -7,7 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/skin/plugs/normalize-css/normalize.css"/>
     <link rel="stylesheet" href="/skin/css/base.css"/>
-    <link rel="stylesheet" href="/skin/css/dialog.css"/>
+    <link rel="stylesheet" href="/skin/plugs/dialog/css/dialog.css"/>
     <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
@@ -213,11 +213,11 @@
                 _this = this
             //- script
             script.setAttribute('type','text/javascript')
-            script.setAttribute('src','/skin/plugs/owl/owl.carousel.min.js')
+            script.setAttribute('src','/skin/plugs/owl-carousel/owl.carousel.min.js')
             document.querySelector('head').appendChild(script)
             //- style
             link.setAttribute('rel','stylesheet')
-            link.setAttribute('href','/skin/plugs/owl/owl.carousel.min.css')
+            link.setAttribute('href','/skin/plugs/owl-carousel/assets/owl.carousel.min.css')
             document.querySelector('head').appendChild(link)
             //- 
             link.onload = function () {
