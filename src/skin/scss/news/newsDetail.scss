@@ -259,6 +259,9 @@
         background: #ccc;
         border-radius: 20px;
         vertical-align: top;
+        img{
+          width: 100%;
+        }
       }
       .com-cont{
         width: calc(100% - 50px);

@@ -33,7 +33,7 @@
                 <div class="ga-tab-box">
                     <ul>
                         <li v-for="(item, index) in list" v-if="index==0" class="first clearfix">
-                            <a href="#" class="pic"><img src="../skin/img/project/list-img01.jpg" alt="" /></a>
+                            <a href="#" class="pic"><img v-bind:src="resizeImg(item.CoverMobilePic,200,125)" alt="" /></a>
                             <div class="desc">
                                 <a v-bind:href="['/news/detail?id='+ item.NewsID]" class="title ellipsis">{{item.Title}}</a>
                                 <p v-html="item.Abstract" class="txt"></p>

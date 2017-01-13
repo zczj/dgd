@@ -209,5 +209,12 @@ var indexModel = new Vue({
       var t1 = new Date(time);
       return DGDTOOLS.fT._convertTime(t1);
     },
+    //返回自定义图片尺寸
+    resizeImg: function (url,width,height) {
+      if (url) {
+        var result = url.split('@')[0] +'@1e_1c_0o_0l_'+ height +'h_'+width+'w_90q.src';
+      }
+      return result;
+    }
   }
 })

@@ -1,5 +1,5 @@
 // passport公共样式
-.h-passport-page{
+.h-passport-page {
   width: 100%;
   height: 750px;
   margin-bottom: -20px;
@@ -7,13 +7,13 @@
   background-size: auto 100%;
   overflow: hidden;
   .passport-profile-wrapper,
-  .passport-content-wrapper{
+  .passport-content-wrapper {
     float: left;
     width: 50%;
   }
   // PC端左侧公司简介
-  .passport-profile-wrapper{
-    .profile{
+  .passport-profile-wrapper {
+    .profile {
       width: 638px;
       height: 445px;
       margin: 100px 0 0 -100px;
@@ -22,11 +22,11 @@
     }
   }
   // 主体（登录/注册/....）
-  .passport-content-wrapper{
+  .passport-content-wrapper {
     position: relative;
     padding-top: 116px;
     // 公共按钮
-    .passport-button{
+    .passport-button {
       display: inline-block;
       vertical-align: top;
       width: 100%;
@@ -41,12 +41,12 @@
       cursor: pointer;
       opacity: .9;
       transition: opacity .2s;
-      &:hover{
+      &:hover {
         opacity: 1;
       }
     }
     // 公共输入框
-    input.passport-input{
+    input.passport-input {
       width: 100%;
       height: 38px;
       // line-height: 38px;
@@ -54,23 +54,23 @@
       text-indent: 10px;
       color: #464647;
       font-size: 1.333333em;
-      &:focus{
-        border-color: #0ee894;
+      &:focus {
+        border-color: darken(#0ee894, 20%);
       }
     }
     // 主体盒子
-    .passport-box-wrapper{
+    .passport-box-wrapper {
       float: right;
       width: 316px;
       height: 369px;
-      .passport-box{
+      .passport-box {
         position: relative;
         width: 100%;
         height: 100%;
         background-color: #fff;
         overflow: hidden;
       }
-      .passport-item{
+      .passport-item {
         position: absolute;
         width: 100%;
         padding: 35px 43px 0;
@@ -80,7 +80,7 @@
         background-color: #fff;
       }
       // 头部
-      .passport-header{
+      .passport-header {
         width: 100%;
         height: 32px;
         font-size: 20px;
@@ -92,16 +92,16 @@
       }
     }
     // 表单
-    .passport-form{
+    .passport-form {
       margin-bottom: 17px;
       li {
         position: relative;
         margin-top: 20px;
-        &:first-child{
+        &:first-child {
           margin-top: 0;
         }
         // 错误提示
-        &.error{
+        &.error {
           text-align: center;
           color: #f58484;
           background: #ffefef;
@@ -111,15 +111,15 @@
         }
       }
       // 验证码
-      .verify{
+      .verify {
         position: absolute;
-        right: 8px;
+        right: 0;
         top: 50%;
-        width: 64px;
-        height: 20px;
+        // width: 64px;
+        // height: 20px;
         cursor: pointer;
-        transform: translateY(-50%);
-        ~ .icon-refresh{
+        transform: translateY(-50%) scale(.9);
+        ~.icon-refresh {
           position: absolute;
           right: -20px;
           top: 50%;
@@ -131,106 +131,100 @@
         }
       }
       // 发送短信按钮
-      .sms{
+      .sms {
         position: absolute;
         top: 50%;
         right: 8px;
         color: #41d4dc;
         cursor: pointer;
         transform: translateY(-50%);
-        &.disabled{
+        &.disabled {
           color: #ccc!important;
           cursor: default!important;
         }
       }
       // 记住、忘记密码
-      .remember, .forgot{
+      .remember,
+      .forgot {
         font-size: 1.16667em;
         color: #7e7e7e;
       }
-      .remember{
+      .remember {
         float: left;
         margin-bottom: 16px;
-        input{
+        input {
           width: 18px;
           height: 18px;
           vertical-align: middle;
           margin-right: 5px;
         }
-        > a{
+        >a {
           color: #41d4dc;
         }
       }
-      .forgot{
+      .forgot {
         float: right;
-        a{
+        a {
           color: inherit;
-          &:hover{
+          &:hover {
             text-decoration: underline;
           }
         }
       }
     }
-
   }
 }
 
-
-
-
-
 // 登录页面
-#login{
+#login {
   // 登录头部背景
-  .passport-header{
+  .passport-header {
     background-image: url(/skin/img/passport/login-item-header-bg.png);
   }
   // 切换登录按钮
-  .switch-login-box{
+  .switch-login-box {
     margin-top: 10px;
-    .passport-button{
+    .passport-button {
       height: 50px;
       line-height: 50px;
       margin-top: 10px;
-      .icon{
+      .icon {
         font-size: 1.25em;
         margin-right: 10px;
       }
-      &.user-login{
+      &.user-login {
         background-color: #30d1fb;
       }
-      &.phone-login{
+      &.phone-login {
         background-color: #3e85ff;
       }
     }
   }
   // 手机验证码登录
-  .passport-item.phoneNum{
-    .passport-header{
+  .passport-item.phoneNum {
+    .passport-header {
       margin-bottom: 12px;
     }
   }
 }
 
-
 // 注册页面
-#register{
+#register {
   // 注册头部背景
-  .passport-header{
+  .passport-header {
     background-image: url(/skin/img/passport/register-item-header-bg.png);
   }
-  .passport-box{
+  .passport-box {
     height: 560px;
   }
-  .passport-button{
+  .passport-button {
     margin-top: 0;
   }
 }
 
-
 // 成功页面
-#success{
-  .fpwd-tooltips-bar{
+#success {
+  .fpwd-tooltips-bar {
     // position: absolute;
     right: 0;
     display: table;
@@ -241,11 +235,11 @@
     margin-left: 11px;
     padding: 20px 0;
     background-color: #fff;
-    .line{
+    .line {
       position: relative;
       width: 100%;
       height: 101px;
-      &::after{
+      &::after {
         content: ' ';
         position: absolute;
         left: 50%;
@@ -255,22 +249,23 @@
         transform: translateX(-50%);
       }
     }
-    .step{
+    .step {
       font-size: 14px;
       color: #b2b9bf;
-      &.active{
+      &.active {
         color: #343434;
       }
     }
   }
-  .fpwd-layout{
+  .fpwd-layout {
     position: absolute;
     right: 101px;
   }
 }
-.passport-box{
+
+.passport-box {
   padding: 40px 43px 0;
-  .passport-header{
+  .passport-header {
     height: 26px;
     line-height: 26px;
     font-size: 21.11px;
@@ -278,36 +273,35 @@
     color: #343434;
     background-image: url(/skin/img/passport/success-item-header.png?12315486);
   }
-  .passport-success{
+  .passport-success {
     width: 80px;
     height: 80px;
     margin: 22px auto 18px;
     background: url(/skin/img/passport/success-ok.png) no-repeat 0 0;
     background-size: cover;
   }
-  .passport-success-msg{
+  .passport-success-msg {
     text-align: center;
     color: #616a73;
     font-size: 16px;
     line-height: 28px;
   }
-  .passport-success-go{
+  .passport-success-go {
     text-align: center;
     font-size: 16px;
     color: #616a73;
-    span{
+    span {
       color: #e60012;
     }
   }
-  .passport-button{
+  .passport-button {
     // margin-top: 30px;
   }
 }
 
-
 // 找回密码页面
-#fpwd{
-  .fpwd-tooltips-bar{
+#fpwd {
+  .fpwd-tooltips-bar {
     position: absolute;
     right: 0;
     display: table;
@@ -318,11 +312,11 @@
     margin-left: 11px;
     padding: 20px 0;
     background-color: #fff;
-    .line{
+    .line {
       position: relative;
       width: 100%;
       height: 101px;
-      &::after{
+      &::after {
         content: ' ';
         position: absolute;
         left: 50%;
@@ -332,26 +326,26 @@
         transform: translateX(-50%);
       }
     }
-    .step{
+    .step {
       font-size: 14px;
       color: #b2b9bf;
-      &.active{
+      &.active {
         color: #343434;
       }
     }
   }
-  .passport-box-wrapper{
+  .passport-box-wrapper {
     position: absolute;
     right: 101px;
   }
-  .passport-item{
-    .passport-header{
+  .passport-item {
+    .passport-header {
       height: 24px;
       line-height: 24px;
       margin-bottom: 0;
       background-image: url(/skin/img/passport/fpwd-item-header-bg.png);
     }
-    .fpwd-item-wrapper{
+    .fpwd-item-wrapper {
       width: 100%;
       height: 228px;
       display: table;
@@ -359,15 +353,15 @@
         display: table-cell;
         vertical-align: middle;
       }
-      .fpwd-notice{
+      .fpwd-notice {
         color: #e60012;
         font-size: 16px;
       }
     }
-    .passport-button{
+    .passport-button {
       margin-top: 0;
     }
-    .passport-success-button{
+    .passport-success-button {
       margin-top: 30px;
     }
   }
@@ -375,97 +369,92 @@
 
 //小于800px;
 @media screen and (max-width: 800px) {
-  .container{
+  .container {
     width: 100%;
   }
-  .h-passport-page{
+  .h-passport-page {
     height: auto;
     background: none;
-    .passport-profile-wrapper{
+    .passport-profile-wrapper {
       display: none;
-      .profile{
+      .profile {
         background: none;
       }
     }
-    .passport-content-wrapper{
+    .passport-content-wrapper {
       float: none;
       width: 100%;
       padding: 44px 0;
       // background-color: #f0eff5;
-      input.passport-input{
+      input.passport-input {
         height: 50px;
       }
-      .passport-box-wrapper{
+      .passport-box-wrapper {
         float: none;
         width: 70%;
         height: auto;
         margin: 0 auto 0;
-        .passport-header{
+        .passport-header {
           height: 52px;
           line-height: 52px;
           font-size: 44px;
           text-align: center;
           background-position: center center;
         }
-        .passport-box{
+        .passport-box {
           height: 510px;
         }
       }
-      .passport-form{
+      .passport-form {
         margin-bottom: 30px;
-        li{
+        li {
           margin-top: 36px;
         }
-        .sms{
-          font-size:  1.3333em;
+        .sms {
+          font-size: 1.3333em;
         }
       }
-      .passport-button{
+      .passport-button {
         height: 50px;
         line-height: 50px;
         margin-bottom: 22px;
       }
     }
-
   }
-
   // 登录
-  #login{
+  #login {
     .passport-item.phoneNum {
-      .passport-header{
+      .passport-header {
         margin-bottom: 20px;
       }
     }
     .passport-item.account {
-      .passport-header{
+      .passport-header {
         margin-bottom: 58px;
       }
     }
   }
-
   // 注册、
-  #register{
-    .passport-box{
+  #register {
+    .passport-box {
       height: 666px;
     }
   }
-
   // 成功
-  #success{
-    .fpwd-tooltips-bar{
+  #success {
+    .fpwd-tooltips-bar {
       display: none;
     }
-    .fpwd-layout{
+    .fpwd-layout {
       position: static;
     }
   }
-
   // 找回密码
-  #fpwd{
-    .fpwd-tooltips-bar{
+  #fpwd {
+    .fpwd-tooltips-bar {
       display: none;
     }
-    .passport-box-wrapper{
+    .passport-box-wrapper {
       position: static;
     }
   }
@@ -473,76 +462,68 @@
 
 // ipad竖屏
 @media (min-width: 768px) and (max-width: 799px) {
-
-
   // 注册
-  #register{
-    .login-box{
-      .item{
-        .remember{
+  #register {
+    .login-box {
+      .item {
+        .remember {
           line-height: 52px;
         }
       }
     }
   }
-
-
-
   // 登录/成功页面
-  #success, #fpwd{
-    .passport-box{
+  #success,
+  #fpwd {
+    .passport-box {
       padding: 70px 80px 0;
-      .passport-success{
+      .passport-success {
         width: 148px;
         height: 148px;
       }
     }
   }
-
-  #fpwd{
-    .passport-item{
-      .passport-header{
+  #fpwd {
+    .passport-item {
+      .passport-header {
         height: 40px;
         line-height: 40px;
         font-size: 36px;
       }
-      .fpwd-item-wrapper{
+      .fpwd-item-wrapper {
         height: 320px;
       }
     }
   }
-
 }
 
-
-
 @media screen and (max-width: 767px) {
-  .h-passport-page{
-    .passport-content-wrapper{
+  .h-passport-page {
+    .passport-content-wrapper {
       padding: 24px 0;
-      input.passport-input{
+      input.passport-input {
         height: 40px;
       }
-      .passport-form{
+      .passport-form {
         margin-bottom: 18px;
-        li{
+        li {
           margin-top: 22px;
         }
       }
-      .passport-button{
+      .passport-button {
         height: 40px;
         line-height: 40px;
         margin-bottom: 14px;
       }
-      .passport-box-wrapper{
+      .passport-box-wrapper {
         width: 90%;
-        .passport-item{
+        .passport-item {
           padding: 20px;
         }
-        .passport-box{
+        .passport-box {
           height: 388px;
         }
-        .passport-header{
+        .passport-header {
           height: 30px;
           line-height: 30px;
           font-size: 26px;
@@ -550,35 +531,63 @@
       }
     }
   }
-
   // 登录
-  #login{
-    .passport-item.phoneNum{
-      .passport-header{
+  #login {
+    .passport-item.phoneNum {
+      .passport-header {
         margin-bottom: 12px;
       }
     }
     .passport-item.account {
-      .passport-header{
+      .passport-header {
         margin-bottom: 34px;
       }
     }
   }
-
   // 注册
-  #register{
-    .passport-box{
+  #register {
+    .passport-box {
       height: 530px;
     }
   }
-
 }
 
 //
 @media screen and (max-width: 320px) {
-  .h-passport-page{
-    .passport-content-wrapper{
+  .h-passport-page {
+    .passport-content-wrapper {
       font-size: 10px;
     }
+  }
+}
+
+// 错误动画
+input.error {
+  border-color: #f58484!important;
+  animation: shade .4s;
+}
+
+input.success {
+  border-color: #0ee894!important;
+}
+
+@keyframes shade {
+  0% {
+    transform: translatex(0)
+  }
+  20% {
+    transform: translateX(20px);
+  }
+  40% {
+    transform: translateX(-20px);
+  }
+  60% {
+    transform: translateX(20px);
+  }
+  80% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(0)
   }
 }

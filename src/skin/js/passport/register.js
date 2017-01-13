@@ -1,18 +1,22 @@
-var registerModel =  new Vue({
+var registerModel = new Vue({
   el: '#register',
   data: {
-    verify: false,  //  form验证
-    checboxSelected: false  // checkbox是否选中
+    verify: false, //  form验证
+    checboxSelected: false // checkbox是否选中
   },
   methods: {
-    register: function () {
+    register: function() {
       var _this = this,
-          telPhoneNum = _this.$refs.telPhoneNum,
-          imageVerify = _this.$refs.imageVerify,
-          SMSVerify = _this.$refs.SMSVerify,
-          password = _this.$refs.password,
-          confirmPassword = _this.$refs.confirmPassword,
-          recommend = _this.$refs.recommend
+        telPhoneNum = _this.$refs.telPhoneNum,
+        imageVerify = _this.$refs.imageVerify,
+        SMSVerify = _this.$refs.SMSVerify,
+        password = _this.$refs.password,
+        confirmPassword = _this.$refs.confirmPassword,
+        recommend = _this.$refs.recommend;
+
+
+      passportModel.getImageVerify();
+      return false;
       // 调用form验证方法验证输入
       this.formVerify(this)
       if (this.verify) {
@@ -38,7 +42,7 @@ var registerModel =  new Vue({
             "TradePassword": "",
             "UserType": ""
           },
-          success: function (res) {
+          success: function(res) {
             if (res.resultid !== 200) {
               passportModel.getVerify(_this)
               headerModel.loading = false
@@ -47,19 +51,19 @@ var registerModel =  new Vue({
               telPhoneNum.select()
             } else {
               DGDTOOLS.store.save('userInfo', res)
-              window.location.href='./success.html?register'
+              window.location.href = './success.html?register'
             }
           }
         })
       }
     },
     // 表单验证
-    formVerify: function () {
+    formVerify: function() {
       var telPhoneNum = this.$refs.telPhoneNum, // 手机号码
-          imageVerify = this.$refs.imageVerify, // 图形验证码
-          SMSVerify = this.$refs.SMSVerify,  // 短信验证码
-          password =  this.$refs.password,  // 密码
-          confirmPassword =  this.$refs.confirmPassword  // 确认密码
+        imageVerify = this.$refs.imageVerify, // 图形验证码
+        SMSVerify = this.$refs.SMSVerify, // 短信验证码
+        password = this.$refs.password, // 密码
+        confirmPassword = this.$refs.confirmPassword // 确认密码
 
       if (telPhoneNum.value === '' || !passportModel.verifyTel(telPhoneNum.value)) {
         // 电话号码验证
@@ -85,7 +89,7 @@ var registerModel =  new Vue({
         this.verify = false
         password.focus()
         password.select()
-      } else if (password.value !== confirmPassword.value){
+      } else if (password.value !== confirmPassword.value) {
         passportModel.errorFn('两次输入的密码不一致')
         this.verify = false
         confirmPassword.focus()
@@ -95,9 +99,74 @@ var registerModel =  new Vue({
       } else {
         this.verify = true
       }
+    },
+    // 用户名验证
+    telPhoneNumCheck: function() {
+      var telPhoneNum = this.$refs.telPhoneNum;
+      if (telPhoneNum.value === '' || !passportModel.verifyTel(telPhoneNum.value)) {
+        // 电话号码验证
+        // passportModel.errorFn('请填写正确的手机号码')
+        // $(telPhoneNum).addClass('error')
+        // this.verify = false
+        // telPhoneNum.focus()
+        // telPhoneNum.select()
+      } else {
+
+      }
+    },
+    //图形验证码验证
+    imageVerifyCheck: function() {
+      var imageVerify = this.$refs.imageVerify;
+      if (imageVerify.value === '' || !passportModel.verifyImage(imageVerify.value)) {
+        // 图形验证码验证
+        passportModel.errorFn('请填写正确的图形验证码验证')
+        $(imageVerify).addClass('error')
+      } else {
+        $.ajax({
+          url: '/passport/IsRightValidateCode',
+          type: 'POST',
+          data: {
+            code: imageVerify.value
+          },
+          success: function(res) {
+            if (!res) {
+              passportModel.errorFn('图形验证码不正确')
+              $(imageVerify).addClass('error')
+            } else {
+              $(imageVerify).removeClass('error').addClass('success');
+            }
+          }
+        })
+      }
+    },
+    SMSVerifyCheck: function() {
+      var SMSVerify = this.$refs.SMSVerify,
+        telPhoneNum = this.$refs.telPhoneNum;
+      if (SMSVerify.value === '' || !passportModel.verifySMS(SMSVerify.value)) {
+        // 图形验证码验证
+        passportModel.errorFn('请填写正确的图形验证码验证')
+        $(SMSVerify).addClass('error')
+      } else {
+        $.ajax({
+          url: headerModel.api + '/Passport/ValidatePhoneCode',
+          type: 'POST',
+          data: {
+            Phone: '18675594174',
+            Code: SMSVerify.value
+          },
+          success: function(res) {
+            if (!res) {
+              passportModel.errorFn('图形验证码不正确')
+              $(SMSVerify).addClass('error')
+            } else {
+              $(SMSVerify).removeClass('error').addClass('success');
+            }
+          }
+        })
+      }
     }
   },
-  mounted: function () {
+  mounted: function() {
     $('#loader').fadeOut("300")
     this.$refs.telPhoneNum.focus()
   }
