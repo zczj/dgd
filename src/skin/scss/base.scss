@@ -682,13 +682,16 @@ header {
         text-align: right;
         height: 100%;
         width: 100%;
-        .mean-btn {
+        .mean-btn,.center-btn {
           font-size: 4rem;
           text-align: center;
           .icon {
             display: inline-block;
             vertical-align: top;
           }
+        }
+        .center-btn{
+          display: none;
         }
       }
       nav {
@@ -759,7 +762,7 @@ header {
       }
     }
   }
-  .holding header .login-btns .tool-nav {
+  .holding header .login-btns.navShow .tool-nav {
     transform: translate(-130px, 0);
     height: auto;
   }
@@ -779,11 +782,14 @@ header {
           height: 44px;
         }
       }
-      .triggers>.mean-btn {
+      .triggers>.mean-btn,.triggers>.center-btn {
         width: 60px;
         font-size: 3rem;
         .icon {
           margin-top: 8px;
+          &.icon-user{
+            margin-top: 2px;
+          }
         }
       }
     }
@@ -1317,7 +1323,6 @@ header {
 
 //小于800px;
 @media only screen and (max-width: 50em) {
-  @include header--800();
   @include header--800();
   @include common-list--800();
 }

@@ -2,7 +2,8 @@ var headerModel = new Vue({
   el: "#header",
   name: 'header',
   data: {
-    tag: false,
+    tagl: false,
+    tagr: false,
     api: 'http://devapi.zczj.com:80/api',
     navs: [
       { title: '首页', url: '/Index/Index', pathname: 'index' },
@@ -41,13 +42,22 @@ var headerModel = new Vue({
     }
   },
   methods: {
-    showMean: function() {
-      this.tag = !this.tag;
+    showMean: function(tag) {
+      if(tag==='l'){
+        this.tagl = !this.tagl;
+      }else{
+        this.tagr = !this.tagr;
+      }
       document.querySelector('html').className = 'holding'
       document.querySelector('body').className = 'holding'
     },
     closeMean: function() {
-      this.tag = !this.tag;
+      if(this.tagl){
+        this.tagl = false;
+      }
+      if(this.tagr){
+        this.tagr = false;
+      }
       document.querySelector('html').className = '';
       document.querySelector('body').className = '';
     },

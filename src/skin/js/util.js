@@ -313,7 +313,31 @@ var Util = function() {
           fn.call(this, DGDTOOLS.Ev._eventProcess(event));
           event.preventDefault();
         }, capture || false);
-      }
+      },
+      // 设置高度
+      _setHeight: function  (obj,arr) {
+        var oH = document.documentElement.clientHeight || document.body.clientHeight,
+        cutH = 0;
+        if(arr.length){
+          for(var i = 0; i< arr.length; i++){
+            if(this._getStyle(arr[i],'marginTop')&& this._getStyle(arr[i],'marginTop')!=='auto'){
+              cutH += parseInt(this._getStyle(arr[i],'marginTop'))
+            }
+            cutH += arr[i].clientHeight;
+          }
+        }
+        
+        return oH - cutH;
+      },
+      // 获取样式
+      _getStyle: function (obj, attr) {
+        if (obj.currentStyle) {
+          return obj.currentStyle[attr];
+        }
+        else {
+          return document.defaultView.getComputedStyle(obj, null)[attr];
+        }
+      } 
 
 
     }

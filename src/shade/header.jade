@@ -66,12 +66,15 @@ section#header
           a.logo(href="/")
             img(src="/skin/img/logo.png", alt="")
           .triggers
+            a(href="#",v-on:click="showMean('l')").center-btn
+              i.icon.icon-user
             a(href="#", v-on:click="showMean").mean-btn
               i.icon.icon-catgray
-          nav(v-bind:class="{ navShow: tag }", v-cloak="")
+            
+          nav(v-bind:class="{ navShow: tagr }", v-cloak="")
             a(v-for="(item, index) in navs", v-bind:href="item.url", v-bind:class="{ cur : index == 0 }").border-1px {{item.title}}
             a.mobile-show.border-1px(href="javascript:void(0);", v-if="isLogin", v-on:click="loginOut()") 退出
-          .login-btns(v-if="isMobileOrTable")
+          .login-btns(v-if="isMobileOrTable", v-bind:class="{navShow: tagr}")
             ul.tool-nav
               li.login-btn(v-if="!isLogin")
                 .item
@@ -100,7 +103,7 @@ section#header
               li.go-zczj
                 a.item(href="http://m.dgd.vc/") 前往之家
     //- 遮罩层
-    .mask( v-bind:class="{'mask-show': tag}", v-on:click="closeMean")
+    .mask( v-bind:class="{'mask-show': (tagr||tagl?true:false)}", v-on:click="closeMean")
     input#userId(type="hidden")
 
 
