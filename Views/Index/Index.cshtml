@@ -3,6 +3,7 @@
     ViewBag.Keywords = "";
     ViewBag.Description = "";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string imgSize = "@1e_1c_0o_0l_320h_230w_90q.src";
 }
 <link rel="stylesheet" href="/skin/plugs/owl-carousel/assets/owl.carousel.min.css" />
 <link rel="stylesheet" href="/skin/plugs/owl-carousel/assets/owl.theme.default.min.css" />
@@ -20,20 +21,23 @@
         <div class="container clearfix">
             <div class="ga-side">
                 <div class="dgd-plat-gg">
-                    <div class="title"><span>平台公告</span><a href="/notice/index.html" target="_blank" class="more">更多公告 >></a></div>
+                    <div class="title"><span>平台公告</span><a href="/Notice/Index" target="_blank" class="more">更多公告 >></a></div>
                     <div id="ggSlider" v-bind:class="{isMobile: headerModel.isMobileOrTable}" class="content">
                         <ul>
-                            <li v-for="item in Ad.NoticeList" class="clearfix"><span class="time">{{item.PostDate}}</span><a v-bind:href="item.URL" class="title ellipsis">{{item.Title}}</a></li>
+                            <li v-for="item in Ad.NoticeList" class="clearfix"><span class="time">{{item.PostDate}}</span><a v-bind:href="['/Notice/Detail/'+item.NoticeID]" class="title ellipsis">{{item.Title}}</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="ga-main ga-tab">
-                <div class="ga-tab-btns clearfix"><a href="javascript:void(0);" v-for="(item, index) in tabs" v-bind:class="{ cur : index == 0 }" v-on:click="tabFn(CategoryMap[index], index)" ref="tab-btns" class="ga-tab-btn">{{item}}</a><a href="/news/index.html" target="_blank" class="more">更多资讯 >></a></div>
+                <div class="ga-tab-btns clearfix"><a href="javascript:void(0);" v-for="(item, index) in tabs" v-bind:class="{ cur : index == 0 }" v-on:click="tabFn(CategoryMap[index], index)" ref="tab-btns" class="ga-tab-btn">{{item}}</a><a href="/news" target="_blank" class="more">更多资讯 >></a></div>
                 <div class="ga-tab-box">
                     <ul>
                         <li v-for="(item, index) in list" v-if="index==0" class="first clearfix">
-                            <a href="#" class="pic"><img v-bind:src="resizeImg(item.CoverMobilePic,200,125)" alt="" /></a>
+                            <a href="#" class="pic">
+                                <img v-bind:src="resizeImg(item.CoverMobilePic,200,125)" v-if="item.CoverMobilePic" alt="" />
+                                <img src="/skin/img/default.jpg" v-else alt="" />
+                            </a>
                             <div class="desc">
                                 <a v-bind:href="['/news/detail?id='+ item.NewsID]" class="title ellipsis">{{item.Title}}</a>
                                 <p v-html="item.Abstract" class="txt"></p>
@@ -74,12 +78,17 @@
         <div class="container">
             <div class="common-t"><span>融资的项目</span></div>
             <ul class="common-list">
-                <li v-for="item in Ad.projectList" class="list-item">
-                    <div class="list-pic"><a v-bind:href="['/project/detail.html?id='+ item.ProjectID]"><img v-if="item.BigPic==null" src="/skin/img/default.jpg" alt="" /><img v-else="item.BigPic!=null" v-bind:src="item.BigPic" /><span v-bind:class="[&quot;tag-&quot;+item.State]" class="tag"></span></a></div>
+                <li v-for="(item, index) in Ad.projectList" class="list-item">
+                    <div class="list-pic">
+                        <a v-bind:href="['/project/detail?id='+ item.ProjectID]">
+                            <img v-if="item.BigPic==null" src="/skin/img/default.jpg" alt="" />
+                            <img v-else="item.BigPic!=null" v-bind:src="item.BigPic" />
+                        <span v-bind:class="[&quot;tag-&quot;+item.State]" class="tag"></span>
+                        </a></div>
                     <div class="list-main">
                         <div class="list-t">
                             <div class="item"><span>起投金额：</span><span class="price">{{item.LowVote}}</span></div>
-                            <div class="item"><span>项目平台：</span><span class="price">智金汇</span></div><a href="['/order/index.html?id='+ item.ProjectID]" class="buy-now"><i class="icon icon-money"></i>我要认购</a><a href="javascript:void(0);" v-on:click="headerModel.gz(item.ProjectID, item)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }" class="gz-btn"></a>
+                            <div class="item"><span>项目平台：</span><span class="price">智金汇</span></div><a href="javascript:void(0);" v-on:click="buyNow(item.ProjectID,index)" class="buy-now"><i class="icon icon-money"></i>我要认购</a><a href="javascript:void(0);" v-on:click="headerModel.gz(item.ProjectID, item)" v-bind:class="{ 'gz-btn-ed': item.FollowState== true }" class="gz-btn"></a>
                         </div>
                         <div class="list-con">
                             <div v-show="item.ShortDesc" class="list-txt">{{item.ShortDesc}}</div>
@@ -95,24 +104,28 @@
     <section class="transfer">
         <div class="container">
             <div class="common-t"><span>转让的项目</span></div>
-            <div id="transfer-list" class="transfer-list">
-                <ul class="clearfix">
-                    <li style="background-image:url(http://pic01.zczj.com//counseling/20161212/20161212101626.jpg@1e_1c_0o_0l_136h_220w_90q.src)" class="item cur">
-                        <div class="face">
-                            <span class="tag"></span>
-                            <div class="logo"><img src="http://www.dgd.vc/skin/promotion/fhReport/img/l2.png" alt="" /></div>
-                            <h2 class="title">乐商宝2号2期</h2><a href="#" class="btn">点击查看</a>
+            <div id="transfer-list" class="transfer-list owl-carousel owl-theme">
+                <div class="item" v-for="(item,index) in transferList" v-bind:style="{backgroundImage: 'url('+item.Pic+'@imgSize)' }" v-on:mouseover="mouse(index)" v-on:mouseout="mouseOut(index)" ref="trList">
+                    <div class="face">
+                        <span class="tag" v-bind:class="['tag-'+item.State]"></span>
+                        <div class="logo">
+                           @* <img v-bind:src="item.logo" alt="" />*@
                         </div>
-                        <div class="back">
-                            <div class="title">此项目折价出售</div>
-                            <p class="item">还剩 X 天 X 小时 X 秒</p>
-                            <p class="item">转让金额：4万元</p>
-                            <p class="item">转让份额：2份</p><a href="#" class="btn">查看关联项目</a>
-                        </div>
-                    </li>
-                </ul>
+                        <h2 class="title">{{item.ProjectName}}</h2>
+                    </div>
+                    <div class="back">
+                        <div class="title">{{item.ProjectName}}</div>
+                        <p class="items" v-if="item.ResidualTime =='已转让'">{{item.ResidualTime}}</p>
+                        <p class="items" v-else>还剩 {{item.ResidualTime}}</p>
+                        <p class="items">转让金额：{{item.Amount}}元</p>
+                        <p class="items">转让份额：2份</p><a v-bind:href="['/transfer/detail?id='+ item.CessionID]" class="btn">查看关联项目</a>
+                    </div>
+                </div>
+                
+
+               
             </div>
-            <div class="loading-more"><a href="javascript:void(0);">查看更多转让项目</a></div>
+            <div class="loading-more"><a href="/Transfer" target="_blank">查看更多转让项目</a></div>
         </div>
     </section>
     <section class="odds">
@@ -154,12 +167,7 @@
             <div class="player-con clearfix">
                 <div class="player-bar"><span class="prev-btn"></span><span class="next-btn"></span></div>
                 <div id="player-list" class="player-list owl-carousel owl-theme">
-                    <div class="item"><img src="/skin/img/index/p1.jpg" alt="" /></div>
-                    <div class="item"><img src="/skin/img/index/p1.jpg" alt="" /></div>
-                    <div class="item"><img src="/skin/img/index/p1.jpg" alt="" /></div>
-                    <div class="item"><img src="/skin/img/index/p1.jpg" alt="" /></div>
-                    <div class="item"><img src="/skin/img/index/p1.jpg" alt="" /></div>
-                    <div class="item"><img src="/skin/img/index/p1.jpg" alt="" /></div>
+                    <div class="item" v-for="item in plat"><img v-bind:src="item.src" alt="" /></div>                    
                 </div>
             </div>
         </div>
@@ -167,7 +175,7 @@
     <section class="links">
         <div class="container">
             <div class="common-t"><span>友情链接</span></div>
-            <div class="links-list"><a v-for="item in fcLink" v-bind:href="item.SiteLink">{{item.SiteName}}</a></div>
+            <div class="links-list"><a v-for="item in fcLink" v-bind:href="item.SiteLink" target="_blank">{{item.SiteName}}</a></div>
         </div>
     </section>
 </div>

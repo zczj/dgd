@@ -1,26 +1,43 @@
 var headerModel = new Vue({
   el: "#header",
+  name: 'header',
   data: {
     tag: false,
     api: 'http://devapi.zczj.com:80/api',
     navs: [
-      { title: '首页', url: '/Index/Index' },
-      { title: '投资项目', url: '/Project/Index' },
-      { title: '股权转让', url: '/Transfer/Index' },
-      { title: '质押贷款', url: '/index' },
-      { title: '新手指引', url: '/Novice/Index' },
-      { title: '关于我们', url: '/About/Index' }
+      { title: '首页', url: '/Index/Index', pathname: 'index' },
+      { title: '投资项目', url: '/Project/Index', pathname: 'project' },
+      { title: '股权转让', url: '/Transfer/Index', pathname: 'transfer' },
+      { title: '新手指引', url: '/Novice/Index', pathname: 'novice' },
+      { title: '关于我们', url: '/About/Index', pathname: 'about' }
     ],
     isLogin: false, //是否登录
     userInfo: null,
     token: '',
     loading: false,
     isMobileOrTable: false, // 当前视口宽度是否是处于非PC样式
+    fromUrl: window.location.href
   },
   computed: {
     // 是否为移动端
     isMobile: function() {
       return DGDTOOLS.check._isMobileOrPad();
+    },
+    // 当前页导航高亮
+    currentPage: function() {
+      var _this = this,
+        index = 0,
+        url = window.location.pathname.split('/')[1].toLowerCase();
+
+      for (var i = 0; i < _this.navs.length; i++) {
+        if (_this.navs[i].pathname == url) {
+          index = i;
+          break; // 匹配成功后,跳出for循环
+        } else {
+          index = null;
+        }
+      }
+      return index;
     }
   },
   methods: {

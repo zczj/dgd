@@ -1,13 +1,14 @@
-Vue.config.devtools = true
 var passportModel = new Vue({
   el: '.passport-common',
+  name: 'passportCommon',
   data: {
     sms: '发送',
     sended: false, // 是否已发送短信验证码
     error: false, // 表单验证错误提示
     errorMsg: '', // 表单验证错误提示信息
     delay: 5000, // 提示消失时间（ms）
-    verify: false // 验证成功与否
+    verify: false, // 验证成功与否
+    isImageVerify: false // 图形验证码是否验证成功
   },
   methods: {
     // 验证手机号码
@@ -51,18 +52,37 @@ var passportModel = new Vue({
     // 刷新图形验证码
     getVerify: function(obj) {
       var verifyImage = obj.$refs.verifyImage
-      verifyImage.src = 'http://www.dgd.vc/Passport/VerifyImage?r=' + Math.random()
+      verifyImage.src = '/Passport/VerifyImage?r=' + Math.random()
     },
     // 验证图形验证码
-    getImageVerify: function() {
+    getImageVerify: function(obj, bool) {
+      var _this = this,
+        b = bool || false;
       $.ajax({
         url: '/passport/IsRightValidateCode',
         type: 'POST',
+        async: false,
         data: {
-          code: '1234'
+          code: obj.$refs.imageVerify.value
         },
         success: function(res) {
-          console.log(res)
+          if (!res) {
+            _this.errorFn('图形验证码不正确')
+            obj.$refs.imageVerify.focus()
+            obj.$refs.imageVerify.select()
+            $(obj.$refs.imageVerify).removeClass('success error').addClass('error')
+            _this.isImageVerify = false;
+            return false;
+          } else {
+            if (!bool && !_this.sended) {
+              // 发送短信方法
+              $(obj.$refs.imageVerify).addClass('success');
+              _this.getSMSVerify(obj.$refs.telPhoneNum.value);
+            }
+            _this.isImageVerify = true;
+            return true;
+          }
+
         }
       })
     },
@@ -113,18 +133,20 @@ var passportModel = new Vue({
         this.errorFn('请填写正确的手机号码')
         tel.focus()
         tel.select()
+        $(tel).removeClass('success error').addClass('error')
         return
+      } else {
+        $(tel).addClass('success')
       }
       // 图形验证码验证
-      if (imageVerify && (imageVerify.value == '' || !this.verifyImage(imageVerify.value))) {
+      if (imageVerify.value !== '' || this.verifyImage(imageVerify.value)) {
+        this.getImageVerify(obj)
+      } else {
         this.errorFn('请填写正确的图形验证码')
         imageVerify.focus()
         imageVerify.select()
+        $(imageVerify).removeClass('success error').addClass('error')
         return
-      }
-      // 发送短信方法
-      if (!this.sended) {
-        this.getSMSVerify(tel.value)
       }
     },
 

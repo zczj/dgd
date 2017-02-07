@@ -1,1 +1,1 @@
-window.location.href = '/shade/unsupport.html'
+window.location.href = '/Content/unsupport.html'

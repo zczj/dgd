@@ -1,5 +1,11 @@
 @import "news.scss";
+// scss变量
+$orderC: #41d4dc;
+
+
+
 // 新闻详情
+
 .news-warp{
   min-height: 500px;
 }
@@ -91,7 +97,8 @@
       color: #999;
       position: relative;
       cursor: pointer;
-      display: inline-block;
+      overflow: hidden;
+      float: left;
       &::after{
         content: "";
         position: absolute;
@@ -280,6 +287,20 @@
         .com-tools{
           text-align: right;
           margin-top: 6px;
+          color:#a8a9ab;
+          font-size: 1.4rem;
+          .repay{
+            padding-left: 20px;
+          }
+          .zan{
+            color:#a8a9ab;
+            padding-left: 20px;
+            font-size: 1.6rem;
+            .icon{
+              vertical-align: middle;
+              margin-right: 4px;
+            }
+          }
         }
         //- 二级评论
         .com-list-sub{
@@ -354,4 +375,51 @@
 //小于600px;
 @media only screen and (max-width: 37.5em) {
   @include news-detail--600();
+}
+
+.g-dialog-contianer .dialog-window {
+
+  color:#fff;
+  .jb-head{
+    border-bottom:1px #fff solid;
+    border-width: 0 0 1px 0;
+    width: auto;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1.6rem;
+   
+    &::after{
+      content:'请选择举报类型：';
+      color:#fff;
+      
+    }
+  }
+  .jbPop{
+    label{
+      display: block;
+      text-align: left;
+      color:#fff;
+      transition: .3s all;
+      input[name='jbType']{
+        display: none;
+        opacity: 0;
+      }
+      .icon{
+        vertical-align: middle;
+        margin-right: 10px;
+        color:#ccc;
+        transition: .3s all;
+      }
+      input[name='jbType']:checked +.icon{
+        color:$orderC;
+      }
+      &:hover{
+        cursor: pointer;
+        color:$orderC;
+        input[name='jbType'] +.icon{
+          color:$orderC;
+        }
+      }
+    }
+  }
 }

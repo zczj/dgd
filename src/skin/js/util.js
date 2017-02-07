@@ -1,7 +1,7 @@
-
-; (function ($) {
+;
+(function($) {
   $.extend(jQuery.easing, {
-    elasticOut: function (x, t, b, c, d, a, p) {    //正弦增强曲线（弹动渐出）
+    elasticOut: function(x, t, b, c, d, a, p) { //正弦增强曲线（弹动渐出）
       if (t === 0) {
         return b;
       }
@@ -23,19 +23,19 @@
   });
 })(jQuery);
 
-var Util = function () {
+var Util = function() {
   //写入缓存
   function store() {
     var Store = {}
     return Store.prototype = {
-      _fetch: function (key) {
+      _fetch: function(key) {
         // return JSON.parse(window.localStorage.getItem(key) || '[]');
         return JSON.parse(window.localStorage.getItem(key) || null);
       },
-      save: function (key, items) {
+      save: function(key, items) {
         window.localStorage.setItem(key, JSON.stringify(items))
       },
-      clearOne: function (key) {
+      clearOne: function(key) {
         window.localStorage.removeItem(key);
       }
     }
@@ -45,7 +45,7 @@ var Util = function () {
     var Ft = {};
     return Ft.prototype = {
       // 转换时间 年/月/日 时：分：秒
-      _convertTime: function (date) {
+      _convertTime: function(date) {
         var now = new Date().getTime();
         var t1 = date.getTime();
         var year = new Date().getFullYear() - date.getFullYear();
@@ -67,7 +67,7 @@ var Util = function () {
         return result;
       },
       // 转换时间 **前
-      _cutTime: function (cutTime) {
+      _cutTime: function(cutTime) {
         var str = '刚刚';
         if (cutTime.year && cutTime.year > 0) {
           return str = cutTime.year + '年前';
@@ -87,7 +87,7 @@ var Util = function () {
         return str;
       },
       // 转换日期格式 "年-月-日"
-      _covnerTimeLine: function (date) {
+      _covnerTimeLine: function(date) {
         var str = date.split('/').join('-');
         return str;
       }
@@ -99,11 +99,11 @@ var Util = function () {
     var Check = {}
     return Check.prototype = {
       // 是否为数组
-      _array: function (obj) {
+      _array: function(obj) {
         return Object.prototype.toString.call(obj) === '[object Array]';
       },
       // 是否为微信浏览
-      _isWeixin: function () {
+      _isWeixin: function() {
         var userAgentString = window.navigator ? window.navigator.userAgent : "";
         var weixinreg = /MicroMessenger/i;
         var androidreg = /android/i;
@@ -113,43 +113,43 @@ var Util = function () {
         return true;
       },
       // 是否为登录状态 不是跳转到登录页面
-      _isLogin: function () {
+      _isLogin: function() {
         $.dialog({
-            type: 'warning',
-            message: '请先登录！',
-            buttons: [{
-              text: '登录',
-              type: 'green',
-              callback: function () {
-                window.location = '/passport/login?url=' + window.location.href;
-              }
-            }, {
-              text: '取消',
-              type: 'red'
-            }],
-            maskClose: true,
-            effect: true
-          })
+          type: 'warning',
+          message: '请先登录！',
+          buttons: [{
+            text: '登录',
+            type: 'green',
+            callback: function() {
+              window.location = '/passport/login?url=' + window.location.href;
+            }
+          }, {
+            text: '取消',
+            type: 'red'
+          }],
+          maskClose: true,
+          effect: true
+        })
 
       },
       // 是否为数字，包括小数点。
-      _isNumPoint: function (e) {
+      _isNumPoint: function(e) {
         var event = window.e || e;
         event.returnValue = this._isNum(event) || event.keyCode === 46 ? true : false;
         return event.returnValue;
         // return event.returnValue = (this._isNum(e.keyCode) && e.keyCode === 46);
       },
       // 是否为数字
-      _isNum: function (e) {
+      _isNum: function(e) {
         var event = window.e || e;
         return e.returnValue = (/[\d]/.test(String.fromCharCode(e.keyCode))) ? true : false;
       },
       // 移动电话
-      _isPhone: function (str) {
+      _isPhone: function(str) {
         return /^0?(13[0-9]|15[0-9]|17[0-9]|18[0-9]|14[57])[0-9]{8}$/.test(str)
       },
       // 是否为移动端
-      _isMobileOrPad: function () {
+      _isMobileOrPad: function() {
         var e = navigator.userAgent.toLowerCase(),
           t = "ipad" == e.match(/ipad/i),
           i = "iphone os" == e.match(/iphone os/i),
@@ -169,7 +169,7 @@ var Util = function () {
     Ev.loadJsLock = false;
     return Ev.prototype = {
       // 分享：https://github.com/zhansingsong
-      _share: function (ele) {
+      _share: function(ele) {
         new iShare({
           container: ele,
           config: {
@@ -192,14 +192,14 @@ var Util = function () {
        * @param   {num} size 二维码大小 默认值 8
        * @return  {无返回值 }      [description]
        */
-      _createQrcode: function (ele, size) {
+      _createQrcode: function(ele, size) {
         var shareUrl = window.location.href
         size = size ? size : 8;
         qr.canvas({
           canvas: ele,
           value: shareUrl,
           size: size,
-          cb: function (width, len, px) {
+          cb: function(width, len, px) {
             var el = ele;
             var val = 25;
             if (width < (25 * size - 10)) {
@@ -211,7 +211,7 @@ var Util = function () {
         });
       },
       // 动态加载js
-      _loadJS: function (url) {
+      _loadJS: function(url) {
         if (!this.loadJsLock) {
           this.loadJsLock = true;
           var script = document.createElement('script')
@@ -224,73 +224,102 @@ var Util = function () {
         }
       },
       // 按钮水波纹扩散
-      _btnCs: function () {
+      _btnCs: function() {
         // 须加载 skin/plugs/buttons/prefixfree.min.js
         var prefixfree = this._loadJS('/skin/plugs/button/prefixfree.min.js');
-        prefixfree.onload=function  () {
+        prefixfree.onload = function() {
           // body
-        
-        var canvas = {},
-          centerX = 0,
-          centerY = 0,
-          color = '',
-          containers = document.getElementsByClassName('material-design')
-        context = {},
-          element = {},
-          radius = 0,
 
-          requestAnimFrame = function () {
-            return (
-              window.requestAnimationFrame ||
-              window.mozRequestAnimationFrame ||
-              window.oRequestAnimationFrame ||
-              window.msRequestAnimationFrame ||
-              function (callback) {
-                window.setTimeout(callback, 1000 / 60);
+          var canvas = {},
+            centerX = 0,
+            centerY = 0,
+            color = '',
+            containers = document.getElementsByClassName('material-design')
+          context = {},
+            element = {},
+            radius = 0,
+
+            requestAnimFrame = function() {
+              return (
+                window.requestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function(callback) {
+                  window.setTimeout(callback, 1000 / 60);
+                }
+              );
+            }(),
+
+            init = function() {
+              containers = Array.prototype.slice.call(containers);
+              for (var i = 0; i < containers.length; i += 1) {
+                canvas = document.createElement('canvas');
+                canvas.addEventListener('click', press, false);
+                containers[i].appendChild(canvas);
+                canvas.style.width = '100%';
+                canvas.style.height = '100%';
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
               }
-            );
-          } (),
+            },
 
-          init = function () {
-            containers = Array.prototype.slice.call(containers);
-            for (var i = 0; i < containers.length; i += 1) {
-              canvas = document.createElement('canvas');
-              canvas.addEventListener('click', press, false);
-              containers[i].appendChild(canvas);
-              canvas.style.width = '100%';
-              canvas.style.height = '100%';
-              canvas.width = canvas.offsetWidth;
-              canvas.height = canvas.offsetHeight;
-            }
-          },
+            press = function(event) {
+              color = event.toElement.parentElement.dataset.color;
+              element = event.toElement;
+              context = element.getContext('2d');
+              radius = 0;
+              centerX = event.offsetX;
+              centerY = event.offsetY;
+              context.clearRect(0, 0, element.width, element.height);
+              draw();
+            },
 
-          press = function (event) {
-            color = event.toElement.parentElement.dataset.color;
-            element = event.toElement;
-            context = element.getContext('2d');
-            radius = 0;
-            centerX = event.offsetX;
-            centerY = event.offsetY;
-            context.clearRect(0, 0, element.width, element.height);
-            draw();
-          },
+            draw = function() {
+              context.beginPath();
+              context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+              context.fillStyle = color;
+              context.fill();
+              radius += 2;
+              if (radius < element.width) {
+                requestAnimFrame(draw);
+              }
+            };
 
-          draw = function () {
-            context.beginPath();
-            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-            context.fillStyle = color;
-            context.fill();
-            radius += 2;
-            if (radius < element.width) {
-              requestAnimFrame(draw);
-            }
-          };
-
-        return init();
+          return init();
         }
+
+      },
+      _eventProcess: function(event) {
+        var type = event.type;
+        if (type == 'DOMMouseScroll' || type == 'mousewheel') {
+          event.delta = (event.wheelDelta) ? event.wheelDelta / 120 : -(event.detail || 0) / 3;
+        }
+        if (event.srcElement && !event.target) {
+          event.target = event.srcElement;
+        }
+        if (!event.preventDefault && event.returnValue !== undefined) {
+          event.preventDefault = function() {
+            event.returnValue = false;
+          };
+        }
+        return event;
+      },
+      _mousewheel: function(el, type, fn, capture) {
+        if (type === "mousewheel" && document.mozHidden !== undefined) {
+          type = "DOMMouseScroll";
+        }
+        el.addEventListener(type, function(event) {
+          fn.call(this, DGDTOOLS.Ev._eventProcess(event));
+          event.preventDefault();
+        }, capture || false);
       }
+
+
     }
   }
+
+
   //检测登录
   function checkLogin() {
     return Tools.store._fetch('userInfo');
@@ -309,7 +338,7 @@ var Util = function () {
   function tips() {
     var Tip = {}
     return Tip.prototype = {
-      _tip: function (msg, callback) {
+      _tip: function(msg, callback) {
         $.dialog({
           type: 'warning',
           message: msg,

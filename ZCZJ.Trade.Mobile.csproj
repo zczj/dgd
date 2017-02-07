@@ -135,6 +135,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="App_Data\测试环境证书信息.txt" />
+    <Content Include="Content\2.html" />
+    <Content Include="Content\3.html" />
+    <Content Include="Content\unsupport.html" />
     <Content Include="Global.asax" />
     <Content Include="skin\css\about\about.css" />
     <Content Include="skin\css\about\index.css" />
@@ -169,6 +173,26 @@
     <Content Include="skin\img\about\index-slider2.png" />
     <Content Include="skin\img\about\index-slider3.png" />
     <Content Include="skin\img\about\joinus-banner.jpg" />
+    <Content Include="skin\img\Cooperation\dcw_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\djt_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\dwc_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\hmgs_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\hxjh_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\hyzc_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\kt_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\mxd_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\myts_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\qlg_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\tc_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\thw_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\tne_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\tsj_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\tsk_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\tzw_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\yht_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\zck_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\zjh_Jc.jpg" />
+    <Content Include="skin\img\Cooperation\zmzj_Jc.jpg" />
     <Content Include="skin\img\default.jpg" />
     <Content Include="skin\img\icon-zczj-b.png" />
     <Content Include="skin\img\icon-zczj.png" />
@@ -270,7 +294,6 @@
     <Content Include="skin\js\project\project-detail.js" />
     <Content Include="skin\js\project\project.js" />
     <Content Include="skin\js\project\qrcode.min.js" />
-    <Content Include="skin\js\qa.js" />
     <Content Include="skin\js\reservation\reserva.js" />
     <Content Include="skin\js\reservation\reservaComplete.js" />
     <Content Include="skin\js\unsupport.js" />
@@ -314,9 +337,17 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
     <Folder Include="Models\" />
+    <Folder Include="skin\css\maps\about\" />
+    <Folder Include="skin\css\maps\index\" />
+    <Folder Include="skin\css\maps\mycenter\" />
+    <Folder Include="skin\css\maps\news\" />
+    <Folder Include="skin\css\maps\notice\" />
+    <Folder Include="skin\css\maps\novice\" />
+    <Folder Include="skin\css\maps\order\" />
+    <Folder Include="skin\css\maps\passport\" />
+    <Folder Include="skin\css\maps\project\" />
+    <Folder Include="skin\css\maps\transfer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -403,28 +434,6 @@
     <Content Include="Views\Reservation\Complete.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="skin\css\maps\about\about.css.map" />
-    <Content Include="skin\css\maps\about\index.css.map" />
-    <Content Include="skin\css\maps\about\joinus.css.map" />
-    <Content Include="skin\css\maps\about\qa.css.map" />
-    <Content Include="skin\css\maps\base.css.map" />
-    <Content Include="skin\css\maps\font.css.map" />
-    <Content Include="skin\css\maps\index\index.css.map" />
-    <Content Include="skin\css\maps\mixin.css.map" />
-    <Content Include="skin\css\maps\mycenter\bindCard.css.map" />
-    <Content Include="skin\css\maps\news\news.css.map" />
-    <Content Include="skin\css\maps\news\newsDetail.css.map" />
-    <Content Include="skin\css\maps\notice\index.css.map" />
-    <Content Include="skin\css\maps\novice\index.css.map" />
-    <Content Include="skin\css\maps\order\order.css.map" />
-    <Content Include="skin\css\maps\passport\login.css.map" />
-    <Content Include="skin\css\maps\passport\passport.css.map" />
-    <Content Include="skin\css\maps\project\project-detail.css.map" />
-    <Content Include="skin\css\maps\project\project.css.map" />
-    <Content Include="skin\css\maps\transfer\detail.css.map" />
-    <Content Include="skin\css\maps\transfer\index.css.map" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{0c1d8894-d7f3-4f45-8ca1-d530e92c96e7}</Project>
       <Name>BLL</Name>
@@ -437,6 +446,10 @@
       <Project>{4e2dd522-2f22-46bd-a160-ea9847040434}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ZCZJ.Pay\ZCZJ.Pay.csproj">
+      <Project>{7c6d55a3-5c93-4490-b29f-511132b5775a}</Project>
+      <Name>ZCZJ.Pay</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ZCZJ.Share\ZCZJ.Share.csproj">
       <Project>{ced4c721-b2e0-43d5-abb7-b28c5c3a0794}</Project>
       <Name>ZCZJ.Share</Name>
@@ -444,6 +457,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Index\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\baofoo_pub.cer" />
+    <Content Include="App_Data\bfkey_100000178%40%40100000916.pfx" />
+    <Content Include="App_Data\bfkey_1024417%40%4032732.cer" />
+    <Content Include="App_Data\dgd20161111_pri.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Order\Go.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\dgd.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

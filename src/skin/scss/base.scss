@@ -1357,6 +1357,18 @@ header {
   transition: opacity .3s ease;
 }
 
+// 切换动画3 (下滑)
+.pulldown-enter,
+.pulldown-leave-active {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.pulldown-enter-active,
+.pulldown-leave-active {
+  transition: all .5s ease;
+}
+
 // loading
 .loader {
   font-size: 0.4rem;
@@ -1456,9 +1468,10 @@ header {
 #go-top {
   position: fixed;
   bottom: 40px;
-  right: -80px;
+  right: -30px;
   font-size: 24px;
   cursor: pointer;
+  z-index: 999999;
   transition: all .4s;
   transform-origin: center center;
   &:hover {
@@ -1466,18 +1479,94 @@ header {
     transform: rotate(-360deg);
   }
   &.show {
-    right: 80px;
+    right: 30px;
     transform: rotate(-720deg);
   }
 }
+
 // 按钮水波纹
-.material-design{
+.material-design {
   position: relative;
   overflow: hidden;
-  canvas{
+  canvas {
     position: absolute;
     top: 0;
     left: 0;
     opacity: .25;
+  }
+}
+
+// 用户协议
+#pulldown-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  .iframe-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 80%;
+    height: 70%;
+    padding: 20px 25px;
+    background: #fff;
+    margin: auto;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .6);
+    .scroll-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0%;
+      height: 4px;
+      background-color: #41d4dc;
+    }
+    .icon {
+      position: absolute;
+      right: 10px;
+      top: 0;
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 4;
+      transition: .4s;
+      &:hover {
+        transform: rotate(-180deg);
+      }
+    }
+    .iframe-item {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+    .item {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+    }
+  }
+}
+
+@media screen and (max-width:767px) {
+  #pulldown-wrapper {
+    .iframe-wrapper {
+      width: 95%;
+      height: 90%;
+      overflow: scroll;
+      .iframe-item {
+        overflow: scroll;
+      }
+    }
+    .item {
+      display: none;
+    }
   }
 }

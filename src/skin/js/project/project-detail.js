@@ -13,7 +13,10 @@ var projectDetail = new Vue({
     detail: '',
     followPersonList: [],
     projectQAList: {},
-    proId: ''
+    proId: '',
+    authen: '', // 认证人信息
+    qaReplyTexarea: false, // 回复输入框
+    qaReplyTexareaIndex: 0
   },
   methods: {
     toggleTab: function(index) {
@@ -55,33 +58,63 @@ var projectDetail = new Vue({
       headerModel.loading = true
       var qaurl = headerModel.api + '/ZhongChou/ProjectQAList?projectid=' + this.proId
       this.$http.get(qaurl).then(function(response) {
-        this.projectQAList = response.data.list.reverse()
-        headerModel.loading = false
-        this.isFirstTab = false
+        // 倒序处理
+        for (var i = 0; i < response.data.list.length; i++) {
+          response.data.list[i].ChlidList = response.data.list[i].ChlidList.reverse();
+        }
+        this.projectQAList = response.data.list.reverse();
+
+        // 
+        headerModel.loading = false;
+        this.isFirstTab = false;
+        this.qaReplyTexarea = false;
       })
     },
     // 添加留言问答
-    AddProjectQA: function() {
+    AddProjectQA: function(id) {
       var _this = this,
-        qaText = _this.$refs.qaText
-        // 判断登录，登录成功后才能留言
+        qaReplyText,
+        postValue,
+        qaText = _this.$refs.qaText;
+
+
+      var ParentID = id || 0;
+      // 判断登录，登录成功后才能留言
       if (!headerModel.isLogin) {
         DGDTOOLS.check._isLogin()
         return false
       }
       // 判断留言内容不能为空
-      if (qaText.value === '') {
-        $.dialog({
-          type: 'warning',
-          message: '请填写留言内容',
-          delay: 2000,
-          maskClose: true,
-          effect: true
-        })
-        this.$refs.qaText.focus()
-        return false
+      if (ParentID === 0) {
+        postValue = qaText
+        if (postValue.value === '') {
+          $.dialog({
+            type: 'warning',
+            message: '请填写留言内容',
+            delay: 2000,
+            maskClose: true,
+            effect: true
+          });
+          postValue.focus();
+          return false;
+        }
+      } else if (ParentID !== 0) {
+        // 获取节点
+        qaReplyText = _this.$refs.qaReplyText;
+        postValue = qaReplyText[0];
+        if (postValue.value === '') {
+          $.dialog({
+            type: 'warning',
+            message: '请填写回复内容',
+            delay: 2000,
+            maskClose: true,
+            effect: true
+          });
+          postValue.focus();
+          return false;
+        }
       }
-
+      // return false;
       headerModel.loading = true
       var AddProjectQAUrl = headerModel.api + '/ZhongChou/AddProjectQA';
       $.ajax({
@@ -89,9 +122,9 @@ var projectDetail = new Vue({
         method: 'POST',
         data: {
           "ProjectID": _this.proId,
-          "Content": qaText.value,
+          "Content": postValue.value,
           "Token": headerModel.token,
-          "ParentID": 0
+          "ParentID": ParentID
         }
       }).done(function(res) {
         //console.log(res)
@@ -100,6 +133,13 @@ var projectDetail = new Vue({
         _this.getProjectQAList()
         headerModel.loading = false
       })
+    },
+    // toggle回复输入框
+    toggleQaReply: function(index) {
+      if (this.qaReplyTexareaIndex === index) {
+        this.qaReplyTexarea = !this.qaReplyTexarea;
+      }
+      this.qaReplyTexareaIndex = index;
     },
     // 鼠标滚轮事件
     scroll: function() {
@@ -222,10 +262,34 @@ var projectDetail = new Vue({
         _this.scroll()
       }
     },
-    //
-
-
+    // 获取认证信息
+    getAuthen: function() {
+      $("#loader").fadeIn(300)
+      this.$http.get(headerModel.api + '/Pay/QueryAuthenticator?token=' + headerModel.token).then(function(response) {
+        $('#loader').fadeOut(300);
+        this.authen = response.data.State
+      })
+    },
+    buyNow: function(id) {
+      var _this = this;
+      // 检测登录
+      if (!headerModel.isLogin) {
+        DGDTOOLS.check._isLogin();
+        return;
+      } else {
+        // 是否认证投资人        
+        if (!this.authen) {
+          DGDTOOLS.tip._tip('请认证投资人！', function() {
+            var url = window.location.href;
+            window.location.href = 'http://test.dgd.vc/mycenter/authentication?url=' + window.location.href;
+          });
+          return;
+        }
+        window.location.href = "/Order/Index?id=" + id;
+      }
+    }
   },
+
   computed: {
     // 计算总的跟投人数
     totalFollowPerson: function() {
@@ -239,11 +303,12 @@ var projectDetail = new Vue({
       //仿路由联调（暂时加一下）套程序后替换。。老苏
     this.proId = window.location.search.split('id=')[1] || 0;
     if (this.proId == 0) {
-      window.location.href = './index.html'
+      window.location.href = './Index/Index'
       return false
     }
 
     // 获取详情
-    _this.getProjectDetail()
+    _this.getProjectDetail();
+    _this.getAuthen();
   }
 })

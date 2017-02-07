@@ -1,0 +1,17 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  #model-index
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main
+          h2 右侧区域
+
+
+    script.
+      window.onload=function(){
+        document.getElementById('loader').style.display='none'
+      }

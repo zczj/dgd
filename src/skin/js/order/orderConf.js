@@ -111,23 +111,39 @@ var orderConfModel = new Vue({
       headerModel.loading = true;
       if (_this.payMethod == 1) {
         // 1.4.1 在线支付 68539.75
-
-
-        if (headerModel.isMobile) {
-          
-          
-          
-          
+        if (headerModel.isMobile) {          
           // 1.4.1.1 移动端支付
-          console.log('移动端支付')
           // 1.4.1.1 查询是否绑卡了
           this.$http.get(headerModel.api + '/Pay/QueryCard?token=' + headerModel.token).then(function (response) {
 
             if (response.data.retCode === '1') {
               // 已绑定卡
-              headerModel.loading = false;
               _this.payLock = false;
-              DGDTOOLS.tip._tip(response.data.retMsg)
+              //DGDTOOLS.tip._tip(response.data.retMsg)
+              $.ajax({
+                url:'/Order/OrderConf',
+                data: {
+                  "orderid": _this.orderId,
+                  "paytype": _this.payMethod,
+                  "token": headerModel.token,
+                },
+                type: 'post',
+                success: function (response) {
+                  headerModel.loading = false;
+                  _this.payLock = false;
+                  if (response.resultid == 200) {
+                    document.body.innerHTML = response.HTML;
+                    document.getElementById('form1').submit();
+                  } else {
+                    DGDTOOLS.tip._tip(response.message);
+                  }
+                },
+                error: function (e) {
+                  headerModel.loading = false;
+                  _this.payLock = false;
+                  console.error(e.status + ":" + e.responseText);
+                }
+              })
 
             } else {
               // 未绑定卡

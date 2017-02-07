@@ -29,7 +29,9 @@ var newsModel = new Vue({
     // 评论
     comment: '',
     // 提交评论
-    comTxt: ''
+    comTxt: '',
+    // 举报类型
+    jbType:''
 
 
 
@@ -44,7 +46,7 @@ var newsModel = new Vue({
             console.log(response.data.message);
           }else{
             this.newsData = response.data;
-            
+           
             DGDTOOLS.Ev._btnCs();
           }
         }
@@ -140,70 +142,202 @@ var newsModel = new Vue({
     },
     // 获取评论信息
     getComment: function  () {
-      $("#loader").fadeIn(300)
+      // $("#loader").fadeIn(300)
       this.$http.get(headerModel.api + '/News/GetComment?ObjectID=news_' + this.newsId).then(function(response) {
         if(response.data){
           this.comment = response.data;
         }
-        $("#loader").fadeOut(300)
+        headerModel.loading=false;
       })
     },
-    // 提交评论信息
-    postComment: function  () {
+    checkComment: function  (obj) {
       var _this = this;
-          _this.comTxt = _this.$refs.comTxt.value;
-      // 1.1 检测登录
       if(!headerModel.isLogin){
         DGDTOOLS.check._isLogin();
-        return;
+        return false;
       }
-      if(this.comTxt == ''){
+      if(obj.val() == ''){
         DGDTOOLS.tip._tip('请说两句。。。',function  () {
-          _this.$refs.comTxt.focus();
-          return;
+          obj.focus();
         })
+        return false;
       }
-      
+      return true;
+    },
+    // 显示二级评论框
+    toggleRepay: function  (id,e) {
+      var _this = this;
+      var appendDiv = $(e.target).parents('.com-cont'),
+          subForm = '<div class="com-form"><div class="com-inner"><textarea placeholder="来说两句吧……" value="" class="com-box"></textarea></div> <div class="com-ft clearfix"><!----> <button data-color="#fff">发表评论</button></div></div>';
+          if(appendDiv.find('.com-form').length){
+            appendDiv.find('.com-form').toggle();
+            return;
+          }else{
+            appendDiv.append(subForm);
+          }
+          appendDiv.find('button').click(function  () {
+            
+            _this.comTxt= appendDiv.find('textarea').val();
+            console.log(_this.comTxt);
+            _this.postComment(id,appendDiv.find('textarea'));
+          })
+    },
+    // 提交评论信息
+    postComment: function  (id,obj) {
+      var _this = this;
+      var pId = id?id:0;
+      obj = obj?obj: $(_this.$refs.comTxt);
+          _this.comTxt = obj.val();
+      // 1.1 检测登录
+      if(!_this.checkComment(obj)){
+          return
+      }
       // newsid = 7431
-
+      headerModel.loading=true;
       $.ajax({
         url: headerModel.api + '/News/AddComm',
         data: {
           "token": headerModel.token,
-          "newsid": this.newsId,
-          "Content": this.comTxt,
-          "ParentID": 0,
+          "newsid": _this.newsId,
+          "Content": _this.comTxt,
+          "ParentID": pId,
           "CommentType": "news_"           
         },
         type: 'post',
         success: function (response) {
+          headerModel.loading=false;
           if (response.resultid == 200) {
-            // 提交成功跳转到订单确认页面，根据定单id
-            DGDTOOLS.tip._tip(response.message, function () {
-              console.log(response);
-            })
+            // 提交评论成功 拼接到二级评论前面。
+            obj.val('');
+            _this.getComment();
 
           } else {
             DGDTOOLS.tip._tip(response.message)
           }
         },
         error: function (e) {
+          headerModel.loading=false;
           DGDTOOLS.tip._tip(e.status + ":" + '接口异常')
           console.error(e.status + ":" + e.responseText);
         }
       })
+    },
+    // 评论点赞
+    zanFn:function  (id,index) {
+      var _this = this;
+      headerModel.loading=true;
+      _this.$http.get(headerModel.api + '/News/AddSp?commid='+id).then(function(response) {
+        headerModel.loading=false;
+        if(response.data.resultid == 200){
+          _this.comList[index].Sp=response.data.Sp;
+        }else{
+          DGDTOOLS.tip._tip(response.data.message)
+        }
+      })
+    },
+
+    // 举报
+    jbFn:function  (id) {
+      var _this = this;
+      // 举报模板
+      var jbHtml = '<div ref="jbPop" class="jbPop" style="min-width:300px;">'+
+          '<label><input type="radio" name="jbType" value="1" v-model="jbType"><i class="icon icon-os"></i>淫秽色情</label>'+
+          '<label><input type="radio" name="jbType" value="2" v-model="jbType"><i class="icon icon-os"></i>广告垃圾</label>'+
+          '<label><input type="radio" name="jbType" value="3" v-model="jbType"><i class="icon icon-os"></i>违法作息</label>'+
+          '<label><input type="radio" name="jbType" value="4" v-model="jbType"><i class="icon icon-os"></i>其他</label>'+
+          '</div>';
+      var jbPop = $.dialog({
+        // type: 'warning',
+        type:'jb-head',
+        message: jbHtml,
+        buttons:[{
+          text: '取消',
+          type: 'red'
+        },{
+          text: '举报',
+          type: 'green',
+          callback: function(){
+            var type = $('.jbPop').find('input:checked').val();
+            if(type){
+              _this.jbType = type;
+              headerModel.loading=true;
+              // 提交后台
+              $.ajax({
+                url: headerModel.api+'/News/Repost',
+                data: {
+                  "CommentID": id,
+                  "Type": type,
+                  "token": headerModel.token
+                },
+                type: 'post',
+                success: function  (response) {
+                  headerModel.loading=false;
+                  if(response.resultid == 200){
+                    DGDTOOLS.tip._tip('提交成功！', function  () {
+                      jbPop.close();
+                    })
+                  }else{
+                    DGDTOOLS.tip._tip(response.message)
+                  }
+                },
+                error: function (e) {
+                  headerModel.loading = false;
+                  DGDTOOLS.tip._tip(e.status + ":" + '接口异常')
+                  console.error(e.status + ":" + e.responseText);
+                }
+              })
+            }else{
+              DGDTOOLS.tip._tip('请选择你的举报内容！')
+            }
+            return false;
+          }
+        }],
+        maskOpacity: .4,
+        effect: true
+      })
+    }
+  },
+  computed:{
+    /**
+     * 返回评论列表
+     */
+    comList:function  () {
+      var comN =[], // 
+          comS =[],
+          comL = this.comment.ComList?this.comment.ComList:[];
+          for(var i = 0; i<comL.length; i++){
+            // 1.1 父级评论
+            if(comL[i].ParentID == 0 ){
+              comL[i].comSon=[];
+              comN.push(comL[i]);
+            }else{
+            // 1.2 二级评论
+            comS.push(comL[i]);          
+            }
+          }
+
+          for (var j = 0; j < comN.length; j++) {
+            for(var i = 0; i<comS.length;i++){
+              if(comS[i].ParentID == comN[j].CommentID){
+                comN[j].comSon.push(comS[i]);
+              }
+            }
+          }
+
+      return comN;
     }
   },
   mounted: function () {
     // 获取url传参过来的资讯id
     this.newsId = window.location.search.split('id=')[1] || 0;
+    window.onload=function  () {
+      setTimeout(function() {
+        DGDTOOLS.Ev._share('.item-share');
+      }, 2000);
+    }
     this.getNews();
     this.getIntPro();
     this.getIntNew();
     this.getComment();
-    window.onload=function () {
-      DGDTOOLS.Ev._share('.item-share');
-      
-    }
   }
 })

@@ -1,6 +1,66 @@
 /**
  * 首页js
  */
+
+var plats=[{
+  src:'/skin/img/Cooperation/tsk_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/dwc_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/tne_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/myts_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/qlg_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/zmzj_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/hmgs_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/zck_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/thw_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/djt_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/dcw_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/hxjh_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/yht_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/hyzc_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/mxd_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/tc_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/tsj_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/kt_Jc.jpg'
+},
+{
+  src:'/skin/img/Cooperation/tzw_Jc.jpg'
+},]
+
+
 var indexModel = new Vue({
   el: '#model-index',
   data: {
@@ -14,27 +74,103 @@ var indexModel = new Vue({
     currentpage: 1,
     pageSize: 3,
     cat: '53',
-    fcLink:'' // 友情链接
+    fcLink:'', // 友情链接
+    transferList: '', // 转让列表
+    authen:'', // 认证人信息
+    plat: plats
   },
   created: function() {
     this.getAd();
     this.getNewsList();
     this.getFriendLink();
+    this.getAuthen();
+    this.getCession();
+    
   },
   updated: function() {
     var _this = this;
     // 退出重置关注状态
-    if (!headerModel.isLogin) {
+    if (!headerModel.isLogin && _this.Ad.projectList) {
       for (var i = 0; i < _this.Ad.projectList.length; i++) {
         console.log(_this.Ad.projectList[i].FollowState = false);
       }
     }
     
+    ;(function  () {
+      // var owl = $('#transfer-list');
+      // owl.owlCarousel({
+      //   items: 4,
+      //   nav: false,
+      //   height:320,
+      //   margin: 10,
+      //   responsiveClass:true,
+      //   responsive: {
+      //     480:{
+      //       items:2
+      //     },
+      //     780:{
+      //       items:3,
+      //     },
+      //     900:{
+      //       items:4,
+      //     },
+      //     1100:{
+      //       items: 5,
+      //     }
+      //   }
+      // });
+    })('转让列表');
 
 
-    //合作伙伴
-    ;(function () {
-      var owl = $('#player-list');
+    //公告
+    ;(function() {
+       _this.ggSlider();
+    })('公告');
+
+
+
+  },
+  methods: {
+    // 首页轮播图
+    bannerSlider: function () {
+      var dgdAd = $('#dgd-ad');
+      dgdAd.owlCarousel({
+        items: 1,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true
+      });
+    },
+    transferSlider: function  () {
+      var transferS = $('#transfer-list');
+      transferS.owlCarousel({
+        items: 4,
+        nav: false,
+        height:320,
+        margin: 10,
+        responsiveClass:true,
+        responsive: {
+          0:{
+            items:1.5
+          },
+          320:{
+            items:1.5
+          },
+          480:{
+            items:2
+          },
+          800:{
+            items:3,
+          },
+          1100:{
+            items: 4,
+          }
+        }
+      });
+    },
+    playerSlider: function  () {
+     var owl = $('#player-list');
       owl.owlCarousel({
         items: 5,
         nav: false,
@@ -44,7 +180,7 @@ var indexModel = new Vue({
             items:2
           },
           480:{
-            items:3
+            items:2
           },
           600:{
             items:3,
@@ -63,29 +199,13 @@ var indexModel = new Vue({
       $('.prev-btn').click(function() {
         owl.trigger('prev.owl.carousel')
       });
-    })('合作伙伴');
-
-    //公告
-    ;(function() {
-      _this.ggSlider();
-    })('公告');
-
-
-
-  },
-  methods: {
-    // 首页轮播图
-    bannerSlider: function () {
-      var dgdAd = $('#dgd-ad');
-      dgdAd.owlCarousel({
-        items: 1,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 5000,
-        autoplayHoverPause: true
-      });
     },
-    
+    mouse:function  (i) {
+      $(this.$refs.trList[i]).addClass('cur');
+    },
+    mouseOut:function  (i) {
+      $(this.$refs.trList[i]).removeClass('cur');
+    },
     getAd: function  () {
       $('#loader').fadeIn(300);
       this.$http.get(headerModel.api + '/ZhongChou/GetList?pagesize=3&state=0&currentpage=20&token=' + headerModel.token).then(function (response) {
@@ -95,18 +215,19 @@ var indexModel = new Vue({
         $('#loader').fadeOut(300);
         this.$nextTick(function () {
             this.bannerSlider();
+            this.playerSlider();
           });
       })
     },
     //公告滚动
     ggSlider: function () {
       var _this = this;
+      var oDiv = $('#ggSlider');
+      var oUl = oDiv.find('ul');
+      var iH = oUl.find('li:first').height();
+      var iNow = 0;
+      oDiv.timer = null;
       if (headerModel.isMobileOrTable) {
-        var oDiv = $('#ggSlider');
-        var oUl = oDiv.find('ul');
-        var iH = oUl.find('li:first').height();
-        var iNow = 0;
-        oDiv.timer = null;
 
         function slider(num) {
           iNow += num;
@@ -127,6 +248,7 @@ var indexModel = new Vue({
         autoPlay();
 
       }else{
+        clearInterval( oDiv.timer );
         return;
       }
     },
@@ -153,6 +275,19 @@ var indexModel = new Vue({
 
         headerModel.loading=false;
          $('#loader').fadeOut(300);
+      })
+    },
+    getCession: function  () {
+      var _this = this;
+      _this.$http.get(headerModel.api + '/ZhongChou/GetCessionList?currentPage=1&PageSize=5').then(function (response) {
+        if(response.data){
+          _this.transferList = response.data;
+          _this.$nextTick(function  () {
+            _this.transferSlider();
+          });
+        }
+      },function(response) {
+        console.log(response.status);
       })
     },
     // 友情链接
@@ -215,6 +350,38 @@ var indexModel = new Vue({
         var result = url.split('@')[0] +'@1e_1c_0o_0l_'+ height +'h_'+width+'w_90q.src';
       }
       return result;
-    }
+    },
+    // 获取认证信息
+    getAuthen: function() {
+      $("#loader").fadeIn(300)
+      this.$http.get(headerModel.api + '/Pay/QueryAuthenticator?token=' + headerModel.token).then(function(response) {
+        $('#loader').fadeOut(300);
+        this.authen = response.data.State
+      })
+    },
+    buyNow: function(id, index) {
+      var _this = this;
+      // 检测登录
+      if (!headerModel.isLogin) {;
+        DGDTOOLS.check._isLogin();
+        return;
+      } else {
+        // 是否认证投资人        
+        if (!this.authen) {
+          DGDTOOLS.tip._tip('请认证投资人！', function() {
+            var url = window.location.href;
+            window.location.href = 'http://test.dgd.vc/mycenter/authentication?url=' + window.location.href;
+          });
+          return;
+        }
+
+        // 预约项目
+        if (_this.list[index].ISReservation) {
+          window.location.href = "/reservation/index?id=" + id
+        } else {
+          window.location.href = "/order/index?id=" + id
+        }
+      }
+    },
   }
 })

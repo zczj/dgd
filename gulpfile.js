@@ -24,7 +24,7 @@
  //样式
  gulp.task('css', function() {
    return gulp.src(['src/skin/scss/**/*.scss', 'src/skin/comStyle/*.scss'])
-     .pipe(changed('skin/css/', { extension: '.css' }))
+     .pipe(changed('dist/skin/css/', { extension: '.css' }))
      .pipe(debug({ title: '编译：' }))
      .pipe(sourcemaps.init())
      // 嵌套输出方式 nested (默认)
@@ -42,34 +42,34 @@
        exclude: ['.eot', '.woff', '.ttf', '.svg']
      }))
      .pipe(sourcemaps.write('./maps'))
-     .pipe(gulp.dest('skin/css'))
+     .pipe(gulp.dest('dist/skin/css'))
      .pipe(browserSync.reload({ stream: true }));
  })
 
- //脚本
- gulp.task('js', function() {
-   return gulp.src(['src/skin/js/*.js', 'src/skin/js/**/*.js'])
-     .pipe(changed('skin/js', { extension: '.js' }))
-     .pipe(debug({ title: '编译：' }))
-     // .pipe(rename({ suffix: '.min'}))
-     .pipe(uglify())
-     .pipe(gulp.dest('skin/js'))
- })
+//脚本
+gulp.task('js', function () {
+  return gulp.src(['src/skin/js/*.js', 'src/skin/js/**/*.js'])
+    .pipe(changed('dist/skin/js', {extension: '.js'}))
+    .pipe(debug({title: '编译：'}))
+    // .pipe(rename({ suffix: '.min'}))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/skin/js'))
+})
 
  // 图片
  gulp.task('img', function() {
    return gulp.src(['src/skin/img/*', 'src/skin/img/**/*'])
      // .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
-     .pipe(gulp.dest('skin/img'))
+     .pipe(gulp.dest('dist/skin/img'))
      // .pipe(notify({ message: 'Images task complete' }));
  });
 
  //第三方js
  gulp.task('plugs', function() {
    return gulp.src(['src/skin/plugs/*', 'src/skin/plugs/**/*'])
-     .pipe(changed('skin/plugs', { extension: '.plugs' }))
+     .pipe(changed('dist/skin/plugs', { extension: '.plugs' }))
      .pipe(debug({ title: '编译：' }))
-     .pipe(gulp.dest('skin/plugs'))
+     .pipe(gulp.dest('dist/skin/plugs'))
  })
 
  //jade
@@ -85,13 +85,13 @@
 
  //清理
  gulp.task('clean', function() {
-   return gulp.src('skin', { read: false })
+   return gulp.src('dist', { read: false })
      .pipe(clean());
  })
 
 
  gulp.task('build', function() {
-   gulp.start('css', 'js', 'img', 'plugs');
+   gulp.start('css', 'js', 'img', 'jade', 'plugs');
  });
 
  gulp.task('serve', ['css', 'js', 'img', 'jade', 'plugs'], function() {
@@ -105,7 +105,7 @@
    gulp.watch(['src/skin/scss/*.scss', 'src/skin/scss/**/*.scss'], ['css']);
    gulp.watch(['src/skin/js/*.js', 'src/skin/js/**/*.js'], ['js']);
    gulp.watch(['src/skin/img/*', 'src/skin/img/**/*'], ['img']);
-   gulp.watch('dist/**/*.html').on('change', browserSync.reload);
+   gulp.watch('*').on('change', browserSync.reload);
  })
 
  gulp.task('default', ['serve'])

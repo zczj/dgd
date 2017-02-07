@@ -1,14 +1,14 @@
-var getType = window.location.href.split('?')[1] || 'error'
+var getType = window.location.href.split('?')[1].split('&')[0] || 'error'
 new Vue({
   el: '#success',
   data: {
     formShow: false,
     from: false,
-    number: 50,
+    number: 10,
     fpwd: false
   },
   computed: {
-    type: function () {
+    type: function() {
       if (getType == 'login') {
         this.from = false
         return '登录'
@@ -24,26 +24,29 @@ new Vue({
       }
     },
     // 计算countdown值
-    countdown: function () {
-      var timer = null, _this=this//, number = 10
-      return timer = setInterval(function () {
+    countdown: function() {
+      var timer = null,
+        _this = this //, number = 10
+      return timer = setInterval(function() {
         _this.number--
-        if (_this.number<=0) {
-          clearInterval(timer)
-        }
+          if (_this.number <= 0) {
+            clearInterval(timer)
+          }
         return _this.number
       }, 1000)
     }
   },
-  mounted: function () {
-    var timer = null,  _this = this
-    timer = setInterval(function () {
+  mounted: function() {
+    $('#loader').fadeOut(300);
+    var timer = null,
+      _this = this
+    timer = setInterval(function() {
       _this.number--
-      if (_this.number<=0) {
-        clearInterval(timer)
-        window.location.href = window.location.search.split('url=')[1] || '/';
+        if (_this.number <= 0) {
+          clearInterval(timer)
+          window.location.href = window.location.search.split('url=')[1] || '/';
 
-      }
+        }
     }, 1000)
   }
 })

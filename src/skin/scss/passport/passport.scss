@@ -153,8 +153,8 @@
         float: left;
         margin-bottom: 16px;
         input {
-          width: 18px;
-          height: 18px;
+          // width: 18px;
+          // height: 18px;
           vertical-align: middle;
           margin-right: 5px;
         }
@@ -293,9 +293,6 @@
     span {
       color: #e60012;
     }
-  }
-  .passport-button {
-    // margin-top: 30px;
   }
 }
 
@@ -437,7 +434,7 @@
   // 注册、
   #register {
     .passport-box {
-      height: 666px;
+      height: 730px;
     }
   }
   // 成功
@@ -547,7 +544,7 @@
   // 注册
   #register {
     .passport-box {
-      height: 530px;
+      height: 550px;
     }
   }
 }

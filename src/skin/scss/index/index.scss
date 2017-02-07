@@ -231,11 +231,13 @@
             font-size: 1.5rem;
             display: inline-block;
             line-height: 26px;
-            width: 80%;
+            width: calc(100% - 75px);
             height: 100%;
-            float: left;
+            float:left;
           }
           .time{
+            width: 75px;
+            display: inline-block;
             float: right;
             color: #99a0a7;
             font-size: 1.3rem;
@@ -480,19 +482,18 @@
     width: 100%;
     height: 320px;
     overflow: hidden;
-    li+li{
-      margin-left: 20px;
+    .item+.item{
+      height: 100%;
     }
-    li{
+    .item{
       // width: calc(25% - 20px);
-      width: 220px;
+      width: 100%;
       height: 320px;
       background-size:cover;
       background-position: center center;
       display: inline-block;
       color: #fff;
       position: relative;
-      float: left;
       text-align: center;
       border: 1px #b6bdc0 solid;
       border-radius: 5px;
@@ -528,19 +529,29 @@
             padding: 0 10px;
             line-height: 1.2;
             margin-top: 6px;
-            text-shadow:3px 3px 3px #333;
+            text-shadow:1px 1px 1px #333;
+          }
+          &.tag-2{
+            &::after{
+              content:'已转让';
+            }
           }
         }
         .logo{
           text-align: center;
-          margin-top: 84px;
+          margin:20% auto 0;
+          width: 78px;
+          height: 78px;
+          overflow: hidden;
+
+
         }
         .title{
           text-align: center;
           margin-top: 10px;
           font-size: 2rem;
           font-weight: 400;
-          text-shadow:3px 3px 3px #111;
+          text-shadow:1px 1px 1px #111;
         }
       }
       .back{
@@ -555,7 +566,7 @@
           padding: 50px 20px;
           position: relative;
           z-index: 10;
-          .title,.item{
+          .title,.items{
             text-align: left;
           }
           .title{
@@ -563,7 +574,7 @@
             color: #02d3ac;
             margin-bottom: 20px;
           }
-          .item{
+          .items{
             font-size: 1.4rem;
             line-height: 24px;
           }
