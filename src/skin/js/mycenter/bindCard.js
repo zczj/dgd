@@ -1,5 +1,6 @@
 /**
  * 绑定银行卡
+ * 工行： 621661280000447287
  */
 
 var bindCardModel = new Vue({
