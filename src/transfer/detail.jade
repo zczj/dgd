@@ -1,7 +1,19 @@
 extends ../shade/layout
 block content
   link(rel="stylesheet", href="/skin/css/transfer/detail.css")
-  #transfer-detail
+  link(rel="stylesheet", href="/skin/css/transfer/popup.css")
+  #popup
+    .popup-mask(v-if='popup')
+    transition(name='pulldown', v-on:after-enter="afterEnter")
+      .wrapper(v-if='popup')
+        .header 私信约谈
+          a(href="javascript:;",v-on:click='popup=false').icon.icon-close 
+        .content
+          textarea(placeholder='说点什么...', ref='msgBox')
+          .button-wrapper.clearfix
+            a(href='javascript:;',v-on:click='sendMsg').button.purchase-button 确定
+            a(href='javascript:;',v-on:click='popup=false').button.interview-button 取消
+  #transfer-detail.allH
     .container.clearfix
       .transfer-detail-content
         div
@@ -37,7 +49,7 @@ block content
                 li
                   span 转让剩余时间：
                   span 10天10小时10分10秒
-              a(href="javascrip:;").detail-button 约谈
+              a(href="javascrip:;", v-on:click='popupModel.showPopup').detail-button 约谈
           // 流程
           .process
             .process-header
@@ -68,7 +80,12 @@ block content
               a(href="#") 《大股东权益转让协议》
           li
             a(href="#").button 确认购买
+  script(src='/skin/js/transfer/popup.js')
   script.
-    $(function(){
-      $('#loader').fadeOut('300')
+    
+    new Vue({
+      el: '#transfer-detail',
+      mounted: function () {
+        $('#loader').fadeOut('300')
+      }
     })

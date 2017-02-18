@@ -341,9 +341,11 @@ var orderModel = new Vue({
     // 返回用户选择的 coupon
     coupon: function() {
       var res = {};
-      for (var i = 0; i < this.buyInfo.CouponList.length; i++) {
-        if (this.buyInfo.CouponList[i].CouponID == this.selected) {
-          return res = this.buyInfo.CouponList[i];
+      if(this.buyInfo.CouponList){
+        for (var i = 0; i < this.buyInfo.CouponList.length; i++) {
+          if (this.buyInfo.CouponList[i].CouponID == this.selected) {
+            return res = this.buyInfo.CouponList[i];
+          }
         }
       }
       return res

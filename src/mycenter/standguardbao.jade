@@ -1,0 +1,175 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/stand.css")
+  #model-stand.allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main#stand(v-cloak)
+          //- 我的站岗宝 pc
+          section.item-wrapper.stand-head(v-if="!headerModel.isMobileOrTable")
+            .item-header 
+              span 我的站岗宝
+            .item-warp.clearfix
+              dl
+                dt
+                  .stand-logo
+                dd.stand-name  站岗宝(元)
+                dd.stand-price {{(standInfo.TotalAmount-0).toFixed(2)}}
+              .stand-list
+                p
+                  span.t 活期产品(元)：
+                  span.val 2014.00
+                p
+                  span.t 定期产品(元)：
+                  span.val 2015.00
+                p
+                  span.t 冻结资金(元)：
+                  span.val {{standInfo.FreezingAmount}}
+                p
+                  span.t 总收益：
+                  span.val {{standInfo.AccumulatedIncome}}
+
+          //- 我的站岗宝 mobile
+          section.item-wrapper.stand-head-mobile(v-else)
+            dl
+              dt.stand-name 站岗宝(元)
+              dd.stand-price {{((standInfo.TotalAmount-0).toFixed(2))}}
+            .stand-list
+              p
+                span.t 活期产品(元)：
+                span.val 2014.00
+              p
+                span.t 定期产品(元)：
+                span.val 2015.00
+            
+              p
+                span.t 累计收益(元)：
+                span.val {{standInfo.AccumulatedIncome}}
+          section.item-warpper(v-if="headerModel.isMobileOrTable")
+            .list-tab 
+              a(href="#" v-bind:class="{cur:!isShow}" v-on:click="isShow = !isShow") 活期账户
+              a(href="#" v-bind:class="{cur:isShow}" v-on:click="isShow = !isShow") 定期账户
+          
+          //-  数据列表(活期)
+          section.item-wrapper.tz-list(v-show="!isShow || !headerModel.isMobileOrTable")
+            .item-header(v-if="!headerModel.isMobileOrTable")
+              span 活期账户
+            .item-header-info.clearfix
+              .info-name
+                span 活期(元)： 
+                span {{((standInfo.TotalAmount-0).toFixed(2))}}
+              .info-list
+                p(v-if="!headerModel.isMobileOrTable") 冻结资金(元)：4
+                p 
+                  span 昨日收益(元)：
+                  span 4
+                p 
+                  span 累计收益(元)：
+                  span {{standInfo.AccumulatedIncome}} 
+              .info-tools
+                a(href="#") 转出
+                a(href="#") 设置自动转入
+            .tz-list-bar(v-if="!headerModel.isMobileOrTable")
+              a(href="javascript:void(0);" v-for="(item, index) in tabs" v-on:click="queryList(typeMap[index],index)"  v-bind:class="{ cur : index == 0 }" ref='tab-btns') {{item}}
+
+            .tz-list-warp
+              .tz-list-item(v-for="(item, index) in list")
+                .tz-list-t 
+                  .suptable
+                    span.tz-list-l
+                      span.tz-list-name {{item.ProjectName}}
+                      span.tz-list-time 交易日期: {{item.PostDate}}
+                    span.tz-list-r(v-if="item.PayStatus == 0")
+                      a(href="javascript:void(0);" v-on:click="delMyTran(index,item.OrderID)").tz-list-del 删除
+                .tz-list-con
+                              
+                          
+
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 交易金额（元） 
+                    .item 
+                      div
+                        p
+                          span {{(item.TransactionAmount-0).toFixed(2)}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 交易类型
+                    .item 
+                      div
+                        p
+                          span {{item.Type}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 活期余额（元） 
+                    .item 
+                      div
+                        P
+                          span {{(item.AvailableBalance-0).toFixed(2)}}
+
+              .tz-list-empty(v-if="!list.length")
+                p 暂无记录
+            include page.jade     
+
+
+          //-  数据列表(定期)                   
+          section.item-wrapper.tz-list(v-show="isShow || !headerModel.isMobileOrTable")
+            .item-header(v-if="!headerModel.isMobileOrTable")
+              span 定期账户
+            .item-header-info.clearfix
+              .info-fe
+                span 持有总份额（元）： 
+                span 2015.00
+              
+            .tz-list-bar(v-if="!headerModel.isMobileOrTable")
+              a(href="javascript:void(0);" v-for="(item, index) in tabs" v-on:click="queryList(typeMap[index],index)"  v-bind:class="{ cur : index == 0 }" ref='tab-btns') {{tabs[index]}}
+
+            .tz-list-warp
+              .tz-list-item(v-for="(item, index) in list")
+                .tz-list-t 
+                  .suptable
+                    span.tz-list-l
+                      span.tz-list-name {{item.ProjectName}}
+                      span.tz-list-time 交易日期: {{item.PostDate}}
+                    span.tz-list-r(v-if="item.PayStatus == 0")
+                      a(href="javascript:void(0);" v-on:click="delMyTran(index,item.OrderID)").tz-list-del 删除
+                .tz-list-con
+                              
+                          
+
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 交易金额（元） 
+                    .item 
+                      div
+                        p
+                          span {{(item.TransactionAmount-0).toFixed(2)}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 交易类型
+                    .item 
+                      div
+                        p
+                          span {{item.Type}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 活期余额（元） 
+                    .item 
+                      div
+                        P
+                          span {{(item.AvailableBalance-0).toFixed(2)}}
+
+              .tz-list-empty(v-if="!list.length")
+                p 暂无记录
+            include page.jade
+                               
+
+           
+            
+
+  script(src="/skin/js/mycenter/stand.js")
+  

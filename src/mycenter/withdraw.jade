@@ -1,0 +1,118 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/withdraw.css")
+
+  #model.allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main#withdraw(v-cloak)
+          //- 提现
+          .bank-act(v-if="headerModel.isMobileOrTable")
+            .bank-act-top
+              span.bank-logo
+                i.icon
+              span.bank-name {{list && list[0].BankName}}
+            .bank-act-num.clearfix
+              span ****
+              span ****
+              span ****
+
+              span.lastF {{list && list[0].CardID.substring(list[0].CardID.length-4)}}
+            i.icon.icon-bank-yl
+
+          section.item-wrapper.recharge
+            .item-header(v-if="!headerModel.isMobileOrTable")
+              span 提现
+            .item-warp
+              .withdraw-tip(v-if="!headerModel.isMobileOrTable")
+                dl
+                  dt 温馨提示：
+                 
+                  dd  1.当天提现在16：00前申请的，当天到账；16:00后申请的，次日的12:00到账；
+                  dd  2.确保您的银行帐号的姓名和您的网站上的真实姓名一致,信用卡不得设为提现帐号；
+                  dd  3.每人每天提现限额5万元
+
+              .recharge-list
+                ul
+                  li.price
+                    span.t-name 账户余额：
+                    span.t-val {{mySideModel.userBaseInfo&& mySideModel.userBaseInfo.AvailableBalance.toFixed(2)}}
+                  li(v-if="headerModel.isMobileOrTable")
+                    span.t-name 姓名：
+                    span.t-val {{list&&list[0].FullName}}
+                  li(v-if="headerModel.isMobileOrTable")
+                    span.t-name 身份证号：   
+                    span.t-val {{list&&list[0].IDNumber}}
+                  li.t-line
+                    span.t-name 提现金额：
+                    span.t-val 
+                      input.recharge-input(type="text" v-on:keypress="DGDTOOLS.check._isNumPoint(event)" v-model="tmoney" ref='tmoney' v-on:blur="checkPoint")
+                      span(v-if="!headerModel.isMobileOrTable") 元
+                  li(v-if="!headerModel.isMobileOrTable")
+                    span.t-name 提现银行卡：
+                    span.t-val.back-list
+                      .back-list-item(v-for="(item,i) in list")
+                        label(v-if="isDis!=-1" v-on:click="DGDTOOLS.tip._tip('已在移动端绑定了银行卡！！！')").disabled
+                          input(type="radio" name="cartBank" v-if="i==isDis" checked="checked" disabled="disabled" v-bind:value="item.MyBankCardID" )
+                          input(type="radio" name="cartBank" v-else disabled="disabled" v-bind:value="item.MyBankCardID" )
+                          i.icon.icon-checked
+                          span.tzb-bank-icon(v-bind:class="item.BankStyle")
+                          span 尾号：{{item.CardID.substring(item.CardID.length-4)}}
+                        label(v-else)
+                          input(type="radio" name="cartBank" v-bind:value="item.MyBankCardID" v-model="bankId")
+                          i.icon.icon-checked
+                          span.tzb-bank-icon(v-bind:class="item.BankStyle")
+                          span 尾号：{{item.CardID.substring(item.CardID.length-4)}}
+                        
+                  //- li(v-if="!headerModel.isMobileOrTable")
+                  //-   span.t-name 到账金额：
+                  //-   span.t-val.blueb 0.0元
+                  //- li(v-if="!headerModel.isMobileOrTable")
+                  //-   span.t-name 手续费：
+                  //-   span.t-val.blueb 0.0元
+                  li
+                    span.t-name 交易密码：
+                    span.t-val 
+                      input.recharge-input(type="password" ref="pwd" v-model="pwd")
+                      a(href="#" v-if="!headerModel.isMobileOrTable").forget-pwd 忘记支付密码？
+                .recharge-btns
+                  a.btn(href="javascript:void(0);" v-if="!headerModel.isMobileOrTable" v-on:click="withDrow") 确定
+                  a.btn(href="javascript:void(0);" v-on:click="withDrow" v-else) 确认并提现
+                  .recharge-tools(v-if="!headerModel.isMobileOrTable")
+                    a(href="bindCard.html") 添加银行卡
+                    ||
+                    a(href="#") 提现记录
+                .recharge-tip(v-if="headerModel.isMobileOrTable")
+                  dl
+                    dt.
+                      温馨提示：
+                    dd.
+                      1、周一到周五提现受理时间为09:00-17:00，周日提现申请顺延至周一受理；
+                    dd. 
+                      2、一般情况下招、交、农、建、工行等银行提现处理后24小时内到帐，其它银行1-2个工作日到账（节假日除外）。
+                    dd. 
+                      3、提现银行卡的开户名须与实名认证的真实姓名一致，且银行卡信息填写正确方可提现成功。
+                    dd. 
+                      4、信用卡不得设为提现银行卡。
+                    dd. 
+                .recharge-tel(v-if="headerModel.isMobileOrTable")
+                  span 客服电话：
+                  a(href="tel:0755-82557958") 0755-82557958
+
+           
+
+                    
+                    
+          script(src='../skin/js/passport/jquery-md5.min.js')         
+          script(src="/skin/js/mycenter/withdraw.js")
+      
+
+
+
+                
+              
+                

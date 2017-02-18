@@ -18,3 +18,11 @@
    background:-moz-linear-gradient(45deg, $color1, $color2);
    background:linear-gradient(45deg, $color1, $color2);
 }
+
+//过滤渐变
+@mixin gradientC($coner,$color1,$color2){
+   background:-webkit-linear-gradient($coner, $color1, $color2);
+   background:-o-linear-gradient($coner, $color1, $color2);
+   background:-moz-linear-gradient($coner, $color1, $color2);
+   background:linear-gradient($coner, $color1, $color2);
+}

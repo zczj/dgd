@@ -1,132 +1,185 @@
 @font-face {
   font-family: 'iconfont';  /* project id 190684 */
-  src: url('//at.alicdn.com/t/font_mjfbzh66dlutmx6r.eot');
-  src: url('//at.alicdn.com/t/font_mjfbzh66dlutmx6r.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_mjfbzh66dlutmx6r.woff') format('woff'),
-  url('//at.alicdn.com/t/font_mjfbzh66dlutmx6r.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_mjfbzh66dlutmx6r.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_g15fi1dr0pzgds4i.eot');
+  src: url('//at.alicdn.com/t/font_g15fi1dr0pzgds4i.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_g15fi1dr0pzgds4i.woff') format('woff'),
+  url('//at.alicdn.com/t/font_g15fi1dr0pzgds4i.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_g15fi1dr0pzgds4i.svg#iconfont') format('svg');
 }
 
-.icon{
+.icon {
   font-style: normal;
   display: inline-block;
   vertical-align: top;
-  &::before{
+  &::before {
     display: inline-block;
     font-family: 'iconfont';
     color: inherit;
     vertical-align: top;
   }
+  // 个人中心 - 银联
+  &-bankicon::before {
+    content: '\e61b';
+  }
+
+  // 个人中心 - 我的质押 - 逾期
+  &-warning::before {
+    content: '\e6fe';
+  }
+  // 个人中心 - 我的质押 - 还款日期
+  &-clock::before {
+    content: '\e65f';
+  }
+  // 个人中心 - 我的质押 - 还款
+  &-repayment::before {
+    content: '\e651';
+  }
+  // 个人中心 - 信息
+  &-tips::before {
+    content: '\e61a';
+  }
+  // 个人中心 - 资金
+  &-qian::before {
+    content: '\e619';
+  }
+  // 个人中心 - 管理
+  &-mannage::before {
+    content: '\e696';
+  }
+  // 个人中心 - 转让
+  &-transfer::before {
+    content: '\e656';
+  }
+  // 个人中心 - 贷款
+  &-pro::before {
+    content: '\e610';
+  }
+  // 个人中心 - 推广
+  &-gift::before {
+    content: '\e99e';
+  }
+  // 个人中心 - 消息
+  &-message::before {
+    content: '\eb54';
+  }
+  // 个人中心 - 安全设置
+  &-preson::before {
+    content: '\e678';
+  }
+  // 个人中心 - 首页
+  &-home::before {
+    content: '\e67a';
+  }
   // 留言点赞
-  &-com-zan::before{
+  &-com-zan::before {
     content: '\e69b';
   }
   // 支付宝
-  &-zfb::before{
+  &-zfb::before {
     content: '\e605';
   }
   // 银行卡
-  &-bank::before{
+  &-bank::before {
     content: '\e640';
   }
   // 加
-  &-add::before{
+  &-add::before {
     content: '\e603';
   }
   // 减
-  &-cut::before{
+  &-cut::before {
     content: '\e609';
   }
   // 支付 stepicon
-  &-os::before{
+  &-os::before {
     content: '\e615';
   }
   // 收藏
-  &-sc::before{
+  &-sc::before {
     content: '\e62e';
   }
   // 喇叭--声明
-  &-sm::before{
+  &-sm::before {
     content: '\e6df';
   }
   // 头部消息
-  &-msgTop::before{
+  &-msgTop::before {
     content: '\e65c';
   }
   // 400电话
-  &-tel::before{
+  &-tel::before {
     content: '\e60f';
   }
   // 微信
-  &-wx::before{
+  &-wx::before {
     content: '\e602';
   }
   // 新浪
-  &-sina::before{
+  &-sina::before {
     content: '\e61c';
   }
   // 豆瓣
-  &-douban::before{
+  &-douban::before {
     content: '\e657';
   }
   // 人人
-  &-renren::before{
+  &-renren::before {
     content: '\e601';
   }
   // QQ空间
-  &-qzone::before{
+  &-qzone::before {
     content: '\e7dc';
   }
   // 阅读
-  &-ice::before{
+  &-ice::before {
     content: '\e621';
   }
   // 点赞
-  &-zan::before{
+  &-zan::before {
     content: '\e607';
   }
   // 消息
-  &-msg::before{
+  &-msg::before {
     content: '\e608';
   }
   // 关闭
-  &-close::before{
+  &-close::before {
     content: '\e613';
   }
   // 分类
-  &-catgray::before{
+  &-catgray::before {
     content: '\e612';
   }
-   // 用户
-  &-user::before{
+  // 用户
+  &-user::before {
     content: '\e600';
   }
   // 手机
-  &-phone::before{
+  &-phone::before {
     content: '\e620';
   }
   // 刷新
-  &-refresh::before{
+  &-refresh::before {
     content: '\e65b';
   }
   // 钱
-  &-money::before{
+  &-money::before {
     content: '\e616';
   }
   // 搜索
-  &-search::before{
+  &-search::before {
     content: '\e611';
   }
   // 向上
-  &-up::before{
+  &-up::before {
     content: '\e614';
   }
   // 向下
-  &-down::before{
+  &-down::before {
     content: '\e971';
   }
   // 向左
-  &-left::before{
+  &-left::before {
     content: '\e604';
   }
 }

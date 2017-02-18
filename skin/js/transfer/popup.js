@@ -1,0 +1,1 @@
+var popupModel=new Vue({el:"#popup",data:{popup:!1},methods:{showPopup:function(){return DGDTOOLS.checkLogin()?void(this.popup=!0):(DGDTOOLS.check._isLogin(),!1)},sendMsg:function(){var o=this.$refs.msgBox;return""==o.value?(DGDTOOLS.tip._tip("请填写私信内容",function(){o.focus()}),!1):void $.ajax()},afterEnter:function(){this.$refs.msgBox.focus()}}});

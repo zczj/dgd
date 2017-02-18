@@ -1,0 +1,165 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/transfer.css")
+  .allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main
+          // 我的转让
+          section.item-wrapper
+            .item-header 
+              span 我的转让
+            .item-content.cols-3.clearfix
+              .cols-item
+                div.clearfix
+                  .title 总转出项目数(个)
+                  h2.amount-number2 8
+                div.clearfix
+                  .title 总转出项目金额(元)
+                  h2.amount-number 30,000.00
+              .cols-item
+                div.clearfix
+                  .title 总转出项目数(个)
+                  h2.amount-number2 8
+                div.clearfix
+                  .title 总转出项目金额(元)
+                  h2.amount-number 30,000.00
+              .cols-item
+                div.clearfix
+                  .title 总转出项目数(个)
+                  h2.amount-number2 8
+                div.clearfix
+                  .title 总转出项目金额(元)
+                  h2.amount-number 30,000.00
+          
+
+          section.item-wrapper
+            //- .item-header
+              span
+            .item-content
+              //- 1
+              
+              .transfer-list
+                .transfer-header
+                  //- 已完成: transfer-finished
+                  //- 转让中: transfer-ing
+                  //- 已转出: transfer-out
+                  //- 已转入: transfer-in
+                  .transfer-tag.transfer-out
+                  .transfer-project-title 真功夫邀你来做股东
+                  .transfer-project-intro 
+                  a(href="#").transfer-association 查看关联项目>
+                .transfer-content.clearfix
+                  .param.clearfix
+                    ul.amount.clearfix
+                      li
+                        span.name 转让金额（元）
+                        | ：
+                        span 40,000.00
+                      li
+                        span.name 转让份额（元）
+                        | ：
+                        span 1.25%
+                      li
+                        span.name 原始金额（元）
+                        | ：
+                        span 40,000.00
+                    ul.amount.clearfix
+                      li
+                        span.name 转让方
+                        | ：
+                        span 张 * *
+                      li
+                        span.name 原始投资时间
+                        | ：
+                        span 2016年07月03日15:00
+                      li
+                        span.name 转让时间
+                        | ：
+                        span 10天10小时10分10秒
+                  .buttons.clearfix
+                    a(href="#").blue 查看详情
+                    a(href="#").button 签署合同
+                    a(href="#").button 签署合同
+              //- 2
+              .transfer-list
+                .transfer-header
+                  .transfer-tag.transfer-finished
+                  .transfer-project-title 真功夫邀你来做股东
+                  .transfer-project-intro 
+                  a(href="#").transfer-association 查看关联项目>
+                .transfer-content.clearfix
+                  .param.clearfix
+                    ul.amount.clearfix
+                      li
+                        span.name 转让金额（元）
+                        | ：
+                        span 40,000.00
+                      li
+                        span.name 转让份额（元）
+                        | ：
+                        span 1.25%
+                      li
+                        span.name 原始金额（元）
+                        | ：
+                        span 40,000.00
+                    ul.amount.clearfix
+                      li
+                        span.name 转让方
+                        | ：
+                        span 张 * *
+                      li
+                        span.name 原始投资时间
+                        | ：
+                        span 2016年07月03日15:00
+                      li
+                        span.name 转让时间
+                        | ：
+                        span 10天10小时10分10秒
+                  .buttons.clearfix
+                    a(href="#").blue 查看详情
+                    a(href="#").button 签署合同
+                    a(href="#").button 签署合同
+              //- 3
+              .transfer-list
+                .transfer-header
+                  .transfer-tag.transfer-finished
+                  .transfer-project-title 真功夫邀你来做股东
+                  .transfer-project-intro 
+                  a(href="#").transfer-association 查看关联项目>
+                .transfer-content.clearfix
+                  .param.clearfix
+                    ul.amount.clearfix
+                      li
+                        span.name 转让金额（元）
+                        | ：
+                        span 40,000.00
+                      li
+                        span.name 转让份额（元）
+                        | ：
+                        span 1.25%
+                      li
+                        span.name 原始金额（元）
+                        | ：
+                        span 40,000.00
+                    ul.amount.clearfix
+                      li
+                        span.name 转让方
+                        | ：
+                        span 张 * *
+                      li
+                        span.name 原始投资时间
+                        | ：
+                        span 2016年07月03日15:00
+                      li
+                        span.name 转让时间
+                        | ：
+                        span 10天10小时10分10秒
+                  .buttons.clearfix
+                    a(href="#").blue 查看详情
+                    a(href="#").button 签署合同
+                    a(href="#").button 签署合同

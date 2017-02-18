@@ -1,0 +1,120 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/pledge.css")
+  #pledge-detail.allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main
+          // 质押详情
+          section.item-wrapper.assets
+            .item-header 
+              span 质押详情
+            .item-content.clearfix
+              ul
+                li 项目名称：
+                  span.strong {{detail.ProjectName}}
+                li 投资金额：
+                  span.strong {{detail.PledgeAmount}}
+                li 还款方式：
+                  span.strong {{repaymentType[detail.RepaymentType]}}
+                li 借款周期：
+                  span.strong {{detail.BorrowingCycle}}
+                li 年化利息：
+                  span.strong {{detail.AnnualizedInterestRate}}
+              ul
+                li 项目状态：
+                  span.red {{pledgeStatus[detail.PledgeStatus]}}
+                li 下期账单日：{{detail.NextBillingDate}}
+                li 
+                  a(href="#").btn 现在还款
+          
+          // 还款详情
+          section.item-wrapper.assets
+            .item-header 
+              span 还款详情
+            .item-content.tz-list
+              .tz-list-warp
+                .tz-list-item(v-for='item in detail.RepaymentList')
+                  .tz-list-t 
+                    .suptable
+                      span.tz-list-l
+                        span.tz-list-time 还款时间
+                        span.tz-list-time {{item.RepaymentDate}}
+                      span.tz-list-r
+                        //- a(href="#" ).tz-list-del.blue 交易详情
+                  .tz-list-con
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 本金（元）
+                      .item 
+                        div
+                          p
+                            span {{item.Principal}}
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 利息（元）
+                      .item 
+                        div
+                          p
+                            span.green {{item.Interest.toFixed(2)}}
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 逾期天数
+                      .item 
+                        div
+                          span {{item.OverdueDays}}
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 逾期金额 
+                      .item 
+                        div
+                          p
+                            span {{item.OverdueAmount}}
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 总金额（元）
+                      .item 
+                        div
+                          span {{item.TotalAmount.toFixed(2)}}
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span  还款状态  
+                      .item 
+                        div
+                          span(v-if='item.RepaymentType == 0').green 已还
+                          span(v-if='item.RepaymentType == 1').red 未还
+  
+
+  script.
+    new Vue({
+      el: '#pledge-detail',
+      data: {
+        pledgeStatus: ['申请中', '待还款', '逾期', '已转让', '已还款'],
+        repaymentType: ['按月还款', '按日还款'],
+        repaymentStatus: ['未还', '已还'],
+        detail: {
+          'ProjectName': '拉拉社区', 
+          'PledgeAmount': 1000.00, 
+          'PledgeStatus': 0, 
+          'RepaymentType': 0, 
+          'BorrowingCycle': '3个月', 
+          'AnnualizedInterestRate': '18%', 
+          'NextBillingDate': '07-18',
+          'RepaymentList': [
+            {'RepaymentDate': '2016-08-13', 'Principal': 0, 'Interest': 150.00, 'OverdueDays': 0, 'OverdueAmount': 0, 'TotalAmount': 150.00, 'RepaymentType': 0},
+            {'RepaymentDate': '2016-08-13', 'Principal': 0, 'Interest': 150.00, 'OverdueDays': 0, 'OverdueAmount': 0, 'TotalAmount': 150.00, 'RepaymentType': 0},
+            {'RepaymentDate': '2016-08-13', 'Principal': 0, 'Interest': 150.00, 'OverdueDays': 0, 'OverdueAmount': 0, 'TotalAmount': 150.00, 'RepaymentType': 1},
+            {'RepaymentDate': '2016-08-13', 'Principal': 0, 'Interest': 150.00, 'OverdueDays': 0, 'OverdueAmount': 0, 'TotalAmount': 150.00, 'RepaymentType': 0},
+            {'RepaymentDate': '2016-08-13', 'Principal': 0, 'Interest': 150.00, 'OverdueDays': 0, 'OverdueAmount': 0, 'TotalAmount': 150.00, 'RepaymentType': 0},
+            {'RepaymentDate': '2016-08-13', 'Principal': 0, 'Interest': 150.00, 'OverdueDays': 0, 'OverdueAmount': 0, 'TotalAmount': 150.00, 'RepaymentType': 1},
+            {'RepaymentDate': '2016-08-13', 'Principal': 0, 'Interest': 150.00, 'OverdueDays': 0, 'OverdueAmount': 0, 'TotalAmount': 150.00, 'RepaymentType': 1},
+            {'RepaymentDate': '2016-08-13', 'Principal': 0, 'Interest': 150.00, 'OverdueDays': 0, 'OverdueAmount': 0, 'TotalAmount': 150.00, 'RepaymentType': 1},
+            {'RepaymentDate': '2016-08-13', 'Principal': 0, 'Interest': 150.00, 'OverdueDays': 0, 'OverdueAmount': 0, 'TotalAmount': 150.00, 'RepaymentType': 0}
+          ]
+        }
+      }
+    })

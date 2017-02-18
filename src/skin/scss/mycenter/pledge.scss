@@ -1,0 +1,146 @@
+@import 'myBase';
+// 质押列表
+.item-content {
+  padding-left: 0;
+}
+
+.icon-wrapper {
+  .icon {
+    color: #fed546;
+    font-size: 20px;
+    padding: 0 3px;
+    &.gray {
+      color: #c8c8c8;
+    }
+  }
+}
+
+.tz-list-items {
+  .item {
+    >div:hover {
+      .tips {
+        display: block;
+      }
+    }
+  }
+}
+
+.tips {
+  display: none;
+  position: absolute;
+  top: 35px;
+  text-align: left;
+  border: 1px solid #f1f1f1;
+  background-color: #fff;
+  padding: 15px 10px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, .2);
+  border-radius: 5px;
+  z-index: 9;
+  &::before,
+  &::after {
+    content: ' ';
+    position: absolute;
+    top: -12px;
+    left: 40%;
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: solid;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+  }
+  &::before {
+    border-bottom-color: #f1f1f1;
+  }
+  &::after {
+    border-bottom-color: #fff;
+    top: -10px;
+  }
+}
+
+// 质押详情
+#pledge-detail {
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #009ff0;
+    line-height: normal;
+    border-radius: 5px;
+  }
+  .item-wrapper {
+    margin-bottom: 0;
+  }
+  .item-content {
+    ul {
+      width: 50%;
+      float: left;
+      &:last-child {
+        text-align: right;
+      }
+    }
+    li {
+      color: #95a0aa;
+      font-size: 16px;
+      height: 50px;
+      line-height: 50px;
+      .strong {
+        color: #505050;
+        font-size: 18px;
+      }
+      .red {
+        color: #e60012;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .tips {
+    transform: translateX(-50%);
+    &::before,
+    &::after {
+      left: 50%;
+    }
+  }
+  // 质押详情
+  #pledge-detail {
+    .btn {
+      display: block;
+      text-align: center;
+    }
+    .item-content {
+      ul {
+        width: 100%;
+        float: none;
+        &:last-child {
+          li {
+            text-align: right;
+            &:nth-of-type(2n) {
+              text-align: left;
+            }
+            &:last-child {
+              width: 100%;
+            }
+          }
+        }
+      }
+      li {
+        color: #95a0aa;
+        font-size: 14px;
+        height: 40px;
+        line-height: 40px;
+        width: 50%;
+        float: left;
+        text-align: left;
+        &:nth-of-type(2n) {
+          text-align: right;
+        }
+        .strong {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+@import 'myBase';
+/**
+* 资金流水
+*/
+.tz-list{
+  .item-header{
+    span{
+      cursor:pointer;
+      margin: 0 30px;
+      &::after{
+        display: none;
+      }
+      &.cur,&:hover{
+        color:#009ff0;
+        &::after{
+          display: inline-block;
+        }
+      }
+
+    }
+  }
+}
+.fundManage{
+  .item-warp{
+    font-size: 0;
+    .acc{
+      display: inline-block;
+      font-size: 1.6rem;
+      color:#616a73;
+      padding-right: 20px;
+      line-height: 1.6;
+      dt{
+
+      }
+      dd{
+        font-size: 2.4rem;
+        color:#5b5f5f;
+        font-weight: 700;
+      }
+    }
+    .tools-bar{
+      font-size: 1.6rem;
+      display: inline-block;
+      .btn{
+        display: inline-block;
+        padding: 2px 20px;
+        border:1px #42adf2 solid;
+        color:#42adf2;
+        border-radius: 4px;
+        transition: .3s all;
+        &:hover{
+          color:#fff;
+          background:#42adf2;
+        }
+      }
+      .btn+.btn{
+        margin-left: 20px;
+      }
+    }
+  }
+}

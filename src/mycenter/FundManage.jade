@@ -1,0 +1,145 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/fundManage.css")
+
+  #model-fundM.allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main#fundM
+          // 资金管理
+          section.item-wrapper.fundManage
+            .item-header 
+              span 资金管理
+            .item-warp
+              dl.acc
+                dt 账户余额（元）
+                dd {{ mySideModel.userBaseInfo &&mySideModel.userBaseInfo.Balance.toFixed(2)}}
+              .tools-bar
+                a.btn(href="#") 充值
+                a.btn(href="#") 提现
+          section.item-wrapper.tz-list
+            .item-header 
+              span(v-for="(btn, index) in tabs"  v-bind:class="{ cur : index == 0 }" ref='tab-btns' v-on:click="queryList( index)") {{btn}}
+            .tz-list-warp
+              .tz-list-item(v-for="(item, index) in list")
+                .tz-list-t 
+                  .suptable
+                    span.tz-list-l
+                      //- span.tz-list-name xxx
+                      span.tz-list-time 交易时间:{{item.PostDate}}
+                    span.tz-list-r(v-if="item.PayStatus == 0")
+                      a(href="javascript:void(0);" v-on:click="delMyTran(index,item.OrderID)").tz-list-del 删除
+                .tz-list-con(v-if="type==3")
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 类型 
+                    .item 
+                      div
+                        p
+                          span {{item.FoundType}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 交易金额（元）
+                    .item 
+                      div
+                        p
+                          span {{item.TransactionAmount}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 可用余额（元） 
+                    .item 
+                      div
+                        P
+                          span 没接口数据
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 冻结总金额（元） 
+                    .item 
+                      div
+                        P
+                          span 没接口数据
+                //- 充值记录
+                .tz-list-con(v-if="type==1")
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 类型 
+                    .item 
+                      div
+                        p
+                          span {{item.FoundType}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 账号
+                    .item 
+                      div
+                        p
+                          span 无接口
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 充值余额（元） 
+                    .item 
+                      div
+                        P
+                          span {{item.TransactionAmount}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 关联银行 
+                    .item 
+                      div
+                        P
+                          span 无接口
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 交易状态 
+                    .item 
+                      div
+                        P
+                          span.green {{item.FoundType}}
+
+                //- 提现记录
+                .tz-list-con(v-if="type==2")
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 到账金额（元） 
+                    .item 
+                      div
+                        p
+                          span {{item.TransactionAmount}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 关联银行
+                    .item 
+                      div
+                        p
+                          span {{item.Variable}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 交易状态 
+                    .item 
+                      div
+                        P
+                          span.green {{item.FoundType}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 手续费（元） 
+                    .item 
+                      div
+                        P
+                          span {{item.AvailableBalance.toFixed(2)}}
+
+              .tz-list-empty(v-if="!list.length")
+                p 暂无记录
+            
+            //- 翻页
+            include page.jade
+            
+
+
+
+
+  script(src="/skin/js/mycenter/fundManage.js")
+  

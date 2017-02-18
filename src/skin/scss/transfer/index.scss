@@ -1,10 +1,10 @@
 $color: #41d4dc;
-#transfer-list{
+#transfer-list {
   background-color: #fafafa;
   margin-bottom: -20px;
   padding-bottom: 20px;
   // banner
-  .banner{
+  .banner {
     display: block;
     width: 100%;
     height: 300px;
@@ -12,7 +12,7 @@ $color: #41d4dc;
     background-position: center top;
   }
   // 标题
-  .transfer-title{
+  .transfer-title {
     position: relative;
     color: #333;
     font-size: 30px;
@@ -21,19 +21,19 @@ $color: #41d4dc;
     padding-bottom: 20px;
     font-style: normal;
     &::before,
-    &::after{
+    &::after {
       content: ' ';
       position: absolute;
       left: 50%;
       bottom: 0;
       transform: translateX(-50%);
     }
-    &::before{
+    &::before {
       width: 344px;
       height: 1px;
       background-color: #ececec;
     }
-    &::after{
+    &::after {
       width: 112px;
       height: 3px;
       background-color: $color;
@@ -41,43 +41,43 @@ $color: #41d4dc;
     }
   }
   // 列表
-  .container{
+  .container {
     margin-top: 52px;
   }
-  .transfer{
-    &-list{
+  .transfer {
+    &-list {
       padding: 0 25px;
       margin-bottom: 20px;
       border: 1px solid #e6e6e6;
       background-color: #fff;
       border-radius: 5px;
     }
-    &-header{
+    &-header {
       position: relative;
       width: 100%;
       height: 74px;
       line-height: 74px;
       padding-left: 100px;
       border-bottom: 1px solid #e6e6e6;
-      &::after{
+      &::after {
         content: '.';
         display: block;
         clear: both;
         visibility: hidden;
       }
-      > * {
+      >* {
         float: left;
-        &:not(.transfer-tag){
+        &:not(.transfer-tag) {
           width: 33%;
           height: 100%;
           overflow: hidden;
           white-space: nowrap;
-          text-overflow:ellipsis;
+          text-overflow: ellipsis;
         }
       }
     }
     // 转让标签
-    &-tag{
+    &-tag {
       position: absolute;
       left: 0;
       width: 86px;
@@ -87,83 +87,84 @@ $color: #41d4dc;
       font-size: 19px;
       margin-top: 21px;
       border-radius: 5px;
-      &::after{
+      &::after {
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
         height: 100%;
       }
-      &.transfer-ing{
+      &.transfer-ing {
         color: #fe6840;
         border: 1px solid #fe6840;
-        &::after{
+        &::after {
           content: '转让中'
         }
       }
-      &.transfer-over{
+      &.transfer-over {
         color: $color;
         border: 1px solid $color;
-        &::after{
+        &::after {
           content: '已转让'
         }
       }
-      &.transfer-finished{
+      &.transfer-finished {
         color: #d2d3d3;
         border: 1px solid #d2d3d3;
-        &::after{
+        &::after {
           content: '已完成'
         }
       }
     }
     // 项目名称
-    &-project-title{
+    &-project-title {
       color: #333;
       font-size: 26px;
     }
     // 项目简介
-    &-project-intro{
+    &-project-intro {
       color: #969696;
       font-size: 17px;
     }
     // 关联项目
-    &-association{
+    &-association {
       color: #0b50fe;
       font-size: 15px;
-      &:hover{
+      &:hover {
         text-decoration: underline;
       }
     }
     //
-    &-content{
-      .param{
+    &-content {
+      .param {
         padding: 28px 0;
         width: 80%;
         float: left;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow:ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
-      .buttons{
+      .buttons {
         padding: 15px 0;
         width: 20%;
         float: right;
+        text-align: right;
       }
       // 转让金额
-      .amount{
+      .amount {
         margin: 14px 0;
         color: #969696;
-        li{
+        li {
           float: left;
           width: 33.3%;
           font-size: 16px;
         }
-        span{
+        span {
           color: #323232;
         }
       }
       // 按钮
-      .button{
+      /*.button{
         float: right;
         display: block;
         width: 154px;
@@ -203,36 +204,37 @@ $color: #41d4dc;
           }
         }
 
-      }
+      }*/
     }
   }
 }
 
 // ipad竖屏
 @media (min-width: 768px) and (max-width: 1023px) {
-  #transfer-list{
-    .transfer-list{
+  #transfer-list {
+    .transfer-list {
       padding: 0 10px;
     }
-    .transfer-header{
-      .transfer-project-title, .transfer-project-intro{
+    .transfer-header {
+      .transfer-project-title,
+      .transfer-project-intro {
         width: 40%;
         padding: 0 5px;
       }
-      .transfer-association{
+      .transfer-association {
         width: 20%;
       }
     }
-    .transfer-content{
-      .param{
+    .transfer-content {
+      .param {
         float: none;
         width: 100%;
         padding-bottom: 0;
       }
-      .buttons{
+      .buttons {
         float: none;
         width: 100%;
-        > .button{
+        >.button {
           margin: 0 10px;
         }
       }
@@ -240,59 +242,58 @@ $color: #41d4dc;
   }
 }
 
-
 // 手机端
 @media screen and (max-width: 767px) {
-  #transfer-list{
-    .banner{
+  #transfer-list {
+    .banner {
       height: 150px;
       background-position: center bottom;
     }
-    .transfer-title{
+    .transfer-title {
       font-size: 20px;
       margin-top: 20px;
-      &::before{
+      &::before {
         width: 100%;
       }
     }
-    .container{
+    .container {
       margin-top: 20px;
     }
-    .transfer-list{
+    .transfer-list {
       padding: 0 10px;
     }
     //
-    .transfer-header{
+    .transfer-header {
       height: auto;
       padding: 0;
       line-height: normal;
       padding-top: 10px;
       text-align: center;
-      &::after{
+      &::after {
         display: none;
       }
-      > *:not(.transfer-tag){
+      >*:not(.transfer-tag) {
         float: none;
         width: 100%;
         height: auto;
       }
     }
-    .transfer-tag{
+    .transfer-tag {
       position: relative;
       font-size: 14px;
       margin: 0;
     }
-    .transfer-project-title{
+    .transfer-project-title {
       font-size: 20px;
       height: 44px;
       line-height: 44px;
     }
-    .transfer-project-intro{
+    .transfer-project-intro {
       font-size: 14px;
       height: 30px;
       line-height: 30px;
     }
-    .transfer-association{
+    .transfer-association {
       position: absolute;
       top: 10px;
       right: 0;
@@ -302,47 +303,47 @@ $color: #41d4dc;
       line-height: 32px;
     }
     //
-    .transfer-content{
+    .transfer-content {
       padding-top: 10px;
-      .param{
+      .param {
         float: none;
         width: 100%;
         padding: 0;
       }
-      .amount{
+      .amount {
         margin: 0;
-        li{
+        li {
           float: none;
           width: 100%;
           line-height: 1.8;
           font-size: 14px;
         }
-        .name{
+        .name {
           display: inline-block;
           width: 110px;
         }
-        span{
-          &:last-child{
+        span {
+          &:last-child {
             margin-left: 10px;
           }
         }
       }
-      .buttons{
+      .buttons {
         float: none;
         width: 100%;
         padding: 5px;
       }
-      .button{
+      .button {
         float: none;
         display: inline-block;
         width: 44%;
         height: 40px;
         line-height: 40px;
         font-size: 16px;
-        &:first-child{
+        &:first-child {
           float: left;
         }
-        &:last-child{
+        &:last-child {
           float: right;
         }
       }

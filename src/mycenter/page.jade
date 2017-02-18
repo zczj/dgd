@@ -1,0 +1,21 @@
+.page-bar
+  //- pc 翻页 
+  ul(v-if="!headerModel.isMobileOrTable")                
+    li.page-text(v-if="curPage!=1")
+      a(href="javascript:void(0);" v-on:click="pageClick(curPage-1)") 上一页
+    li
+      a(href="javascript:void(0);" v-on:click="pageClick(1)" v-bind:class="{cur: curPage == 1}") 1
+    li(v-if="curPage>4 && totalPage>7")
+      span ...
+    li(v-for="item in PagesIndex")
+      a(href="javascript:void(0);" v-on:click="pageClick(item)" v-bind:class="{cur: curPage == item}") {{item}}
+    li(v-if="totalPage>=7 && curPage < totalPage-3")
+      span ...
+    li(v-if="totalPage>6 && totalPage!= 1")
+      a(href="javascript:void(0);" v-on:click="pageClick(totalPage)" v-bind:class="{cur: curPage == totalPage}") {{totalPage}}
+    li.page-text(v-if="curPage!=totalPage")
+      a(href="javascript:void(0);", v-on:click="pageClick(curPage+1)") 下一页
+  //- mobile
+  .mobile-page(v-else)
+    a(href="javascript:void(0);",v-if="curPage!=totalPage" v-on:click="pageClick(curPage+1,'mb')") 加载更多
+    a.end-page(href="javascript:void(0);",v-else ) 最后一页

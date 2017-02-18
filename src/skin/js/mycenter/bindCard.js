@@ -20,7 +20,9 @@ var bindCardModel = new Vue({
     showCity:false,
     buyLock:false,
     
-
+    
+    
+    
 
 
     // 银行信息
@@ -265,14 +267,22 @@ var bindCardModel = new Vue({
       this.$nextTick(function () {
         return this.province; // => '更新完成'
       })
-      
+    },
+    /**
+     *  true : 个人中心绑卡
+     *  false : 定单绑卡
+     */
+    isMC: function(){
+      return this.orderId == 0;
     }
   },
   mounted: function () {
     this.orderId = window.location.search.split('orderId=')[1] || 0;
-    if (!this.orderId) {
-      window.location.href="../project/index.html"
-    }
+    // 1.1 定单进绑卡页面
+    // 1.2 个人中心进绑卡页面
+    // if (!this.orderId) {
+    //   window.location.href="../project/index.html"
+    // }
     // 103775
     this.getOrderInfo()
     this.getAuthen()

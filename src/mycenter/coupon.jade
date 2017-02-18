@@ -1,0 +1,26 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/coupon.css")
+  .allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main#coupon
+
+          // 我的优惠券
+          section.item-wrapper
+            .item-header 
+              span 我的优惠券
+            .item-content
+              ul.coupon-header.clearfix
+                li.current 众筹之家优惠券
+                li 合作伙伴优惠券
+              .coupon-tab
+                a(href="javascript:;").current 未使用
+                a(href="javascript:;") 已使用
+                a(href="javascript:;") 已过期
+              .coupon-item-wrapper
+                .coupon-item

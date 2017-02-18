@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/skin/css/base.css"/>
     <link rel="stylesheet" href="/skin/plugs/dialog/css/dialog.css"/>
     <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
+    <script src="//cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
     <script src="/skin/plugs/dialog/js/dialog.js"></script>
     <script src="/skin/js/util.js"></script><!--[if lte IE 8]>
@@ -77,7 +77,20 @@
     </section>
     <!--==================================================-->
     <link rel="stylesheet" href="/skin/css/transfer/index.css"/>
-    <div id="transfer-list">
+    <link rel="stylesheet" href="/skin/css/transfer/popup.css"/>
+    <div id="popup">
+      <div v-if="popup" class="popup-mask"></div>
+      <transition name="pulldown" v-on:after-enter="afterEnter">
+        <div v-if="popup" class="wrapper">
+          <div class="header">私信约谈<a href="javascript:;" v-on:click="popup=false" class="icon icon-close"> </a></div>
+          <div class="content">
+            <textarea placeholder="说点什么..." ref="msgBox"></textarea>
+            <div class="button-wrapper clearfix"><a href="javascript:;" v-on:click="sendMsg" class="button purchase-button">确定</a><a href="javascript:;" v-on:click="popup=false" class="button interview-button">取消</a></div>
+          </div>
+        </div>
+      </transition>
+    </div>
+    <div id="transfer-list" class="allH">
       <!-- banner--><a href="#" class="banner"></a>
       <!-- 标题-->
       <h1 class="transfer-title">权益转让</h1>
@@ -102,7 +115,7 @@
                 <li><span class="name">原始投资时间</span>：<span>2016年07月03日15:00</span></li>
               </ul>
             </div>
-            <div class="buttons clearfix"><a href="javascript:;" class="button interview-button">约谈</a><a href="#" class="button purchase-button">我要购买</a></div>
+            <div class="buttons clearfix"><a href="javascript:;" v-on:click="popupModel.showPopup" class="button interview-button">约谈</a><a href="#" class="button purchase-button">1我要购买</a></div>
           </div>
         </div>
         <div class="transfer-list">
@@ -173,9 +186,13 @@
         </div>
       </div>
     </div>
+    <script src="/skin/js/transfer/popup.js"></script>
     <script>
-      $(function(){
-        $('#loader').fadeOut('300')
+      new Vue({
+        el: '#transfer-list',
+        mounted: function () {
+          $('#loader').fadeOut('300')
+        }
       })
     </script>
     <!--==================================================-->
@@ -238,8 +255,12 @@
       
       var setWarpH=function() {
         var warp = document.querySelectorAll('.allH')[0];
+        if(warp){
+          
+        
         var iH = DGDTOOLS.Ev._setHeight(warp,[document.getElementById('header'), document.getElementById('footer')]);
         warp.style.minHeight=iH+'px';
+        }
       }
       
       var _onload = window.onload || function(){};

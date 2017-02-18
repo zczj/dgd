@@ -4,7 +4,7 @@ var headerModel = new Vue({
   data: {
     tagl: false,
     tagr: false,
-    api: 'http://devapi.zczj.com:80/api',
+    api: 'https://devapi.zczj.com:4460/api',
     navs: [
       { title: '首页', url: '/Index/Index', pathname: 'index' },
       { title: '投资项目', url: '/Project/Index', pathname: 'project' },
@@ -43,19 +43,30 @@ var headerModel = new Vue({
   },
   methods: {
     showMean: function(tag) {
-      if(tag==='l'){
+      // setTimeout(function(){
+
+
+      if (tag === 'l') {
         this.tagl = !this.tagl;
-      }else{
+        if (this.tagl) {
+          $('.my-side').addClass('meanShow')
+        } else {
+          $('.my-side').removeClass('meanShow')
+        }
+      } else {
         this.tagr = !this.tagr;
       }
       document.querySelector('html').className = 'holding'
       document.querySelector('body').className = 'holding'
+
+      // },600)
     },
     closeMean: function() {
-      if(this.tagl){
+      if (this.tagl) {
         this.tagl = false;
+        $('.my-side').removeClass('meanShow')
       }
-      if(this.tagr){
+      if (this.tagr) {
         this.tagr = false;
       }
       document.querySelector('html').className = '';

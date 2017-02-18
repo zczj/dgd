@@ -1,0 +1,467 @@
+/*
+* 充值
+*/
+.withdraw-tip{
+  background:#f2f3f5;
+  padding: 20px 10px;
+  font-size:1.6rem;
+  color:#616a73;
+  line-height: 1.8;
+  dt{
+    margin-bottom: 10px;
+  }
+}
+
+/*充值提现共用模块*/
+.recharge-list{
+  color:#424f63;
+  font-size:1.6rem;
+  margin-top: 20px;
+  ul{
+    li{
+      font-size: 0;
+      padding: 6px 0;
+      span{
+        font-size: 1.6rem;
+        display: inline-block;
+        &.t-name{
+          width: 100px;
+          text-align: right;
+          vertical-align: top;
+        }
+        &.blueb{
+          font-weight: 700;
+          color:#009ff0;
+        }
+        &.pay-type{
+            label{
+                display: inline-block;
+                border:1px #b2b9bf solid;
+                width: 132px;
+                height: 40px;
+                background-image:url('/skin/img/order/icon-fuyou.png');
+                background-repeat: no-repeat;
+                background-position: center center;
+                &:nth-of-type(2){
+                    background-image: url('/skin/img/order/icon-baofu.png')
+                }
+            
+            }
+        }
+      }
+      .recharge-input{
+        height: 28px;
+        width: 120px;
+        padding: 0 5px;
+        border:1px #c0c5ca solid;
+        margin-right: 4px;
+        line-height: normal;
+      }
+      .seebankP{
+          color:#009ff0;
+          font-size: 1.4rem;
+      }
+
+    }
+  }
+
+  .recharge-btns{
+    
+    margin-top: 34px;
+    font-size:0;
+    .btn{
+      padding: 0 35px;
+      height: 40px;
+      line-height: 40px;
+      color:#fff;
+      background:#009ff0;
+      font-size: 1.6rem;
+      display: inline-block;
+      border-radius: 5px;
+      margin-right: 10px;
+      transition: .3s all;
+      &:hover{
+        opacity: .9;
+      }
+    }
+    .recharge-tools{
+      font-size: 1.6rem;
+      display: inline-block;
+      color:#b2b9bf;
+      a{
+        color:#b2b9bf;
+        padding: 0 6px;
+        &:hover{
+          color:#009ff0;
+        }
+      }
+    }
+  }
+  .forget-pwd{
+      margin-left: 30px;
+      color:#b2b9bf;
+      &:hover{
+          color:#009ff0;
+      }
+     
+  }
+}
+
+
+
+// ** 银行卡
+.bank-act{
+  height: 188px;
+  background:#009ff0;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  position: relative;
+  padding: 30px;
+  font-size: 2rem;
+  color:#fff;
+  .bank-logo{
+    background:#fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+  }
+  .bank-act-num{
+    margin-top: 20px;
+    span{
+      margin-right: 15px;
+      &.lastF{
+        float:right;
+      }
+    }
+  }
+  .icon-bank-yl{
+    width: 53px;
+    height: 27px;
+    background:url('/skin/img/mycenter/bankyl.png');
+    position: absolute;
+    bottom: 16px;
+    right: 30px;
+  }
+}
+
+.back-list{
+  &-item+&-item{
+      margin-top: 10px;
+  }
+  label{
+    display: inline-block;
+    background:#f2f3f5;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 20px;
+    vertical-align: middle;
+    border:1px #b2b9bf solid;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    input[name='cartBank']{
+      display: none;
+    }
+    input[name='cartBank']:checked + .icon-checked{
+      width: 32px;
+      height: 26px;
+      display: block;
+      background:url('/skin/img/mycenter/bankCheck.png');
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    &.disabled{
+      cursor: not-allowed;
+    }
+  }
+}
+
+@mixin recharge-800{
+  .recharge{
+    background:none;
+    padding: 0;
+  }
+  .recharge-list{
+    ul{
+
+    
+      li{
+        background: #fff;
+        padding: 15px;
+        span{
+          &.t-name{
+              text-align: right;
+              width: 80px;
+          }
+          &.t-val{              
+              width:calc(100% - 80px);
+              .recharge-input{
+                  width: 100%;
+                  &:focus{
+                      border-color:#009ff0;
+                  }
+              }
+          }
+        }
+        &.price{
+          border:1px #e4e4e4 solid;
+          border-width: 1px 0;
+          margin-bottom: 12px;
+          padding: 10px 15px;
+
+          span{
+            display: block;
+            &.t-name{
+              text-align: left;
+              color:#a0a0a0;
+              font-size: 1.6rem;
+            }
+            &.t-val{
+              font-size: 2.4rem;
+              color:#ff7b2d;
+            }
+          }
+        }
+        &.t-line{
+          border-top:1px #f8f8f8 solid;
+        }
+        .recharge-input{
+          border-width: 0 0 1px 0;
+        }
+      }
+    }
+    .recharge-btns{
+      margin-top: 30px;
+      .btn{
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        height: 60px;
+        line-height: 60px;
+        font-size: 2rem;
+      }
+    }
+    .recharge-tip{
+      color:#ff7b2d;
+      font-size: 1.5rem;
+      padding: 16px 10px;
+      dd{
+        margin-top: 10px;
+      }
+    }
+    .recharge-tel{
+      text-align: center;
+      margin-top: 20px; 
+      a{
+        color:#009ff0;
+        text-decoration: underline;
+      }
+    }
+  }
+} 
+
+
+// 800px
+@media screen and (max-width:50em){
+  
+  @include recharge-800();
+}
+
+// 600px
+@media screen and (max-width:37.5em){
+
+}
+
+
+
+.tzb-bank-icon {
+        background: url("/skin/img/mycenter/bank-icon.png") no-repeat;
+        
+        vertical-align: middle;
+        display: inline-block;
+        width: 140px;
+        height: 36px;
+    }
+    .ABC {
+        background-position: 0 0;
+    }
+
+    .BOB {
+        background-position: 0 -36px;
+    }
+
+    .BJRCB {
+        background-position: 0 -72px;
+    }
+
+    .BOC {
+        background-position: 0 -108px;
+    }
+
+    .CCB {
+        background-position: 0 -144px;
+    }
+
+    .CDCB {
+        background-position: 0 -180px;
+    }
+
+    .CEB {
+        background-position: 0 -216px;
+    }
+
+    .CIB {
+        background-position: 0 -252px;
+    }
+
+    .CITIC {
+        background-position: 0 -288px;
+    }
+
+    .CMB {
+        background-position: 0 -324px;
+    }
+
+    .CMBC {
+        background-position: 0 -360px;
+    }
+
+    .COMM {
+        background-position: 0 -396px;
+    }
+
+    .FDB {
+        background-position: 0 -432px;
+    }
+
+    .GDB {
+        background-position: 0 -468px;
+    }
+
+    .HZCB {
+        background-position: 0 -504px;
+    }
+
+    .ICBC {
+        background-position: 0 -540px;
+    }
+
+    .NBCB {
+        background-position: 0 -576px;
+    }
+
+    .PSBC {
+        background-position: 0 -612px;
+    }
+
+    .SDB {
+        background-position: 0 -648px;
+    }
+
+    .SHBANK {
+        background-position: 0 -684px;
+    }
+
+    .OTHER {
+        background-position: 0 -720px;
+    }
+
+    .SHRCB {
+        background-position: 0 -720px;
+    }
+
+    .PAB {
+        background-position: 0 -756px;
+    }
+
+    .SPDB {
+        background-position: 0 -792px;
+    }
+
+    .WZCB {
+        background-position: 0 -828px;
+    }
+
+    .BEA {
+        background-position: 0 -865px;
+    }
+
+    .NJCB {
+        background-position: 0 -897px;
+    }
+
+    .HRB {
+        background-position: 0 -931px;
+    }
+
+    .CFT {
+        background-position: 0 -967px;
+    }
+
+    .CMCC {
+        background-position: 0 -999px;
+    }
+
+    .CUCC {
+        background-position: 0 -1092px;
+    }
+
+    .CTCC {
+        background-position: 0 -1036px;
+    }
+
+    .WDZJ {
+        background-position: 0 -1154px;
+    }
+
+    .ALIPAY {
+        background-position: 0 -1196px;
+    }
+
+    .HXBANK {
+        background-position: 0 -1240px;
+    }
+
+    .GZBANK {
+        background-position: 0 -1276px;
+    }
+
+    .SZVBBANK {
+        background-position: 0 -1311px;
+    }
+
+    .CXHBANK {
+        background-position: 0 -1346px;
+    }
+
+    .ZJZBANK {
+        background-position: 0 -1382px;
+    }
+
+    .BHBANK {
+        background-position: 0 -1414px;
+    }
+
+    .ZJTSBANK {
+        background-position: 0 -1460px;
+    }
+
+    .HBBANK {
+        background-position: 0 -1499px;
+    }
+
+    .NCBBANK {
+        background-position: 0 -1549px;
+    }
+
+    .ZSBANK {
+        background-position: 0 -1591px;
+    }
+
+    .OTHERBANK {
+        background-position: 0 -1646px;
+    }

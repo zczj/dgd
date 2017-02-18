@@ -50,6 +50,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -129,6 +130,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AboutDetail.cs" />
+    <Compile Include="Models\ZC_CessionModelList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +163,7 @@
     <Content Include="skin\css\project\project.css" />
     <Content Include="skin\css\transfer\detail.css" />
     <Content Include="skin\css\transfer\index.css" />
+    <Content Include="skin\css\transfer\popup.css" />
     <Content Include="skin\img\about\about-location.png" />
     <Content Include="skin\img\about\banner-1200.jpg" />
     <Content Include="skin\img\about\c1.png" />
@@ -275,6 +279,8 @@
     <Content Include="skin\img\transfer\banner_s.jpg" />
     <Content Include="skin\img\transfer\process.png" />
     <Content Include="skin\img\unsupport_bg.png" />
+    <Content Include="skin\js\about\index.js" />
+    <Content Include="skin\js\about\qa.js" />
     <Content Include="skin\js\header.js" />
     <Content Include="skin\js\index.js" />
     <Content Include="skin\js\mycenter\bindCard.js" />
@@ -296,6 +302,7 @@
     <Content Include="skin\js\project\qrcode.min.js" />
     <Content Include="skin\js\reservation\reserva.js" />
     <Content Include="skin\js\reservation\reservaComplete.js" />
+    <Content Include="skin\js\transfer\popup.js" />
     <Content Include="skin\js\unsupport.js" />
     <Content Include="skin\js\util.js" />
     <Content Include="skin\plugs\bscroll\bscroll.min.js" />
@@ -337,7 +344,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="skin\css\maps\about\" />
     <Folder Include="skin\css\maps\index\" />
     <Folder Include="skin\css\maps\mycenter\" />

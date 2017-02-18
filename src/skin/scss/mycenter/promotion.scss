@@ -1,0 +1,244 @@
+.tz-list .tz-list-item {
+  margin-bottom: -1px;
+  &:not(:first-child) {
+    .tz-list-con {
+      .tz-list-items {
+        &::after {
+          display: none;
+        }
+        .item {
+          &:nth-of-type(1) {
+            border: none;
+          }
+          &.tz-list-name {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  &:nth-child(n) {
+    .tz-list-con {
+      padding: 0;
+      .tz-list-items {
+        .item {
+          min-height: 40px;
+          &:nth-of-type(1).tz-list-name {
+            background-color: #cacfd4;
+            color: #009ff0;
+            font-weight: bold;
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 弹窗
+.dialog {
+  &-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 268px;
+    height: 172px;
+    margin: -86px -134px;
+    border: 1px solid #d9dadb;
+    z-index: 99;
+  }
+  &-top {
+    height: 40px;
+    text-align: right;
+    background-color: #eceded;
+    font-size: 22px;
+    .icon {
+      cursor: pointer;
+      transition: .2s linear;
+      &:hover {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  &-body {
+    background-color: #fff;
+    height: 130px;
+    text-align: center;
+    p {
+      height: 76px;
+      line-height: 76px;
+    }
+  }
+}
+
+.my-promotion,
+.rule,
+.record {
+  .item-header {
+    margin-bottom: 30px;
+  }
+}
+
+// 我的推广
+.my-promotion {
+  .text {
+    color: #b2b9bf;
+    margin-bottom: 24px;
+  }
+  .method-item {
+    width: 49%;
+    height: 103px;
+    border: 1px solid #dee3e9;
+    border-radius: 10px;
+    overflow: hidden;
+    float: left;
+    .button {
+      float: right;
+      padding: 6px 0;
+      line-height: normal;
+      width: 30%;
+    }
+    &:nth-of-type(2) {
+      float: right;
+    }
+    &-head {
+      float: left;
+      height: 100%;
+      background: #4ad3da;
+      background: linear-gradient(#4ad3da, #009ff0);
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      writing-mode: vertical-lr;
+      letter-spacing: 4px;
+      padding: 0 10px;
+    }
+    &-content {
+      float: left;
+      width: 80%;
+      padding: 10px;
+      font-size: 14px;
+      word-break: break-all;
+      .clearfix {
+        height: 36px;
+        line-height: 36px;
+      }
+    }
+  }
+  .tips {
+    margin-top: 20px;
+    padding-top: 20px;
+    text-indent: 90px;
+    border-top: 1px solid #dee3e9;
+  }
+}
+
+// 推广规则
+.rule {
+  dl {
+    margin-top: 30px;
+  }
+  dt {
+    color: #009ff0;
+    font-size: 18px;
+    margin-bottom: 18px;
+  }
+  dd {
+    color: #616a73;
+    font-size: 16px;
+  }
+}
+
+// 邀请记录
+.record {
+  li {
+    width: 25%;
+    float: left;
+  }
+  // 查看更多
+  .get-more {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: #616a73;
+    margin-top: 15px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .tz-list .tz-list-item {
+    margin-bottom: 10px;
+    &:nth-child(n) {
+      .tz-list-con .tz-list-items {
+        &::after {
+          display: block;
+        }
+        .item {
+          &:nth-of-type(1) {
+            border: none;
+            &.tz-list-name {
+              background: none;
+              color: #616a73;
+              font-weight: normal;
+            }
+          }
+          &.tz-list-name {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .my-promotion,
+  .rule,
+  .record {
+    .item-header {
+      margin-bottom: 10px;
+    }
+  }
+  // 我的推广
+  .my-promotion {
+    .text {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .method-item {
+      width: 100%;
+      margin-bottom: 10px;
+      .button {
+        margin-right: 10px;
+      }
+      &:nth-of-type(2) {
+        float: none;
+      }
+      &-head {
+        float: left;
+        font-size: 14px;
+      }
+      &-content {
+        font-size: 12px;
+      }
+    }
+    .tips {
+      margin-top: 10px;
+      padding-top: 10px;
+      font-size: 14px;
+      text-indent: 0;
+    }
+  }
+  // 推广规则
+  .rule {
+    dl {
+      margin-top: 10px;
+    }
+    dt {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    dd {
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,62 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/transfer.css")
+  .allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main
+          // 项目转让
+          section.item-wrapper
+            .item-header 
+              span 项目转让
+            .item-content.transfer-intro
+              ul.clearfix
+                li 项目名称：
+                li 真功夫
+              ul.clearfix
+                li 原始金额：
+                li 40,000元
+              ul.clearfix
+                li 转让金额：
+                li 
+                  input(type='tel', placeholder='请输入转让金额')
+                  span.orange 历史成交金额：40,000元每份
+              ul.clearfix
+                li 转出时间：
+                li 2016-12-25
+              ul.clearfix
+                li 超额收益：
+                li 1,452元
+                  span （超额收益为收益金额的5%~10%）
+              ul.clearfix
+                li 转让手续费：
+                li 1,452元
+                  span （手续费为转让金额的0.5%）
+              ul.clearfix
+                li 个人所得税：
+                li 1,452元
+                  span （所得税为收益金额的20%）
+              ul.clearfix
+                li 实际到账：
+                li 2,550元
+                  span.orange 实际到账=转让金额-超额收益-转让手续费-个人所得税
+              ul.clearfix
+                li 项目状态：
+                li 转让中
+              ul.clearfix
+                li 申请时间：
+                li 2016-12-13
+              ul.clearfix
+                li
+                li
+                  a(href="#").button 确认转让
+          // 转让流程
+          section.item-wrapper
+            .item-header 
+              span 转让流程
+            .item-content.transfer-step
+              img(src="/skin/img/mycenter/transfer-step.png", width='100%', alt="")

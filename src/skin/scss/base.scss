@@ -4,7 +4,6 @@
 /************
  * 共用样式
  ************/
-
 * {
   box-sizing: border-box;
   // user-select: none;
@@ -12,6 +11,7 @@
   /* 来自http://www.cnblogs.com/PeunZhang/archive/2013/02/28/2907708.html*/
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
+  
   /* For some Androids */
 }
 
@@ -60,7 +60,7 @@ dl,
 dt,
 dd,
 li,
-p {
+p,h1,h2 {
   margin: 0;
   padding: 0;
 }
@@ -804,6 +804,7 @@ header {
   font-size: 0px;
   position: relative;
   z-index: 999;
+  padding-top: 20px;
   .info dl {
     margin: 0 2rem;
     width: calc(16.666666666666668% - 4rem);
@@ -842,6 +843,7 @@ header {
 
 @mixin footer--950 () {
   .footer {
+    padding-top: 15px;
     .info dl {
       dt {
         font-size: 1.5rem;
@@ -863,6 +865,7 @@ header {
 
 @mixin footer--480 () {
   .footer {
+    padding-top: 0;
     .info {
       display: none;
     }

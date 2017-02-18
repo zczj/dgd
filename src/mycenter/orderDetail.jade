@@ -1,0 +1,280 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/orderDetail.css")
+  .allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main#order-detail
+          // 订单详情
+          section.item-wrapper.order-intro
+            .item-header 
+              span 订单详情
+            .item-content.clearfix
+              ul.clearfix
+                li 项目名称：
+                  span.strong 摇滚河马
+                li 项目类型：
+                  span.strong 收益型
+                li 交易单号：
+                  span.strong 1026365
+                li 认购金额：
+                  span.strong 10,000 元
+                li 优惠券：
+                  span.strong 20 元
+                li 管理费：
+                  span.strong 500 元
+                li 支付金额：
+                  span.strong 11,000 元
+                li 增值服务：
+                  span.strong 可质押、可转让
+              ul.clearfix
+                li 项目状态：
+                  span 未支付
+                li 
+                  a(href="#").button 现在还款
+          // 股东信息
+          section.item-wrapper.shareholder
+            .item-header 
+              span 股东信息
+            .item-content.tz-list
+              .tz-list-warp
+                //- 1
+                .tz-list-item
+                  .tz-list-con
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 投资人
+                      .item 
+                        div
+                          p
+                            span 陈**（138******51） 
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 投资额（元）
+                      .item 
+                        div
+                          p
+                            span 10000.00
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 持股份数 
+                      .item 
+                        div
+                          p
+                            span 5
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 持股比例 
+                      .item 
+                        div
+                          span 2.50%
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 投资时间 
+                      .item 
+                        div
+                          span 2015-12-30  12:12:30
+                //- 2
+                .tz-list-item
+                  .tz-list-con
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 投资人
+                      .item 
+                        div
+                          p
+                            span 陈**（138******51） 
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 投资额（元）
+                      .item 
+                        div
+                          p
+                            span 10000.00
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 持股份数 
+                      .item 
+                        div
+                          p
+                            span 5
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 持股比例 
+                      .item 
+                        div
+                          span 2.50%
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 投资时间 
+                      .item 
+                        div
+                          span 2015-12-30  12:12:30
+                //- 3
+                .tz-list-item
+                  .tz-list-con
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 投资人
+                      .item 
+                        div
+                          p
+                            span 陈**（138******51） 
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 投资额（元）
+                      .item 
+                        div
+                          p
+                            span 10000.00
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 持股份数 
+                      .item 
+                        div
+                          p
+                            span 5
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 持股比例 
+                      .item 
+                        div
+                          span 2.50%
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 投资时间 
+                      .item 
+                        div
+                          span 2015-12-30  12:12:30  
+                
+                
+          // 运营报告
+          section.item-wrapper.report
+            .item-header 
+              span 运营报告
+            .item-content
+              ul
+                li.clearfix
+                  span 2016-10-10 至 2016-12-12
+                  .a-wrapper
+                    a(href="#").blue 查看
+                    a(href="#").blue 下载
+                li.clearfix
+                  span 2016-10-10 至 2016-12-12
+                  .a-wrapper
+                    a(href="#").blue 查看
+                    a(href="#").blue 下载
+                li.clearfix
+                  span 2016-10-10 至 2016-12-12
+                  .a-wrapper
+                    a(href="#").blue 查看
+                    a(href="#").blue 下载
+                li.clearfix
+                  span 2016-10-10 至 2016-12-12
+                  .a-wrapper
+                    a(href="#").blue 查看
+                    a(href="#").blue 下载
+                
+          // 项目分红
+          section.item-wrapper.dividend
+            .item-header 
+              span 项目分红
+            .item-content.tz-list
+              .tz-list-warp
+                //- 1
+                .tz-list-item
+                  .tz-list-con
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 分红时间
+                      .item 
+                        div
+                          p
+                            span 2016-12-30 
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 分红期数
+                      .item 
+                        div
+                          p
+                            span 5期
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 财务报表
+                      .item 
+                        div
+                          p
+                            a(href="#").blue 查看
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 分红金额（元）
+                      .item 
+                        div
+                          span 500.00
+                //- 2
+                .tz-list-item
+                  .tz-list-con
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 分红时间
+                      .item 
+                        div
+                          p
+                            span 2016-12-30 
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 分红期数
+                      .item 
+                        div
+                          p
+                            span 5期
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 财务报表
+                      .item 
+                        div
+                          p
+                            a(href="#").blue 查看
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 分红金额（元）
+                      .item 
+                        div
+                          span 500.00
+                //- 3
+                .tz-list-item
+                  .tz-list-con
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 分红时间
+                      .item 
+                        div
+                          p
+                            span 2016-12-30 
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 分红期数
+                      .item 
+                        div
+                          p
+                            span 5期
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 财务报表
+                      .item 
+                        div
+                          p
+                            a(href="#").blue 查看
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 分红金额（元）
+                      .item 
+                        div
+                          span 500.00  
+                
+                //- 合计
+                .total-dividend 总分红（元）：30000.00

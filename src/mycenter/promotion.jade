@@ -1,0 +1,109 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/promotion.css")
+  .allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main#promotion
+
+          // 我的推广
+          section.item-wrapper.my-promotion
+            .item-header 
+              span 我的推广
+            .item-content.clearfix
+              p.text 邀请好友注册方法
+              div.clearfix
+                .method-item.clearfix
+                  .method-item-head 方法一
+                  .method-item-content
+                    div.clearfix
+                      a(href="javascript:;", v-bind:data-clipboard-text='promotion.PromotionCode').button.empty 复制
+                    div 复制注册码“{{promotion.PromotionCode}}”
+                      
+                .method-item.clearfix
+                  .method-item-head 方法二
+                  .method-item-content
+                    div.clearfix 复制链接给好友-->　
+                      a(href="javascript:;", v-bind:data-clipboard-text='promotion.ShareAddress').button.empty 复制
+                    div {{promotion.ShareAddress}}
+              //- 
+              .tips
+                p 1. 复制邀请码发送至好友，好友注册时需在“邀请人”栏目填写。
+                p 2. 复制“注册链接”发送至好友，好友点击进到相关页面直接填写注册信息
+          transition(name='pulldown')  
+            .dialog-wrapper(v-if='showDialog')
+              .dialog-top
+                span
+                  i.icon.icon-close(v-on:click='showDialog = false')
+              .dialog-body
+                p 复制成功
+                a(href="javascript:;",v-on:click='showDialog = false').button 确定
+          
+          // 推广规则
+          section.item-wrapper.rule
+            .item-header 
+              span 推广规则
+            .item-content
+              dl
+                dt 你的收益：
+                dd 推荐的每一位好友参与大股东项目投资，项目募集成功后（签署合同）可获得好友投资金额的0.4%返利。
+              dl
+                dt 你朋友的福利：
+                dd 被推荐人获得一张50元代金券，投资可抵扣，有效期从获得之日起3个月。投资10000元及以上就可使用。
+                  br
+                  | 提成时间：被推荐人从注册之日起3年内有效。
+                  br
+                  | 其他事项：有任何疑问，可致电众筹之家官方服务电话（0755-82557958），或联系之家妹微信:zczjmmm。
+            
+          // 邀请记录
+          section.item-wrapper.record
+            .item-header 
+              span 邀请记录
+            .item-content.tz-list
+              .tz-list-warp
+                div(v-if='rebateCount == 0') 暂无记录
+                //- 1
+                .tz-list-item(v-else v-for='item in rebate')
+                  .tz-list-con
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 受邀好友手机
+                      .item 
+                        div
+                          p
+                            span {{item.Phone}}
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 投资额（元）
+                      .item 
+                        div
+                          p
+                            span {{item.Amount}}
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 返利金额（0.4%） 
+                      .item 
+                        div
+                          p
+                            span {{item.Amount}}
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 订单时间 
+                      .item 
+                        div
+                          span {{item.PostDate}}
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 状态 
+                      .item 
+                        div
+                          span {{item.State}}
+                //- 
+                span.get-more(v-on:click='getMoreRebate') {{getMore}}
+  //- 
+  script(src='/skin/js/mycenter/clipboard.min.js')
+  script(src='/skin/js/mycenter/promotion.js')

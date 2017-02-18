@@ -1,0 +1,133 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/investment.css")
+  #model-index.allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main
+          //- 我的资产
+          section.item-wrapper.assets
+            .item-header 
+              span 我的资产
+            .item-content
+              .overview.clearfix
+                .overview-content
+                  .title 投资总额(元)
+                  .amount-wrapper
+                    h2 52700.00
+                    //- a(href="#") 充值记录
+                    //- a(href="#") 提现记录
+                    //- a(href="#") 资金流水
+                //- .button-wrapper
+                //-   a(href="javascript:;").button 充值
+                //-   a(href="javascript:;").button 提现
+              .overview-sort.clearfix
+                .overview-sort-item
+                  .standbao
+                    .title 股权类(元)
+                    h2 32700.00
+                .overview-sort-item
+                  .pledge
+                    .title 收益权类(元)
+                    h2 32700.00
+                .overview-sort-item
+                  .frozen
+                    .title 店铺类(元)
+                    h2 32700.00   
+
+                    
+          //- 我的投资
+          section.item-wrapper.tz-list
+            .tz-list-warp
+              .tz-list-item(v-for="(item, index) in list.response")
+                .tz-list-t 
+                  .suptable
+                    span.tz-list-l
+                      span.tz-list-name {{item.ProjectName}}
+                      span.tz-list-time {{item.PostDate}}
+                    span.tz-list-r(v-if="item.PayStatus == 0")
+                      a(href="javascript:void(0);" v-on:click="delMyTran(index,item.OrderID)").tz-list-del 删除
+                .tz-list-con
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 订单金额（元）
+                    .item 
+                      div
+                        div(v-if="item.ISReservation")
+                          p
+                          span 预约份额：{{item.Number}}份
+                          p
+                            span 预约金额：无接口数据
+                        div(v-else)
+                          span {{item.Amount}}                 
+                          
+
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 支付状态
+                    .item 
+                      div
+                        p
+                          span.blue {{item.PayStr}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 合同状态
+                    .item 
+                      div
+                        p
+                          span.blue {{contractStatus[item.ContractStatus]}}
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span 增值服务
+                    .item 
+                      div
+                        P
+                          span 可质押
+                        P
+                          span 可转让
+                  .tz-list-items
+                    .item.tz-list-name 
+                      span  操作  
+                    .item 
+                      div
+                        P
+                          span 
+                          //- a(v-bind:href="{'/project/detail.html?id='+ item.ProjectID}").blue 项目详情
+                          a(v-bind:href="'/project/detail.html?id='+ item.ProjectID").blue 项目详情
+                        P
+                          a(v-bind:href="'/order/index.html?id='+ item.OrderID" v-if="item.PayStatus == 0").btn 立即支付       
+
+
+
+            
+            .page-bar
+              //- pc 翻页 
+              ul(v-if="!headerModel.isMobileOrTable")                
+                li.page-text(v-if="curPage!=1")
+                  a(href="javascript:void(0);" v-on:click="pageClick(curPage-1)") 上一页
+                li
+                  a(href="javascript:void(0);" v-on:click="pageClick(1)" v-bind:class="{cur: curPage == 1}") 1
+                li(v-if="curPage>4 && totalPage>7")
+                  span ...
+                li(v-for="item in PagesIndex")
+                  a(href="javascript:void(0);" v-on:click="pageClick(item)" v-bind:class="{cur: curPage == item}") {{item}}
+                li(v-if="totalPage>=7 && curPage < totalPage-3")
+                  span ...
+                li(v-if="totalPage>6 && totalPage!= 1")
+                  a(href="javascript:void(0);" v-on:click="pageClick(totalPage)" v-bind:class="{cur: curPage == totalPage}") {{totalPage}}
+                li.page-text(v-if="curPage!=totalPage")
+                  a(href="javascript:void(0);", v-on:click="pageClick(curPage+1)") 下一页
+              //- mobile
+              .mobile-page(v-else)
+                a(href="javascript:void(0);",v-if="curPage!=totalPage" v-on:click="pageClick(curPage+1,'mb')") 加载更多
+                a.end-page(href="javascript:void(0);",v-else ) 最后一页
+
+  script(src='/skin/js/mycenter/investment.js')
+     
+
+
+          

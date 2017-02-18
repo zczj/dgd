@@ -315,30 +315,50 @@ var Util = function() {
         }, capture || false);
       },
       // 设置高度
-      _setHeight: function  (obj,arr) {
+      _setHeight: function(obj, arr) {
         var oH = document.documentElement.clientHeight || document.body.clientHeight,
-        cutH = 0;
-        if(arr.length){
-          for(var i = 0; i< arr.length; i++){
-            if(this._getStyle(arr[i],'marginTop')&& this._getStyle(arr[i],'marginTop')!=='auto'){
-              cutH += parseInt(this._getStyle(arr[i],'marginTop'))
+          cutH = 0;
+        if (arr.length) {
+          for (var i = 0; i < arr.length; i++) {
+            if (this._getStyle(arr[i], 'marginTop') && this._getStyle(arr[i], 'marginTop') !== 'auto') {
+              cutH += parseInt(this._getStyle(arr[i], 'marginTop'))
             }
             cutH += arr[i].clientHeight;
           }
         }
-        
+
         return oH - cutH;
       },
       // 获取样式
-      _getStyle: function (obj, attr) {
+      _getStyle: function(obj, attr) {
         if (obj.currentStyle) {
           return obj.currentStyle[attr];
-        }
-        else {
+        } else {
           return document.defaultView.getComputedStyle(obj, null)[attr];
         }
-      } 
-
+      },
+      // 翻页个人中心， 返回可显示页码数组
+      _setPage: function(totalPage, curPage) {
+        var displayPageList = [];
+        var left = 2;
+        var right = totalPage;
+        //总页数大于7页
+        if (totalPage >= 7) {
+          if (curPage < 5) {
+            left = 2;
+          } else if (curPage > totalPage - 3) {
+            left = totalPage - 5;
+          } else {
+            left = curPage - 2;
+          }
+          right = left + 4;
+        }
+        while (left <= right) {
+          displayPageList.push(left);
+          left++;
+        }
+        return displayPageList;
+      }
 
     }
   }
@@ -370,6 +390,15 @@ var Util = function() {
           effect: true,
           delayCallback: callback && callback()
         })
+      },
+      _tipAll: function(obj){
+        $.dialog({
+          type: obj.type|| 'warning',
+          message: obj.msg,
+          delay: obj.time || 2000,
+          effect: true,
+          delayCallback: obj.callback && obj.callback()
+        })
       }
     }
   }
@@ -385,3 +414,5 @@ var Util = function() {
 }
 
 window.DGDTOOLS = Util();
+
+jQuery.support.cors = true;

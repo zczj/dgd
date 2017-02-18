@@ -1,17 +1,138 @@
 extends ../shade/layout
 block content
   link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/home.css?v=192389")
   #model-index.allH
     .my-warp
       .container.clearfix
         //- 左侧
         include side.jade
         //- 右侧
-        .my-main
-          h2 右侧区域ss
+        .my-main#home
+          // 我的资产
+          section.item-wrapper.assets
+            .item-header 
+              span 我的资产
+            .item-content
+              .overview.clearfix
+                .overview-content
+                  .title.block-icon 账户余额(元)
+                  .amount-wrapper
+                    h2.amount-number {{mySideModel.userBaseInfo&& mySideModel.userBaseInfo.Balance.toFixed(2)}}
+                    a(href="#") 充值记录
+                    a(href="#") 提现记录
+                    a(href="#") 资金流水
+                .button-wrapper
+                  a(href="javascript:;").button.empty 充值
+                  a(href="javascript:;").button 提现
+              .overview-sort.cols-3.clearfix
+                .overview-sort-item
+                  .standbao
+                    .title.block-icon.yellow 站岗宝(元)
+                    h2.amount-number2 {{standGuardInfo && standGuardInfo.TotalAmount.toFixed(2)}}
+                .overview-sort-item
+                  .pledge
+                    .title.block-icon.blue 质押贷款(元)
+                    h2.amount-number2 32700.00
+                .overview-sort-item.available
+                  .pledge
+                    .title.block-icon.blue 可用余额(元)
+                    h2.amount-number2 {{mySideModel.userBaseInfo && mySideModel.userBaseInfo.AvailableBalance.toFixed(2)}}
+                .overview-sort-item
+                  .frozen
+                    .title.block-icon.gray 冻结金额(元)
+                    h2.amount-number2 {{mySideModel.userBaseInfo && mySideModel.userBaseInfo.FrozenBalance.toFixed(2)}}
 
-  script(src="")
-  script.
-    window.onload=function(){
-      document.getElementById('loader').style.display='none'
-    }
+          // 我的投资
+          section.item-wrapper.invest
+            .item-header 
+              span 我的投资
+              a(href="#", title='查看详情').detail 查看详情
+            .item-content.invest-wrapper.clearfix
+              .invest-overview
+                //- .invest-item
+                .title 累计投资总额（元）
+                h2.amount-number 52700.00
+              .invest-chart
+                img(src="/skin/img/mycenter/home-chart.png", alt="")
+          // 站岗宝
+          section.item-wrapper.standbao
+            .item-header 
+              span 站岗宝
+              a(href='#', title='查看详情').detail 查看详情
+            .item-content.standbao-wrapper
+              .rows.clearfix
+                .cols
+                  .title 活期（元）
+                  h2.amount-number 30000.00
+                .cols
+                  ul
+                    li 冻结资金（元）：{{standGuardInfo && standGuardInfo.FreezingAmount.toFixed(2)}}
+                    li 昨日收益（元）：{{standGuardInfo && standGuardInfo.YesterdayIncome.toFixed(2)}}
+                    li 累计收益（元）：{{standGuardInfo && standGuardInfo.AccumulatedIncome.toFixed(2)}}
+                .cols
+                  a(href='#').button 转出
+                  a(href="#").setting 设置自动转入
+              .rows.clearfix
+                .cols
+                  .title 定期（元）
+                  h2.amount-number 30000.00
+                .cols 待收收益（元）：0.47
+                  
+                .cols
+
+          // 我的借款
+          section.item-wrapper.myLoan
+            .item-header 
+              span 我的借款
+              a(href='#', title='查看详情').detail 查看详情
+            .item-content.clearfix
+              .myLoan-item
+                .title 我的借款
+                .title 账户总额：60000元
+                .progress.clearfix
+                  .yellow-progress
+                  .blue-progress
+                  .gray-progress
+              .myLoan-item
+                ul
+                  li.block-icon.yellow 待还本金：40000 元
+                  li.block-icon.blue 待还本金：40000 元
+                  li.block-icon.gray 待还本金：40000 元
+              .myLoan-item
+                .title 最近待还借款：
+                .title 《摇滚河马》
+                .title 30000.00元
+                a(href="#").button 还款
+          // 转让汇总
+          section.item-wrapper.transfer
+            .item-header 
+              span 转让汇总
+              a(href='#', title='查看详情').detail 查看详情
+            .item-content.clearfix
+              .transfer-overview
+                div
+                  .title 总转让收支（元）
+                  h2.amount-number 3600.00
+                div
+                  .title 总手续费（元）
+                  .amount-number2 1,500.00
+              .transfer-sort.cols-3.clearfix
+                .transfer-sort-item
+                  .project.title 总转让项目：8个
+                  .amount
+                    .title 总转让金额（元）
+                    .amount-number2 200,000.00
+                .transfer-sort-item
+                  .project.title 正在转让项目：6个
+                  .amount
+                    .title 总转让金额（元）
+                    .amount-number2 200,000.00
+                .transfer-sort-item
+                  .project.title 已完成转让项目：2个
+                  .amount
+                    .title 总转让金额（元）
+                    .amount-number2 200,000.00
+
+
+  script(src="/skin/js/mycenter/home.js")

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/skin/css/base.css"/>
     <link rel="stylesheet" href="/skin/plugs/dialog/css/dialog.css"/>
     <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
+    <script src="//cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
     <script src="/skin/plugs/dialog/js/dialog.js"></script>
     <script src="/skin/js/util.js"></script><!--[if lte IE 8]>
@@ -157,8 +157,12 @@
       
       var setWarpH=function() {
         var warp = document.querySelectorAll('.allH')[0];
+        if(warp){
+          
+        
         var iH = DGDTOOLS.Ev._setHeight(warp,[document.getElementById('header'), document.getElementById('footer')]);
         warp.style.minHeight=iH+'px';
+        }
       }
       
       var _onload = window.onload || function(){};

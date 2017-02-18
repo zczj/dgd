@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/skin/css/base.css"/>
     <link rel="stylesheet" href="/skin/plugs/dialog/css/dialog.css"/>
     <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
+    <script src="//cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
     <script src="/skin/plugs/dialog/js/dialog.js"></script>
     <script src="/skin/js/util.js"></script><!--[if lte IE 8]>
@@ -76,7 +76,7 @@
       </header>
     </section>
     <!--==================================================-->
-    <section id="pageList" v-cloak="v-cloak" class="pageList">
+    <section id="pageList" v-cloak="v-cloak" class="pageList clearfix">
       <dl v-for="item in items.l">
         <dt>{{item.catgray}}</dt>
         <dd v-for="list in item.list"><a :href="list.url">{{list.title}}</a></dd>
@@ -105,6 +105,14 @@
           {title: '关于我们',url: 'about/index.html'},
           {title: '加入我们',url: 'about/joinus.html'},
           {title: '不支持IE8及以下页面跳转页',url: 'shade/unsupport.html'},
+          {title: '个人中心首页', url: 'mycenter/index.html'},
+          {title: '个人中心我的质押', url: 'mycenter/pledge.html'},
+          {title: '个人中心质押详情', url: 'mycenter/pledgeDetail.html'},
+          {title: '个人中心我的转让', url: 'mycenter/transfer.html'},
+          {title: '个人中心转让详情', url: 'mycenter/transferDetail.html'},
+          {title: '个人中心订单详情', url: 'mycenter/orderDetail.html'},
+          {title: '个人中心我的推广', url: 'mycenter/promotion.html'},
+          {title: '个人中心我的优惠券', url: 'mycenter/coupon.html'},
           ]
         }],
         l: [{
@@ -122,7 +130,12 @@
           {title: '项目完成', url: 'reservation/complete.html'},
           {title: '提问', url: 'about/qaAsk.html'},
           {title: '绑定银行卡页面', url: 'mycenter/bindCard.html'},
-          {title: '个人中心首页', url: 'mycenter/index.html'},
+          {title: '投资管理-我的投资', url: 'mycenter/Investment.html'},
+          {title: '投资管理-关注项目', url: 'mycenter/Focus.html'},
+          {title: '投资管理-站岗宝', url: 'mycenter/standguardbao.html'},
+          {title: '资金管理', url: 'mycenter/FundManage.html'},
+          {title: '充值', url: 'mycenter/recharge.html'},
+          {title: '提现', url: 'mycenter/withdraw.html'},
           ]
         }]
       }
@@ -140,11 +153,11 @@
     <style>
       body{background:#fff;}
       .pageList{ width: 800px-; margin: 0 auto; padding: 20px 0; background: #fff; }
-      .pageList dl{ padding: 0 20px; margin-top: 20px; }
+      .pageList dl{ padding: 0 20px; width: 50%;float:left;box-sizing: border-box;}
       .pageList dl:first-child{margin-top: 0;}
-      .pageList dl dt, .pageList dl dd{ padding: 0 20px; border-bottom: 1px #ccc solid; height: 30px; line-height: 30px; }
-      .pageList dl dt{ background: #f8f8f8; font-size: 14px; color: #333; font-weight: bold; height: 50px; line-height: 50px; }
-      .pageList dl dd{text-indent: 20px;}
+      .pageList dl dt, .pageList dl dd{ padding: 0 20px; border-bottom: 1px #ccc solid; height: 40px; line-height: 40px; }
+      .pageList dl dt{ background: #f8f8f8; font-size: 16px; color: #333; font-weight: bold; height: 80px; line-height: 80px; }
+      .pageList dl dd{text-indent: 20px;font-size: 14px;}
       .pageList dl dd a{ display: block; }
     </style>
     <!--==================================================-->
@@ -207,8 +220,12 @@
       
       var setWarpH=function() {
         var warp = document.querySelectorAll('.allH')[0];
+        if(warp){
+          
+        
         var iH = DGDTOOLS.Ev._setHeight(warp,[document.getElementById('header'), document.getElementById('footer')]);
         warp.style.minHeight=iH+'px';
+        }
       }
       
       var _onload = window.onload || function(){};

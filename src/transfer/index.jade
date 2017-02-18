@@ -1,7 +1,19 @@
 extends ../shade/layout
 block content
   link(rel="stylesheet", href="/skin/css/transfer/index.css")
-  #transfer-list
+  link(rel="stylesheet", href="/skin/css/transfer/popup.css")
+  #popup
+    .popup-mask(v-if='popup')
+    transition(name='pulldown', v-on:after-enter="afterEnter")
+      .wrapper(v-if='popup')
+        .header 私信约谈
+          a(href="javascript:;",v-on:click='popup=false').icon.icon-close 
+        .content
+          textarea(placeholder='说点什么...', ref='msgBox')
+          .button-wrapper.clearfix
+            a(href='javascript:;',v-on:click='sendMsg').button.purchase-button 确定
+            a(href='javascript:;',v-on:click='popup=false').button.interview-button 取消
+  #transfer-list.allH
     // banner
     a(href="#").banner
     // 标题
@@ -43,8 +55,8 @@ block content
                 | ：
                 span 2016年07月03日15:00
           .buttons.clearfix
-            a(href="javascript:;").button.interview-button 约谈
-            a(href="#").button.purchase-button 我要购买
+            a(href="javascript:;", v-on:click='popupModel.showPopup').button.interview-button 约谈
+            a(href="#").button.purchase-button 1我要购买
       .transfer-list
         .transfer-header
           .transfer-tag.transfer-ing
@@ -156,7 +168,14 @@ block content
           .buttons.clearfix
             a(href="javascript:;").button.interview-button.finished-button 约谈
             a(href="#").button.purchase-button.finished-button 我要购买
+
+
+  script(src='/skin/js/transfer/popup.js')
   script.
-    $(function(){
-      $('#loader').fadeOut('300')
+    
+    new Vue({
+      el: '#transfer-list',
+      mounted: function () {
+        $('#loader').fadeOut('300')
+      }
     })

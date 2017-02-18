@@ -1,20 +1,88 @@
+script.
+  (function() {
+    if (!DGDTOOLS.checkLogin()) {
+      window.location = '/passport/login.html?url=' + window.location.href;
+      return false;
+    };
+  })();
 #model-side(v-cloak)
   .my-side(v-bind:class="{meanShow: headerModel.tagl}")
     #avatar.avatar
-      span.user-pic
-        img(src="http://pic01.zczj.com//avatar/20161114/20161114153629.jpg", alt="")
-      .user-name
-        span 用户名
-        span.msg
-      .user-money
-        span.t 账户余额：
-        span.val
-        a.see-more(href="#") 查看明细
+      .avatar-filter(v-bind:style="{backgroundImage:'url('+headerModel.userInfo && headerModel.userInfo.Avatar+')'}")
+      .avatar-warp
+        span.user-pic
+          img(v-bind:src="headerModel.userInfo && headerModel.userInfo.Avatar")
+        .user-name
+          span.ellipsis {{headerModel.userInfo && headerModel.userInfo.UserName}}
+          span.msg
+            i.icon.icon-tips
+            span.my-msg 1
+        .user-money
+          span.t 账户余额：
+          span.val {{userBaseInfo&& userBaseInfo.Balance.toFixed(2)}}
+          a.see-more(href="#") 查看明细
 
-      script.
-        var modelMySide = new Vue({
-          el:'#model-side',
-          data:{
+    //- 个人中心导航
+    ul.my-nav
+      li 
+        a(href="#")  
+          i.icon.icon-home
+          | 首页 
+      li.dropdown
+        a(href="javascript:void(0);") 
+          i.icon.icon-mannage
+          | 投资管理 
+          i.icon.icon-add
+          i.icon.icon-cut  
+        ul
+          li
+            a(href="#") 我的投资
+            a(href="#") 关注项目
+            a(href="#") 站岗宝
+      li.dropdown
+        a(href="javascript:void(0);") 
+          i.icon.icon-pro
+          | 我的借款  
+          i.icon.icon-add
+          i.icon.icon-cut
+        ul
+          li
+            a(href="#") 我的质押
+            //- a(href="#") 我的投呗
+      li
+        a(href="#")
+          i.icon.icon-transfer
+          | 我的转让
+      li
+        a(href="#") 
+          i.icon.icon-qian
+          | 资金管理
+      li.dropdown
+        a(href="javascript:void(0);") 
+          i.icon.icon-gift
+          | 推广奖励
+          i.icon.icon-add
+          i.icon.icon-cut
+        ul
+          li
+            a(href="#") 优惠券
+            a(href="#") 推广
+            a(href="#") 积分
+      li
+        a(href="#") 
+          i.icon.icon-preson
+          | 安全设置   
+      li
+        a(href="#") 
+          i.icon.icon-message
+          | 消息中心   
 
-          }
-        })
+    
+script(src="/skin/js/mycenter/mySide.js")
+    
+  
+
+    
+
+      
+      

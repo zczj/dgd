@@ -1,0 +1,84 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  #model-focus.allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main
+          // 关注项目
+          section.item-wrapper.tz-list
+            .item-header 
+              span 关注项目
+            .tz-list-warp
+              .tz-list-item(v-for="(item, index) in list.response")
+                .tz-list-t 
+                  .suptable
+                    span.tz-list-l
+                      span.tz-list-name {{item.ProjectName}}
+                      span.tz-list-time {{item.PostDate}}
+                    span.tz-list-r
+                      a(href="javascript:void(0);" v-on:click="del(index,item.ProjectID)").tz-list-del 删除
+                .tz-list-con
+                  .tz-list-items
+                    .item.tz-list-name  
+                      span 起投金额（元）
+                    .item 
+                      div
+                        div {{item.LowVote.toFixed(2)}} 
+                          
+
+                  .tz-list-items
+                    .item.tz-list-name  
+                      span 项目状态
+                    .item 
+                      div
+                        p
+                          span {{stateMap[item.State-1]}}
+                  .tz-list-items
+                    .item.tz-list-name  
+                      span 项目进度
+                    .item 
+                      div
+                        p
+                          span {{item.ProjectProcess}}%
+                  .tz-list-items
+                    .item.tz-list-name  
+                      span 关注人数
+                    .item 
+                      div
+                        P
+                          span {{item.FollowCount}}
+                  .tz-list-items
+                    .item.tz-list-name  
+                      span  操作  
+                    .item 
+                      div
+                        
+                        P
+                          a(v-bind:href="'/project/detail.html?id='+ item.ProjectID").btn 立即认购       
+            .page-bar
+              //- pc 翻页 
+              ul(v-if="!headerModel.isMobileOrTable")                
+                li.page-text(v-if="curPage!=1")
+                  a(href="javascript:void(0);" v-on:click="pageClick(curPage-1)") 上一页
+                li
+                  a(href="javascript:void(0);" v-on:click="pageClick(1)" v-bind:class="{cur: curPage == 1}") 1
+                li(v-if="curPage>4 && totalPage>7")
+                  span ...
+                li(v-for="item in PagesIndex")
+                  a(href="javascript:void(0);" v-on:click="pageClick(item)" v-bind:class="{cur: curPage == item}") {{item}}
+                li(v-if="totalPage>=7 && curPage < totalPage-3")
+                  span ...
+                li(v-if="totalPage>6 && totalPage!= 1")
+                  a(href="javascript:void(0);" v-on:click="pageClick(totalPage)" v-bind:class="{cur: curPage == totalPage}") {{totalPage}}
+                li.page-text(v-if="curPage!=totalPage")
+                  a(href="javascript:void(0);", v-on:click="pageClick(curPage+1)") 下一页
+              //- mobile
+              .mobile-page(v-else)
+                a(href="javascript:void(0);",v-if="curPage!=totalPage" v-on:click="pageClick(curPage+1,'mb')") 加载更多
+                a.end-page(href="javascript:void(0);",v-else ) 最后一页
+
+        script(src='/skin/js/mycenter/Focus.js')

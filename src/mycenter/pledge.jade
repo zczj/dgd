@@ -1,0 +1,106 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/pledge.css")
+  #pledge.allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main
+          // 我的质押
+          section.item-wrapper.assets
+            .item-header 
+              span 我的质押
+            .item-content.tz-list
+              .tz-list-warp
+
+                .tz-list-item(v-for='item in list')
+                  .tz-list-t 
+                    .suptable
+                      span.tz-list-l
+                        span.tz-list-name {{item.ProjectName}}
+                        //- span.tz-list-time {{item.PostDate}}
+                      span.tz-list-r
+                        a(href="./pledgeDetail.html" ).tz-list-del.blue 交易详情
+                  .tz-list-con
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 质押金额（元）
+                      .item 
+                        div
+                          p
+                            span {{item.PledgeAmount.toFixed(2)}}
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 计息方式
+                      .item 
+                        div
+                          p
+                            span 按天（18%）
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 质押状态
+                      .item 
+                        div
+                          span(v-bind:class='pledgeColor[item.PledgeStatus]') {{pledgeStatus[item.PledgeStatus]}}
+                          .icon-wrapper(v-if='item.PledgeStatus == 1')
+                            i.icon.icon-repayment
+                            i.icon.icon-repayment.gray
+                            i.icon.icon-repayment.gray
+                          .icon-wrapper(v-else-if='item.PledgeStatus == 2')
+                            i.icon.icon-warning.red
+                          // tips
+                          ul.tips(v-if='item.PledgeStatus == 1')
+                            li(v-for='rp in item.repayment') {{rp.RepaymentD}} 已还一期利息{{rp.RepaymentAmount}}
+                          ul.tips(v-else-if='item.PledgeStatus == 2')
+                            li 逾期天数：{{item.overdueDay}}
+                            li 逾期金额：{{item.overdueAmount}}
+                            li 逾期费率：{{item.overdueRate}}
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 质押时间
+                      .item 
+                        div
+                          p
+                            span {{item.PledgeDate}}
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span 到期还款日
+                      .item 
+                        div
+                          span {{item.RepaymentDate}}
+                          .icon-wrapper(v-if='item.PledgeStatus ==1 || item.PledgeStatus == 2')
+                            i.icon.icon-clock
+                    .tz-list-items
+                      .item.tz-list-name 
+                        span  操作  
+                      .item 
+                        div
+                          a(href="#", v-if='item.PledgeStatus ==1 || item.PledgeStatus == 2').btn 还 款
+                          span(v-else) 无
+  script.
+    new Vue({
+      el: '#pledge',
+      data: {
+        pledgeStatus: ['申请中', '待还款', '逾期', '已转让', '已还款'],
+        pledgeColor: ['blue', 'yellow', 'red', 'red', 'green'],
+        list: [
+          {'ProjectName': '拉拉社区', 'PledgeAmount': 1000.00, 'PledgeStatus': 0, 'PledgeDate': '2016-10-10', 'RepaymentDate': '2016-11-11'},
+          {'ProjectName': '拉拉社区', 'PledgeAmount': 1000.00, 'PledgeStatus': 2, 'PledgeDate': '2016-10-10', 'RepaymentDate': '2016-11-11', 'overdueDay': '100天', 'overdueAmount': '1000.00元', 'overdueRate': '5%'},
+          {'ProjectName': '拉拉社区', 'PledgeAmount': 1000.00, 'PledgeStatus': 1, 'PledgeDate': '2016-10-10', 'RepaymentDate': '2016-11-11', 
+          repayment: [
+            {'RepaymentAmount': '1000元', 'RepaymentD': '7-13'},
+            {'RepaymentAmount': '1000元', 'RepaymentD': '7-13'},
+            {'RepaymentAmount': '1000元', 'RepaymentD': '7-13'},
+            {'RepaymentAmount': '1000元', 'RepaymentD': '7-13'},
+          ]},
+          {'ProjectName': '拉拉社区', 'PledgeAmount': 1000.00, 'PledgeStatus': 3, 'PledgeDate': '2016-10-10', 'RepaymentDate': '2016-11-11'},
+          {'ProjectName': '拉拉社区', 'PledgeAmount': 1000.00, 'PledgeStatus': 4, 'PledgeDate': '2016-10-10', 'RepaymentDate': '2016-11-11'},
+          {'ProjectName': '拉拉社区', 'PledgeAmount': 1000.00, 'PledgeStatus': 3, 'PledgeDate': '2016-10-10', 'RepaymentDate': '2016-11-11'},
+          {'ProjectName': '拉拉社区', 'PledgeAmount': 1000.00, 'PledgeStatus': 0, 'PledgeDate': '2016-10-10', 'RepaymentDate': '2016-11-11'},
+          {'ProjectName': '拉拉社区', 'PledgeAmount': 1000.00, 'PledgeStatus': 0, 'PledgeDate': '2016-10-10', 'RepaymentDate': '2016-11-11'},
+        ]
+      }
+    })

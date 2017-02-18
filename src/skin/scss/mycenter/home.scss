@@ -1,0 +1,309 @@
+// 区块背景颜色
+$item-bgcolor: #fff;
+// 头部边框颜色
+$header-border-color: #e6e6e6;
+// 头部高亮线条颜色
+$header-high-color: #009ff0;
+// 头部字体颜色
+$header-font-color: #505050;
+// 头部字体大小
+$header-font-size: 20px;
+// 内容区字体颜色
+$content-font-color: #616a73;
+// 按钮颜色
+$buton-color: #009ff0;
+// 按钮字体大小
+$button-font-size: 15px;
+// 头部查看详情字体大小
+$header-detail-font-size: 16px;
+// 头部查看详情字体颜色
+$header-detail-font-color: #009ff0;
+// 我的投资
+.invest {
+  &-overview {
+    float: left;
+    margin-top: 40px;
+    width: 30%;
+  }
+  &-chart {
+    float: right;
+    width: 70%;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+// 站岗宝
+.standbao {
+  &-wrapper {
+    .rows {
+      padding: 20px 0;
+      border-top: 1px solid $header-border-color;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &:first-child {
+        border-top: none;
+      }
+      .cols {
+        width: 33.33%;
+        float: left\0\9; //   IE9 hack
+        &:last-child {
+          text-align: right;
+        }
+      }
+      .setting {
+        display: block;
+        font-size: 16px;
+        color: #b2b9bf;
+        margin-top: 18px;
+      }
+    }
+  }
+}
+
+// 我的借款
+.myLoan {
+  &-item {
+    margin: 35px 0 0;
+    min-height: 100px;
+    float: left;
+    width: 33.33%;
+    text-align: center;
+    &:nth-of-type(2) {
+      border-left: 1px solid $header-border-color;
+      border-right: 1px solid $header-border-color;
+    }
+    li {
+      height: 50px;
+      line-height: 50px;
+    }
+  }
+  .item-content {
+    display: flex;
+    align-items: center;
+  }
+  .title {
+    height: 33px;
+    line-height: 33px;
+  }
+  .progress {
+    width: 80%;
+    height: 10px;
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #ccc;
+    overflow: hidden;
+    >div {
+      float: left;
+    }
+    .yellow-progress {
+      width: 50%;
+      height: 100%;
+      background-color: #ffd800;
+    }
+    .blue-progress {
+      width: 30%;
+      height: 100%;
+      background-color: #3e85ff;
+    }
+    .gray-progress {
+      width: 20%;
+      height: 100%;
+      background-color: #b2b9bf;
+    }
+  }
+}
+
+// 转让汇总
+.transfer {
+  .item-content {
+    margin-top: 20px;
+    display: flex;
+  }
+  .cols-3>div {
+    border-left: none;
+  }
+  &-overview {
+    flex: 1;
+    border-right: 1px solid $header-border-color;
+    text-align: center;
+    float: left\0\9;
+    width: 30%\0\9;
+    .amount-number {
+      color: #009ff0;
+    }
+  }
+  &-sort {
+    flex: 3;
+    margin-left: 40px;
+    float: left\0\9;
+    width: 60%\0\9;
+    &-item {
+      // float: left;
+      // width: 33.33%;
+      // text-align: center;
+      .project {
+        padding: 16px 0;
+        border-bottom: 1px solid $header-border-color;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .amount {
+        padding-top: 20px;
+      }
+    }
+  }
+}
+
+// 600px
+@media screen and (max-width: 600px) {
+  // 我的投资
+  .invest {
+    &-overview {
+      float: none;
+      text-align: center;
+      margin-top: 20px;
+      width: 100%;
+    }
+    &-chart {
+      width: 100%;
+    }
+  }
+  // 站岗宝
+  .standbao {
+    &-wrapper {
+      .rows {
+        font-size: 14px;
+        .cols {
+          width: 50%;
+          &:last-child {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  // 我的借款
+  .myLoan {
+    .item-content {
+      display: block;
+    }
+    &-item {
+      position: relative;
+      margin: 0;
+      min-height: 100px;
+      float: none;
+      width: 100%;
+      text-align: left;
+      &:nth-of-type(2) {
+        border: none;
+        border-top: 1px solid $header-border-color;
+        border-bottom: 1px solid $header-border-color;
+      }
+      li {
+        height: 33px;
+        line-height: 33px;
+        width: 100%;
+      }
+      .button {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+  // 转让汇总
+  .transfer {
+    .item-content {
+      display: block;
+      * {
+        text-align: left;
+      }
+    }
+    &-overview {
+      border: none;
+      border-bottom: 1px solid $header-border-color;
+      display: flex;
+      justify-content: space-around;
+      >div {
+        display: inline-block;
+      }
+    }
+    &-sort {
+      margin-left: 0;
+      &-item {
+        float: none;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border-bottom: 1px dashed $header-border-color;
+        .project {
+          border-bottom: none;
+        }
+        .amount {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 801px) and (max-width: 980px) {
+  // 我的借款
+  .myLoan {
+    .item-content {
+      display: block;
+    }
+    &-item {
+      position: relative;
+      margin: 0;
+      min-height: 100px;
+      float: none;
+      width: 100%;
+      text-align: left;
+      &:nth-of-type(2) {
+        border: none;
+        border-top: 1px solid $header-border-color;
+        border-bottom: 1px solid $header-border-color;
+      }
+      li {
+        height: 33px;
+        line-height: 33px;
+        width: 100%;
+      }
+      .button {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+  // 转让汇总
+  .transfer {
+    .item-content {
+      display: block;
+    }
+    &-overview {
+      border: none;
+      border-bottom: 1px solid $header-border-color;
+      display: flex;
+      justify-content: space-around;
+      >div {
+        display: inline-block;
+      }
+    }
+    &-sort {
+      margin-left: 0;
+      &-item {
+        .project {
+          border-bottom-style: dashed;
+        }
+      }
+    }
+  }
+}

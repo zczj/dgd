@@ -26,30 +26,30 @@ block content
             ul.content
               li
                 span.t-name 项目名称：
-                span.t-val {{orderInfo.project.ProjectName}}
+                span.t-val {{orderInfo.project&&orderInfo.project.ProjectName}}
               li
                 span.t-name 投资类别：
                 span.t-val 个人投资
-              li(v-if="orderInfo.project.Number")
+              li(v-if="orderInfo.project && orderInfo.project.Number")
                 span.t-name 投资份额：
                 span.t-val
               li
                 span.t-name 投资金额：
-                span.t-val {{orderInfo.order.Amount.toFixed(2)}}元
+                span.t-val {{orderInfo.order && orderInfo.order.Amount.toFixed(2)}}元
               li
                 span.t-name 管理费：
-                span.t-val {{orderInfo.order.ManagementExpense}}元
+                span.t-val {{orderInfo.order && orderInfo.order.ManagementExpense}}元
               li
                 span.t-name 优惠券：
-                span.t-val {{orderInfo.order.CouponAmount}}元
-              li(v-if="orderInfo.GDRebateAmount !=0")
+                span.t-val {{orderInfo.order && orderInfo.order.CouponAmount}}元
+              li(v-if="orderInfo.GDRebateAmount && orderInfo.GDRebateAmount !=0")
                 span.t-name 股东券：
                 span.t-val {{orderInfo.GDRebateAmount.toFixed(2)}}元
             .order-footer
               ul
                 li
                   span.t-name 应付总额：
-                  span.t-val ￥{{orderInfo.order.PayAmount.toFixed(2)}}
+                  span.t-val ￥{{orderInfo.order&& orderInfo.order.PayAmount.toFixed(2)}}
 
         //- 左侧
         .main

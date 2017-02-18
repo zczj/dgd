@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/skin/css/base.css"/>
     <link rel="stylesheet" href="/skin/plugs/dialog/css/dialog.css"/>
     <script src="http://www.zczj.com/skin/js/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/vue/2.0.5/vue.min.js"></script>
+    <script src="//cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
     <script src="/skin/plugs/dialog/js/dialog.js"></script>
     <script src="/skin/js/util.js"></script><!--[if lte IE 8]>
@@ -76,43 +76,97 @@
       </header>
     </section>
     <!--==================================================-->
+    <link rel="stylesheet" href="/skin/css/mycenter/index.css"/>
     <link rel="stylesheet" href="/skin/css/mycenter/bindCard.css"/>
-    <!-- 绑定银行卡-->
-    <div id="model-bindCard" v-cloak="v-cloak">
-      <div class="bc-warp">
-        <div class="container">
-          <ul>
-            <li class="border-1px"><span class="t-name">持卡本人:</span><span class="t-val">{{authen.FullName}}</span></li>
-            <li class="border-1px"><span class="t-name">身份证号:</span><span class="t-val">{{authen.IDNumber}}</span></li>
-            <li class="border-1px tips"><span class="t-name">开户银行:</span><span class="t-val"> 
-                <select name="" v-model="bankSelected">
-                  <option v-for="(item,i) in bankListMap" v-bind:value="i">{{item.bankName}}</option>
-                </select></span></li>
-            <li class="border-1px"><span class="t-name">银行卡号:</span><span class="t-val"> 
-                <input type="text" placeholder="请输入银行卡号" v-model="backCode" ref="backCode"/></span></li>
-            <li class="border-1px tips area"><span class="t-name">开户地区:</span><span class="t-val"><span v-bind:class="{changed:provinceS!=0}">
-                  <select v-if="showProvince" v-model="provinceS" ref="xxx" size="1" data="show" v-on:change="getCity(provinceS)">
-                    <option v-for="item in province" v-bind:value="item.CityID">{{item.CityName}}</option>
-                  </select></span><span v-bind:class="{changed:cityS}">
-                  <select v-model="cityS">
-                    <option v-for="item in city" v-bind:value="item.CityID">{{item.CityName}}</option>
-                  </select></span></span></li>
-            <li class="border-1px"><span class="t-name">开户支行:</span><span class="t-val"> 
-                <input type="text" v-model="masterBank" placeholder="请输入支行名称" ref="masterBank"/></span></li>
-            <li class="border-1px"><span class="t-name">预留手机:</span><span class="t-val">
-                <input type="text" placeholder="请输入银行卡预留手机号" v-model="tel" ref="tel"/></span></li>
-            <li class="border-1px"><span class="t-name">支付金额:</span><span class="t-val">{{orderInfo &&orderInfo.order.PayAmount.toFixed(2)}} 元</span></li>
-          </ul>
-          <div class="bc-btns">
-            <button v-on:click="bindFn">立即支付</button>
+    <div id="model-stand" class="allH">
+      <div class="my-warp">
+        <div class="container clearfix">
+          <script>
+            (function() {
+              if (!DGDTOOLS.checkLogin()) {
+                window.location = '/passport/login.html?url=' + window.location.href;
+                return false;
+              };
+            })();
+          </script>
+          <div id="model-side" v-cloak="v-cloak">
+            <div v-bind:class="{meanShow: headerModel.tagl}" class="my-side">
+              <div id="avatar" class="avatar">
+                <div v-bind:style="{backgroundImage:'url('+headerModel.userInfo &amp;&amp; headerModel.userInfo.Avatar+')'}" class="avatar-filter"></div>
+                <div class="avatar-warp"><span class="user-pic"><img v-bind:src="headerModel.userInfo &amp;&amp; headerModel.userInfo.Avatar"/></span>
+                  <div class="user-name"><span class="ellipsis">{{headerModel.userInfo && headerModel.userInfo.UserName}}</span><span class="msg"><i class="icon icon-tips"></i><span class="my-msg">1</span></span></div>
+                  <div class="user-money"><span class="t">账户余额：</span><span class="val">{{userBaseInfo&& userBaseInfo.Balance.toFixed(2)}}</span><a href="#" class="see-more">查看明细</a></div>
+                </div>
+              </div>
+              <ul class="my-nav">
+                <li> <a href="#"> <i class="icon icon-home"></i>首页 </a></li>
+                <li class="dropdown"><a href="javascript:void(0);"> <i class="icon icon-mannage"></i>投资管理 <i class="icon icon-add"></i><i class="icon icon-cut"> </i></a>
+                  <ul>
+                    <li><a href="#">我的投资</a><a href="#">关注项目</a><a href="#">站岗宝</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown"><a href="javascript:void(0);"> <i class="icon icon-pro"></i>我的借款  <i class="icon icon-add"></i><i class="icon icon-cut"></i></a>
+                  <ul>
+                    <li><a href="#">我的质押</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="#"><i class="icon icon-transfer"></i>我的转让</a></li>
+                <li><a href="#"> <i class="icon icon-qian"></i>资金管理</a></li>
+                <li class="dropdown"><a href="javascript:void(0);"> <i class="icon icon-gift"></i>推广奖励<i class="icon icon-add"></i><i class="icon icon-cut"></i></a>
+                  <ul>
+                    <li><a href="#">优惠券</a><a href="#">推广</a><a href="#">积分</a></li>
+                  </ul>
+                </li>
+                <li><a href="#"> <i class="icon icon-preson"></i>安全设置   </a></li>
+                <li><a href="#"> <i class="icon icon-message"></i>消息中心   </a></li>
+              </ul>
+            </div>
           </div>
-          <div class="bc-seePric"><a href="#" title="查看银行限额">查看银行限额>></a></div>
-          <dl class="bc-tips">
-            <dt>温馨提示</dt>
-            <dd>1.移动端充值和提现必须为同一张很行卡，并且是储蓄卡;</dd>
-            <dd>2.绑定银行卡后，如需修改银行信息，请联系我们的客服人员。</dd>
-          </dl>
-          <div class="bc-tel">客服电话：<a href="tel:400-066-8606">400-066-8606</a></div>
+          <script src="/skin/js/mycenter/mySide.js"></script>
+          <!-- 绑定银行 卡-->
+          <div id="model-bindCard" v-cloak="v-cloak" class="my-main">
+            <section class="item-wrapper stand-head">
+              <div class="item-header"> <span>绑定银行卡</span></div>
+              <div class="item-warp bc-warp">
+                <div class="container">
+                  <ul>
+                    <li class="border-1px"><span class="t-name">持卡本人:</span><span class="t-val">{{authen.FullName}}</span></li>
+                    <li class="border-1px"><span class="t-name">身份证号:</span><span class="t-val">{{authen.IDNumber}}</span></li>
+                    <li class="border-1px tips"><span class="t-name">开户银行:</span><span class="t-val"> 
+                        <select name="" v-model="bankSelected">
+                          <option v-for="(item,i) in bankListMap" v-bind:value="i">{{item.bankName}}</option>
+                        </select></span></li>
+                    <li class="border-1px"><span class="t-name">银行卡号:</span><span class="t-val"> 
+                        <input type="text" placeholder="请输入银行卡号" v-model="backCode" ref="backCode"/></span></li>
+                    <li class="border-1px tips area"><span class="t-name">开户地区:</span><span class="t-val"><span v-bind:class="{changed:provinceS!=0}">
+                          <select v-if="showProvince" v-model="provinceS" ref="xxx" size="1" data="show" v-on:change="getCity(provinceS)">
+                            <option v-for="item in province" v-bind:value="item.CityID">{{item.CityName}}</option>
+                          </select></span><span v-bind:class="{changed:cityS}">
+                          <select v-model="cityS">
+                            <option v-for="item in city" v-bind:value="item.CityID">{{item.CityName}}</option>
+                          </select></span></span></li>
+                    <li class="border-1px"><span class="t-name">开户支行:</span><span class="t-val"> 
+                        <input type="text" v-model="masterBank" placeholder="请输入支行名称" ref="masterBank"/></span></li>
+                    <li v-if="!isMC" class="border-1px"><span class="t-name">预留手机:</span><span class="t-val">
+                        <input type="text" placeholder="请输入银行卡预留手机号" v-model="tel" ref="tel"/></span></li>
+                    <li v-else="v-else" class="border-1px"><span class="t-name">手机号码:</span><span class="t-val"></span></li>
+                    <li class="border-1px"><span class="t-name">支付金额:</span><span class="t-val">{{orderInfo &&orderInfo.order.PayAmount.toFixed(2)}} 元</span></li>
+                  </ul>
+                  <div class="bc-btns">
+                    <button v-on:click="bindFn">立即支付</button>
+                  </div>
+                  <div class="bc-seePric"><a href="#" title="查看银行限额">查看银行限额>></a></div>
+                  <dl class="bc-tips">
+                    <dt>温馨提示</dt>
+                    <dd>1.移动端充值和提现必须为同一张很行卡，并且是储蓄卡;</dd>
+                    <dd>2.绑定银行卡后，如需修改银行信息，请联系我们的客服人员。</dd>
+                  </dl>
+                  <div class="bc-tel">客服电话：<a href="tel:400-066-8606">400-066-8606</a></div>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     </div>
@@ -177,8 +231,12 @@
       
       var setWarpH=function() {
         var warp = document.querySelectorAll('.allH')[0];
+        if(warp){
+          
+        
         var iH = DGDTOOLS.Ev._setHeight(warp,[document.getElementById('header'), document.getElementById('footer')]);
         warp.style.minHeight=iH+'px';
+        }
       }
       
       var _onload = window.onload || function(){};

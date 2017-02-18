@@ -1,0 +1,360 @@
+$color: #009ff0;
+.item-content {
+  padding-left: 0;
+}
+
+.transfer {
+  &-list {
+    padding: 0 25px;
+    margin-bottom: 20px;
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  &-header {
+    position: relative;
+    width: 100%;
+    height: 74px;
+    line-height: 74px;
+    padding-left: 100px;
+    border-bottom: 1px solid #e6e6e6;
+    &::after {
+      content: '.';
+      display: block;
+      clear: both;
+      visibility: hidden;
+    }
+    >* {
+      float: left;
+      &:not(.transfer-tag) {
+        width: 33%;
+        height: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  // 转让标签
+  &-tag {
+    position: absolute;
+    left: 0;
+    width: 86px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 19px;
+    margin-top: 21px;
+    border-radius: 5px;
+    &::after {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    &.transfer-ing {
+      color: #fe6840;
+      border: 1px solid #fe6840;
+      &::after {
+        content: '转让中'
+      }
+    }
+    &.transfer-out {
+      color: $color;
+      border: 1px solid $color;
+      &::after {
+        content: '已转出'
+      }
+    }
+    &.transfer-in {
+      color: #fdd102;
+      border: 1px solid #fdd102;
+      &::after {
+        content: '已转入'
+      }
+    }
+    &.transfer-finished {
+      color: #d2d3d3;
+      border: 1px solid #d2d3d3;
+      &::after {
+        content: '已完成'
+      }
+    }
+  }
+  // 项目名称
+  &-project-title {
+    color: #333;
+    font-size: 26px;
+  }
+  // 项目简介
+  &-project-intro {
+    color: #969696;
+    font-size: 17px;
+  }
+  // 关联项目
+  &-association {
+    color: $color;
+    font-size: 15px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  //
+  &-content {
+    display: table;
+    .param {
+      width: 80%;
+      // float: left;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .buttons {
+      padding: 15px 0;
+      // float: right;
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+      >.button {
+        margin: 6px 0;
+      }
+      .blue {
+        color: $color;
+        &:hover {
+          color: #5ee075;
+        }
+      }
+    }
+    // 转让金额
+    .amount {
+      float: left;
+      width: 50%;
+      margin: 14px 0;
+      color: #969696;
+      font-size: 15px;
+      li {
+        height: 30px;
+        line-height: 30px;
+      }
+      span {
+        color: #505050;
+        &.name {
+          color: #969696;
+        }
+      }
+    }
+  }
+}
+
+// 转让详情
+.transfer-intro {
+  li {
+    float: left;
+    height: 48px;
+    line-height: 48px;
+    span {
+      font-size: 16px;
+      &.orange {
+        color: #fc7701;
+        margin-left: 20px;
+      }
+    }
+    &:first-child {
+      width: 100px;
+      text-align: right;
+      font-size: 16px;
+      color: #95a0aa;
+    }
+    &:last-child {
+      text-align: left;
+      font-size: 22px;
+      color: #505050;
+    }
+    .button {
+      line-height: 1.8;
+    }
+    input {
+      font-size: 14px;
+      width: 140px;
+      height: 33px;
+      text-indent: 8px;
+    }
+  }
+}
+
+.transfer-step {
+  padding-top: 40px;
+}
+
+@media screen and (max-width: 600px) {
+  .cols-item {
+    >div {
+      height: 30px;
+      line-height: 30px;
+      border-bottom: 1px dashed #e6e6e6;
+      text-align: left;
+      h2 {
+        text-align: right;
+      }
+      * {
+        width: 50%;
+        float: left;
+      }
+    }
+  }
+}
+
+// ipad竖屏
+@media (min-width: 768px) and (max-width: 1023px) {
+  #transfer-list {
+    .transfer-list {
+      padding: 0 10px;
+    }
+    .transfer-header {
+      .transfer-project-title,
+      .transfer-project-intro {
+        width: 40%;
+        padding: 0 5px;
+      }
+      .transfer-association {
+        width: 20%;
+      }
+    }
+    .transfer-content {
+      .param {
+        float: none;
+        width: 100%;
+        padding-bottom: 0;
+      }
+      .buttons {
+        float: none;
+        width: 100%;
+        >.button {
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+}
+
+// 手机端
+@media screen and (max-width: 767px) {
+  .transfer-list {
+    padding: 0 10px;
+  }
+  //
+  .transfer-header {
+    height: auto;
+    padding: 0;
+    line-height: normal;
+    padding-top: 10px;
+    text-align: center;
+    &::after {
+      display: none;
+    }
+    >*:not(.transfer-tag) {
+      float: none;
+      width: 100%;
+      height: auto;
+    }
+  }
+  .transfer-tag {
+    position: relative;
+    font-size: 14px;
+    margin: 0;
+  }
+  .transfer-project-title {
+    font-size: 20px;
+    height: 44px;
+    line-height: 44px;
+  }
+  .transfer-project-intro {
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+  }
+  .transfer-association {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    text-align: right;
+    font-size: 13px;
+    height: 32px;
+    line-height: 32px;
+  }
+  //
+  .transfer-content {
+    padding-top: 10px;
+    display: block;
+    overflow: hidden;
+    .param {
+      float: none;
+      width: 100%;
+      padding: 0;
+    }
+    .amount {
+      margin: 0;
+      width: 100%;
+      overflow: hidden;
+      li {
+        float: none;
+        width: 100%;
+        line-height: 1.8;
+        font-size: 14px;
+      }
+      .name {
+        display: inline-block;
+        width: 110px;
+      }
+      span {
+        &:last-child {
+          margin-left: 10px;
+        }
+      }
+    }
+    .buttons {
+      float: none;
+      width: 100%;
+      padding: 5px;
+      display: block;
+      >* {
+        display: block;
+      }
+    }
+  }
+  // 转让详情
+  .transfer-intro {
+    ul {
+      &:last-child {
+        li {
+          width: 100%;
+          text-indent: 0;
+        }
+      }
+    }
+    li {
+      height: auto;
+      line-height: 30px;
+      span {
+        display: none;
+        font-size: 12px;
+      }
+      &:first-child {
+        font-size: 14px;
+      }
+      &:last-child {
+        font-size: 16px;
+        text-indent: 40px;
+      }
+    }
+  }
+  .button {
+    display: block;
+  }
+  .transfer-step {
+    padding-top: 0;
+  }
+}
