@@ -127,7 +127,27 @@ html,body{
   }
 }
 
+@mixin stand-head-600{
+  .stand-head-mobile .stand-list{
+    font-size: 1.8rem;
+  }
+}
 
+// 800px
+@media screen and (max-width:50em){
+  .bc-warp{
+    margin-top: 0;
+  }
+  body{
+    background:#fff;
+  }
+  .my-warp{
+    margin-top:10px;
+    .container{
+      width: 100%;
+    }
+  }
+}
 
 
 

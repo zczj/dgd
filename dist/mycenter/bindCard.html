@@ -127,7 +127,7 @@
           <!-- 绑定银行 卡-->
           <div id="model-bindCard" v-cloak="v-cloak" class="my-main">
             <section class="item-wrapper stand-head">
-              <div class="item-header"> <span>绑定银行卡</span></div>
+              <div v-if="!headerModel.isMobileOrTable" class="item-header"> <span>绑定银行卡</span></div>
               <div class="item-warp bc-warp">
                 <div class="container">
                   <ul>
@@ -150,8 +150,8 @@
                         <input type="text" v-model="masterBank" placeholder="请输入支行名称" ref="masterBank"/></span></li>
                     <li v-if="!isMC" class="border-1px"><span class="t-name">预留手机:</span><span class="t-val">
                         <input type="text" placeholder="请输入银行卡预留手机号" v-model="tel" ref="tel"/></span></li>
-                    <li v-else="v-else" class="border-1px"><span class="t-name">手机号码:</span><span class="t-val"></span></li>
-                    <li class="border-1px"><span class="t-name">支付金额:</span><span class="t-val">{{orderInfo &&orderInfo.order.PayAmount.toFixed(2)}} 元</span></li>
+                    <li v-else="v-else" class="border-1px"><span class="t-name">手机号码:</span><span class="t-val">{{mySideModel.userBaseInfo.Phone}}</span></li>
+                    <li v-if="!isMC" class="border-1px"><span class="t-name">支付金额:</span><span class="t-val">{{orderInfo &&orderInfo.order.PayAmount.toFixed(2)}} 元</span></li>
                   </ul>
                   <div class="bc-btns">
                     <button v-on:click="bindFn">立即支付</button>

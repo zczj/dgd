@@ -10,7 +10,7 @@ block content
         // 绑定银行 卡
         .my-main#model-bindCard(v-cloak)
           section.item-wrapper.stand-head
-            .item-header 
+            .item-header(v-if="!headerModel.isMobileOrTable") 
               span 绑定银行卡
             .item-warp.bc-warp
               .container
@@ -50,8 +50,8 @@ block content
                       input(type="text" placeholder="请输入银行卡预留手机号" v-model="tel" ref="tel")
                   li.border-1px(v-else)
                     span.t-name 手机号码:
-                    span.t-val
-                  li.border-1px
+                    span.t-val {{mySideModel.userBaseInfo.Phone}}
+                  li.border-1px(v-if="!isMC")
                     span.t-name 支付金额:
                     span.t-val {{orderInfo &&orderInfo.order.PayAmount.toFixed(2)}} 元
                 .bc-btns
