@@ -134,8 +134,11 @@
                     <li class="border-1px"><span class="t-name">持卡本人:</span><span class="t-val">{{authen.FullName}}</span></li>
                     <li class="border-1px"><span class="t-name">身份证号:</span><span class="t-val">{{authen.IDNumber}}</span></li>
                     <li class="border-1px tips"><span class="t-name">开户银行:</span><span class="t-val"> 
-                        <select name="" v-model="bankSelected">
+                        <select name="" v-model="bankSelected" v-if="!isMC">
                           <option v-for="(item,i) in bankListMap" v-bind:value="i">{{item.bankName}}</option>
+                        </select>
+                        <select name="" v-model="bankSelected" v-else="v-else">
+                          <option v-for="(item,i) in bankListMap" v-bind:value="item.ID">{{item.Name}}</option>
                         </select></span></li>
                     <li class="border-1px"><span class="t-name">银行卡号:</span><span class="t-val"> 
                         <input type="text" placeholder="请输入银行卡号" v-model="backCode" ref="backCode"/></span></li>
@@ -151,10 +154,13 @@
                     <li v-if="!isMC" class="border-1px"><span class="t-name">预留手机:</span><span class="t-val">
                         <input type="text" placeholder="请输入银行卡预留手机号" v-model="tel" ref="tel"/></span></li>
                     <li v-else="v-else" class="border-1px"><span class="t-name">手机号码:</span><span class="t-val">{{mySideModel.userBaseInfo.Phone}}</span></li>
+                    <li v-if="isMC" class="border-1px phoneCode"><span class="t-val">
+                        <input type="text" placeholder="请输入手机验证码" v-model="phoneCode"/></span><a href="javascript:void(0);" v-on:click="getCode" class="sendCode">{{codeText}}</a></li>
                     <li v-if="!isMC" class="border-1px"><span class="t-name">支付金额:</span><span class="t-val">{{orderInfo &&orderInfo.order.PayAmount.toFixed(2)}} 元</span></li>
                   </ul>
                   <div class="bc-btns">
-                    <button v-on:click="bindFn">立即支付</button>
+                    <button v-on:click="addBankCard" v-if="isMC">绑定</button>
+                    <button v-on:click="bindFn" v-else="v-else">立即支付</button>
                   </div>
                   <div class="bc-seePric"><a href="#" title="查看银行限额">查看银行限额>></a></div>
                   <dl class="bc-tips">

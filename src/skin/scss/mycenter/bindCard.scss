@@ -13,14 +13,13 @@ html,body{
     background: #fff;
     li{
       padding: 10px 0;
+      font-size: 0;
       &.border-1px{
         @include border-1px(#ccc);
       }
       &.tips{
         padding-top: 20px;
       }
-      
-      font-size: 0;
       & > span{
         display: inline-block;
         font-size: 1.5rem;
@@ -30,18 +29,35 @@ html,body{
       }
       .t-val{
         width:calc(100% - 76px);
-        select{
+        select,input{
           width: 100%;
           border:none;
           border-bottom:1px #ccc solid;
           background: transparent;
           height:auto;
+          line-height: normal;
           option{
             min-height: 30px;
           }
         }
         input{
           border: none;
+        }
+      }
+      &.phoneCode{
+        span{
+          width:calc(100% - 120px);
+        }
+        .sendCode{
+          font-size: 1.6rem;
+          display: inline-block;
+          text-align:center;
+          height: 30px;
+          line-height: 30px;
+          border-radius: 5px;
+          width: 120px;
+          color:#3e85ff;
+          border:1px #3e85ff solid;
         }
       }
       &.area{

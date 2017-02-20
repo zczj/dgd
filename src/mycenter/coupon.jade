@@ -15,12 +15,69 @@ block content
             .item-header 
               span 我的优惠券
             .item-content
-              ul.coupon-header.clearfix
+              ul.coupon-title.clearfix
                 li.current 众筹之家优惠券
                 li 合作伙伴优惠券
               .coupon-tab
-                a(href="javascript:;").current 未使用
-                a(href="javascript:;") 已使用
-                a(href="javascript:;") 已过期
-              .coupon-item-wrapper
-                .coupon-item
+                a(href="javascript:;", v-on:click='getCouponFilter(1)', v-bind:class='{current: couponState == 1}') 未使用
+                a(href="javascript:;", v-on:click='getCouponFilter(2)', v-bind:class='{current: couponState == 2}') 已使用
+                a(href="javascript:;", v-on:click='getCouponFilter(3)', v-bind:class='{current: couponState == 3}') 已过期
+              .coupon-item-wrapper.clearfix
+                //- 1
+                .coupon-wrapper(v-for='item in couponList')
+                  .coupon-head.red(v-bind:class='{gray: item.IsExpiring||item.IsUsed}')
+                    h2 {{parseInt(item.Amount)}}
+                    span(v-if='item.IsUsed') 已使用
+                    span(v-else-if='item.IsExpiring') 已过期
+                    a(href="#",v-else).btn 使用
+                  .coupon-content
+                    .coupon-number 券　编号：{{item.CouponID}}
+                    .project-name 项目限制：{{item.ProjectName}}
+                    .expiring-date 有效期至：  {{item.ExpiringDate}}
+                
+                   
+               
+  script.
+    new Vue({
+      el: '#coupon',
+      data: {
+        couponList: [],
+        couponState: 1, 
+        //- isFirst: [,true,true, true]
+      },
+      methods: {
+        // 获取优惠券
+        getCouponList: function () {
+          var _this = this, url = headerModel.api + '/MyCenter/CouponList';
+          //- if(!this.isFirst[_this.couponState]) return;
+          //- this.isFirst[_this.couponState] = false;
+          headerModel.loading = true;
+          $.ajax({
+            url: url,
+            data: {
+              "state": _this.couponState,
+              "currentpage": 1,
+              "pagesize": 110,
+              "token": "48fc788c24093a74ec88ea64ad85064d"
+            },
+            type: 'POST',
+            success: function (res) {
+              if (res.resultid) {
+                _this.couponList = res.response;
+                headerModel.loading = false;
+              }
+            }
+          })
+        },
+        // 优惠券筛选
+        getCouponFilter: function (id){
+          if (this.couponState == id) return;
+          
+          this.couponState = id;
+          this.getCouponList();
+        }
+      },
+      mounted: function () {
+        this.getCouponList();
+      }
+    })

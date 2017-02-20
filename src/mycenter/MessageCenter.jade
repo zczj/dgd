@@ -1,0 +1,19 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/withdraw.css")
+
+  #model.allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main#withdraw
+          //- 消息中心
+          section.item-wrapper.recharge
+            .item-header(v-if="!headerModel.isMobileOrTable")
+              span 消息中心
+            .item-warp
+              .msg-list
+                

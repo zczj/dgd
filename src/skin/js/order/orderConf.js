@@ -13,13 +13,7 @@ var orderConfModel = new Vue({
      */
     payMethod: 1,
     payLine: 0, // 在线支付方式
-    payLineMap: [{
-      'bankcode': '006',
-      'bankName': '宝付支付'
-    }, {
-      'bankcode': '005',
-      'bankName': '富友支付'
-    }],
+    payLineMap: DGDTOOLS.VAR._payType(),
     payPwd: '', //支付密码
     payLock: false
   },

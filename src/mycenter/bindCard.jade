@@ -24,8 +24,10 @@ block content
                   li.border-1px.tips
                     span.t-name 开户银行:
                     span.t-val 
-                      select(name="", v-model="bankSelected" )
+                      select(name="", v-model="bankSelected"  v-if="!isMC")
                         option( v-for="(item,i) in bankListMap" v-bind:value="i") {{item.bankName}}
+                      select(name="", v-model="bankSelected" v-else )
+                        option( v-for="(item,i) in bankListMap" v-bind:value="item.ID") {{item.Name}}
                   li.border-1px
                     span.t-name 银行卡号:
                     span.t-val 
@@ -51,11 +53,17 @@ block content
                   li.border-1px(v-else)
                     span.t-name 手机号码:
                     span.t-val {{mySideModel.userBaseInfo.Phone}}
+                  li.border-1px.phoneCode(v-if="isMC")
+                    span.t-val
+                      input(type="text" placeholder="请输入手机验证码" v-model="phoneCode")
+
+                    a.sendCode(href="javascript:void(0);" v-on:click="getCode") {{codeText}}
                   li.border-1px(v-if="!isMC")
                     span.t-name 支付金额:
                     span.t-val {{orderInfo &&orderInfo.order.PayAmount.toFixed(2)}} 元
                 .bc-btns
-                  button(v-on:click="bindFn") 立即支付
+                  button(v-on:click="addBankCard" v-if="isMC") 绑定
+                  button(v-on:click="bindFn" v-else) 立即支付
                 
                 .bc-seePric
                   a(href="#", title="查看银行限额") 查看银行限额>>

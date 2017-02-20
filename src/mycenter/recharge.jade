@@ -11,41 +11,77 @@ block content
         //- 右侧
         .my-main#rechargeM(v-cloak)
           //- 充值
+          .bank-act(v-if="isWap")
+            .bank-act-top
+              span.bank-logo
+                i.icon
+              span.bank-name {{list && list[0].BankName}}
+            .bank-act-num.clearfix
+              span ****
+              span ****
+              span ****
+
+              span.lastF {{list && list[0].CardID.substring(list[0].CardID.length-4)}}
+            i.icon.icon-bank-yl
+
+
           section.item-wrapper.recharge
-            .item-header 
+            .item-header(v-if="!headerModel.isMobileOrTable")
               span 充值
             .item-warp
               .recharge-list
                 ul
                   li.price
                     span.t-name 账户余额：
-                    span.t-val 2000元
+                    span.t-val {{mySideModel.userBaseInfo&& mySideModel.userBaseInfo.AvailableBalance.toFixed(2)}}
                   li(v-if="headerModel.isMobileOrTable")
-                    span.t-name 姓名 
-                    span.t-val 
+                    span.t-name 姓名： 
+                    span.t-val {{list&&list[0].FullName}} 
                   li(v-if="headerModel.isMobileOrTable")
-                    span.t-name 身份证号   
-                    span.t-val 
+                    span.t-name 身份证号：   
+                    span.t-val {{list&&list[0].IDNumber}} 
                   li.t-line
                     span.t-name 充值金额：
                     span.t-val 
-                      input.recharge-input(type="text")
-                      |元
-                  li(v-if="!headerModel.isMobileOrTable")
+                      input.recharge-input(type="text" v-on:keypress="DGDTOOLS.check._isNumPoint(event)" v-model="tmoney" ref='tmoney' v-on:blur="checkPoint")
+                      span(v-if="!headerModel.isMobileOrTable") 元
+                  li(v-if="!isWap")
                     span.t-name 充值方式：
                     span.t-val.pay-type
-                      label
-                        input(type="radio" name='payTaye' checked="checked")
+                      label(v-bind:class="{selected: payLine == 1}")
+                        input(type="radio" name='payTaye' v-model="payLine" v-bind:value="1")
 
-                      label
-                        input(type="radio" name='payTaye') 
+                      label(v-bind:class="{selected: payLine == 0}")
+                        input(type="radio" name='payTaye' v-model="payLine" v-bind:value="0") 
 
                   li(v-if="headerModel.isMobileOrTable").t-line
                     a(href="#").seebankP 查看银行限额 >>
                   
 
                 .recharge-btns
-                  a.btn(href="#" v-if="!headerModel.isMobileOrTable") 确定
-                  a.btn(href="#" v-else) 确认并提现
-
+                  a.btn(href="javascript:void(0);" v-if="!headerModel.isMobileOrTable" v-on:click="addRecharge") 确定
+                  a.btn(href="javascript:void(0);" v-else v-on:click="addRecharge") 确认并充值
+              
+              .recharge-unLine(v-if="!headerModel.isMobileOrTable")
+                .title 线下充值方式：
+                .con
+                  dl.item
+                    dt
+                      i.icon.icon-zfb
+                      |支付宝转帐
+                    dd 开户名称：  深圳市网筹互联网金融服务有限公司
+                    dd 支付宝帐号：  service@zczj.com
+                    dd.red  (转账备注请务必填写："姓名+注册手机号",打款后，扫描二维码截图发给之家妹)
+                  dl.item
+                    dt 
+                      i.icon.icon-bank
+                      |银行卡转帐
+                    dd 开户名称：  深圳市网筹互联网金融服务有限公司
+                    dd 开户帐号：  8110 3010 1220 0031 835
+                    dd.red  (转账备注请务必填写："姓名+注册手机号",打款后，扫描二维码截图发给之家妹)
+                    dd 开户银行：  中信银行深圳深南支行
+                  dl.ewm
+                    dt
+                      img(src="/skin/img/mycenter/ewm.jpg", alt="")
+                    dd 扫码添加之家妹微信
     script(src="/skin/js/mycenter/recharge.js")

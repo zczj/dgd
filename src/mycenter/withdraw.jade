@@ -11,7 +11,7 @@ block content
         //- 右侧
         .my-main#withdraw(v-cloak)
           //- 提现
-          .bank-act(v-if="headerModel.isMobileOrTable")
+          .bank-act(v-if="isWap")
             .bank-act-top
               span.bank-logo
                 i.icon
@@ -52,8 +52,8 @@ block content
                     span.t-val 
                       input.recharge-input(type="text" v-on:keypress="DGDTOOLS.check._isNumPoint(event)" v-model="tmoney" ref='tmoney' v-on:blur="checkPoint")
                       span(v-if="!headerModel.isMobileOrTable") 元
-                  li(v-if="!headerModel.isMobileOrTable")
-                    span.t-name 提现银行卡：
+                  li(v-if="!isWap")
+                    span.t-name.banklist 提现银行卡：
                     span.t-val.back-list
                       .back-list-item(v-for="(item,i) in list")
                         label(v-if="isDis!=-1" v-on:click="DGDTOOLS.tip._tip('已在移动端绑定了银行卡！！！')").disabled

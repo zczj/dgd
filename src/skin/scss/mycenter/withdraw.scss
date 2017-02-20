@@ -12,6 +12,38 @@
   }
 }
 
+/*线下充值*/
+.recharge-unLine{
+    background:#f2f3f5;
+    margin-top: 20px;
+    padding: 20px 15px;
+    color:#616a73;
+    font-size: 1.6rem;
+    line-height: 1.8;
+    .title{
+        color:#000002;
+    }
+    dl{
+        margin-top: 15px;
+        padding: 0 20px;
+        dt{
+            .icon{
+                color:#009ff0;
+                font-size: 24px;
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+        }
+        &.ewm{
+            display: inline-block;
+            text-align: center;
+        }
+    }
+    .red{
+        color:#e60012;
+    }
+}
+
 /*充值提现共用模块*/
 .recharge-list{
   color:#424f63;
@@ -39,13 +71,21 @@
                 border:1px #b2b9bf solid;
                 width: 132px;
                 height: 40px;
+                cursor: pointer;
                 background-image:url('/skin/img/order/icon-fuyou.png');
                 background-repeat: no-repeat;
                 background-position: center center;
                 &:nth-of-type(2){
                     background-image: url('/skin/img/order/icon-baofu.png')
                 }
-            
+                input[type='radio']{
+                    display: none;
+                    opacity: 0;
+                }
+                &.selected{
+                    border-color:#009ff0;
+                    box-shadow: 0px 0px 2px #009ff0;
+                }
             }
         }
       }
@@ -186,6 +226,7 @@
     padding: 0;
   }
   .recharge-list{
+    margin-top: 0;
     ul{
 
     
@@ -196,6 +237,9 @@
           &.t-name{
               text-align: right;
               width: 80px;
+              &.banklist{
+                  font-size: 1.3rem;
+              }
           }
           &.t-val{              
               width:calc(100% - 80px);

@@ -20,12 +20,11 @@ var bindCardModel = new Vue({
     showProvince: false,
     showCity: false,
     buyLock: false,
-
-
-
-
-
-
+    codeText: '获取验证码',
+    endTime: 60,
+    sendLock: false,
+    phoneCode:'', // 手机验证码
+    bankLiskt:'', //  银行列表
     // 银行信息
     bankListMap: [{
       'payCode':
@@ -187,9 +186,10 @@ var bindCardModel = new Vue({
       }
       return true;
     },
+    // 定单页绑上提交页面
     bindFn: function () {
       var _this = this;
-      if(!_this.bindCh()){
+      if (!_this.bindCh()) {
         return;
       }
       if (_this.tel == '') {
@@ -239,16 +239,19 @@ var bindCardModel = new Vue({
               type: 'post',
               success: function (response) {
                 if (response.retCode == '0000') {
+                  _this.buyLock = false;
                   // 提交成功跳转到订单确认页面，根据定单id
                   DGDTOOLS.tip._tip('银行卡绑定成功', function () {
-                    // window.location.href="orderConf.html?orderId="+ response.orderid;
+                    window.location.href="orderConf.html?orderId="+ response.orderid;
                   })
 
                 } else {
+                  _this.buyLock = false;
                   DGDTOOLS.tip._tip(response.retMsg)
                 }
               },
               error: function (e) {
+                _this.buyLock = false;
                 DGDTOOLS.tip._tip(e.status + ":" + '接口异常')
                 console.error(e.status + ":" + e.responseText);
               }
@@ -268,8 +271,95 @@ var bindCardModel = new Vue({
 
 
 
-    }
+    },
+    // 非订单页面绑卡提交方法
+    addBankCard: function () {
+      var _this = this;
+      console.log(_this.phoneCode)
+      if (!_this.bindCh()) {
+        return;
+      }
+      if(_this.phoneCode==''){
+        DGDTOOLS.tip._tip('请输入手机验证码')
+        return;
+      }
+      if (_this.buyLock) {
+        return;
+      } else {
+        _this.buyLock = true;
+      }
 
+      $.ajax({
+        url: headerModel.api + '/MyCenter/AddBankCark',
+        data: {
+          "token": headerModel.token,
+          "provinceid": _this.provinceS, // 省ID
+          "cityid": _this.cityS, // 城市ID
+          "bankid": _this.bankSelected, // 银行ID
+          "branchname": _this.masterBank, // 支行名称
+          "cardid": _this.backCode, // 卡号
+          "phonecode": _this.phoneCode, // 短信验证码
+          "Phone": mySideModel.userBaseInfo.Phone // 手机号码
+        },
+        type: 'post',
+        success: function (response) {
+          if (response.resultid == 200) {
+            _this.buyLock = false;
+            // 提交成功跳转到订单确认页面，根据定单id
+            DGDTOOLS.tip._tip('银行卡绑定成功', function () {
+
+              // window.location.href="orderConf.html?orderId="+ response.orderid;
+            })
+
+          } else {
+            DGDTOOLS.tip._tip(response.message, function () {
+              _this.buyLock = false;
+            })
+          }
+        },
+        error: function (e) {
+          _this.buyLock = false;
+          DGDTOOLS.tip._tip(e.status + ":" + '接口异常')
+          console.error(e.status + ":" + e.responseText);
+        }
+      })
+    },
+    // 获取验证码：
+    getCode: function () {
+      var _this = this;
+      if (_this.sendLock) {
+        return
+      }
+      _this.sendLock = true;
+      // 1.1 计时
+      _this.codeText = 60 + '秒';
+      _this.time = setInterval(function () {
+        if (_this.endTime === 0) {
+          _this.endTime = 60;
+          _this.codeText = '获取验证码';
+          _this.sendLock = false;
+          clearInterval(_this.time);
+        } else {
+          _this.endTime--;
+          _this.codeText = _this.endTime + '秒'
+
+        }
+      }, 1000)
+      headerModel.loading = true;
+        this.$http.get(headerModel.api + '/Passport/SendPhoneCode?phone='+mySideModel.userBaseInfo.Phone+'&t=getpwd').then(function (response) {
+          _this.sendLock = false;
+          headerModel.loading = false;
+        })
+    },
+    getBankList: function  () {
+      this.$http.get(headerModel.api + '/MyCenter/BankList').then(function (response) {
+          this.bankListMap = response.data.BankList;
+          this.bankListMap.unshift({
+            'ID':'0',
+            'Name':'请选择银行'
+          })
+        })
+    }
   },
   computed: {
     sheng: function () {
@@ -293,8 +383,22 @@ var bindCardModel = new Vue({
     //   window.location.href="../project/index.html"
     // }
     // 103775
-    this.getOrderInfo()
+
+    // 个人中心
+    if (this.orderId === 0) {
+      this.getBankList();
+    }
+    // 订单页面
+    else {
+      this.getOrderInfo()
+
+    }
     this.getAuthen()
     this.getCity(0)
+    /**
+     * 380	38079	苏智慧	430522198504057812	,	中国建设银行	CCB		43052278575758542	2016-10-09 16:19:50.377	NULL	0
+721	38079	苏智慧	430522198504057812	130000,130400	招商银行	CMB	dsdsf	6225887836352993	2017-01-09 10:37:13.643	18219523738	1
+778	38079	苏智慧	430522198504057812	110000,110104	中国工商银行	ICBC	宣武支行	6223263216005706453	2017-02-17 17:54:14.160	NULL	0
+     */
   }
 })
