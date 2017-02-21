@@ -1,0 +1,196 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/seccenter.css")
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/2.3.7/flatpickr.min.css")
+  .allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main#seccenter
+
+          // 安全中心
+          section.item-wrapper
+            .item-header 
+              span 安全中心
+            .item-content
+              ul.seccenter-list
+                li(v-on:touchstart="onTouchStart(1)")
+                  i.icon.icon-os
+                  |基本资料
+                  span （修改昵称,性别，简单介绍在这里）
+                  a(href='javascript:;', v-on:click='onTouchStart(1)').button 修改
+                  i.icon.icon-right
+                li(v-on:touchstart="onTouchStart(2)")
+                  i.icon.icon-os
+                  |登录密码
+                  span （最好使用一个包含数字和字母,并且超过6位字符以上的密码）
+                  a(href='javascript:;', v-on:click='onTouchStart(2)').button 修改
+                  i.icon.icon-right
+                li.warning(v-on:touchstart="onTouchStart(3)")
+                  i.icon.icon-warning2
+                  |认证投资人
+                  span （您必须如实填写，您认购项目时需实名认证）
+                  a(href='javascript:;').button 设置
+                  i.icon.icon-right
+                li.warning(v-on:touchstart="onTouchStart(4)")
+                  i.icon.icon-warning2
+                  |交易密码
+                  span （最好使用一个包含数字和字母和符号,并且超过6位字符的密码）
+                  a(href='javascript:;').button 设置
+                  i.icon.icon-right
+                li.warning(v-on:touchstart="onTouchStart(5)")
+                  i.icon.icon-warning2
+                  |提现银行卡
+                  span （您必须至少绑定一张您本人开户的银行卡做为提现的银行卡）
+                  a(href='javascript:;').button 设置
+                  i.icon.icon-right
+                li.warning(v-on:touchstart="onTouchStart(6)")
+                  i.icon.icon-warning2
+                  |利益分配帐号
+                  span （项目分红或退出时利益分配的帐号）
+                  a(href='javascript:;').button 设置
+                  i.icon.icon-right
+          // 基本资料 
+          transition(name='pulldown', v-on:after-enter="afterEnter")
+            .popup-wrapper(v-if='popup == 1')
+              //- .popup-mask(v-if='popup == 1')
+              //- transition(name='pulldown', v-on:after-enter="afterEnter")
+              .wrapper
+                .header 个人信息(*为必填项)
+                  a(href="javascript:;",v-on:click='popup=false').icon.icon-close 
+                .content
+                  .list 昵　　称：
+                    input(v-bind:value='mySideModel.userBaseInfo.UserName')
+                  .list 手　　机：
+                    | {{mySideModel.userBaseInfo.Phone}}
+                    a(href="javascript:;").modify 修改
+                  .list 邮　　箱：
+                    span(style='max-width: 200px') {{mySideModel.userBaseInfo.Email}}
+                    a(href="javascript:;").modify 修改
+                  .list 地　　区：
+                    .select-wrapper
+                      select(v-model="provinceS" ref="xxx" size="1" data="show" v-on:change="getCity(provinceS)")
+                        option( v-for="item in province" v-bind:value="item.CityID") {{item.CityName}}
+                      select(v-if='provinceS != 0', v-model="cityS")
+                        option( v-for="item in city" v-bind:value="item.CityID") {{item.CityName}}
+                  .list 详细地址：
+                    input()
+                    span.tips 合同邮寄地址
+                  .list 性　　别：
+                    select
+                      option(value="0") 男
+                      option(value="1") 女 
+                  .list 生　　日：
+                    input(placeholder="选择日期..").flatpickr
+                  .list 个人简介：
+                    textarea
+                .button-wrapper
+                  a(href='javascript:;',).button.purchase-button 确定
+                  a(href='javascript:;',v-on:click='popup=false').button.empty.interview-button 取消
+
+            // 登录密码 
+            //- transition(name='pull-down')
+              .popup-wrapper
+                .popup-mask(v-if='popup == 2')
+                transition(name='pulldown', v-on:after-enter="afterEnter")
+                  .wrapper(v-if='popup == 2')
+                    .header 登录密码
+                      a(href="javascript:;",v-on:click='popup=false').icon.icon-close 
+                    .content
+                      .list 
+                        lable
+                          | 当前登录密码：
+                        input(type='password')
+                      .list 
+                        lable
+                          | 新登录密码：
+                        input(type='password', placeholder='包含字母和数字的8-15位字符')
+                      .list 
+                        lable
+                          | 确认新密码：
+                        input(type='password')
+                      
+                    .button-wrapper
+                      a(href='javascript:;',).button.purchase-button 确定
+                      a(href='javascript:;',v-on:click='popup=false').button.empty.interview-button 取消
+
+                      
+                      
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/flatpickr/2.3.7/flatpickr.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/flatpickr/2.3.7/l10n/zh.js')
+  script.
+    //- 
+    
+    //- 
+    new Vue({
+      el: '#seccenter',
+      data: {
+        popup: 1,
+        provinceS:'0', // 选中的省份
+        cityS:'', // 选中的城市
+        province:'', 
+        city:'',
+      },
+      methods: {
+        afterEnter: function () {
+          // 日历选择
+          flatpickr(".flatpickr", {
+            "locale": "zh"
+          });
+          //- 省市联动
+          this.getCity(0);
+        },
+        // 城市二级联动
+        getCity: function (id) {
+          var _this = this;
+          if(id!=0){
+            headerModel.loading=true;
+          }
+          _this.$http.get(headerModel.api + '/Help/GetCity?provinceid=' + id).then(function (response) {
+            headerModel.loading=false;
+            _this.showProvince = true;
+            if(id!=0){
+              _this.city = response.data.cityList;
+              _this.cityS = '0';
+            }else{
+              _this.province = response.data.cityList;
+              
+            }
+            
+          })
+        },
+        getCityStr: function  () {
+          var _this = this,
+              str = '';
+          if(_this.provinceS && _this.cityS){
+            for(var i=0; i<_this.province.length; i++){
+              if(_this.province[i].CityID === _this.provinceS){
+                str += _this.province[i].CityName + ',';
+                break;
+              }
+            }
+            for(var i=0; i<_this.city.length; i++){
+              if(_this.city[i].CityID === _this.cityS){
+                str += _this.city[i].CityName;
+                break;
+              }
+            }        
+          }
+          return str;
+        },
+        //- 
+        onTouchStart: function (num) {
+          this.popup = num;
+          console.log(this.popup)
+        }
+      },
+      mounted: function () {
+        
+        
+        
+        
+      }
+    })

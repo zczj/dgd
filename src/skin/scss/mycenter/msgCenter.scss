@@ -1,0 +1,50 @@
+.comment .com-list .item .com-photo{
+  width: 30px;
+  height: 30px;
+}
+
+.item-header{
+  margin-bottom: 0;
+  background: #fff;
+  padding: 27px 25px 0;
+}
+.msg-center{
+  background: none;
+  padding: 0;
+  .comment{
+    margin-top: 0;
+    
+  }
+  .comment .com-list .item{
+    background:#fff;
+    border:none;
+    padding: 20px 25px;
+    
+  }
+  .comment .com-list{
+    margin-top: 0;
+    .item+.item{
+      margin-top: 20px;
+    }
+    .com-cont{
+      .com-tools{
+        a{
+          color:#009ff0;
+          font-size: 1.4rem;
+          display: inline-block;
+          margin-left: 10px;
+          border:1px #009ff0 solid;
+          padding: 4px 15px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:50em){
+  .my-warp{margin-top: 20px;}
+  .msg-center .comment .com-list .item{
+    padding: 10px;
+  }
+}

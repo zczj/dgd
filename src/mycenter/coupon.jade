@@ -16,14 +16,14 @@ block content
               span 我的优惠券
             .item-content
               ul.coupon-title.clearfix
-                li.current 众筹之家优惠券
-                li 合作伙伴优惠券
-              .coupon-tab
+                li(v-on:click='toggleCoupon(1)', v-bind:class='{current: couponType == 1}') 众筹之家优惠券
+                li(v-on:click='toggleCoupon(2)', v-bind:class='{current: couponType == 2}') 合作伙伴优惠券
+              .coupon-tab(v-show='couponType == 1')
                 a(href="javascript:;", v-on:click='getCouponFilter(1)', v-bind:class='{current: couponState == 1}') 未使用
                 a(href="javascript:;", v-on:click='getCouponFilter(2)', v-bind:class='{current: couponState == 2}') 已使用
                 a(href="javascript:;", v-on:click='getCouponFilter(3)', v-bind:class='{current: couponState == 3}') 已过期
-              .coupon-item-wrapper.clearfix
-                //- 1
+              //- 众筹之家优惠券
+              .coupon-item-wrapper.clearfix(v-show='couponType == 1')
                 .coupon-wrapper(v-for='item in couponList')
                   .coupon-head.red(v-bind:class='{gray: item.IsExpiring||item.IsUsed}')
                     h2 {{parseInt(item.Amount)}}
@@ -34,50 +34,20 @@ block content
                     .coupon-number 券　编号：{{item.CouponID}}
                     .project-name 项目限制：{{item.ProjectName}}
                     .expiring-date 有效期至：  {{item.ExpiringDate}}
+              //- 合作伙伴优惠券
+              .coupon-item-wrapper.clearfix(v-show='couponType == 2')
+                .coupon-wrapper(v-for='item in partnerCouponList')
+                  .coupon-head.red
+                    h2 {{parseInt(item.Amount)}}
+                    a(v-bind:href="item.Plate_Links",target='_blank').btn 使用
+                  .coupon-content
+                    .project-name {{item.Plate}}
+                    .coupon-number 新人送豪礼
+                    .expiring-date 50元红包+高息专享7天10%收益 
+
+                
                 
                    
                
-  script.
-    new Vue({
-      el: '#coupon',
-      data: {
-        couponList: [],
-        couponState: 1, 
-        //- isFirst: [,true,true, true]
-      },
-      methods: {
-        // 获取优惠券
-        getCouponList: function () {
-          var _this = this, url = headerModel.api + '/MyCenter/CouponList';
-          //- if(!this.isFirst[_this.couponState]) return;
-          //- this.isFirst[_this.couponState] = false;
-          headerModel.loading = true;
-          $.ajax({
-            url: url,
-            data: {
-              "state": _this.couponState,
-              "currentpage": 1,
-              "pagesize": 110,
-              "token": "48fc788c24093a74ec88ea64ad85064d"
-            },
-            type: 'POST',
-            success: function (res) {
-              if (res.resultid) {
-                _this.couponList = res.response;
-                headerModel.loading = false;
-              }
-            }
-          })
-        },
-        // 优惠券筛选
-        getCouponFilter: function (id){
-          if (this.couponState == id) return;
-          
-          this.couponState = id;
-          this.getCouponList();
-        }
-      },
-      mounted: function () {
-        this.getCouponList();
-      }
-    })
+  script(src='/skin/js/mycenter/coupon.js')
+    

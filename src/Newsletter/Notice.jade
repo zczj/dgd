@@ -1,0 +1,34 @@
+extends ../shade/layout
+block content
+  link(href="/skin/css/newsletter/notice.css", rel="stylesheet")
+  
+  #notice.allH
+    .news-warp.notice-warp
+      .container.clearfix
+        .tab-bar
+          .nav
+              a(href="#") 快讯          
+              a(href="#") 活动          
+              a(href="#").cur 公告
+        .notice
+          ul
+            li(v-for="item in list")
+              a(v-bind:href="['NoticeDetail.html?id='+ item.NoticeID] +'?curPage='+curPage")
+                .span-t.ellipsis {{item.Title}}
+                .span-time {{item.PostDate}}
+          
+        include ../shade/page
+          
+
+  script(src="/skin/js/newsletter/notice.js")
+    
+
+      
+           
+
+            
+
+
+
+          
+          

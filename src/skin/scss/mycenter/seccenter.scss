@@ -1,0 +1,215 @@
+// 日期选择器层级
+.flatpickr-calendar.open {
+  z-index: 9999;
+}
+
+.seccenter-list {
+  li {
+    height: 60px;
+    line-height: 60px;
+    font-size: 18px;
+    border-bottom: 1px dashed #e7e7e7;
+    &.warning {
+      .icon:first-child {
+        color: #e8210c;
+      }
+      .button {
+        background-color: #e8210c;
+        border-color: #e8210c;
+      }
+    }
+    span {
+      font-size: 14px;
+      color: #959595;
+    }
+    .icon {
+      &:first-child {
+        margin-right: 10px;
+        color: #009ff0;
+      }
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+  .button {
+    float: right;
+    line-height: 1.8;
+    margin-top: 7px;
+  }
+}
+
+// 弹层
+$color: #41d4dc;
+.popup-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+
+.popup-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .4);
+  z-index: 9999;
+}
+
+.wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  // min-height: 500px;
+  // margin: -250px 0 0 -250px;
+  background-color: #fff;
+  box-shadow: 0 0 1px;
+  border-radius: 3px;
+  // transform: translate3d(-50%, -50%, 0);
+  z-index: 9999;
+  .header {
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+    border-bottom: 1px solid #bcbcbc;
+    .icon {
+      float: right;
+      font-size: 24px;
+      margin: 0 20px;
+      transition: transform .4s;
+      &:hover {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+  .content {
+    padding: 40px;
+    padding-bottom: 0;
+    height: 75%;
+    font-size: 15px;
+    .list {
+      min-height: 40px;
+      line-height: 40px;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+      // white-space: nowrap;
+      >.tips {
+        font-size: 14px;
+        color: #fb9005;
+      }
+      .select-wrapper {
+        display: inline-block;
+        width: 200px;
+      }
+      lable {
+        width: 120px;
+        text-align: right;
+        white-space: nowrap;
+      }
+    }
+    .modify {
+      font-size: 14px;
+      margin-left: 20px;
+    }
+    input,
+    select {
+      width: 210px;
+      height: 30px;
+      text-indent: 8px;
+      border: 1px solid #bcbcbc;
+      border-radius: 3px;
+      &.flatpickr {
+        cursor: pointer;
+      }
+    }
+    textarea {
+      display: inline-block;
+      width: 70%;
+      height: 80px;
+      border: 1px solid #bcbcbc;
+      padding: 5px 10px;
+      font-size: 14px;
+      border-radius: 3px;
+    }
+  }
+  .button {
+    &-wrapper {
+      margin: 15px 0;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+}
+
+@media screen and (max-width:767px) {
+  .popup-mask {
+    display: none;
+  }
+  .wrapper {
+    width: 100%;
+    // height: 100%;
+    // top: 0;
+    // left: 0;
+    margin: 0;
+    border-radius: 0;
+    .content {
+      padding: 20px;
+      textarea {
+        width: 200px;
+      }
+    }
+  }
+  // 
+  .seccenter-list {
+    li {
+      font-size: 14px;
+      height: 40px;
+      line-height: 40px;
+      span {
+        display: none;
+      }
+      .icon {
+        &:last-child {
+          display: block;
+          float: right;
+          font-size: 18px;
+        }
+      }
+    }
+    .button {
+      display: none;
+    }
+  }
+  .wrapper {
+    .content {
+      .list {
+        >.tips {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .wrapper {
+    .button {
+      width: 120px;
+    }
+  }
+}

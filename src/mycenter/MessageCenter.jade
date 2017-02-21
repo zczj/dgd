@@ -1,7 +1,8 @@
 extends ../shade/layout
 block content
   link(rel="stylesheet", href="/skin/css/mycenter/index.css")
-  link(rel="stylesheet", href="/skin/css/mycenter/withdraw.css")
+  link(rel="stylesheet", href="/skin/css/news/newsDetail.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/msgCenter.css")
 
   #model.allH
     .my-warp
@@ -9,11 +10,24 @@ block content
         //- 左侧
         include side.jade
         //- 右侧
-        .my-main#withdraw
+        .my-main#msg-center
           //- 消息中心
-          section.item-wrapper.recharge
+          section.item-wrapper.msg-center
             .item-header(v-if="!headerModel.isMobileOrTable")
               span 消息中心
-            .item-warp
-              .msg-list
-                
+            section.comment
+              .com-list
+                .item(v-for="item in list").clearfix
+                  .com-photo
+                    img(v-bind:src="item.Avater" v-bind:alt="item.SendUserName")
+                  .com-cont
+                    .com-t.clearfix
+                      span.author{{item.SendUserName}}
+                      span.time{{item.PostDate}}
+                    .com-txt{{item.Content}}
+                    ul.com-list-sub
+                    .com-tools
+                      a(href="#").repay 回复
+                      a(href="#").del 删除
+                  
+  script(src="/skin/js/mycenter/msgCenter.js")               

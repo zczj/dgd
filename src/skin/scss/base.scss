@@ -1578,3 +1578,65 @@ header {
     }
   }
 }
+
+
+
+
+/* page-bar 翻页*/
+
+.page-bar {
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  ul {
+    display: inline-block;
+    li {
+      display: inline-block;
+      a {
+        display: inline-block;
+        height: 28px;
+        line-height: 28px;
+        width: 28px;
+        text-align: center;
+        border: 1px #e0e0e0 solid;
+        margin: 0 2px;
+        border-radius: 3px;
+        &.cur,
+        &:hover {
+          color: #fff;
+          background: #009ff0;
+          border-color: #009ff0;
+        }
+      }
+      &.page-text {
+        a {
+          width: auto;
+          padding: 0 5px;
+        }
+      }
+    }
+  }
+  &>.mobile-page {
+    text-align: center;
+    a {
+      display: inline-block;
+      padding: 5px 40px;
+      border: 1px #e0e0e0 solid;
+      font-size: 1.4rem;
+      border-radius: 4px;
+      transition: .3s all;
+      &:hover {
+        background: #3e85ff;
+        border-color: #3e85ff;
+        color: #fff;
+      }
+      &.end-page,
+      &.end-page:hover {
+        background: #ccc;
+        border-color: #ccc;
+        color: #fff;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

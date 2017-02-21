@@ -1,0 +1,124 @@
+extends ../shade/layout
+block content
+  link(rel="stylesheet", href="/skin/css/mycenter/index.css")
+  link(rel="stylesheet", href="/skin/css/mycenter/seccenter.1.css")
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/2.3.7/flatpickr.min.css")
+  .allH
+    .my-warp
+      .container.clearfix
+        //- 左侧
+        include side.jade
+        //- 右侧
+        .my-main#seccenter
+
+          // 安全中心
+          section.item-wrapper
+            .item-header 
+              span 安全中心
+            .item-content
+              .list
+                lable 昵称：
+                input(type="text", v-bind:value='mySideModel.userBaseInfo.UserName')
+              .list
+                lable 手机：
+                span {{mySideModel.userBaseInfo.Phone}}
+              .list
+                lable 邮箱：
+                input(type="text", v-bind:value='mySideModel.userBaseInfo.Email')
+                a(href="javascript:;").toggle-layer 验证
+              .list
+                .list-tab-wrapper
+                  .list-tab.current 个人信息
+                  .list-tab 银行卡管理
+                  .list-tab 安全设置
+
+                // 个人信息内容页
+                .tab-content
+                  .list
+                    lable 实名认证
+                    .notice
+                      i.icon.icon-wraning2
+                      | 未认证
+                    a(href="javascript:;").toggle-layer 认证
+                  .list
+                    h2 详细信息
+                    .list
+                      lable
+
+                      
+                      
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/flatpickr/2.3.7/flatpickr.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/flatpickr/2.3.7/l10n/zh.js')
+  script.
+    //- 
+    
+    //- 
+    new Vue({
+      el: '#seccenter',
+      data: {
+        popup: 1,
+        provinceS:'0', // 选中的省份
+        cityS:'', // 选中的城市
+        province:'', 
+        city:'',
+      },
+      methods: {
+        afterEnter: function () {
+          // 日历选择
+          flatpickr(".flatpickr", {
+            "locale": "zh"
+          });
+          //- 省市联动
+          this.getCity(0);
+        },
+        // 城市二级联动
+        getCity: function (id) {
+          var _this = this;
+          if(id!=0){
+            headerModel.loading=true;
+          }
+          _this.$http.get(headerModel.api + '/Help/GetCity?provinceid=' + id).then(function (response) {
+            headerModel.loading=false;
+            _this.showProvince = true;
+            if(id!=0){
+              _this.city = response.data.cityList;
+              _this.cityS = '0';
+            }else{
+              _this.province = response.data.cityList;
+              
+            }
+            
+          })
+        },
+        getCityStr: function  () {
+          var _this = this,
+              str = '';
+          if(_this.provinceS && _this.cityS){
+            for(var i=0; i<_this.province.length; i++){
+              if(_this.province[i].CityID === _this.provinceS){
+                str += _this.province[i].CityName + ',';
+                break;
+              }
+            }
+            for(var i=0; i<_this.city.length; i++){
+              if(_this.city[i].CityID === _this.cityS){
+                str += _this.city[i].CityName;
+                break;
+              }
+            }        
+          }
+          return str;
+        },
+        //- 
+        onTouchStart: function (num) {
+          this.popup = num;
+          console.log(this.popup)
+        }
+      },
+      mounted: function () {
+        
+        
+        
+        
+      }
+    })

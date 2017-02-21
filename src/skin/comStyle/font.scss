@@ -1,10 +1,8 @@
 @font-face {
-  font-family: 'iconfont';  /* project id 190684 */
-  src: url('//at.alicdn.com/t/font_g15fi1dr0pzgds4i.eot');
-  src: url('//at.alicdn.com/t/font_g15fi1dr0pzgds4i.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_g15fi1dr0pzgds4i.woff') format('woff'),
-  url('//at.alicdn.com/t/font_g15fi1dr0pzgds4i.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_g15fi1dr0pzgds4i.svg#iconfont') format('svg');
+  font-family: 'iconfont';
+  /* project id 190684 */
+  src: url('//at.alicdn.com/t/font_6hzwmghv3o1g7gb9.eot');
+  src: url('//at.alicdn.com/t/font_6hzwmghv3o1g7gb9.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_6hzwmghv3o1g7gb9.woff') format('woff'), url('//at.alicdn.com/t/font_6hzwmghv3o1g7gb9.ttf') format('truetype'), url('//at.alicdn.com/t/font_6hzwmghv3o1g7gb9.svg#iconfont') format('svg');
 }
 
 .icon {
@@ -17,11 +15,18 @@
     color: inherit;
     vertical-align: top;
   }
+  // 个人中心 - 日历
+  &-calendar::before {
+    content: '\e61d';
+  }
+  // 个人中心 - 错误
+  &-warning2::before {
+    content: '\e98d';
+  }
   // 个人中心 - 银联
   &-bankicon::before {
     content: '\e61b';
   }
-
   // 个人中心 - 我的质押 - 逾期
   &-warning::before {
     content: '\e6fe';
@@ -181,5 +186,9 @@
   // 向左
   &-left::before {
     content: '\e604';
+  }
+  // 向左
+  &-right::before {
+    content: '\e653';
   }
 }

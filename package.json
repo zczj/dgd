@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "dev": "gulp --gulpfile gulpfile-dist.js",
+    "pro": "gulp --gulpfile gulpfile-skin.js"
+  },
   "devDependencies": {
     "browser-sync": "^2.17.5",
     "gulp": "^3.9.1",
