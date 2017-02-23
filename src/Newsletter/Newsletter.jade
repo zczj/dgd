@@ -1,6 +1,47 @@
 extends ../shade/layout
 block content
-  #newsletter.allH
-    .news-warp
+  link(href="/skin/css/newsletter/newsletter.css", rel="stylesheet")
+  
+  #newsletter.allH(v-cloak)
+    .news-warp.notice-warp
       .container.clearfix
-        .main
+        .tab-bar
+          .nav
+              a(href="#").cur 快讯          
+              a(href="#") 活动          
+              a(href="#") 公告
+
+
+        .newsletter
+          .list(v-for="(item, index) in list.list")
+            .item.year(v-if='item.dataSlipt')
+                .item-time
+                  span.year {{ item.year}}
+                .item-img
+                  span.year{{ item.year}}
+            .item.newsletter-item(v-bind:class="{opened: item.isOpen}")
+                .item-time
+                  span.data.
+                    {{item.data}}
+                  span.line-cur
+                  .point-line
+                
+                .item-img
+                  span.time {{item.data}}
+                  a(v-bind:href="item.url")
+                    img(v-bind:src="item.img", alt="")
+                .item-con(ref = 'txtH')
+                  .title.ellipsis 
+                    a(v-bind:href="item.url") {{item.title}}
+                  .con(v-if="!item.isOpen" v-html="item.txtSort")
+                  .con(v-else v-html="item.txtAll")
+                  .tools
+                    a(href="javascript:void(0);" v-on:click="toggle(index)" v-if="item.isOpen") 收起阅读     
+                    a(href="javascript:void(0);" v-on:click="toggle(index)" v-else) 展开阅读  {{item.isOpen}}      
+                    a(v-bind:href="item.url") 阅读原文
+          
+
+
+  script(src="/skin/js/Newsletter/newsletter.js")
+
+          

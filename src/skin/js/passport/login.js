@@ -148,7 +148,7 @@ var loginModel = new Vue({
     },
     // 登录成功后跳转
     successFn: function() {
-      window.location.href = './Success?login&url=' + (window.location.search.split('url=')[1] || '')
+      window.location.href = (window.location.search.split('url=')[1] || '')
     },
     toggle: function() {
       this.formShow = !this.formShow

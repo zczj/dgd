@@ -4,8 +4,33 @@ var msgModel = new Vue({
     list: '',
   },
   computed: {
-    comList: function  () {
-      // body
+    /**
+     * 返回评论列表
+     */
+    comList:function  () {
+      var comN =[], // 
+          comS =[],
+          comL = this.list?this.list:[];
+          for(var i = 0; i<comL.length; i++){
+            // 1.1 父级评论
+            if(comL[i].ParentID == 0 ){
+              comL[i].comSon=[];
+              comN.push(comL[i]);
+            }else{
+            // 1.2 二级评论
+            comS.push(comL[i]);          
+            }
+          }
+
+          for (var j = 0; j < comN.length; j++) {
+            for(var i = 0; i<comS.length;i++){
+              if(comS[i].ParentID == comN[j].ID){
+                comN[j].comSon.push(comS[i]);
+              }
+            }
+          }
+
+      return comN;
     }
   },
   methods: {
@@ -13,7 +38,7 @@ var msgModel = new Vue({
     getMsgList: function () {
       var _this = this;
       $.ajax({
-        url: headerModel.api + '/MyCenter/GetMessage',
+        url: headerModel.api + '/MyCenter/GetMessageList',
         data: {
           "Token": headerModel.token,
           "MonthNum": 0,
@@ -24,7 +49,7 @@ var msgModel = new Vue({
         success: function (response) {
           $("#loader").fadeOut(300)
           if (response.resultid === 200) {
-            _this.list = response.response;
+            _this.list = response.RelpyList;
             console.log(_this.list)
           } else {
             DGDTOOLS.tip._tip(response.message);
@@ -41,7 +66,7 @@ var msgModel = new Vue({
     getRepMsg: function  () {
       var _this = this;
       $.ajax({
-        url: headerModel.api + '/MyCenter/GetMessage',
+        url: headerModel.api + '/MyCenter/GetMessageList',
         data: {
           "Token": headerModel.token,
           "MonthNum": 0,

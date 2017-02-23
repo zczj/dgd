@@ -17,15 +17,28 @@ block content
               span 消息中心
             section.comment
               .com-list
-                .item(v-for="item in list").clearfix
+                .item(v-for="item in comList").clearfix
                   .com-photo
                     img(v-bind:src="item.Avater" v-bind:alt="item.SendUserName")
                   .com-cont
                     .com-t.clearfix
-                      span.author{{item.SendUserName}}
+                      span.author{{item.Account}}
                       span.time{{item.PostDate}}
                     .com-txt{{item.Content}}
-                    ul.com-list-sub
+                    ul.com-list-sub(v-if="item.comSon && item.comSon.length" data-title="二级评论")
+                      li.list-li.clearfix(v-for="com in item.comSon")
+                        span.repay-info
+                          span.repay-name(v-if="com.UserID !== mySideModel.userBaseInfo.uid")
+                            span.blue {{ com.Account}}
+                            |回复  : 
+                          span.repay-name(v-else)
+                            span.blue 我
+                            |回复  :
+
+
+
+                          span.time {{com.PostDate}}
+                        span.repay-txt {{com.Content}}
                     .com-tools
                       a(href="#").repay 回复
                       a(href="#").del 删除

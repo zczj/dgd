@@ -122,6 +122,7 @@
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\MyCenterController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\NewsletterController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\NoticeController.cs" />
     <Compile Include="Controllers\NoviceController.cs" />
@@ -479,6 +480,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\dgd.pubxml" />
+    <Content Include="Views\MyCenter\_MyCenterSide.cshtml" />
+    <Content Include="Views\MyCenter\Investment.cshtml" />
+    <Content Include="Views\MyCenter\Focus.cshtml" />
+    <Content Include="Views\MyCenter\Standguardbao.cshtml" />
+    <Content Include="Views\MyCenter\FundManage.cshtml" />
+    <Content Include="Views\MyCenter\Recharge.cshtml" />
+    <Content Include="Views\MyCenter\Withdraw.cshtml" />
+    <Content Include="Views\MyCenter\MessageCenter.cshtml" />
+    <Content Include="Views\Newsletter\Index.cshtml" />
+    <Content Include="Views\Newsletter\Promotion.cshtml" />
+    <Content Include="Views\Newsletter\Notice.cshtml" />
+    <Content Include="Views\Newsletter\NoticeDetail.cshtml" />
+    <Content Include="Views\Shared\_Page.cshtml" />
+    <Content Include="Views\MyCenter\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

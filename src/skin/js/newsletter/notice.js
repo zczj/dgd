@@ -2,7 +2,7 @@
 var noticeModel = new Vue({
   el: '#notice',
   data: {
-    pageSize: 6, // 每页显示条数
+    pageSize: 10, // 每页显示条数
     curPage: 1, // 当前页
     Pagedata: '',
     CacheList: {}, // 缓存
@@ -48,6 +48,8 @@ var noticeModel = new Vue({
   },
   mounted: function () {
     // body
+    
+    
     this.getNotice();
   }
 })

@@ -11,6 +11,9 @@ block content
               a(href="#") 活动          
               a(href="#").cur 公告
         .notice
+          .notice-detail
+            .notice-t {{coverHtml.title}}
+            .notice-con(v-html='coverHtml.html')
 
 
 

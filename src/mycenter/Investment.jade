@@ -2,13 +2,13 @@ extends ../shade/layout
 block content
   link(rel="stylesheet", href="/skin/css/mycenter/index.css")
   link(rel="stylesheet", href="/skin/css/mycenter/investment.css")
-  #model-index.allH
+  .allH
     .my-warp
       .container.clearfix
         //- 左侧
         include side.jade
         //- 右侧
-        .my-main
+        .my-main#model-index
           //- 我的资产
           section.item-wrapper.assets
             .item-header 

@@ -1,4 +1,5 @@
-input {
+input,
+select {
   width: 210px;
   height: 40px;
   text-indent: 6px;
@@ -6,13 +7,68 @@ input {
   border-radius: 5px;
 }
 
+input[type='password'] {
+  font-size: 14px;
+}
+
+select {
+  margin: 4px 0;
+}
+
+textarea {
+  display: inline-block;
+  width: 500px;
+  height: 100px;
+  border: 1px solid #bcbcbc;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 3px;
+}
+
+.visibility {
+  opacity: 0;
+  visibility: hidden;
+}
+
+// 换行
+.nowrap {
+  white-space: normal!important;
+}
+
+// 日期选择器层级
+.flatpickr-calendar.open {
+  z-index: 9999;
+}
+
+// 展开收缩按钮
+.toggle-layer {
+  font-size: 14px;
+  color: #009ff0;
+  margin: 0 10px;
+}
+
 .list {
   padding: 5px 0;
-  // 展开收缩按钮
-  .toggle-layer {
-    font-size: 14px;
-    color: #009ff0;
-    margin: 0 10px;
+  // display: flex;
+  min-height: 40px;
+  line-height: 40px;
+  overflow: hidden;
+  label {
+    float: left;
+    height: 100%;
+  }
+  .input-wrapper {
+    display: inline-block;
+  }
+  // 实名认证
+  .verified {
+    display: flex;
+    justify-content: space-between;
+    >* {
+      width: 33.333%\0\9;
+      float: left\0\9;
+      margin: 0\0\9;
+    }
   }
   // 选项卡
   &-tab {
@@ -41,6 +97,131 @@ input {
       border: 1px solid #e6e6e6;
       background-color: #f4f4f4;
       border-radius: 2px;
+    }
+  }
+  // 下拉列表
+  .select-wrapper {
+    display: inline-block;
+    width: 210px;
+  }
+  // tips
+  .tips {
+    font-size: 14px;
+    color: #fb9005;
+    margin: 0 10px;
+  }
+  // 状态提示
+  .notice {
+    color: #aaa;
+    .icon {
+      color: #e8210c;
+      margin-right: 10px;
+    }
+    &.success .icon {
+      color: #66be47;
+    }
+  }
+  // 日期选择
+  input.flatpickr {
+    cursor: pointer;
+  }
+}
+
+// 展开层
+.list-content {
+  width: 100%;
+  padding: 40px 0;
+  margin-top: 6px;
+  text-align: center;
+  background-color: #f0f0f0;
+  .verified-wrapper {
+    display: inline-block;
+  }
+  label {
+    min-width: 120px;
+    text-align: right;
+  }
+}
+
+// 按钮
+.button-wrapper {
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    width: 100%;
+  }
+  .toggle-layer {
+    margin: 0;
+  }
+  // 按钮
+  .button {
+    display: block;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+  // 内容区
+  .item-content {
+    font-size: 14px;
+  }
+  .visibility {
+    display: none;
+  }
+  .list {
+    white-space: nowrap;
+    label {
+      width: 70px;
+    }
+    .input-wrapper {
+      margin-left: 70px;
+      display: block;
+    }
+    &-tab {
+      width: 33.333%;
+      height: 100%;
+      font-size: 15px;
+      line-height: 40px;
+      &.current {
+        border: none;
+      }
+      &-wrapper {
+        padding: 0;
+        height: 40px;
+        line-height: 40px;
+      }
+    }
+    // tips
+    .tips {
+      display: none;
+    }
+    // 下拉框容器
+    .select-wrapper {
+      width: auto;
+      display: block;
+    }
+  }
+  // 展开层
+  .list-content {
+    padding: 20px 10px;
+    .verified-wrapper {
+      width: 100%;
+    }
+    label {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+    .select-wrapper {
+      display: block;
+      width: 100%;
+    }
+    input,
+    select {
+      display: block;
+      width: 100%;
     }
   }
 }

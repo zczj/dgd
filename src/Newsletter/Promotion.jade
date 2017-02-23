@@ -1,7 +1,41 @@
 extends ../shade/layout
 block content
-  link(rel="stylesheet", href="/skin/css/news/newsDetail.css")
-  #newsletter.allH
-    .news-warp
+  link(href="/skin/css/newsletter/newsletter.css", rel="stylesheet")
+  
+  #newsletter.allH(v-cloak)
+    .news-warp.notice-warp
       .container.clearfix
-        .main
+        .tab-bar
+          .nav
+              a(href="#") 快讯          
+              a(href="#").cur 活动          
+              a(href="#") 公告
+
+
+        .newsletter
+          .list(v-for="(item,index) in list.list")
+            .item.year(v-if='item.dataSlipt')
+                .item-time
+                  span.year {{ item.year}}
+                .item-img
+                  span.year{{ item.year}}
+            .item.newsletter-item(v-bind:class="{opened: item.isOpen}")
+                .item-time
+                  span.data.
+                    {{item.data}}
+                  span.line-cur
+                  .point-line
+                
+                .item-banner
+                  span.time {{item.data}}
+                  a(v-bind:href="item.url" v-bind:style="{backgroundImage:'url(http://zczj01.oss-cn-shenzhen.aliyuncs.com//homeshow/20170121/20170121160626.jpg)'}")
+           
+                    img(src="http://zczj01.oss-cn-shenzhen.aliyuncs.com//homeshow/20170121/20170121160626.jpg", alt="")
+                    
+                
+          
+
+
+  script(src="/skin/js/Newsletter/newsletter.js")
+
+          

@@ -48,6 +48,17 @@
       }
     }
   }
+  .notice-detail{
+    padding: 30px 20px;
+    color:#616a73;
+    font-size: 1.8rem;
+    line-height: 1.8;
+    .notice-t{
+      text-align: center;
+      font-size: 2.2rem;
+      padding-bottom: 10px;
+    }
+  }
 }
 
 @mixin notice-600{
