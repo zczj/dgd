@@ -1,0 +1,167 @@
+extends ../shade/layout
+block content 
+  link(href="/skin/promotion/standBao/css/pro-base.css", rel="stylesheet")
+  
+  #pro-warp.allH
+    .pro-banner.clearfix
+      .w1100
+        img(src="/skin/promotion/standBao/img/m-banner.jpg", alt="")
+        .btn
+          a.buy(href="javascript:void(0);") 立即抢购
+    .pro-item.pro-item-1.clearfix
+      .w1100
+        .pro-categray.clearfix
+          .cate-item
+            dl
+              dt.item-t 活期
+              dd.item-c
+                span 年化利率：
+                b 8%
+              dd.item-b 不限制起投额
+          .cate-item
+            dl
+              dt.item-t 定存一个月
+              dd.item-c
+                span 年化利率：
+                b 9%
+              dd.item-b 100元起投
+          .cate-item
+            dl
+              dt.item-t 定存三个月
+              dd.item-c
+                span 年化利率：
+                b 10%
+              dd.item-b 100元起投
+        .pro-new-tip
+          .new-tip-t
+          .new-tip-c.
+            “全新站岗宝”是由大股东推出的一项<b>年化利率8%~10%</b>的全新账户余额管理增值服务，用户可以把账户中心的资金转入
+            站岗宝中（<b>分为“活期”、“定期”两种方式</b>），可以获得一定的利息，让您的回款资金不站岗。
+    .pro-item.pro-item-2.clearfix
+      .w1100
+        .pro-ys.clearfix
+          .pro-ys-t
+          .pro-ys-c.clearfix
+            dl.ys-item
+              dt
+              dd.item-t 资金不站岗
+              dd.item-c.
+                提高投资人的资金利用率
+                避免资金闲置站岗，账户
+                交易，风险实时监控
+            dl.ys-item
+              dt
+              dd.item-t 多重安全保障
+              dd.item-c.
+                金融大数据的专业分析
+                用户限额选购、站岗宝
+                额满封闭 配有高额流动
+                备用资金
+            dl.ys-item
+              dt
+              dd.item-t 收益安心拿
+              dd.item-c.
+                收益稳健   理财灵活
+                多种购买期限选择
+                站岗利息更超值
+            dl.ys-item
+              dt
+              dd.item-t 多平台自动化
+              dd.item-c.
+                PC端+移动端多平台操作
+                账户中心可设置自动转入
+                账户操作，立即到账
+          .pro-ys-t.pro-ys-t2
+          .pro-ys-c.clearfix
+            .pro-tb
+              img(src="/skin/promotion/standBao/img/m-tb1.png", alt="")
+            .pro-tb
+              img(src="/skin/promotion/standBao/img/m-tb2.png", alt="")
+    .pro-item.pro-item-3
+      .w1100
+        .pro-tips.clearfix
+          .pro-tips-t
+          ul
+            li 三种方式均支持直接投资项目
+            li 如用定期产品投资项目，则利息按活期进行结算
+            li 定期赎回到期还本付息，结算资金至账户可用余额，不支持提前赎回
+          .pro-tips-t
+          ul
+            li 1.  点击页面“立即抢购”输入投资金额，支付密码，即可完成站岗宝投资
+            li 2.  在”立即抢购”页面,选择您所需求的购买期限(活期\一个月\三个月)
+
+
+            li 3.  可在我的账户中心设置自动投标功能,账户余额将自动投资到站岗宝活期
+            li 4.  只能用账户中心余额进行投资，不支持银行卡资金直接转入
+            li 5.  站岗宝每天开放有限额度，在限额内，每人每天限购5万，总额不能超过20万
+            li 6.  退出流程：先将站岗宝余额转至平台账户余额（实时到账），再申请提现至银行卡
+            li 7.  投资时间：截止晚上11点，进行当天结算；如提前投满每日限额，以满额时间为准
+    .pro-btn
+      a.buy(href="javascript:void(0);")
+    .mark
+    .popBox#popBox
+      h1.title
+      span.close(title="关闭")
+      .popCon
+        ul
+          li.li_1
+            span.title 可购余额：
+            span.p-val
+              span.price 0元
+          li.li_2.cleanfix
+            span.title 可用余额：
+            span.p-val
+              span.price 112702.85元
+              a(href="/mycenter/recharge") 去充值
+          li.li_3
+            span.title 投资类型：
+            span.p-val
+              label
+                input(name="tzType" type="radio")
+                | 随存随取，年化利率8%，无投资门槛
+              label
+                input(name="tzType" type="radio")
+                | 随存随取，年化利率8%，无投资门槛
+              label
+                input(name="tzType" type="radio")
+                | 随存随取，年化利率8%，无投资门槛
+          li.li_4.cleanfix
+            span.title 购买金额：
+            span.p-val
+              input(type="text")
+              a.maxBuy(href="javascript:void(0);") 最大购买
+          li.li_5.cleanfix
+            span.title 交易密码：
+            span.p-val
+              input(type="text")
+              a(href="javascript:void(0);") 忘记密码？
+          li.li_6.cleanfix
+            span.title 验 证 码：
+            span.p-val
+              input(type="text")
+              img(src="/Passport/VerifyImage", alt="")
+          li.li_7.cleanfix
+            span.title
+            span.p-val
+              label
+                input(type="checkbox")
+                |同意
+                a(href="javascript:void(0);")
+                  |《站岗宝投资协议》
+          li.li_8.li_error
+            span.title
+            span.p-val#error
+          li.li_8
+            span.title
+            span.p-val
+              a.buyNow(href="javascript:void(0);") 立即抢购
+              a.autoGo(href="/mycenter/Automatically") 自动转入
+          li.li_9
+            span.title
+            span.p-val （注：每人每天限购50,000元）
+  script(src="/skin/promotion/standBao/js/pro.js")
+  script.
+    window.onload=function(){
+      $('#loader').fadeOut();
+      
+    }
